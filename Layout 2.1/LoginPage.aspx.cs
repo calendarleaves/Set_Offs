@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SetOffs1;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Layout_2._1
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
-        SqlConnection con = new SqlConnection("Data Source=DESKTOP-HDH00MK;Initial Catalog=PCCOE;Integrated Security=True");
+       
         protected void Page_Load(object sender, EventArgs e)
         { 
         }
@@ -18,10 +19,11 @@ namespace Layout_2._1
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("Select Email,Password from Employee where Email='" + UsernameTextBox.Text + "'and Password='" + PasswordTextBox.Text + " '", con);
-                con.Open();
+                Employee employee = new Employee();
+               DBConnection con =new DBConnection();
+                employee=con.GetEmployee(UsernameTextBox.Text);
 
-                SqlDataReader rdr = cmd.ExecuteReader();
+
 
                 if (UsernameTextBox.Text == "")
                 {
@@ -44,9 +46,10 @@ namespace Layout_2._1
                 {
                     pass.Text = "";
                 }
-                if (rdr.Read())
+                if (UsernameTextBox.Text==employee.Email && PasswordTextBox.Text==employee.Password)
                 {
                     Session["ID"] = UsernameTextBox.Text;
+                   
                     Response.Write("Succesfully logged in");
 
                 }

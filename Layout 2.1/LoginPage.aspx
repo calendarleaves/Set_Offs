@@ -17,7 +17,7 @@
     <div class="box">
     <form id="form1" runat="server">
         
-        <asp:Image ID="Image1" class="Img" ImageUrl="img/undraw_pic_profile_re_7g2h.svg"  runat="server" Height="100" Width="100" ImageAlign="NotSet" />
+        <asp:Image ID="Image1" class="Img" ImageUrl="undraw_pic_profile_re_7g2h.svg"  runat="server" Height="100" Width="100" ImageAlign="NotSet" />
           <br />
           <h2>Sign in</h2>
         <div class="inputBox">
