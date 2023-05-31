@@ -49,8 +49,8 @@ namespace Layout_2._1
                 if (UsernameTextBox.Text==employee.Email && PasswordTextBox.Text==employee.Password)
                 {
                     Session["ID"] = UsernameTextBox.Text;
-                   
-                    Response.Write("Succesfully logged in");
+
+                    Response.Redirect("Calendar 1.aspx");
 
                 }
                 else
