@@ -76,8 +76,8 @@
         </asp:GridView>
        <asp:Label ID="lblMessage" runat="server"></asp:Label>
              </div>
-        <asp:Button ID="Button1" runat="server" Text="Create Absence" onclick="Button1_Click" />
-        
+        <%--<asp:Button ID="Button1" runat="server" Text="Create Absence" onclick="Button1_Click" />
+        --%>
        
     </form>
 </body>
