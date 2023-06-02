@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Layout_2._1.WebForm1" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Layout_2._1.WebForm1" %>
 
 <!DOCTYPE html>
 
@@ -11,7 +11,9 @@
 </head>
 <body>
      <!-- hi i am writing this comments 
+           changed_by_suraj
          this is second comment -->
+
      <asp:Image ID="Image3" CssClass="backimg1" ImageUrl="flexur2.jpg"  runat="server" />
     <asp:Image ID="Image2" CssClass="backimg" ImageUrl="5259.jpg"  runat="server" />
    
