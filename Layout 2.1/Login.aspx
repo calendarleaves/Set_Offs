@@ -11,7 +11,7 @@
 </head>
 <body>
      <!-- hi i am writing this comments 
-          this is for master-->
+          this is for main-->
      <asp:Image ID="Image3" CssClass="backimg1" ImageUrl="flexur2.jpg"  runat="server" />
     <asp:Image ID="Image2" CssClass="backimg" ImageUrl="5259.jpg"  runat="server" />
    
