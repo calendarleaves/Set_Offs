@@ -6,118 +6,80 @@
 <head runat="server">
     <title></title>
     
-    <style>
-      
-
-        .div
-        {
-            margin:50px 500px 50px 300px;
-            padding:40px;
-            border: 1px double;
-            background-color:white;
-        }
-        .txt
-        {
-             
-            width:400px;
-            height:150px;
-           
-        }
-        .button1
-        {
-            width:30px;
-            height:30px;
-        }
-        .h1{
-            margin:10px 100px;
-            font-size:35px;
-            font-style:italic;
-        }
-        .drop
-        {
-            width:150px;
-            height:30px;
-        }
-        .leave,.From,.TO,.Total,.comment
-        {
-            margin:50px ;
-            font-size:25px;
-
-        }
-        .submit
-        {
-               margin:10px 80px;
-             width:80px;
-            height:40px;
-               
-        }
-        .Cancel
-        {
-            width:80px;
-            height:40px;
-        }
-        .fixed-size-textbox
-        {
-            width: 200px; 
-           height: 50px;
-        }    
-    </style>
+   <link rel="stylesheet" href="AbsencePageCSS1.css">
 </head>
 <body>
-    <form id="form1" runat="server" >
-        <div class="div" >
+  
+    <div class="box">
+      
+    <form id="form1" runat="server"  >
+      
+                    <h1 class="h1">Create Absence</h1>
+           
 
-             <h1 class="h1">Create Absence</h1>
-
-            <br /><br />
-
-             <asp:Label class="leave" runat="server" Text="Leave type : "></asp:Label> 
-
-             <asp:DropDownList  CssClass="drop" runat="server" ID="Drop" DataTextField="Drop" >
+            <br />
+             
+         <div class="A">
+             <asp:Label class="leave" runat="server" Text="Leave Type :"></asp:Label> </br>
+            
+             <asp:DropDownList  CssClass="drop" runat="server" ID="Drop" DataTextField="Drop" OnSelectedIndexChanged="Drop_SelectedIndexChanged" AutoPostBack="true" >
                  
-                 <asp:ListItem Value="">Please Select</asp:ListItem>  
-                 <asp:ListItem>Full day </asp:ListItem>  
-                <asp:ListItem>First Half</asp:ListItem>  
-                 <asp:ListItem>Second Half</asp:ListItem>  
+                 <asp:ListItem Value=""> </asp:ListItem>  
+                 <asp:ListItem>Privilege leave </asp:ListItem>  
+                <asp:ListItem>Sick Leave</asp:ListItem>  
+                 <asp:ListItem>Half Leave</asp:ListItem> 
+                 
             
              </asp:DropDownList>
+            <br />
+            <asp:Label ID="LeaveLable" class="error" runat="server" Text="" ForeColor="Red"></asp:Label>
+           
+            <br /> 
              
+       
 
-            <br /> <br />
-
-
-            <asp:Label class="From" runat="server" Text="Start Date :"></asp:Label> 
+            <asp:Label class="From" runat="server" Text="Start Date :"></asp:Label> <br />
             <asp:TextBox ID="from" CssClass="text" runat="server" ReadOnly="true"></asp:TextBox>
-             <asp:ImageButton CssClass="button1" runat="server" ImageUrl="~/cal.jpg" ImageAlign="AbsBottom" onclick="Calendar1_Click" /><br />
+             <asp:ImageButton CssClass="button1" runat="server" ImageUrl="cal1.jpg" ImageAlign="AbsBottom" onclick="Calendar1_Click" /><br />
+            <asp:Label ID="calendar1lable" class="error" runat="server" Text="" ForeColor="#FF3300"></asp:Label>
 
-
-            <asp:Calendar ID="Calendar1" runat="server" BackColor="#9999FF" OnSelectionChanged="Calendar1_SelectionChanged" OnDayRender="Calendar1_DayRender" ></asp:Calendar> 
+            <asp:Calendar ID="Calendar1" CssClass="calendarView" runat="server" BackColor="#9999FF" OnSelectionChanged="Calendar1_SelectionChanged" OnDayRender="Calendar1_DayRender" ></asp:Calendar> 
             <br />  
                 
-             <asp:Label  runat="server" class="TO" Text="End Date :"></asp:Label> 
+             <asp:Label  runat="server" class="TO" Text="End Date :"></asp:Label> </br>
+
              <asp:TextBox ID="To" CssClass="text" runat="server" ReadOnly="true" ></asp:TextBox>
-             <asp:ImageButton CssClass="button1" runat="server" ImageUrl="~/cal.jpg" ImageAlign="AbsBottom" onclick="Unnamed_Click1"/><br />
+             <asp:ImageButton CssClass="button1" runat="server" ImageUrl="cal1.jpg" ImageAlign="AbsBottom" onclick="Calendar2_Click" /><br />
+             <asp:Label ID="Calendar2Label" CssClass="error" runat="server" Text="" ForeColor="Red"></asp:Label>
 
+            <asp:Calendar ID="Calendar2" runat="server"  BackColor="#9999FF" OnSelectionChanged="Calendar2_SelectionChanged" OnDayRender="Calendar2_DayRender" ></asp:Calendar> <br />
 
-            <asp:Calendar ID="Calendar2" runat="server" BackColor="#9999FF" OnSelectionChanged="Calendar2_SelectionChanged" OnDayRender="Calendar2_DayRender" ></asp:Calendar> <br />
+            <asp:Label class="Total" ID="Total" runat="server" Text="Total Days : "></asp:Label></br>
 
-            <asp:Label class="Total" ID="Total" runat="server" Text="Total Days : "></asp:Label>
-            <asp:TextBox  ID="Total_Days" runat="server" ReadOnly="true" ></asp:TextBox>
-
+            <asp:TextBox  ID="Total_Days" CssClass="text" runat="server" ReadOnly="true" ></asp:TextBox>
+            
             <br /><br />
 
-             <asp:Label class="comment" ID="Lable1" runat="server" Text="Comment" ></asp:Label>
-             <asp:TextBox ID="TextBox1" runat="server" TextMode="SingleLine" CssClass= "fixed-size-textbox" Rows="4" Font-Size="Medium"></asp:TextBox>  <br /><br />
+             <asp:Label class="comment" ID="Lable1" runat="server" Text="Comment :" ></asp:Label><br />
+             <asp:TextBox ID="TextBox1" cssclass="text2" runat="server" TextMode="MultiLine"  Rows="4" Font-Size="Medium"></asp:TextBox>  <br /><br />
+               
+               </div>
+
+              <div class="button">
+             <asp:Button CssClass ="submit" runat="server"  Text="Submit" OnClick="Submit_click"  />
 
           
-             <asp:Button CssClass ="submit" runat="server" BackColor="#00CC66" Text="Submit" OnClick="Unnamed_Click2" />
+            <asp:Button CssClass ="Cancel" runat="server"  Text="Cancel"  /> 
 
+           </div>
           
-            <asp:Button CssClass ="Cancel" runat="server" BackColor="#FF3300" Text="Cancel"  /> <br />
-
-            <asp:Label ID="ErrorLable" runat="server" Text="" ForeColor="#FF0066" Visible="false"></asp:Label>
-          
-        </div>
+    
     </form>
+
+    </div>
+        
+
 </body>
+
 </html>
+

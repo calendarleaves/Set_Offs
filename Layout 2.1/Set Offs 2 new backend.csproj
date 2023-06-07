@@ -68,8 +68,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="5259.jpg" />
-    <Content Include="animatedLoginCSS1.css" />
+    <Content Include="AbsencePageCSS1.css" />
+    <Content Include="AbsencePageCSS.css" />
     <Content Include="cal.jpg" />
+    <Content Include="cal1.jpg" />
     <Content Include="Calendar 1.aspx" />
     <Content Include="Create_Abs.aspx" />
     <Content Include="flexur2.jpg" />
