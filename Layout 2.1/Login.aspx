@@ -1,7 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Layout_2._1.WebForm1" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Layout_2._1.WebForm1" %>
 
 <!DOCTYPE html>
-
+<%-- test comment --%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
@@ -10,7 +10,18 @@
     
 </head>
 <body>
+<<<<<<< HEAD
 <
+=======
+     <!-- hi i am writing this comments 
+
+          
+        
+
+          this is for main-->
+
+
+>>>>>>> 77fa65dde88228fccf7ebaefa3a477c705aae4f3
      <asp:Image ID="Image3" CssClass="backimg1" ImageUrl="flexur2.jpg"  runat="server" />
     <asp:Image ID="Image2" CssClass="backimg" ImageUrl="5259.jpg"  runat="server" />
    
