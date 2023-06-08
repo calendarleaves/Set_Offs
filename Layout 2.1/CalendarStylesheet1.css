@@ -1,0 +1,119 @@
+﻿
+body {
+    background-color: deepskyblue;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+.Box0 {
+    height: 80px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    margin-bottom:10px;
+}
+
+#Image1 {
+    padding-top: 10px;
+    padding-left: 15px;
+    width: 10%;
+}
+
+.Box0 h1 {
+    color: brown;
+    font-size: 50px;
+    margin-left: 20px;
+    width: 60%;
+    padding-left: 450px;
+}
+
+.Box1 {
+    background-color: white;
+    float: left;
+    width: 69%;
+    height: 430px;
+    margin-bottom:10px;
+}
+
+.Box2 {
+    background-color: white;
+    float: right;
+    width: 30%;
+    height: 250px;
+}
+.Box3 {
+    background-color:aliceblue;
+    float: right;
+    width: 30%;
+    height: 180px;
+}
+.Box4 {
+    width: 1270px;
+    height: 80px;
+    margin:20px;
+    margin-top:40px;
+    border: 2px solid red;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    padding-right:30px;
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: #f2f2f2;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding-right:30px;
+}
+
+#Calendar1 {
+    border:none;
+}
+.TodaySelect {
+    background: linear-gradient(to bottom, #4e82eb, #b6c4db)
+}
+.CalendarDay {
+    border: outset 1px #fbfbfb;
+    text-decoration: none;
+    font-weight:bold;
+ 
+}
+.CalendarSelector {
+   
+    background-color:#bebcbc !important;
+}
+.HeaderStyle {
+    background-color: #bfdcfa;
+}
+.GridViewStyle {
+    padding: 4px 7px 2px 4px !important;
+    border-collapse: collapse !important;
+   
+}
+
+    .GridViewStyle th {
+        background-color: aliceblue !important;
+        border: 1px solid none !important;
+    }
+    .GridViewStyle td {
+        border: 1px solid none !important;
+    }
+.CustomRowStyle{
+    height:25px;
+}
+.GridViewStyle th:first-child, .GridViewStyle td:first-child {
+    border-left: none !important;
+}
+
+.GridViewStyle th:last-child, .GridViewStyle td:last-child {
+    border-right: none !important;
+}
+
+.GridViewStyle tr:first-child th, .GridViewStyle tr:first-child td {
+    border-top: none !important;
+}
+
+.GridViewStyle tr:last-child th, .GridViewStyle tr:last-child td {
+    border-bottom: none !important;
+}
