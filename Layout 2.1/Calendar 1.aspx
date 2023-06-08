@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title> Calendar Page </title>
-    <link rel="stylesheet" type="text/css" href="CalendarStylesheet1.css" />
+    <link rel="stylesheet" type="text/css" href="CalendarStylesheet2.css" />
    					 						   		
 </head>
 <body>
