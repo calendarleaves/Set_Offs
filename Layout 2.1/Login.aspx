@@ -22,8 +22,8 @@
           <h2>Sign in</h2>
         <div class="inputBox">
             
-             <asp:Label ID="Username" class="textbox" runat="server" Text="Username" ForeColor="Black" ></asp:Label><br />
-             <asp:TextBox ID="UsernameTextBox" class="A" runat="server" Width="300" Height="25"></asp:TextBox>
+             <asp:Label ID="Username" class="textbox" runat="server" Text="Username" ForeColor="Black"></asp:Label><br />
+             <asp:TextBox ID="UsernameTextBox" class="A" runat="server" Width="300" Height="25" ToolTip="Enter Username" TextMode="Email"></asp:TextBox>
             <asp:Label ID="user" runat="server" Text="" ForeColor="Red" Font-Size="10px"></asp:Label>
         </div> <br />
 
@@ -31,7 +31,7 @@
         <div class="inputBox">
             <br />
             <asp:Label ID="Password" runat="server" class="textbox" Text="Password" ForeColor="Black" ></asp:Label> <br />
-            <asp:TextBox ID="PasswordTextBox" class="A" runat="server" Height="25" Width="300" ></asp:TextBox>
+            <asp:TextBox ID="PasswordTextBox" class="A" runat="server" Height="25" Width="300" TextMode="Password" ToolTip="Enter password"></asp:TextBox>
             <asp:Label ID="pass" runat="server" Text="" ForeColor="Red" Font-Size="10px"></asp:Label>
         </div>
         <asp:Button ID="Submit" CssClass="Submit" runat="server" Text="Login" onclick="Submit_Click" BackColor="#CCCCCC" />

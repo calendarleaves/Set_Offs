@@ -69,7 +69,7 @@
              <asp:Button CssClass ="submit" runat="server"  Text="Submit" OnClick="Submit_click"  />
 
           
-            <asp:Button CssClass ="Cancel" runat="server"  Text="Cancel"  /> 
+            <asp:Button CssClass ="Cancel" runat="server"  Text="Cancel"  OnClick="Cancel_Click" /> 
 
            </div>
           

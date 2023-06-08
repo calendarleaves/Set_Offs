@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Reflection.Emit;
 using SetOffs1;
+using System.Diagnostics.Eventing.Reader;
 //using Microsoft.AspNet.FriendlyUrls;
 
 namespace WebApplication1
@@ -17,10 +18,7 @@ namespace WebApplication1
     public partial class WebForm1 : System.Web.UI.Page
     {
         SqlConnection conn = new SqlConnection(@"Data Source=DESKTOP-2VT3DAG;Initial Catalog=db1;Integrated Security=True");
-
-
         DateTime currentDate;
-
         static string b = "1";
         int a = Int16.Parse(b);
         protected void Page_Load(object sender, EventArgs e)
@@ -31,15 +29,18 @@ namespace WebApplication1
                 Calendar2.Visible = false;
             }
 
-            if (from.Text == null)
+        /*    if (from.Text == null)
             {
                 Calendar2.Enabled = false;
-            }
-
-
+            } */
         }
+
+      
+      
         public string totalDays()
         {
+
+            
             if (from.Text != "" && To.Text != "")
             {
                 int weekoff = 0;
@@ -57,10 +58,7 @@ namespace WebApplication1
                             weekoff++;
                         }
                         currentDate = currentDate.AddDays(1);
-                    }
-
-
-                }
+                    } }
 
                 TimeSpan difference = endDate - startDate;
                 string m = difference.ToString("dd");
@@ -89,6 +87,7 @@ namespace WebApplication1
             {
                 Calendar1.Visible = true;
             }
+           
 
             Calendar1.Attributes.Add("style", "position:absolute");
 
@@ -132,9 +131,55 @@ namespace WebApplication1
             totalDays();
 
         }
+        protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
+        {
+            e.Cell.BackColor = Color.White;
+            
+            if (e.Day.Date.DayOfWeek == DayOfWeek.Saturday || e.Day.Date.DayOfWeek == DayOfWeek.Sunday)
+            {
+                // Hide the day by setting its visibility to false
+                e.Day.IsSelectable = false;
+                e.Cell.ForeColor = System.Drawing.Color.Red;
+            }
+            if (e.Day.Date < DateTime.Now.Date) // Replace DateTime.Now with your selected value
+            {
+                e.Day.IsSelectable = false;
+                e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
+            }
+
+            if (To.Text != "")
+            {
+                if (e.Day.Date > Calendar2.SelectedDate) // Replace DateTime.Now with your selected value
+                {
+                    e.Day.IsSelectable = false;
+                    e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
+                }
+            }
+            
 
 
-        protected void Submit_click(object sender, EventArgs e)
+        }
+
+        protected void Calendar2_DayRender(object sender, DayRenderEventArgs e)
+        {
+            if (e.Day.Date < Calendar1.SelectedDate || e.Day.Date < DateTime.Now.Date) // Replace DateTime.Now with your selected value
+            {
+                e.Day.IsSelectable = false;
+                e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
+            }
+
+        }
+
+        protected void Drop_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedValue = Drop.SelectedValue;
+
+            if (selectedValue != "")
+            {
+                LeaveLable.Text = "";
+            }
+        }
+            protected void Submit_click(object sender, EventArgs e)
         {
             try
             {
@@ -162,7 +207,7 @@ namespace WebApplication1
                     SqlCommand cmd = new SqlCommand("insert into [Leave]  values('" + a + "','" + Drop.SelectedValue + "', '" + Calendar1.SelectedDate.ToString("yyyy-MM-dd") + "','" + Calendar2.SelectedDate.ToString("yyyy-MM-dd") + "','" + TextBox1.Text + "','" + Total_Days.Text + "') ", conn);
                     cmd.ExecuteNonQuery();
                     conn.Close();
-                    Response.Redirect("WebForm1.aspx");
+                    Response.Redirect("Calendar 1.aspx");
                 }
             }
             catch (Exception ex)
@@ -172,45 +217,9 @@ namespace WebApplication1
 
             }
         }
-
-        protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
-        {
-            if (e.Day.Date < DateTime.Now.Date) // Replace DateTime.Now with your selected value
+            protected void Cancel_Click(object sender, EventArgs e)
             {
-                e.Day.IsSelectable = false;
-                e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
+            Response.Redirect("Calendar 1.aspx");
             }
-
-            if (To.Text != "")
-            {
-                if (e.Day.Date > Calendar2.SelectedDate) // Replace DateTime.Now with your selected value
-                {
-                    e.Day.IsSelectable = false;
-                    e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
-                }
-            }
-        }
-
-        protected void Calendar2_DayRender(object sender, DayRenderEventArgs e)
-        {
-            if (e.Day.Date < Calendar1.SelectedDate) // Replace DateTime.Now with your selected value
-            {
-                e.Day.IsSelectable = false;
-                e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
-            }
-
-        }
-
-        protected void Drop_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string selectedValue = Drop.SelectedValue;
-
-            if (selectedValue != "")
-            {
-                LeaveLable.Text = "";
-            }
-        }
-
-
     }
 }
