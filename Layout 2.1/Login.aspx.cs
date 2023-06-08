@@ -61,7 +61,7 @@ namespace Layout_2._1
             }
             catch (Exception ex)
             {
-                Response.Write(ex.Message.ToString());
+                Response.Write("server down");
             }
 
         }
