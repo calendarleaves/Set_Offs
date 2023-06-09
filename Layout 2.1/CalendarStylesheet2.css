@@ -6,72 +6,83 @@ body {
     padding: 0;
 }
 .Box0 {
-    height: 80px;
-    background-color: white;
     display: flex;
+    height: 15vh;
     align-items: center;
-    margin-bottom:10px;
+    justify-content: left;
+    background-color: white;
+    margin-bottom:2vh;
 }
 
 #Image1 {
-    padding-top: 10px;
-    padding-left: 15px;
-    width: 10%;
+    width: 10vw;
+    margin-left: 2vw;
+    height: 10vh;
 }
 
 .Box0 h1 {
-    color: brown;
-    font-size: 50px;
-    margin-left: 20px;
-    width: 60%;
-    padding-left: 450px;
+    min-width: 10vw;
+    margin-left: 33vw;
+    font-size:8vh;
 }
 
 .Box1 {
-    background-color: white;
+    display: flex;
+    height: 70vh;
+    width: 57vw;
     float: left;
-    width: 69%;
-    height: 430px;
-    margin-bottom:10px;
+    background-color: white;
+    margin-left: 2vw;
+    margin-bottom: 3vh;
 }
 
 .Box2 {
-    background-color: white;
-    float: right;
-    width: 30%;
-    height: 250px;
-}
-.Box3 {
-    background-color:aliceblue;
-    float: right;
-    width: 30%;
-    height: 180px;
-}
-.Box4 {
-    width: 1270px;
-    height: 50px;
-    margin: 20px;
-    margin-top: 40px;
-    border: 2px solid red;
     display: flex;
-    align-items: center;
-    justify-content: right;
-    padding-right: 30px;
-    color: white;
+    height: 35vh;
+    width: 33vw;
+    margin-right: 2vw;
+    padding-top: 2vh;
+    padding-left: 2vh;
+    justify-content: center;
+    float: right;
     background-color: white;
+}
+#Griedview1 {
+    height: 35vh;
+    min-width: 30vw;
+}
+/* griedview 1 and 2 added in same div
+,use griedview id to style 2 gives inside this 1 div
+
+#Griedview2 {
+    height: 35vh;
+    background-color: antiquewhite;
+    width: 30vw;
+}*/
+
+.Box4 {
+    display: flex;
+    width: 100vw;
+    height: 10vh;
+    background-color: white;
+   
+    align-items: center;
+    justify-content: Right;
 }
 
-.button {
-    padding: 10px 20px;
-    background-color: deepskyblue;
+#Button1 {
+    background-color: indianred;
+    margin-right: 2vw;
     border: 1px solid black;
     border-radius: 5px;
-    padding-right: 30px;
+    height:5vh;
 }
 
 #Calendar1 {
     border:none;
 }
+
+
 .TodaySelect {
     background: linear-gradient(to bottom, #4e82eb, #b6c4db)
 }
@@ -80,6 +91,10 @@ body {
     text-decoration: none;
     font-weight:bold;
  
+}
+
+#NexPre{
+    font-size:1vh;
 }
 .CalendarSelector {
    
@@ -91,15 +106,17 @@ body {
 .GridViewStyle {
     padding: 4px 7px 2px 4px !important;
     border-collapse: collapse !important;
-   
+    width: 35vw;
 }
 
     .GridViewStyle th {
         background-color: aliceblue !important;
         border: 1px solid none !important;
+        width: 33vw;
     }
     .GridViewStyle td {
         border: 1px solid none !important;
+        width: 33vw;
     }
 .CustomRowStyle{
     height:25px;
