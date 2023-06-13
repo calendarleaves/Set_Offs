@@ -11,7 +11,8 @@ namespace Layout_2._1
 {
     public partial class WebForm1 : System.Web.UI.Page
     {    protected void Page_Load(object sender, EventArgs e)
-        { 
+        {
+            Session["ID"] = null;
         }
         protected void Submit_Click(object sender, EventArgs e)
         {

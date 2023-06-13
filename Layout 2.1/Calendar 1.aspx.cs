@@ -15,10 +15,23 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            
+            if (!Page.IsPostBack)
+            {
+                if (Session["ID"] == null)
+                {
+                    Response.Write("<script> alert('Your session has been expired...'); window.location.href = 'Login.aspx'</script>");
+                }
+            }
+            if (Session["ID"] == null)
+            {
+                Response.Write("<script> alert('please Login...'); window.location.href = 'Login.aspx'</script>");
+            }
             if (!IsPostBack)
             {
                 LoadTodayRecords();
             }
+            ProfileImage.Attributes.Add("onclick", "ToggleDropdownMenu()");
         }
 
       
@@ -130,6 +143,16 @@ namespace WebApplication1
         protected void Button1_Click(object sender, EventArgs e)
         {
             Response.Redirect("Create_Abs.aspx");
+        }
+
+        protected void logout(object sender, EventArgs e)
+        {
+            Session["ID"] = null;
+            try
+            {
+                Response.Redirect("Login.aspx");
+            }
+            catch(Exception ex) { };
         }
     }
 }

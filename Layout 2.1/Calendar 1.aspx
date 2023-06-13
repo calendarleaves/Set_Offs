@@ -6,19 +6,35 @@
 <head runat="server">
     <title> Calendar Page </title>
     <link rel="stylesheet" type="text/css" href="CalendarStylesheet2.css" />
-   
-
-
-				 						   		
+    <script>
+        function ToggleDropdownMenu() {
+            var dropdownMenu = document.getElementById('<%= DropdownMenu.ClientID %>');
+            dropdownMenu.classList.toggle('show');
+        }
+        </script>			 						   		
 </head>
 <body>
     <form id="form1" runat="server">
-       
-      <div class="Box0">         
- <asp:Image ID="Image1"  ImageUrl="flexur2.jpg" runat="server" CssClass="Image2" />
+        <div class="Head">
+       <div class="Box0">         
+            <asp:Image ID="Image1"  ImageUrl="flexur2.jpg" runat="server" CssClass="Image2" />
 
-        <h1>Set Offs</h1>   </div>            
- 
+            <h1>Set Offs</h1>   </div>            
+        <div class="Logout">
+            <div class="image-wrapper">
+                  <div class="profile-circle">
+                    <asp:Image ID="ProfileImage" runat="server" ImageUrl="profile-image.jpg" CssClass="profile-image" />
+                  </div>
+                  <div class="dropdown-menu" runat="server" id="DropdownMenu">
+                    <ul class="dropdown-toggle">
+                      <li><strong>Profile</strong></li>
+                      <li>ID</li>
+                      <li><asp:Button ID="Button2" runat="server" OnClick="logout" Text="Logout" CssClass="dropdown-toggle" /></li>
+                    </ul>
+                  </div>
+                </div>
+           </div>
+            </div>
         <div class="Box1">
             
        
