@@ -50,12 +50,14 @@ namespace WebApplication1
                 {
                     GridView1.DataSource = null;
                     GridView1.DataBind();
+                    
                     lblMessage.Text = "NO RECORDS YET !!";
                 }
                 else
                 {
                     GridView1.DataSource = sLeaves; // if record is there then show that records only.
                     GridView1.DataBind();
+                    
                     lblMessage.Text = string.Empty;
                 }
             }
@@ -66,12 +68,14 @@ namespace WebApplication1
                 {
                     GridView1.DataSource = null; // if no records is there then show below message.
                     GridView1.DataBind();
+                    
                     lblMessage.Text = "ALL WERE PRESENT !!";
                 }
                 else
                 {
                     GridView1.DataSource = sLeaves; //if record is there then show that records only.
                     GridView1.DataBind();
+                    
                     lblMessage.Text = string.Empty;
                 }
             }
@@ -81,6 +85,7 @@ namespace WebApplication1
             }
             else
             {
+               
                 lblMessage.Text = "INVALID DATE";  // default condition.
             }
         }
@@ -101,12 +106,14 @@ namespace WebApplication1
             {
                 GridView1.DataSource = null;
                 GridView1.DataBind();
+                
                 lblMessage.Text = "ALL ARE PRESENT !!";
             }
             else
             {
                 GridView1.DataSource = todayLeaves;
                 GridView1.DataBind();
+                
                 lblMessage.Text = string.Empty;
             }
         }
@@ -127,6 +134,7 @@ namespace WebApplication1
 
         protected void Calendar1_VisibleMonthChanged(object sender, MonthChangedEventArgs e)
         {
+            
             lblMessage.Text = string.Empty;
             //This ccondition is to check if after month chages user is returning to current month then it'll show today's records.
             if (Calendar1.VisibleDate.Month == DateTime.Today.Month && Calendar1.VisibleDate.Year == DateTime.Today.Year)

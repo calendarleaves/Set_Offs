@@ -41,7 +41,7 @@
             <asp:Calendar ID="Calendar1" runat="server" Height="100%" Width="100%" CssClass="CalendarCss" OnSelectionChanged="Calendar1_SelectionChanged" CellSpacing="2" Font-Bold="False" Font-Size="Large" OnDayRender="Calendar1_DayRender" OnVisibleMonthChanged="Calendar1_VisibleMonthChanged" NextMonthText="Next &gt;" PrevMonthText="&lt; Previous" BorderColor="White" FirstDayOfWeek="Monday">
             <DayHeaderStyle BackColor="#bfdcfa" CssClass="" BorderColor="White" />
             <DayStyle ForeColor="Black" HorizontalAlign="Center" CssClass="CalendarDay" BorderColor="#FFFFCC" BorderWidth="0px" />
-            <NextPrevStyle BackColor="White" ForeColor="Black" Font-Bold="True" Font-Overline="False" Font-Size="1em" Font-Underline="False" />
+            <NextPrevStyle BackColor="White" ForeColor="Black" Font-Bold="True" Font-Overline="False"  Font-Underline="False" />
             <OtherMonthDayStyle ForeColor="Silver" />
             <SelectedDayStyle  CssClass="CalendarSelector" ForeColor="Black" BackColor="White" />
               <SelectorStyle  CssClass="CalendarSelector"/> 
@@ -60,7 +60,7 @@
             </Columns>      
             <EditRowStyle Height="50px" />
         </asp:GridView>
-      <asp:Label ID="lblMessage" runat="server"></asp:Label>
+       <asp:Label ID="lblMessage" runat="server" ></asp:Label>
       <asp:GridView ID="GridView2" runat="server"></asp:GridView>
 
         </div>
