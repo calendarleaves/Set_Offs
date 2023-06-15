@@ -8,10 +8,12 @@ body {
 .Box0 {
     display: flex;
     height: 15vh;
+    width:100%;
     align-items: center;
     justify-content: left;
     background-color: white;
     margin-bottom:2vh;
+    float:left;
 }
 
 #Image1 {
@@ -21,9 +23,9 @@ body {
 }
 
 .Box0 h1 {
-    min-width: 10vw;
-    margin-left: 33vw;
-    font-size:8vh;
+    min-width: 15vw;
+    margin-left: 30.5vw;
+    font-size:2rem;
 }
 
 .Box1 {
@@ -38,7 +40,7 @@ body {
 
 .Box2 {
     display: flex;
-    height: 35vh;
+    height: 45vh;
     width: 33vw;
     margin-right: 2vw;
     padding-top: 2vh;
@@ -48,7 +50,7 @@ body {
     background-color: white;
 }
 #Griedview1 {
-    height: 35vh;
+    height: 25vh;
     min-width: 30vw;
 }
 /* griedview 1 and 2 added in same div
@@ -139,6 +141,29 @@ body {
 
 
 
+@media screen and (max-width:768px) {
+    
+    #Image1 {
+        width: 16vw;
+        height: 10vh;
+    }
+    .Box0 h1 {
+        min-width: 15vw;
+        margin-left: 20.5vw;
+        font-size: 1.5rem;
+    }
+    .Logout {
+        display: flex;
+        width: 100%;
+        height: 15vh;
+        align-items: center;
+        justify-content: right;
+        background-color: white;
+        margin-bottom: 2vh;
+        float: right;
+    }
+}
+
 /*===============================================*/
 .Head {
     display: flex;
@@ -148,12 +173,14 @@ body {
 
 .Logout {
     display: flex;
-    width: 100vw;
+    width: 100%;
     height: 15vh;
+    margin-right: 4vw;
     align-items: center;
     justify-content: right;
     background-color: white;
     margin-bottom: 2vh;
+    float: right;
 }
 
 .image-wrapper {
@@ -165,7 +192,7 @@ body {
     width: 50px;
     height: 50px;
     border-radius: 50vh;
-    margin-right: 2vw;
+    margin-right: 4vw;
     background-color: white;
     overflow: hidden;
     position: relative;
