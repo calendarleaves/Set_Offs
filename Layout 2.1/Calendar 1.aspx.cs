@@ -32,11 +32,20 @@ namespace WebApplication1
                 LoadTodayRecords();
             }
             ProfileImage.Attributes.Add("onclick", "ToggleDropdownMenu()");
+            if (Session["ID"] != null || Session["ID"] as String != "")
+            {
+                DBConnection d = new DBConnection();
+                Employee emp = new Employee();
+                emp = d.GetEmployee(Session["Id"] as string);
+                EmpName.Text = emp.FirstName + " " + emp.LastName;
+                EmpId.Text = emp.Id.ToString();
+            }
+
         }
 
-      
 
-        protected void Calendar1_SelectionChanged(object sender, EventArgs e)
+
+            protected void Calendar1_SelectionChanged(object sender, EventArgs e)
         {
 
             DateTime selectedDate = Calendar1.SelectedDate.Date;

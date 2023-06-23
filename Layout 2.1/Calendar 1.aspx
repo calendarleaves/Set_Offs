@@ -27,8 +27,10 @@
                   </div>
                   <div class="dropdown-menu" runat="server" id="DropdownMenu">
                     <ul class="dropdown-toggle">
-                      <li><strong>Profile</strong></li>
-                      <li>ID</li>
+                        <asp:Label ID="EmpName" runat="server" ></asp:Label>
+                        <asp:Label ID="EmpId" runat="server" ></asp:Label>
+                      <%--<li><strong>Profile</strong></li>
+                      <li>ID</li>--%>
                       <li><asp:Button ID="Button2" runat="server" OnClick="logout" Text="Logout" CssClass="dropdown-toggle" /></li>
                     </ul>
                   </div>
