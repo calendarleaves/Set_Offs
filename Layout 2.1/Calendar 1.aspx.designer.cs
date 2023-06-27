@@ -51,31 +51,22 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Image Image1;
 
         /// <summary>
-        /// EmpName control.
+        /// GridView3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label EmpName;
+        protected global::System.Web.UI.WebControls.GridView GridView3;
 
         /// <summary>
-        /// EmpId control.
+        /// Label2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label EmpId;
-
-        /// <summary>
-        /// EmpEmail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label EmpEmail;
+        protected global::System.Web.UI.WebControls.Label Label2;
 
         /// <summary>
         /// Button3 control.

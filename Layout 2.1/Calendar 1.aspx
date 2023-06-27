@@ -20,7 +20,6 @@
         justify-content: right;
         }
         
-        
     </style>
 </head>
 <body>
@@ -39,8 +38,6 @@
              
             <!-- Dropdown on the Right -->
             <ul class="navbar-nav flex-row    justify-content-end">
-                
-                 
             <li class="nav-item dropdown">
                 
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -51,9 +48,18 @@
                     
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <span class="navbar-brand ml-3 mb-0 h1" id=""><asp:Label ID="EmpName" runat="server" Text="Profile"></asp:Label></span>
-                    <asp:Label ID="EmpId" runat="server" Text="ID" CssClass="ml-3"></asp:Label>
-                    <asp:Label ID="EmpEmail" runat="server" Text="ID" CssClass="ml-3"></asp:Label>
+                    <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="false" CssClass="my-gridview" BorderColor="White" BorderWidth="0px">
+                        <Columns>
+                            <asp:TemplateField  > 
+                                <ItemTemplate>
+                                    <div class="grid-item">
+                                        <asp:Label ID="Label1" runat="server" Text='<%# Eval("Profile") %>'  CssClass="ml-3 mr-3"></asp:Label>
+                                    </div>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
+                    <asp:Label ID="Label2" runat="server"   CssClass="ml-3 "></asp:Label>
                     <div class="dropdown-divider"></div>
                     <div class="text-right pr-2">
                         <asp:Button ID="Button3" runat="server" OnClick="logout" Text="Logout" CssClass="btn btn-primary" />
