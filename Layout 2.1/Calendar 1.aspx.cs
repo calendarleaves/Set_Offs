@@ -31,7 +31,7 @@ namespace WebApplication1
             {
                 LoadTodayRecords();
             }
-            ProfileImage.Attributes.Add("onclick", "ToggleDropdownMenu()");
+            //ProfileImage.Attributes.Add("onclick", "ToggleDropdownMenu()");
             if (Session["ID"] != null || Session["ID"] as String != "")
             {
                 DBConnection d = new DBConnection();
@@ -39,6 +39,9 @@ namespace WebApplication1
                 emp = d.GetEmployee(Session["Id"] as string);
                 EmpName.Text = emp.FirstName + " " + emp.LastName;
                 EmpId.Text = emp.Id.ToString();
+                EmpEmail.Text= emp.Email;
+                EmpName_profile.Text = emp.FirstName;
+                //EmpId_profile.Text = emp.Id.ToString();
             }
 
         }
