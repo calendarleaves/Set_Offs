@@ -32,6 +32,7 @@ namespace WebApplication1
                 LoadTodayRecords();
             }
             //ProfileImage.Attributes.Add("onclick", "ToggleDropdownMenu()");
+
             if (Session["ID"] != null || Session["ID"] as String != "")
             {
                 
