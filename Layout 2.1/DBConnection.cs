@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Globalization;
@@ -18,6 +19,7 @@ namespace SetOffs1
     public class DBConnection
     {
         private SqlConnection con;
+        private DataTable profile ;
         public DBConnection()
         {
             this.con = new SqlConnection(connectionString: ConfigurationManager.ConnectionStrings["Setoffs"].ConnectionString);
@@ -68,7 +70,7 @@ namespace SetOffs1
                 con.Close();
             }
         }
-
+        
         public Employee GetEmployee(string email)
         {
             Employee emp = new Employee();
@@ -152,7 +154,32 @@ namespace SetOffs1
 
             return values;
         }
+        
+        public DataTable GetProfileDataTable(String s)
+        {
+            // Replace with your data retrieval logic
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Profile"); // Replace "ColumnName" with the actual column name
 
+            DBConnection d = new DBConnection();
+            Employee emp = new Employee();
+            emp = d.GetEmployee(s);
+            DataRow row1 = dt.NewRow();
+            row1["Profile"] = emp.FirstName + " " + emp.LastName;
+            dt.Rows.Add(row1);
+
+            DataRow row2 = dt.NewRow();
+            row2["Profile"] = emp.Id.ToString();
+            dt.Rows.Add(row2);
+
+            DataRow row3 = dt.NewRow();
+            row3["Profile"] = emp.Email;
+            dt.Rows.Add(row3);
+
+            // ...
+
+            return dt;
+        }
     }
 
     public class EmployeeLeave
@@ -184,5 +211,7 @@ namespace SetOffs1
         public string Comments { get; set; } = "NoComments";
         public int Days { get; set; } = 0;
     }
+    
+    
 
 }
