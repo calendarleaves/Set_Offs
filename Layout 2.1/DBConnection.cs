@@ -91,7 +91,7 @@ namespace SetOffs1
                         emp.Email = reader.GetString(4);
                         emp.Designation = reader.GetString(3);
                         emp.Password = reader.GetString(5); //reader.GetString(reader.GetOrdinal("Password"));
-
+                        emp.Flx_Id=reader.GetString(6);
 
                     }
                 }
@@ -169,7 +169,7 @@ namespace SetOffs1
             dt.Rows.Add(row1);
 
             DataRow row2 = dt.NewRow();
-            row2["Profile"] = emp.Id.ToString();
+            row2["Profile"] = emp.Flx_Id;
             dt.Rows.Add(row2);
 
             DataRow row3 = dt.NewRow();
@@ -184,7 +184,6 @@ namespace SetOffs1
 
     public class EmployeeLeave
     {
-        
         public string FirstName { get; set; } = "NotSpecified";
         
         public string LeaveType { get; set; } = "Leave";
@@ -193,7 +192,7 @@ namespace SetOffs1
     public class Employee
     {
         public int Id { get; set; } = 0;
-
+        public string Flx_Id { get; set; } = "FLX";
         public string FirstName { get; set; } = "NotSpecified";
         public string LastName { get; set; } = "NotSpecified";
         public string Email { get; set; } = "NotSpecified";
@@ -211,7 +210,4 @@ namespace SetOffs1
         public string Comments { get; set; } = "NoComments";
         public int Days { get; set; } = 0;
     }
-    
-    
-
 }
