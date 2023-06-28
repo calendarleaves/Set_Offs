@@ -31,14 +31,23 @@ namespace WebApplication1
             {
                 LoadTodayRecords();
             }
-            ProfileImage.Attributes.Add("onclick", "ToggleDropdownMenu()");
+            //ProfileImage.Attributes.Add("onclick", "ToggleDropdownMenu()");
+
             if (Session["ID"] != null || Session["ID"] as String != "")
             {
+                
+             //Added Dropdown Profile details 
                 DBConnection d = new DBConnection();
+                DataTable dt = d.GetProfileDataTable(Session["Id"] as string);
+                
+                GridView3.DataSource = dt;
+                GridView3.DataBind();
+
+                //Added Profile side name name to 
                 Employee emp = new Employee();
                 emp = d.GetEmployee(Session["Id"] as string);
-                EmpName.Text = emp.FirstName + " " + emp.LastName;
-                EmpId.Text = emp.Id.ToString();
+                EmpName_profile.Text = emp.FirstName;
+                //EmpId_profile.Text = emp.Id.ToString();
             }
 
         }
@@ -171,6 +180,31 @@ namespace WebApplication1
             }
             catch(Exception ex) { };
         }
+        //private DataTable GetDataTable()
+        //{
+        //    // Replace with your data retrieval logic
+        //    DataTable dt = new DataTable();
+        //    dt.Columns.Add("Profile"); // Replace "ColumnName" with the actual column name
+
+        //    DBConnection d = new DBConnection();
+        //    Employee emp = new Employee();
+        //    emp = d.GetEmployee(Session["Id"] as string);
+        //    DataRow row1 = dt.NewRow();
+        //    row1["Profile"] = emp.FirstName + " " + emp.LastName;
+        //    dt.Rows.Add(row1);
+
+        //    DataRow row2 = dt.NewRow();
+        //    row2["Profile"] = emp.Id.ToString();
+        //    dt.Rows.Add(row2);
+
+        //    DataRow row3 = dt.NewRow();
+        //    row3["Profile"] = emp.Email;
+        //    dt.Rows.Add(row3);
+
+        //    // ...
+
+        //    return dt;
+        //}
     }
 }
 
