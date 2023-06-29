@@ -62,7 +62,7 @@
                     <asp:Label ID="Label2" runat="server"   CssClass="ml-3 "></asp:Label>
                     <div class="dropdown-divider"></div>
                     <div class="text-right pr-2">
-                        <asp:Button ID="Button3" runat="server" OnClick="logout" Text="Logout" CssClass="btn btn-primary" />
+                        <asp:Button ID="Button3" runat="server" OnClick="logout" Text="Logout" CssClass="btn btn-primary h-10" />
                     </div>
                 </div>
             </li>
