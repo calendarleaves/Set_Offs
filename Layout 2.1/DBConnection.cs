@@ -101,7 +101,7 @@ namespace SetOffs1
         {
             List<HolidayList> upcomingHolidays = new List<HolidayList>();
 
-            using (SqlCommand command = new SqlCommand("SELECT * FROM Holidays WHERE Date >= @CurrentDate", con))
+            using (SqlCommand command = new SqlCommand("SELECT * FROM HolidayList WHERE Date >= @CurrentDate", con))
             {
                 command.Parameters.AddWithValue("@CurrentDate", currentDate.Date);
                 con.Open();

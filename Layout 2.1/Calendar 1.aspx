@@ -152,10 +152,12 @@
                         <h4 class="division-heading">Upcoming Holidays</h4>
                         <hr class="division-divider">
                         
-                        <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" Width="100%" cssClass="Griedview2Style">
-                            <Columns>
-                               
-                            </Columns>
+                        <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" Width="97%" cssClass="Griedview2Style" BorderColor="White" BorderWidth="0px" >
+                           <Columns>
+                <asp:BoundField DataField="Date" Headertext="Date" />                     
+               <asp:BoundField DataField="Holiday" Headertext="Holiday"/>
+            </Columns>      
+            <EditRowStyle Height="50px" />
                         </asp:GridView>
                     </div>
        
