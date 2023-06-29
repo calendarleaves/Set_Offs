@@ -17,6 +17,7 @@ namespace WebApplication1
         {
             try
             {
+
                 if (!Page.IsPostBack)
                 {
                     if (Session["ID"] == null)
@@ -50,6 +51,7 @@ namespace WebApplication1
                     EmpName_profile.Text = emp.FirstName;
                     //EmpId_profile.Text = emp.Id.ToString();
                 }
+                LoadHolidays();
             }
             catch(Exception ex) 
             {
@@ -204,7 +206,7 @@ namespace WebApplication1
                 Response.Redirect("Login.aspx");
             }
             catch(Exception ex) {
-                Response.Redirect("Create_Abs.aspx");
+                //Response.Redirect("Create_Abs.aspx");
             };
         }
         //private DataTable GetDataTable()
@@ -232,6 +234,27 @@ namespace WebApplication1
 
         //    return dt;
         //}
+
+        private void LoadHolidays() // this will load next Holidays
+        {
+            try
+            {
+                DateTime today = DateTime.Today;
+                DBConnection d = new DBConnection();
+                List<HolidayList> nextHolidays = d.GetUpcomingHolidays(today);
+
+
+                GridView2.DataSource = nextHolidays;
+                GridView2.DataBind();
+
+
+
+            }
+            catch (Exception ex)
+            {
+                Response.Write("An Error Occurred Please Try Again Later");
+            }
+        }
     }
 }
 
