@@ -24,8 +24,7 @@ namespace SetOffs1
         {
             this.con = new SqlConnection(connectionString: ConfigurationManager.ConnectionStrings["Setoffs"].ConnectionString);
         }
-        //String cs = "Data Source=DESKTOP-OVIGJK3;Initial Catalog=Setoffs;Integrated Security=True ";
-        //    SqlConnection Con = new SqlConnection(cs);
+        
         public List<EmployeeLeave> GetEmployeeLeave(DateTime date)
         {
             Employee emp = new Employee();
@@ -33,9 +32,6 @@ namespace SetOffs1
             using (SqlCommand command = new SqlCommand("SELECT e.FirstName, l.LeaveType FROM Employee e INNER JOIN Leave l ON e.id = l.EMPID WHERE  '" + date.ToString("yyyy-MM-dd") + "'between l.StartDate AND l.EndDate;", con))
             {
                 con.Open();
-
-
-
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -56,7 +52,7 @@ namespace SetOffs1
         public void AddEmployee(Employee employee)
         {
 
-            using (SqlCommand command = new SqlCommand("INSERT INTO Employee (Id ,FristName,LastName,Designation, Email,Password) VALUES (@Id,@FristName,@LastName,@Designation, @Email,@Password)", con))
+            using (SqlCommand command = new SqlCommand("INSERT INTO Employee (Id ,FristName,LastName,Designation, Email,Password,Flx_Id) VALUES (@Id,@FristName,@LastName,@Designation, @Email,@Password,@Flx_Id)", con))
             {
                 command.Parameters.AddWithValue("@Id", employee.Id);
                 command.Parameters.AddWithValue("@fristName", employee.FirstName);
@@ -64,6 +60,7 @@ namespace SetOffs1
                 command.Parameters.AddWithValue("@Designation", employee.Designation);
                 command.Parameters.AddWithValue("@Email", employee.Email);
                 command.Parameters.AddWithValue("@Password", employee.Password);
+                command.Parameters.AddWithValue("@Flx_Id", employee.Flx_Id);
 
                 con.Open();
                 command.ExecuteNonQuery();
@@ -99,6 +96,31 @@ namespace SetOffs1
             }
 
             return emp;
+        }
+        public List<HolidayList> GetUpcomingHolidays(DateTime currentDate)
+        {
+            List<HolidayList> upcomingHolidays = new List<HolidayList>();
+
+            using (SqlCommand command = new SqlCommand("SELECT * FROM Holidays WHERE Date >= @CurrentDate", con))
+            {
+                command.Parameters.AddWithValue("@CurrentDate", currentDate.Date);
+                con.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        HolidayList holiday = new HolidayList();
+
+                        holiday.Date = reader.GetDateTime(0);
+                        holiday.Holiday = reader.GetString(1);
+                        upcomingHolidays.Add(holiday);
+                    }
+                }
+                con.Close();
+            }
+
+            return upcomingHolidays;
         }
 
         public void AddLeave(Leave leave)
@@ -181,7 +203,11 @@ namespace SetOffs1
             return dt;
         }
     }
-
+    public class HolidayList
+    {
+        public DateTime Date { get; set; }
+        public string Holiday { get; set; }
+    }
     public class EmployeeLeave
     {
         public string FirstName { get; set; } = "NotSpecified";

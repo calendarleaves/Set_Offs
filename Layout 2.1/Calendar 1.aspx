@@ -10,8 +10,8 @@
     <style>
     
         .profile-circle {
-        width: 4vw;
-        height: 8vh;
+        width: 38px;
+        height: 40px;
         
         background-color: white;
         overflow: hidden;
@@ -59,6 +59,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             
@@ -66,13 +67,13 @@
             
                  <asp:Image ID="Image2"  ImageUrl="flexur2.jpg" runat="server" CssClass="Image2" />
 
-        <div class="navbar-header ">
+        <div class="navbar-header d-md-flex ">
             <!-- Title in the Middle -->
-            <h1 class="navbar-item " style="margin-left: 110px;">SetOFFS</h1>
+            <h1 class="navbar-item " style="margin-left: 100px;">Set Offs</h1>
         </div>
              
             <!-- Dropdown on the Right -->
-            <ul class="navbar-nav flex-row    justify-content-end">
+            <ul class="navbar-nav flex-row  d-none d-md-flex  justify-content-end">
             <li class="nav-item dropdown">
                 
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -105,6 +106,7 @@
             
         </div>
     </nav>
+            </div>
        	 <div class="container-fluid main">
             <div class="row">
             
