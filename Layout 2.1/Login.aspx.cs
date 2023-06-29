@@ -10,37 +10,39 @@ using System.Web.UI.WebControls;
 namespace Layout_2._1
 {
     public partial class WebForm1 : System.Web.UI.Page
-    {    protected void Page_Load(object sender, EventArgs e)
+    {       protected void Page_Load(object sender, EventArgs e)
         {
             Session["ID"] = null;
         }
-        protected void Submit_Click(object sender, EventArgs e)
+        protected void Login_Click(object sender, EventArgs e)
         {
             try
             {
                 Employee employee = new Employee();
-                DBConnection con =new DBConnection();
-                employee=con.GetEmployee(UsernameTextBox.Text);
+                DBConnection con = new DBConnection();
+                employee = con.GetEmployee(UsernameTextBox.Text);
 
                 if (UsernameTextBox.Text == "")
                 { { user.Text = " * Please Fill Username "; } }
                 else
-                { user.Text = "";}
+                { user.Text = ""; }
 
                 if (PasswordTextBox.Text == "")
-                {{pass.Text = " * Please Fill Password"; } }
+                { { pass.Text = " * Please Fill Password"; } }
                 else
                 { pass.Text = ""; }
 
-                if (UsernameTextBox.Text==employee.Email && PasswordTextBox.Text==employee.Password)
-                { Session["ID"] = UsernameTextBox.Text;
-                   Response.Redirect("Calendar 1.aspx"); }
+                if (UsernameTextBox.Text == employee.Email && PasswordTextBox.Text == employee.Password)
+                {
+                    Session["ID"] = UsernameTextBox.Text;
+                    Response.Redirect("Calendar 1.aspx");
+                }
 
                 else
                 {
-                    if (UsernameTextBox.Text !="" && PasswordTextBox.Text != "")
-                    { loginfail.Text = "* Username or password is incorrect  ";}
-                    else { loginfail.Text = ""; }
+                    if (UsernameTextBox.Text != "" && PasswordTextBox.Text != "")
+                    { error.Text = "* Username or password is incorrect  "; }
+                    else { error.Text = ""; }
                 }
             }
             catch (Exception ex)
@@ -48,5 +50,6 @@ namespace Layout_2._1
                 Response.Write("server down");
             }
 
-        }}}
-    
+        }
+    }
+}

@@ -17,10 +17,9 @@ namespace WebApplication1
 
     public partial class WebForm1 : System.Web.UI.Page
     {
-        SqlConnection conn = new SqlConnection(@"Data Source=DESKTOP-2VT3DAG;Initial Catalog=db1;Integrated Security=True");
         DateTime currentDate;
-        static string b = "1";
-        int a = Int16.Parse(b);
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -29,18 +28,15 @@ namespace WebApplication1
                 Calendar2.Visible = false;
             }
 
-        /*    if (from.Text == null)
+            if (from.Text == null)
             {
                 Calendar2.Enabled = false;
-            } */
-        }
+            }
 
-      
-      
+
+        }
         public string totalDays()
         {
-
-            
             if (from.Text != "" && To.Text != "")
             {
                 int weekoff = 0;
@@ -58,7 +54,10 @@ namespace WebApplication1
                             weekoff++;
                         }
                         currentDate = currentDate.AddDays(1);
-                    } }
+                    }
+
+
+                }
 
                 TimeSpan difference = endDate - startDate;
                 string m = difference.ToString("dd");
@@ -87,7 +86,6 @@ namespace WebApplication1
             {
                 Calendar1.Visible = true;
             }
-           
 
             Calendar1.Attributes.Add("style", "position:absolute");
 
@@ -96,8 +94,9 @@ namespace WebApplication1
         protected void Calendar2_Click(object sender, ImageClickEventArgs e)
         {
             Calendar2.SelectedDate = currentDate;
-            Calendar2Label.Text = "";
+            Calendar3Label.Text = "";
             To.Text = "";
+            Total_Days.Text = "";
             if (from.Text != "")
             {
                 Calendar2.Enabled = true;
@@ -131,16 +130,70 @@ namespace WebApplication1
             totalDays();
 
         }
+
+
+        protected void Submit_click(object sender, EventArgs e)
+        {
+            try
+            {
+                Calendar1.Visible = false;
+                Calendar2.Visible = false;
+                DateTime start1 = Calendar1.SelectedDate;
+                DateTime end1 = Calendar2.SelectedDate;
+                if (Drop.SelectedValue == "")
+                {
+                    LeaveLable.Text = "* Please select leave";
+                    Drop.Focus();
+                    FormError.Text = "* Incompleted info";
+
+                }
+                else if (from.Text == "")
+                {
+                    calendar1lable.Text = "* Please select Startdate";
+                    from.Focus();
+                    FormError.Text = " * Incompleted info";
+                }
+                else if (To.Text == "")
+                {
+                    Calendar3Label.Text = "* Please select Enddate";
+                    To.Focus();
+                    FormError.Text = " * Incompleted info";
+                }
+                else
+                {
+                    DBConnection cmd = new DBConnection();
+                    Employee emp = new Employee();
+                    emp = cmd.GetEmployee(Session["ID"] as string);
+
+
+
+                    Leave l = new Leave();
+                    l.EmpId = emp.Id;
+                    l.LeaveType = Drop.SelectedValue;
+                    l.StartDate = Calendar1.SelectedDate;
+                    l.EndDate = Calendar2.SelectedDate;
+                    l.Days = Int16.Parse(Total_Days.Text);
+                    l.Comments = CommentBox.Text;
+
+
+                    cmd.AddLeave(l);
+                    Response.Redirect("Calendar 1.aspx");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Response.Write("error");
+
+
+            }
+        }
+
         protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
         {
-            e.Cell.BackColor = Color.White;
-            
-            if (e.Day.Date.DayOfWeek == DayOfWeek.Saturday || e.Day.Date.DayOfWeek == DayOfWeek.Sunday)
-            {
-                // Hide the day by setting its visibility to false
-                e.Day.IsSelectable = false;
-                e.Cell.ForeColor = System.Drawing.Color.Red;
-            }
+            Calendar1.BackColor = Color.White;
+            Calendar1.TitleFormat = TitleFormat.Month;
+
             if (e.Day.Date < DateTime.Now.Date) // Replace DateTime.Now with your selected value
             {
                 e.Day.IsSelectable = false;
@@ -155,17 +208,32 @@ namespace WebApplication1
                     e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
                 }
             }
-            
+            if (e.Day.Date.DayOfWeek == DayOfWeek.Saturday || e.Day.Date.DayOfWeek == DayOfWeek.Sunday)
+            {
+                e.Day.IsSelectable = false;
+                e.Cell.ForeColor = System.Drawing.Color.Red;
 
+            }
 
         }
 
         protected void Calendar2_DayRender(object sender, DayRenderEventArgs e)
         {
-            if (e.Day.Date < Calendar1.SelectedDate || e.Day.Date < DateTime.Now.Date) // Replace DateTime.Now with your selected value
+            if (e.Day.Date < DateTime.Now.Date) // Replace DateTime.Now with your selected value
             {
                 e.Day.IsSelectable = false;
                 e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
+            }
+            if (e.Day.Date < Calendar1.SelectedDate) // Replace DateTime.Now with your selected value
+            {
+                e.Day.IsSelectable = false;
+                e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
+            }
+            if (e.Day.Date.DayOfWeek == DayOfWeek.Saturday || e.Day.Date.DayOfWeek == DayOfWeek.Sunday)
+            {
+                e.Day.IsSelectable = false;
+                e.Cell.ForeColor = System.Drawing.Color.Red;
+
             }
 
         }
@@ -179,47 +247,5 @@ namespace WebApplication1
                 LeaveLable.Text = "";
             }
         }
-            protected void Submit_click(object sender, EventArgs e)
-        {
-            try
-            {
-                Calendar1.Visible = false;
-                Calendar2.Visible = false;
-                DateTime start1 = Calendar1.SelectedDate;
-                DateTime end1 = Calendar2.SelectedDate;
-                if (Drop.SelectedValue == "")
-                {
-                    LeaveLable.Text = "* Please select leave";
-
-                }
-                else if (from.Text == "")
-                {
-                    calendar1lable.Text = "* Please select Startdate";
-                }
-                else if (To.Text == "")
-                {
-                    Calendar2Label.Text = "* Please select Enddate";
-                }
-                else
-                {
-
-                    conn.Open();
-                    SqlCommand cmd = new SqlCommand("insert into [Leave]  values('" + a + "','" + Drop.SelectedValue + "', '" + Calendar1.SelectedDate.ToString("yyyy-MM-dd") + "','" + Calendar2.SelectedDate.ToString("yyyy-MM-dd") + "','" + TextBox1.Text + "','" + Total_Days.Text + "') ", conn);
-                    cmd.ExecuteNonQuery();
-                    conn.Close();
-                    Response.Redirect("Calendar 1.aspx");
-                }
-            }
-            catch (Exception ex)
-            {
-
-                Response.Write("genreral exception");
-
-            }
-        }
-            protected void Cancel_Click(object sender, EventArgs e)
-            {
-            Response.Redirect("Calendar 1.aspx");
-            }
     }
 }
