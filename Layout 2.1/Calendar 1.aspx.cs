@@ -15,124 +15,143 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-            if (!Page.IsPostBack)
+            try
             {
+                if (!Page.IsPostBack)
+                {
+                    if (Session["ID"] == null)
+                    {
+                        Response.Write("<script> alert('Your session has been expired...'); window.location.href = 'Login.aspx'</script>");
+                    }
+                }
                 if (Session["ID"] == null)
                 {
-                    Response.Write("<script> alert('Your session has been expired...'); window.location.href = 'Login.aspx'</script>");
+                    Response.Write("<script> alert('please Login...'); window.location.href = 'Login.aspx'</script>");
+                }
+                if (!IsPostBack)
+                {
+                    LoadTodayRecords();
+                }
+                //ProfileImage.Attributes.Add("onclick", "ToggleDropdownMenu()");
+
+                if (Session["ID"] != null || Session["ID"] as String != "")
+                {
+
+                    //Added Dropdown Profile details 
+                    DBConnection d = new DBConnection();
+                    DataTable dt = d.GetProfileDataTable(Session["Id"] as string);
+
+                    GridView3.DataSource = dt;
+                    GridView3.DataBind();
+
+                    //Added Profile side name name to 
+                    Employee emp = new Employee();
+                    emp = d.GetEmployee(Session["Id"] as string);
+                    EmpName_profile.Text = emp.FirstName;
+                    //EmpId_profile.Text = emp.Id.ToString();
                 }
             }
-            if (Session["ID"] == null)
+            catch(Exception ex) 
             {
-                Response.Write("<script> alert('please Login...'); window.location.href = 'Login.aspx'</script>");
+                Response.Write("An Error Occurred Please Try Again Later");
             }
-            if (!IsPostBack)
-            {
-                LoadTodayRecords();
-            }
-            //ProfileImage.Attributes.Add("onclick", "ToggleDropdownMenu()");
-
-            if (Session["ID"] != null || Session["ID"] as String != "")
-            {
-                
-             //Added Dropdown Profile details 
-                DBConnection d = new DBConnection();
-                DataTable dt = d.GetProfileDataTable(Session["Id"] as string);
-                
-                GridView3.DataSource = dt;
-                GridView3.DataBind();
-
-                //Added Profile side name name to 
-                Employee emp = new Employee();
-                emp = d.GetEmployee(Session["Id"] as string);
-                EmpName_profile.Text = emp.FirstName;
-                //EmpId_profile.Text = emp.Id.ToString();
-            }
-
         }
 
 
 
             protected void Calendar1_SelectionChanged(object sender, EventArgs e)
         {
-
-            DateTime selectedDate = Calendar1.SelectedDate.Date;
-            //if selected date is greater than today's date
-            if (selectedDate > DateTime.Today)
+            try
             {
-                List<EmployeeLeave> sLeaves = GetEmployeeLeavesByDate(selectedDate); // fetching data from database
-
-
-                if (sLeaves.Count == 0) // if no records is there then show below message.
+                DateTime selectedDate = Calendar1.SelectedDate.Date;
+                //if selected date is greater than today's date
+                if (selectedDate > DateTime.Today)
                 {
-                    GridView1.DataSource = null;
-                    GridView1.DataBind();
-                    
-                    lblMessage.Text = "NO RECORDS YET !!";
+                    List<EmployeeLeave> sLeaves = GetEmployeeLeavesByDate(selectedDate); // fetching data from database
+
+
+                    if (sLeaves.Count == 0) // if no records is there then show below message.
+                    {
+                        GridView1.DataSource = null;
+                        GridView1.DataBind();
+
+                        lblMessage.Text = "NO RECORDS YET !!";
+                    }
+                    else
+                    {
+                        GridView1.DataSource = sLeaves; // if record is there then show that records only.
+                        GridView1.DataBind();
+
+                        lblMessage.Text = string.Empty;
+                    }
+                }
+                else if (selectedDate < DateTime.Today) // //if selected date is less than today's date
+                {
+                    List<EmployeeLeave> sLeaves = GetEmployeeLeavesByDate(selectedDate);//fetching data from database
+                    if (sLeaves.Count == 0)
+                    {
+                        GridView1.DataSource = null; // if no records is there then show below message.
+                        GridView1.DataBind();
+
+                        lblMessage.Text = "ALL WERE PRESENT !!";
+                    }
+                    else
+                    {
+                        GridView1.DataSource = sLeaves; //if record is there then show that records only.
+                        GridView1.DataBind();
+
+                        lblMessage.Text = string.Empty;
+                    }
+                }
+                else if (selectedDate == DateTime.Today)
+                {
+                    LoadTodayRecords();
                 }
                 else
                 {
-                    GridView1.DataSource = sLeaves; // if record is there then show that records only.
-                    GridView1.DataBind();
-                    
-                    lblMessage.Text = string.Empty;
+
+                    lblMessage.Text = "INVALID DATE";  // default condition.
                 }
             }
-            else if (selectedDate < DateTime.Today) // //if selected date is less than today's date
+            catch (Exception ex)
             {
-                List<EmployeeLeave> sLeaves = GetEmployeeLeavesByDate(selectedDate);//fetching data from database
-                if (sLeaves.Count == 0)
-                {
-                    GridView1.DataSource = null; // if no records is there then show below message.
-                    GridView1.DataBind();
-                    
-                    lblMessage.Text = "ALL WERE PRESENT !!";
-                }
-                else
-                {
-                    GridView1.DataSource = sLeaves; //if record is there then show that records only.
-                    GridView1.DataBind();
-                    
-                    lblMessage.Text = string.Empty;
-                }
-            }
-            else if (selectedDate == DateTime.Today)
-            {
-                LoadTodayRecords();
-            }
-            else
-            {
-               
-                lblMessage.Text = "INVALID DATE";  // default condition.
+                Response.Write("An Error Occurred Please Try Again Later");
             }
         }
 
         private List<EmployeeLeave> GetEmployeeLeavesByDate(DateTime date) // method to get employee list who are on leave by date
-        {
+        {   
+
             DBConnection d = new DBConnection();
             return d.GetEmployeeLeave(date);
         }
 
         private void LoadTodayRecords() // this will load Today's records
         {
-            DateTime today = DateTime.Today;
-
-            List<EmployeeLeave> todayLeaves = GetEmployeeLeavesByDate(today);
-
-            if (todayLeaves.Count == 0)
+            try
             {
-                GridView1.DataSource = null;
-                GridView1.DataBind();
-                
-                lblMessage.Text = "ALL ARE PRESENT !!";
+                DateTime today = DateTime.Today;
+
+                List<EmployeeLeave> todayLeaves = GetEmployeeLeavesByDate(today);
+
+                if (todayLeaves.Count == 0)
+                {
+                    GridView1.DataSource = null;
+                    GridView1.DataBind();
+
+                    lblMessage.Text = "ALL ARE PRESENT !!";
+                }
+                else
+                {
+                    GridView1.DataSource = todayLeaves;
+                    GridView1.DataBind();
+
+                    lblMessage.Text = string.Empty;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                GridView1.DataSource = todayLeaves;
-                GridView1.DataBind();
-                
-                lblMessage.Text = string.Empty;
+                Response.Write("An Error Occurred Please Try Again Later");
             }
         }
 
@@ -152,17 +171,23 @@ namespace WebApplication1
 
         protected void Calendar1_VisibleMonthChanged(object sender, MonthChangedEventArgs e)
         {
-            
-            lblMessage.Text = string.Empty;
-            //This ccondition is to check if after month chages user is returning to current month then it'll show today's records.
-            if (Calendar1.VisibleDate.Month == DateTime.Today.Month && Calendar1.VisibleDate.Year == DateTime.Today.Year)
+            try
             {
-                LoadTodayRecords();
+                lblMessage.Text = string.Empty;
+                //This ccondition is to check if after month chages user is returning to current month then it'll show today's records.
+                if (Calendar1.VisibleDate.Month == DateTime.Today.Month && Calendar1.VisibleDate.Year == DateTime.Today.Year)
+                {
+                    LoadTodayRecords();
+                }
+                else
+                {
+                    GridView1.DataSource = null; //  else Clear the data source
+                    GridView1.DataBind();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                GridView1.DataSource = null; //  else Clear the data source
-                GridView1.DataBind();
+                Response.Write("An Error Occurred Please Try Again Later");
             }
         }
 
@@ -178,7 +203,9 @@ namespace WebApplication1
             {
                 Response.Redirect("Login.aspx");
             }
-            catch(Exception ex) { };
+            catch(Exception ex) {
+                Response.Redirect("Create_Abs.aspx");
+            };
         }
         //private DataTable GetDataTable()
         //{
