@@ -54,7 +54,16 @@
     margin-bottom: 5px;
     border: 1px solid #000f;
 }
-
+.GriedViewContainer {
+    height: 500px;
+}
+.Griedview1Div, .Griedview2Div {
+    max-height: 50%;
+    min-height:50%;
+    background-color: white;
+    overflow-y: auto;
+    padding: 10px;
+}
     </style>
 </head>
 <body>
@@ -137,21 +146,27 @@
             <EditRowStyle Height="50px" />
         </asp:GridView>
        <asp:Label ID="lblMessage" runat="server" ></asp:Label>
-      <asp:GridView ID="GridView2" runat="server"></asp:GridView>
-
-        </div></div>
+                        </div>
+      <!--GridView Section - Upcoming Holiday -->
+                    <div class="Griedview2Div">
+                        <h4 class="division-heading">Upcoming Holidays</h4>
+                        <hr class="division-divider">
+                        
+                        <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" Width="100%" cssClass="Griedview2Style">
+                            <Columns>
+                               
+                            </Columns>
+                        </asp:GridView>
+                    </div>
+       
+   </div> </div></div>
 
             </div></div>
        <hr class="divider">
-    <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div style="position: absolute; right: 20px; ">
+    <div class="container-fluid" style="display: flex; justify-content: flex-end; margin-right: 20px;">
+          
         <asp:Button ID="Button1" CssClass="AbsButton" runat="server" Text="Create Absence"  OnClick="Button1_Click" Height:25px/>
-                </div>
-                </div>
-            </div>
-        </div>
+      </div>
         <footer class="footer">
             <div class="container-fluid">
                 <div class="row">
