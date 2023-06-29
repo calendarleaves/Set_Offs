@@ -67,6 +67,11 @@
     <Content Include="5259.jpg" />
     <Content Include="AbsencePageCSS1.css" />
     <Content Include="AbsencePageCSS.css" />
+    <Content Include="CreateAbsence.css" />
+    <Content Include="images\flexur2 - Copy.jpg" />
+    <Content Include="images\flexur2.jpg" />
+    <Content Include="images\holiday.jpg" />
+    <Content Include="images\LoginLogo.gif" />
     <Content Include="LoginCSS.css" />
     <Content Include="cal.jpg" />
     <Content Include="cal1.jpg" />
@@ -74,6 +79,7 @@
     <Content Include="CalendarStylesheet2.css" />
     <Content Include="Create_Abs.aspx" />
     <Content Include="flexur2.jpg" />
+    <Content Include="LoginCSSboot.css" />
     <Content Include="Profile.png" />
     <Content Include="undraw_pic_profile_re_7g2h.svg" />
     <Content Include="Web.config" />

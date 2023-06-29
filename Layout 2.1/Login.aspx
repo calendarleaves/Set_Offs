@@ -1,46 +1,87 @@
 <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Layout_2._1.WebForm1" %>
 
 <!DOCTYPE html>
- 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-<link href="LoginCSS.css" rel="stylesheet" />
-     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <meta charset="utf-8" />
+   
+     <link href="LoginCSSboot.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"/>
     
 </head>
 <body>
-     
-     <asp:Image ID="Image3" CssClass="backimg1" ImageUrl="flexur2.jpg"  runat="server" />
-    <asp:Image ID="Image2" CssClass="backimg" ImageUrl="5259.jpg"  runat="server" />
-   
-    <div class="box">
-    <form id="form1" runat="server">
-        
-        <asp:Image ID="Image1" class="Img" ImageUrl="undraw_pic_profile_re_7g2h.svg"  runat="server" Height="100" Width="100" ImageAlign="NotSet" />
-          <br />
-          <h2>Sign in</h2>
-        <div class="inputBox">
-            
-             <asp:Label ID="Username" class="textbox" runat="server" Text="Username" ForeColor="Black"></asp:Label><br />
-             <asp:TextBox ID="UsernameTextBox" class="A" runat="server" Width="300" Height="25" ToolTip="Enter Username" TextMode="Email"></asp:TextBox>
-            <asp:Label ID="user" runat="server" Text="" ForeColor="Red" Font-Size="10px"></asp:Label>
-        </div> <br />
+     <div class="container-fluid ">
+
+        <div class="row">
+
+             
 
 
-        <div class="inputBox">
-            <br />
-            <asp:Label ID="Password" runat="server" class="textbox" Text="Password" ForeColor="Black" ></asp:Label> <br />
-            <asp:TextBox ID="PasswordTextBox" class="A" runat="server" Height="25" Width="300" TextMode="Password" ToolTip="Enter password"></asp:TextBox>
-            <asp:Label ID="pass" runat="server" Text="" ForeColor="Red" Font-Size="10px"></asp:Label>
-        </div>
-        <asp:Button ID="Submit" CssClass="Submit" runat="server" Text="Login" onclick="Submit_Click" BackColor="#CCCCCC" />
-        <br />
-        <asp:Label ID="loginfail" CssClass="loginfail" runat="server" Text="" ForeColor="#FF3300"></asp:Label>
-        <asp:Label ID="Exception" CssClass="ExceptionError" runat="server" Text="" ForeColor="#FF3300"></asp:Label>
-            
-    </form>
-    </div>
+             <div class="col-md-8">
+                    <div class="Images">
+                       
+                        <asp:Image ID="Image1" src="images/flexur2.jpg" class=" img-fluid Flexur" runat="server" /><br />
+
+
+                       <asp:Image ID="Image2" src="images/holiday.jpg" class=" img-fluid holiday" runat="server" />
+
+                </div>
+
+
+                 </div>
+
+
+
+
+
+
+                <div class="col-md-4  " style="float:right">
+                    <div class="box " style="max-width:350px; max-height:420px">
+                        <form id="form2" runat="server" >
+
+
+
+                                <div class="login img-fluid" style="max-width:400px; min-width:400px">
+
+                                   
+                                    <asp:Image ID="Image4" class="A rounded-circle respnsive loginlogo img-fluid" src="undraw_pic_profile_re_7g2h.svg" runat="server" /><br />
+                                    <asp:Label ID="Label6" class="h1 form-label" runat="server" Text="Label">Sign in</asp:Label>
+                                 
+                                    <br />
+                                   
+                                    <asp:Label ID="Label7"  class="B form-label" runat="server" Text="Label" ForeColor="Black">Username</asp:Label>
+                                    <asp:Label ID="user" runat="server" class=" form-label"  Text="Label" ForeColor="#FF3300">*</asp:Label>
+                                    
+                                    <asp:TextBox ID="UsernameTextBox" runat="server" type="email" placeholder="Email" class="form-control" style="max-width:300px; max-height:50px"></asp:TextBox>
+
+                                   
+
+                                    <br />
+                                    
+
+                                    <asp:Label ID="Label9"  class="B form-label" runat="server" Text="Label">Password</asp:Label>
+                                    <asp:Label ID="pass" runat="server" class=" form-label"  Text="Label" ForeColor="#FF3300">*</asp:Label>
+                                    <asp:TextBox ID="PasswordTextBox" runat="server" type="password" placeholder="Password" class="form-control" style="max-width:300px; max-height:50px" OnGotFocus="focusforpass"></asp:TextBox>
+
+                                    <asp:Button ID="Submit" class="submit" runat="server" Text="LOGIN" OnClick="Login_Click"/>
+                                    <br />
+                                    <asp:Label ID="error" runat="server" Text="" ForeColor="#FF3300"></asp:Label>
+                                </div>
+                            </form>
+
+                       
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+         </div>
+       
 </body>
 </html>
-

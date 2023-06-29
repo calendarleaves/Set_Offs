@@ -24,6 +24,15 @@ namespace WebApplication1
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// Label2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label2;
+
+        /// <summary>
         /// Drop control.
         /// </summary>
         /// <remarks>
@@ -42,6 +51,15 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Label LeaveLable;
 
         /// <summary>
+        /// lable2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lable2;
+
+        /// <summary>
         /// from control.
         /// </summary>
         /// <remarks>
@@ -49,6 +67,15 @@ namespace WebApplication1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox from;
+
+        /// <summary>
+        /// from1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox from1;
 
         /// <summary>
         /// calendar1lable control.
@@ -69,6 +96,15 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Calendar Calendar1;
 
         /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
+
+        /// <summary>
         /// To control.
         /// </summary>
         /// <remarks>
@@ -76,6 +112,15 @@ namespace WebApplication1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox To;
+
+        /// <summary>
+        /// To1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox To1;
 
         /// <summary>
         /// Calendar2Label control.
@@ -96,6 +141,15 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Calendar Calendar2;
 
         /// <summary>
+        /// Calendar3Label control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Calendar3Label;
+
+        /// <summary>
         /// Total control.
         /// </summary>
         /// <remarks>
@@ -114,6 +168,15 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.TextBox Total_Days;
 
         /// <summary>
+        /// Total_Days1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Total_Days1;
+
+        /// <summary>
         /// Lable1 control.
         /// </summary>
         /// <remarks>
@@ -130,5 +193,23 @@ namespace WebApplication1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBox1;
+
+        /// <summary>
+        /// CommentBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox CommentBox;
+
+        /// <summary>
+        /// FormError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label FormError;
     }
 }
