@@ -19,7 +19,42 @@
         cursor: pointer;
         justify-content: right;
         }
-        
+        .footer {
+    background-color: white;
+    padding: 10px;
+    text-align: left;
+    width:100%;
+}
+
+
+.footer-text {
+    margin-bottom: 0;
+    font-size: 10px;
+}
+     .AbsButton {
+    text-align: center ;
+    background-color:cornflowerblue !important;
+    margin-top:5px;
+    border:1px solid #000;
+    font-weight:bold;
+    padding-left:10px;
+    padding-right:10px;
+}   
+     .divider {
+    border: none;
+    border-top: 1px solid #000;
+    margin: 0px 0;
+}
+     .division-heading {
+    margin-top: 0;
+}
+
+.division-divider {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #000f;
+}
+
     </style>
 </head>
 <body>
@@ -70,10 +105,11 @@
             
         </div>
     </nav>
-        <div class="Box1">
+       	 <div class="container-fluid main">
+            <div class="row">
             
-       
-            <asp:Calendar ID="Calendar1" runat="server" Height="100%" Width="100%" CssClass="CalendarCss" OnSelectionChanged="Calendar1_SelectionChanged" CellSpacing="2" Font-Bold="False" Font-Size="Large" OnDayRender="Calendar1_DayRender" OnVisibleMonthChanged="Calendar1_VisibleMonthChanged" NextMonthText="Next &gt;" PrevMonthText="&lt; Previous" BorderColor="White" FirstDayOfWeek="Monday">
+        <div class="col-lg-8 col-md-12 calendar-container">
+            <asp:Calendar ID="Calendar1" runat="server" Height="500px" Width="100%" CssClass="CalendarCss" OnSelectionChanged="Calendar1_SelectionChanged" CellSpacing="2" Font-Bold="False" Font-Size="Large" OnDayRender="Calendar1_DayRender" OnVisibleMonthChanged="Calendar1_VisibleMonthChanged" NextMonthText="Next &gt;" PrevMonthText="&lt; Previous" BorderColor="White" FirstDayOfWeek="Monday">
             <DayHeaderStyle BackColor="#bfdcfa" CssClass="" BorderColor="White" />
             <DayStyle ForeColor="Black" HorizontalAlign="Center" CssClass="CalendarDay" BorderColor="#FFFFCC" BorderWidth="0px" />
             <NextPrevStyle BackColor="White" ForeColor="Black" Font-Bold="True" Font-Overline="False"  Font-Underline="False" />
@@ -86,7 +122,10 @@
         </asp:Calendar>
              </div>
        
-  <div class="Box2">
+   <div class="col-lg-4 col-md-12 GriedViewContainer">
+                    <div class="Griedview1Div ">
+                         <h4 class="division-heading">On Leave</h4>
+                        <hr class="division-divider">
       <asp:GridView ID="GridView1" runat="server"   CssClass="GridViewStyle" RowStyle-CssClass="CustomRowStyle"
             AutoGenerateColumns="False" ShowHeaderWhenEmpty="True" Width="97%" BorderColor="White" BorderWidth="0px">
             <Columns>
@@ -98,12 +137,29 @@
        <asp:Label ID="lblMessage" runat="server" ></asp:Label>
       <asp:GridView ID="GridView2" runat="server"></asp:GridView>
 
-        </div>
-     <br />
-    <div class="Box4">
-        <asp:Button ID="Button1" CssClass="button" runat="server" Text="Create Absence"  OnClick="Button1_Click"/>
-    </div>
+        </div></div>
 
+            </div></div>
+       <hr class="divider">
+    <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div style="position: absolute; right: 20px; ">
+        <asp:Button ID="Button1" CssClass="AbsButton" runat="server" Text="Create Absence"  OnClick="Button1_Click" Height:25px/>
+                </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                       
+                        <p class="footer-text">&copy; 2023 Flexur Systems. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
 			
        
     </form>
