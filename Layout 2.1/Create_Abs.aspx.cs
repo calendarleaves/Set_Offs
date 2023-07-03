@@ -10,6 +10,7 @@ using System.Drawing;
 using System.Reflection.Emit;
 using SetOffs1;
 using System.Diagnostics.Eventing.Reader;
+using Layout_2._1;
 //using Microsoft.AspNet.FriendlyUrls;
 
 namespace WebApplication1
@@ -37,34 +38,41 @@ namespace WebApplication1
         }
         public string totalDays()
         {
-            if (from.Text != "" && To.Text != "")
+            try
             {
-                int weekoff = 0;
-
-                DateTime startDate = Calendar1.SelectedDate;
-                DateTime endDate = Calendar2.SelectedDate;
+                if (from.Text != "" && To.Text != "")
                 {
+                    int weekoff = 0;
 
-                    currentDate = startDate;
-
-                    while (currentDate <= endDate)
+                    DateTime startDate = Calendar1.SelectedDate;
+                    DateTime endDate = Calendar2.SelectedDate;
                     {
-                        if (currentDate.DayOfWeek == DayOfWeek.Saturday || currentDate.DayOfWeek == DayOfWeek.Sunday)
+
+                        currentDate = startDate;
+
+                        while (currentDate <= endDate)
                         {
-                            weekoff++;
+                            if (currentDate.DayOfWeek == DayOfWeek.Saturday || currentDate.DayOfWeek == DayOfWeek.Sunday)
+                            {
+                                weekoff++;
+                            }
+                            currentDate = currentDate.AddDays(1);
                         }
-                        currentDate = currentDate.AddDays(1);
+
+
                     }
 
+                    TimeSpan difference = endDate - startDate;
+                    string m = difference.ToString("dd");
 
+                    int n = Int16.Parse(m) + 1 - weekoff;
+                    Total_Days.Text = n.ToString();
                 }
-
-                TimeSpan difference = endDate - startDate;
-                string m = difference.ToString("dd");
-
-                int n = Int16.Parse(m) + 1 - weekoff;
-                Total_Days.Text = n.ToString();
+            }catch(Exception ex) 
+            { 
+                Custom.ErrorHandle(ex, Response); 
             }
+
             return Total_Days.Text;
         }
 
@@ -177,15 +185,12 @@ namespace WebApplication1
 
 
                     cmd.AddLeave(l);
-                    Response.Redirect("Calendar 1.aspx");
+                    Server.Transfer("Calendar 1.aspx");
                 }
             }
             catch (Exception ex)
             {
-
-                Response.Write("error");
-
-
+                Custom.ErrorHandle(ex, Response);
             }
         }
 

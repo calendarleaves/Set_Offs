@@ -1,4 +1,5 @@
 ﻿using System;
+using Layout_2._1;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using SetOffs1;
+using System.Web.Configuration;
 
 namespace WebApplication1
 {
@@ -31,7 +33,13 @@ namespace WebApplication1
                 }
                 if (!IsPostBack)
                 {
-                    LoadTodayRecords();
+                    try
+                    {
+                        LoadTodayRecords();
+                    }catch (Exception ex)
+                    {
+                        Custom.ErrorHandle(ex, Response);
+                    }
                 }
                 //ProfileImage.Attributes.Add("onclick", "ToggleDropdownMenu()");
 
@@ -55,7 +63,7 @@ namespace WebApplication1
             }
             catch(Exception ex) 
             {
-                Response.Write("An Error Occurred Please Try Again Later");
+                Custom.ErrorHandle(ex, Response);
             }
         }
 
@@ -117,7 +125,7 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-                Response.Write("An Error Occurred Please Try Again Later");
+                Custom.ErrorHandle(ex, Response);
             }
         }
 
@@ -153,7 +161,7 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-                Response.Write("An Error Occurred Please Try Again Later");
+                Custom.ErrorHandle(ex, Response);
             }
         }
 
@@ -189,13 +197,17 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-                Response.Write("An Error Occurred Please Try Again Later");
+                Custom.ErrorHandle(ex, Response);
             }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Create_Abs.aspx");
+            try
+            {
+                Server.Transfer("Create_Abs.aspx");
+            }
+            catch(Exception ex) { Custom.ErrorHandle(ex, Response); }
         }
 
         protected void logout(object sender, EventArgs e)
@@ -252,7 +264,7 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-                Response.Write("An Error Occurred Please Try Again Later");
+                Custom.ErrorHandle(ex, Response);
             }
         }
     }

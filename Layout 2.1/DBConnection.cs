@@ -111,8 +111,8 @@ namespace SetOffs1
                     while (reader.Read())
                     {
                         HolidayList holiday = new HolidayList();
-
-                        holiday.Date = reader.GetDateTime(0);
+                        DateTime dateTimeValue = reader.GetDateTime(0);
+                        holiday.Date = dateTimeValue.Date;
                         holiday.Holiday = reader.GetString(1);
                         upcomingHolidays.Add(holiday);
                     }
