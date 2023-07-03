@@ -181,7 +181,7 @@
             </div></div>
        <hr class="divider">
     <div class="container-fluid" style="display: flex; justify-content: flex-end; margin-right: 20px;">
-          
+          <asp:Button ID="Button2" cssClass="AbsButton" runat="server" Text="Delete Leave"  onClick="Button2_Click" Height:25px Visible="false" Enabled="false"/>
         <asp:Button ID="Button1" CssClass="AbsButton" runat="server" Text="Create Absence"  OnClick="Button1_Click" Height:25px/>
       </div>
         <footer class="footer">
