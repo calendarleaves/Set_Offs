@@ -72,11 +72,34 @@
 .TodaySelect {
     background: linear-gradient(to bottom, #4e82eb, #b6c4db)
 }
-.DayHeader {    text-align: center;    font-size: 18px;    background-color: #a7c4f2 !important;}
+
+.DayHeader {
+    text-align: center;
+    font-size: 18px;
+    background-color: #a7c4f2 !important;
+}
 
 .CalendarSelector {
    
     background-color:#bebcbc !important;
+}
+.colorCode1 {
+    background-color: #f59a9a;
+     border: 1px solid white !important;
+    border-collapse: collapse !important;
+    
+}
+.colorCode2 {
+    background-color: #fb2525;
+     border: 1px solid white !important;
+    border-collapse: collapse !important;
+    
+}
+.colorCode3 {
+    background-color: #960404;
+     border: 1px solid white !important;
+    border-collapse: collapse !important;
+    
 }
     </style>
 </head>
@@ -121,7 +144,7 @@
                     <asp:Label ID="Label2" runat="server"   CssClass="ml-3 "></asp:Label>
                     <div class="dropdown-divider"></div>
                     <div class="text-right pr-2">
-                        <asp:Button ID="Button3" runat="server" OnClick="logout" Text="Logout" CssClass="btn btn-primary h-10" />
+                        <asp:Button ID="Button3" runat="server" OnClick="logout" Text="Logout" CssClass="AbsButton" Width="80px" Style="margin-top: 2px;"/>
                     </div>
                 </div>
             </li>
@@ -130,7 +153,7 @@
         </div>
     </nav>
             </div>
-         <hr class="divider">
+         <hr class="divider"/>
        	 <div class="container-fluid main">
             <div class="row">
             

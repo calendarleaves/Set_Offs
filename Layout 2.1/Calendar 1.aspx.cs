@@ -1,4 +1,5 @@
 ﻿using System;
+using Layout_2._1;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -7,12 +8,13 @@ using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using SetOffs1;
+using System.Web.Configuration;
 
 namespace WebApplication1
 {
     public partial class WebForm11 : System.Web.UI.Page
     {
-
+        DBConnection d1 = new DBConnection();
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -31,7 +33,13 @@ namespace WebApplication1
                 }
                 if (!IsPostBack)
                 {
-                    LoadTodayRecords();
+                    try
+                    {
+                        LoadTodayRecords();
+                    }catch (Exception ex)
+                    {
+                        Custom.ErrorHandle(ex, Response);
+                    }
                 }
                 //ProfileImage.Attributes.Add("onclick", "ToggleDropdownMenu()");
 
@@ -65,7 +73,7 @@ namespace WebApplication1
             }
             catch(Exception ex) 
             {
-                Response.Write("An Error Occurred Please Try Again Later");
+                Custom.ErrorHandle(ex, Response);
             }
         }
 
@@ -76,6 +84,8 @@ namespace WebApplication1
             try
             {
                 DateTime selectedDate = Calendar1.SelectedDate.Date;
+
+                Calendar1.SelectedDayStyle.BackColor = System.Drawing.ColorTranslator.FromHtml("#bebcbc");
                 //if selected date is greater than today's date
                 if (selectedDate > DateTime.Today)
                 {
@@ -127,7 +137,7 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-                Response.Write("An Error Occurred Please Try Again Later");
+                Custom.ErrorHandle(ex, Response);
             }
         }
 
@@ -163,7 +173,7 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-                Response.Write("An Error Occurred Please Try Again Later");
+                Custom.ErrorHandle(ex, Response);
             }
         }
 
@@ -175,9 +185,28 @@ namespace WebApplication1
                 e.Cell.ToolTip = "Chhuti hai bhai..";
 
             }
-            if (e.Day.IsOtherMonth)
+            else if (e.Day.IsOtherMonth)
             {
                 e.Day.IsSelectable = false;
+            }
+            else
+            {
+                DateTime date = e.Day.Date;
+                List<EmployeeLeave> employeeLeaves = d1.GetEmployeeLeave(date);
+                int recordCount = employeeLeaves.Count;
+
+                if (recordCount == 1 || recordCount == 2)
+                {
+                    e.Cell.CssClass = "colorCode1";
+                }
+                else if (recordCount > 2 && recordCount <= 5)
+                {
+                    e.Cell.CssClass = "colorCode2";
+                }
+                else if (recordCount > 5)
+                {
+                    e.Cell.CssClass = "colorCode3";
+                }
             }
         }
 
@@ -199,7 +228,7 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-                Response.Write("An Error Occurred Please Try Again Later");
+                Custom.ErrorHandle(ex, Response);
             }
         }
 
@@ -272,7 +301,7 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-                Response.Write("An Error Occurred Please Try Again Later");
+                Custom.ErrorHandle(ex, Response);
             }
         }
     }

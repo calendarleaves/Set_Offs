@@ -69,6 +69,9 @@
     <Content Include="AbsencePageCSS.css" />
     <Content Include="AddLeave.aspx" />
     <Content Include="CreateAbsence.css" />
+    <Content Include="Error Handler\Error.aspx" />
+    <Content Include="Error Handler\Error404.aspx" />
+    <Content Include="Error Handler\Error500.aspx" />
     <Content Include="DeleteLeave.aspx" />
     <Content Include="images\flexur2 - Copy.jpg" />
     <Content Include="images\flexur2.jpg" />
@@ -109,7 +112,29 @@
     <Compile Include="Create_Abs.aspx.designer.cs">
       <DependentUpon>Create_Abs.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Custom.cs" />
     <Compile Include="DBConnection.cs" />
+    <Compile Include="Error Handler\Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error Handler\Error.aspx.designer.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Error Handler\Error404.aspx.cs">
+      <DependentUpon>Error404.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error Handler\Error404.aspx.designer.cs">
+      <DependentUpon>Error404.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Error Handler\Error500.aspx.cs">
+      <DependentUpon>Error500.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error Handler\Error500.aspx.designer.cs">
+      <DependentUpon>Error500.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DeleteLeave.aspx.cs">
       <DependentUpon>DeleteLeave.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

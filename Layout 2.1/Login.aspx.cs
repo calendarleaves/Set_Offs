@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -35,7 +36,7 @@ namespace Layout_2._1
                 if (UsernameTextBox.Text == employee.Email && PasswordTextBox.Text == employee.Password)
                 {
                     Session["ID"] = UsernameTextBox.Text;
-                    Response.Redirect("Calendar 1.aspx");
+                    Server.Transfer("Calendar 1.aspx");
                 }
 
                 else
@@ -47,7 +48,7 @@ namespace Layout_2._1
             }
             catch (Exception ex)
             {
-                Response.Write("server down");
+                Custom.ErrorHandle(ex, Response);
             }
 
         }
