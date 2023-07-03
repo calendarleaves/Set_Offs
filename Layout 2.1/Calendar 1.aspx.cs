@@ -203,7 +203,11 @@ namespace WebApplication1
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Create_Abs.aspx");
+            try
+            {
+                Server.Transfer("Create_Abs.aspx");
+            }
+            catch(Exception ex) { Custom.ErrorHandle(ex, Response); }
         }
 
         protected void logout(object sender, EventArgs e)

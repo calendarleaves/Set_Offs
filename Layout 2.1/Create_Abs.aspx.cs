@@ -185,7 +185,7 @@ namespace WebApplication1
 
 
                     cmd.AddLeave(l);
-                    Response.Redirect("Calendar 1.aspx");
+                    Server.Transfer("Calendar 1.aspx");
                 }
             }
             catch (Exception ex)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 
 namespace Layout_2._1
@@ -19,6 +20,10 @@ namespace Layout_2._1
             {
                 statusCode = 401; // Unauthorized
             }
+            else if(ex is ThreadAbortException) 
+            {
+                statusCode = 0;
+            }
             else
             {
                 statusCode = 500; // Internal Server Error
@@ -30,6 +35,8 @@ namespace Layout_2._1
             // Redirect to the corresponding error page based on the status code
             switch (statusCode)
             {
+                case 0:
+                    break;
                 case 404:
                     Response.Redirect("~/Error Handler/Error404.aspx");
                     break;
