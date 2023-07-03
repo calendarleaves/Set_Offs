@@ -32,14 +32,19 @@
     font-size: 10px;
 }
      .AbsButton {
-    text-align: center ;
-    background-color:cornflowerblue !important;
-    margin-top:5px;
-    border:1px solid #000;
-    font-weight:bold;
-    padding-left:10px;
-    padding-right:10px;
-}   
+	margin-top: 20px;
+    margin-left: 80px;
+    width: 130px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #7499f1;
+}  
+
+.AbsButton:hover
+{
+    background-color: blue;
+    color:white;
+}     
      .divider {
     border: none;
     border-top: 1px solid #000;
@@ -63,6 +68,15 @@
     background-color: white;
     overflow-y: auto;
     padding: 10px;
+}
+.TodaySelect {
+    background: linear-gradient(to bottom, #4e82eb, #b6c4db)
+}
+.DayHeader {    text-align: center;    font-size: 18px;    background-color: #a7c4f2 !important;}
+
+.CalendarSelector {
+   
+    background-color:#bebcbc !important;
 }
     </style>
 </head>
@@ -116,12 +130,13 @@
         </div>
     </nav>
             </div>
+         <hr class="divider">
        	 <div class="container-fluid main">
             <div class="row">
             
         <div class="col-lg-8 col-md-12 calendar-container">
-            <asp:Calendar ID="Calendar1" runat="server" Height="500px" Width="100%" CssClass="CalendarCss" OnSelectionChanged="Calendar1_SelectionChanged" CellSpacing="2" Font-Bold="False" Font-Size="Large" OnDayRender="Calendar1_DayRender" OnVisibleMonthChanged="Calendar1_VisibleMonthChanged" NextMonthText="Next &gt;" PrevMonthText="&lt; Previous" BorderColor="White" FirstDayOfWeek="Monday">
-            <DayHeaderStyle BackColor="#bfdcfa" CssClass="" BorderColor="White" />
+            <asp:Calendar ID="Calendar1" runat="server" Height="500px" Width="100%" CssClass="CalendarCss" OnSelectionChanged="Calendar1_SelectionChanged" CellSpacing="2" Font-Bold="True" Font-Size="Large" OnDayRender="Calendar1_DayRender" OnVisibleMonthChanged="Calendar1_VisibleMonthChanged" NextMonthText="Next &gt;" PrevMonthText="&lt; Previous" BorderColor="White" FirstDayOfWeek="Monday">
+            <DayHeaderStyle BorderColor="White" BorderWidth="1px" Font-Bold="True" HorizontalAlign="Center" VerticalAlign="Middle" CssClass="DayHeader" />
             <DayStyle ForeColor="Black" HorizontalAlign="Center" CssClass="CalendarDay" BorderColor="#FFFFCC" BorderWidth="0px" />
             <NextPrevStyle BackColor="White" ForeColor="Black" Font-Bold="True" Font-Overline="False"  Font-Underline="False" />
             <OtherMonthDayStyle ForeColor="Silver" />
