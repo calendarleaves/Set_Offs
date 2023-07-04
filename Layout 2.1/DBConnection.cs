@@ -48,6 +48,28 @@ namespace SetOffs1
 
             return users;
         }
+        public List<string> GetAllEmployeeLeave()
+        {
+            List<string> users = new List<string>();
+            using (SqlCommand command = new SqlCommand("SELECT FirstName, LastName FROM Employee", con))
+            {
+                con.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                      string  value1 = reader["FirstName"].ToString();
+                      string  value2 = reader["LastName"].ToString();
+
+                        
+                        users.Add(value1 + " " + value2);
+                    }
+                }
+            }
+            con.Close();
+
+            return users;
+        }
 
         public void AddEmployee(Employee employee)
         {
@@ -97,6 +119,7 @@ namespace SetOffs1
 
             return emp;
         }
+
         public List<HolidayList> GetUpcomingHolidays(DateTime currentDate)
         {
             List<HolidayList> upcomingHolidays = new List<HolidayList>();
@@ -140,6 +163,30 @@ namespace SetOffs1
 
             }
 
+        }
+
+        public void Addleave(string firstname, string lastname, Leave l)
+        {
+
+
+            string query = "SELECT id FROM Employee WHERE FirstName = @firstName AND LastName = @lastName";
+            con.Open();
+            using (SqlCommand command = new SqlCommand(query, con))
+            {
+                command.Parameters.AddWithValue("@firstName", firstname);
+                command.Parameters.AddWithValue("@lastName", lastname);
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        l.EmpId = reader.GetInt32(0);
+                    }
+                    
+                }
+                con.Close();
+                AddLeave(l);
+            }
         }
 
         public Leave GetLeave(int id)
