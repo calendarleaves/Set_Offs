@@ -89,6 +89,7 @@
     <Content Include="undraw_pic_profile_re_7g2h.svg" />
     <Content Include="Web.config" />
     <Content Include="Login.aspx" />
+    <Content Include="DeleteLeavePage.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddLeave.aspx.cs">
@@ -149,6 +150,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteLeavePage.aspx.cs">
+      <DependentUpon>DeleteLeavePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DeleteLeavePage.aspx.designer.cs">
+      <DependentUpon>DeleteLeavePage.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
