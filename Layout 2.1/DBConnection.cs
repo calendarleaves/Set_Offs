@@ -135,7 +135,7 @@ namespace SetOffs1
                     {
                         HolidayList holiday = new HolidayList();
                         DateTime dateTimeValue = reader.GetDateTime(0);
-                        holiday.Date = dateTimeValue.Date;
+                        holiday.Date = dateTimeValue.Date.ToString("yyyy-MM-dd") ;
                         holiday.Holiday = reader.GetString(1);
                         upcomingHolidays.Add(holiday);
                     }
@@ -252,7 +252,7 @@ namespace SetOffs1
     }
     public class HolidayList
     {
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
         public string Holiday { get; set; }
     }
     public class EmployeeLeave
