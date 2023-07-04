@@ -14,7 +14,7 @@ namespace WebApplication1
 {
     public partial class WebForm11 : System.Web.UI.Page
     {
-
+        DBConnection d1 = new DBConnection();
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -60,6 +60,16 @@ namespace WebApplication1
                     //EmpId_profile.Text = emp.Id.ToString();
                 }
                 LoadHolidays();
+                if (!IsPostBack)
+                {
+                    if (Session["ID"] != null && Session["ID"].ToString() == "sumeet.kulkarni@flexur.com")
+                    {
+                        Button1.Text = "Add Leave";
+                        Button2.Visible = true;
+                        Button2.Enabled = true;
+                    }
+                }
+
             }
             catch(Exception ex) 
             {
@@ -74,6 +84,8 @@ namespace WebApplication1
             try
             {
                 DateTime selectedDate = Calendar1.SelectedDate.Date;
+
+                Calendar1.SelectedDayStyle.BackColor = System.Drawing.ColorTranslator.FromHtml("#bebcbc");
                 //if selected date is greater than today's date
                 if (selectedDate > DateTime.Today)
                 {
@@ -173,9 +185,28 @@ namespace WebApplication1
                 e.Cell.ToolTip = "Chhuti hai bhai..";
 
             }
-            if (e.Day.IsOtherMonth)
+            else if (e.Day.IsOtherMonth)
             {
                 e.Day.IsSelectable = false;
+            }
+            else
+            {
+                DateTime date = e.Day.Date;
+                List<EmployeeLeave> employeeLeaves = d1.GetEmployeeLeave(date);
+                int recordCount = employeeLeaves.Count;
+
+                if (recordCount == 1 || recordCount == 2)
+                {
+                    e.Cell.CssClass = "colorCode1";
+                }
+                else if (recordCount > 2 && recordCount <= 5)
+                {
+                    e.Cell.CssClass = "colorCode2";
+                }
+                else if (recordCount > 5)
+                {
+                    e.Cell.CssClass = "colorCode3";
+                }
             }
         }
 
@@ -202,14 +233,20 @@ namespace WebApplication1
         }
 
         protected void Button1_Click(object sender, EventArgs e)
-        {
-            try
+        {   
+            if (Session["ID"] != null && Session["ID"].ToString() == "sumeet.kulkarni@flexur.com")
             {
-                Server.Transfer("Create_Abs.aspx");
+                Response.Redirect("AddLeave.aspx");
             }
-            catch(Exception ex) { Custom.ErrorHandle(ex, Response); }
+            else
+            {
+                Response.Redirect("Create_Abs.aspx");
+            }
         }
-
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("DeleteLeave.aspx");
+        }
         protected void logout(object sender, EventArgs e)
         {
             Session["ID"] = null;

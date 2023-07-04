@@ -83,6 +83,24 @@
    
     background-color:#bebcbc !important;
 }
+.colorCode1 {
+    background-color: #f59a9a;
+     border: 1px solid white !important;
+    border-collapse: collapse !important;
+    
+}
+.colorCode2 {
+    background-color: #fb2525;
+     border: 1px solid white !important;
+    border-collapse: collapse !important;
+    
+}
+.colorCode3 {
+    background-color: #960404;
+     border: 1px solid white !important;
+    border-collapse: collapse !important;
+    
+}
     </style>
 </head>
 <body>
@@ -186,7 +204,7 @@
             </div></div>
        <hr class="divider">
     <div class="container-fluid" style="display: flex; justify-content: flex-end; margin-right: 20px;">
-          
+          <asp:Button ID="Button2" cssClass="AbsButton" runat="server" Text="Delete Leave"  onClick="Button2_Click" Height:25px Visible="false" Enabled="false"/>
         <asp:Button ID="Button1" CssClass="AbsButton" runat="server" Text="Create Absence"  OnClick="Button1_Click" Height:25px/>
       </div>
         <footer class="footer">
