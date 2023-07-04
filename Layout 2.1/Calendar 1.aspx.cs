@@ -179,34 +179,41 @@ namespace WebApplication1
 
         protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
         {
-            if (e.Day.IsWeekend)
+            try
             {
-                e.Day.IsSelectable = false;
-                e.Cell.ToolTip = "Chhuti hai bhai..";
+                if (e.Day.IsWeekend)
+                {
+                    e.Day.IsSelectable = false;
+                    e.Cell.ToolTip = "Chhuti hai bhai..";
 
-            }
-            else if (e.Day.IsOtherMonth)
-            {
-                e.Day.IsSelectable = false;
-            }
-            else
-            {
-                DateTime date = e.Day.Date;
-                List<EmployeeLeave> employeeLeaves = d1.GetEmployeeLeave(date);
-                int recordCount = employeeLeaves.Count;
+                }
+                else if (e.Day.IsOtherMonth)
+                {
+                    e.Day.IsSelectable = false;
+                }
+                else
+                {
+                    DateTime date = e.Day.Date;
+                    List<EmployeeLeave> employeeLeaves = d1.GetEmployeeLeave(date);
+                    int recordCount = employeeLeaves.Count;
 
-                if (recordCount == 1 || recordCount == 2)
-                {
-                    e.Cell.CssClass = "colorCode1";
+                    if (recordCount == 1 || recordCount == 2)
+                    {
+                        e.Cell.CssClass = "colorCode1";
+                    }
+                    else if (recordCount > 2 && recordCount <= 5)
+                    {
+                        e.Cell.CssClass = "colorCode2";
+                    }
+                    else if (recordCount > 5)
+                    {
+                        e.Cell.CssClass = "colorCode3";
+                    }
                 }
-                else if (recordCount > 2 && recordCount <= 5)
-                {
-                    e.Cell.CssClass = "colorCode2";
-                }
-                else if (recordCount > 5)
-                {
-                    e.Cell.CssClass = "colorCode3";
-                }
+            }
+            catch (Exception ex)
+            {
+                Custom.ErrorHandle(ex, Response);
             }
         }
 
@@ -233,19 +240,34 @@ namespace WebApplication1
         }
 
         protected void Button1_Click(object sender, EventArgs e)
-        {   
-            if (Session["ID"] != null && Session["ID"].ToString() == "sumeet.kulkarni@flexur.com")
+        {
+            try
             {
-                Response.Redirect("AddLeave.aspx");
+                if (Session["ID"] != null && Session["ID"].ToString() == "sumeet.kulkarni@flexur.com")
+                {
+                    Server.Transfer("AddLeave.aspx");
+                }
+                else
+                {
+                    Server.Transfer("Create_Abs.aspx");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                Response.Redirect("Create_Abs.aspx");
+                Custom.ErrorHandle(ex, Response);
             }
         }
         protected void Button2_Click(object sender, EventArgs e)
         {
-            Response.Redirect("DeleteLeave.aspx");
+            try
+            {
+                Server.Transfer("DeleteLeavePage.aspx");
+            }
+            catch (Exception ex)
+            {
+                Custom.ErrorHandle(ex, Response);
+            }
+
         }
         protected void logout(object sender, EventArgs e)
         {
@@ -256,7 +278,8 @@ namespace WebApplication1
             }
             catch(Exception ex) {
                 //Response.Redirect("Create_Abs.aspx");
-            };
+                Custom.ErrorHandle(ex, Response);
+            }
         }
         //private DataTable GetDataTable()
         //{
