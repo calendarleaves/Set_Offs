@@ -20,8 +20,8 @@
    
     } 
 
-    .box .h1 {
-        padding: 20px;
+    .h1 {
+        margin-left:60px;
      
     }  
 
@@ -121,10 +121,12 @@
 
 .submit:hover {
     background-color: blue;
+    color:white;
 }
 
 .Cancel:hover {
     background-color: blue;
+    color: white;
 }
 
 .container
@@ -137,7 +139,7 @@
     padding:10px;
     margin-top:30px;
     text-align:left;
-    padding-left:100px;
+    padding-left:120px;
 
 
 }
