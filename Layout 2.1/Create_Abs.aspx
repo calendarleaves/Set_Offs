@@ -68,10 +68,10 @@
              <asp:DropDownList  CssClass="drop" runat="server" ID="Drop" DataTextField="Drop" OnSelectedIndexChanged="Drop_SelectedIndexChanged" AutoPostBack="true" >
                  
               
-                 <asp:ListItem>Full day </asp:ListItem>  
-                 <asp:ListItem>First half </asp:ListItem>  
-                <asp:ListItem>second half</asp:ListItem>  
-                 <asp:ListItem>work from  home</asp:ListItem> 
+                 <asp:ListItem>Full Day </asp:ListItem>  
+                 <asp:ListItem>First Half </asp:ListItem>  
+                <asp:ListItem>Second Half</asp:ListItem>  
+                 <asp:ListItem>Work From  Home</asp:ListItem> 
                  
             
              </asp:DropDownList>
@@ -148,10 +148,10 @@
                  <asp:TextBox ID="CommentBox" runat="server" type="text" placeholder="text" class="form-control text2" TextMode="MultiLine"  Rows="4" Font-Size="Medium"  OnGotFocus="focusforpass"></asp:TextBox> <br />
            <asp:Label ID="FormError" runat="server" CssClass="error" Text="" ForeColor="#FF3300"></asp:Label><br />
             
-             <asp:Button CssClass ="submit" runat="server"  Text="Submit" OnClick="Submit_click"  />
+             <asp:Button CssClass ="submit" runat="server"  Text="SUBMIT" OnClick="Submit_click"  />
 
           
-            <asp:Button CssClass ="Cancel" runat="server"  Text="Cancel"  /> 
+            <asp:Button CssClass ="Cancel" runat="server"  Text="CANCEL" onclick="Cancel_Click" /> 
           
          
  
