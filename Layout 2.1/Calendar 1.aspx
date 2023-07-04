@@ -32,14 +32,19 @@
     font-size: 10px;
 }
      .AbsButton {
-    text-align: center ;
-    background-color:cornflowerblue !important;
-    margin-top:5px;
-    border:1px solid #000;
-    font-weight:bold;
-    padding-left:10px;
-    padding-right:10px;
-}   
+	margin-top: 20px;
+    margin-left: 80px;
+    width: 130px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #7499f1;
+}  
+
+.AbsButton:hover
+{
+    background-color: blue;
+    color:white;
+}     
      .divider {
     border: none;
     border-top: 1px solid #000;
@@ -63,6 +68,38 @@
     background-color: white;
     overflow-y: auto;
     padding: 10px;
+}
+.TodaySelect {
+    background: linear-gradient(to bottom, #4e82eb, #b6c4db)
+}
+
+.DayHeader {
+    text-align: center;
+    font-size: 18px;
+    background-color: #a7c4f2 !important;
+}
+
+.CalendarSelector {
+   
+    background-color:#bebcbc !important;
+}
+.colorCode1 {
+    background-color: #f59a9a;
+     border: 1px solid white !important;
+    border-collapse: collapse !important;
+    
+}
+.colorCode2 {
+    background-color: #fb2525;
+     border: 1px solid white !important;
+    border-collapse: collapse !important;
+    
+}
+.colorCode3 {
+    background-color: #960404;
+     border: 1px solid white !important;
+    border-collapse: collapse !important;
+    
 }
     </style>
 </head>
@@ -107,7 +144,7 @@
                     <asp:Label ID="Label2" runat="server"   CssClass="ml-3 "></asp:Label>
                     <div class="dropdown-divider"></div>
                     <div class="text-right pr-2">
-                        <asp:Button ID="Button3" runat="server" OnClick="logout" Text="Logout" CssClass="btn btn-primary h-10" />
+                        <asp:Button ID="Button3" runat="server" OnClick="logout" Text="Logout" CssClass="AbsButton" Width="80px" Style="margin-top: 2px;"/>
                     </div>
                 </div>
             </li>
@@ -116,12 +153,13 @@
         </div>
     </nav>
             </div>
+         <hr class="divider"/>
        	 <div class="container-fluid main">
             <div class="row">
             
         <div class="col-lg-8 col-md-12 calendar-container">
-            <asp:Calendar ID="Calendar1" runat="server" Height="500px" Width="100%" CssClass="CalendarCss" OnSelectionChanged="Calendar1_SelectionChanged" CellSpacing="2" Font-Bold="False" Font-Size="Large" OnDayRender="Calendar1_DayRender" OnVisibleMonthChanged="Calendar1_VisibleMonthChanged" NextMonthText="Next &gt;" PrevMonthText="&lt; Previous" BorderColor="White" FirstDayOfWeek="Monday">
-            <DayHeaderStyle BackColor="#bfdcfa" CssClass="" BorderColor="White" />
+            <asp:Calendar ID="Calendar1" runat="server" Height="500px" Width="100%" CssClass="CalendarCss" OnSelectionChanged="Calendar1_SelectionChanged" CellSpacing="2" Font-Bold="True" Font-Size="Large" OnDayRender="Calendar1_DayRender" OnVisibleMonthChanged="Calendar1_VisibleMonthChanged" NextMonthText="Next &gt;" PrevMonthText="&lt; Previous" BorderColor="White" FirstDayOfWeek="Monday">
+            <DayHeaderStyle BorderColor="White" BorderWidth="1px" Font-Bold="True" HorizontalAlign="Center" VerticalAlign="Middle" CssClass="DayHeader" />
             <DayStyle ForeColor="Black" HorizontalAlign="Center" CssClass="CalendarDay" BorderColor="#FFFFCC" BorderWidth="0px" />
             <NextPrevStyle BackColor="White" ForeColor="Black" Font-Bold="True" Font-Overline="False"  Font-Underline="False" />
             <OtherMonthDayStyle ForeColor="Silver" />
@@ -152,10 +190,12 @@
                         <h4 class="division-heading">Upcoming Holidays</h4>
                         <hr class="division-divider">
                         
-                        <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" Width="100%" cssClass="Griedview2Style">
-                            <Columns>
-                               
-                            </Columns>
+                        <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" Width="97%" cssClass="Griedview2Style" BorderColor="White" BorderWidth="0px" >
+                           <Columns>
+                <asp:BoundField DataField="Date" Headertext="Date" />                     
+               <asp:BoundField DataField="Holiday" Headertext="Holiday"/>
+            </Columns>      
+            <EditRowStyle Height="50px" />
                         </asp:GridView>
                     </div>
        
@@ -164,7 +204,7 @@
             </div></div>
        <hr class="divider">
     <div class="container-fluid" style="display: flex; justify-content: flex-end; margin-right: 20px;">
-          
+          <asp:Button ID="Button2" cssClass="AbsButton" runat="server" Text="Delete Leave"  onClick="Button2_Click" Height:25px Visible="false" Enabled="false"/>
         <asp:Button ID="Button1" CssClass="AbsButton" runat="server" Text="Create Absence"  OnClick="Button1_Click" Height:25px/>
       </div>
         <footer class="footer">

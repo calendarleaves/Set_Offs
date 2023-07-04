@@ -1,22 +1,15 @@
-﻿using System;
+﻿using SetOffs1;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Reflection.Emit;
-using SetOffs1;
-using System.Diagnostics.Eventing.Reader;
-using Layout_2._1;
-//using Microsoft.AspNet.FriendlyUrls;
 
-namespace WebApplication1
+namespace Layout_2._1
 {
-
-    public partial class WebForm1 : System.Web.UI.Page
+    public partial class AddLeave : System.Web.UI.Page
     {
         DateTime currentDate;
 
@@ -38,41 +31,34 @@ namespace WebApplication1
         }
         public string totalDays()
         {
-            try
+            if (from.Text != "" && To.Text != "")
             {
-                if (from.Text != "" && To.Text != "")
+                int weekoff = 0;
+
+                DateTime startDate = Calendar1.SelectedDate;
+                DateTime endDate = Calendar2.SelectedDate;
                 {
-                    int weekoff = 0;
 
-                    DateTime startDate = Calendar1.SelectedDate;
-                    DateTime endDate = Calendar2.SelectedDate;
+                    currentDate = startDate;
+
+                    while (currentDate <= endDate)
                     {
-
-                        currentDate = startDate;
-
-                        while (currentDate <= endDate)
+                        if (currentDate.DayOfWeek == DayOfWeek.Saturday || currentDate.DayOfWeek == DayOfWeek.Sunday)
                         {
-                            if (currentDate.DayOfWeek == DayOfWeek.Saturday || currentDate.DayOfWeek == DayOfWeek.Sunday)
-                            {
-                                weekoff++;
-                            }
-                            currentDate = currentDate.AddDays(1);
+                            weekoff++;
                         }
-
-
+                        currentDate = currentDate.AddDays(1);
                     }
 
-                    TimeSpan difference = endDate - startDate;
-                    string m = difference.ToString("dd");
 
-                    int n = Int16.Parse(m) + 1 - weekoff;
-                    Total_Days.Text = n.ToString();
                 }
-            }catch(Exception ex) 
-            { 
-                Custom.ErrorHandle(ex, Response); 
-            }
 
+                TimeSpan difference = endDate - startDate;
+                string m = difference.ToString("dd");
+
+                int n = Int16.Parse(m) + 1 - weekoff;
+                Total_Days.Text = n.ToString();
+            }
             return Total_Days.Text;
         }
 
@@ -185,12 +171,15 @@ namespace WebApplication1
 
 
                     cmd.AddLeave(l);
-                    Server.Transfer("Calendar 1.aspx");
+                    Response.Redirect("Calendar 1.aspx");
                 }
             }
             catch (Exception ex)
             {
-                Custom.ErrorHandle(ex, Response);
+
+                Response.Write("error");
+
+
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using Layout_2._1;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -7,16 +8,18 @@ using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using SetOffs1;
+using System.Web.Configuration;
 
 namespace WebApplication1
 {
     public partial class WebForm11 : System.Web.UI.Page
     {
-
+        DBConnection d1 = new DBConnection();
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
+
                 if (!Page.IsPostBack)
                 {
                     if (Session["ID"] == null)
@@ -30,7 +33,13 @@ namespace WebApplication1
                 }
                 if (!IsPostBack)
                 {
-                    LoadTodayRecords();
+                    try
+                    {
+                        LoadTodayRecords();
+                    }catch (Exception ex)
+                    {
+                        Custom.ErrorHandle(ex, Response);
+                    }
                 }
                 //ProfileImage.Attributes.Add("onclick", "ToggleDropdownMenu()");
 
@@ -50,10 +59,21 @@ namespace WebApplication1
                     EmpName_profile.Text = emp.FirstName;
                     //EmpId_profile.Text = emp.Id.ToString();
                 }
+                LoadHolidays();
+                if (!IsPostBack)
+                {
+                    if (Session["ID"] != null && Session["ID"].ToString() == "sumeet.kulkarni@flexur.com")
+                    {
+                        Button1.Text = "Add Leave";
+                        Button2.Visible = true;
+                        Button2.Enabled = true;
+                    }
+                }
+
             }
             catch(Exception ex) 
             {
-                Response.Write("An Error Occurred Please Try Again Later");
+                Custom.ErrorHandle(ex, Response);
             }
         }
 
@@ -64,6 +84,8 @@ namespace WebApplication1
             try
             {
                 DateTime selectedDate = Calendar1.SelectedDate.Date;
+
+                Calendar1.SelectedDayStyle.BackColor = System.Drawing.ColorTranslator.FromHtml("#bebcbc");
                 //if selected date is greater than today's date
                 if (selectedDate > DateTime.Today)
                 {
@@ -115,7 +137,7 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-                Response.Write("An Error Occurred Please Try Again Later");
+                Custom.ErrorHandle(ex, Response);
             }
         }
 
@@ -151,7 +173,7 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-                Response.Write("An Error Occurred Please Try Again Later");
+                Custom.ErrorHandle(ex, Response);
             }
         }
 
@@ -163,9 +185,28 @@ namespace WebApplication1
                 e.Cell.ToolTip = "Chhuti hai bhai..";
 
             }
-            if (e.Day.IsOtherMonth)
+            else if (e.Day.IsOtherMonth)
             {
                 e.Day.IsSelectable = false;
+            }
+            else
+            {
+                DateTime date = e.Day.Date;
+                List<EmployeeLeave> employeeLeaves = d1.GetEmployeeLeave(date);
+                int recordCount = employeeLeaves.Count;
+
+                if (recordCount == 1 || recordCount == 2)
+                {
+                    e.Cell.CssClass = "colorCode1";
+                }
+                else if (recordCount > 2 && recordCount <= 5)
+                {
+                    e.Cell.CssClass = "colorCode2";
+                }
+                else if (recordCount > 5)
+                {
+                    e.Cell.CssClass = "colorCode3";
+                }
             }
         }
 
@@ -187,15 +228,25 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-                Response.Write("An Error Occurred Please Try Again Later");
+                Custom.ErrorHandle(ex, Response);
             }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Create_Abs.aspx");
+        {   
+            if (Session["ID"] != null && Session["ID"].ToString() == "sumeet.kulkarni@flexur.com")
+            {
+                Response.Redirect("AddLeave.aspx");
+            }
+            else
+            {
+                Response.Redirect("Create_Abs.aspx");
+            }
         }
-
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("DeleteLeave.aspx");
+        }
         protected void logout(object sender, EventArgs e)
         {
             Session["ID"] = null;
@@ -204,7 +255,7 @@ namespace WebApplication1
                 Response.Redirect("Login.aspx");
             }
             catch(Exception ex) {
-                Response.Redirect("Create_Abs.aspx");
+                //Response.Redirect("Create_Abs.aspx");
             };
         }
         //private DataTable GetDataTable()
@@ -232,6 +283,27 @@ namespace WebApplication1
 
         //    return dt;
         //}
+
+        private void LoadHolidays() // this will load next Holidays
+        {
+            try
+            {
+                DateTime today = DateTime.Today;
+                DBConnection d = new DBConnection();
+                List<HolidayList> nextHolidays = d.GetUpcomingHolidays(today);
+
+
+                GridView2.DataSource = nextHolidays;
+                GridView2.DataBind();
+
+
+
+            }
+            catch (Exception ex)
+            {
+                Custom.ErrorHandle(ex, Response);
+            }
+        }
     }
 }
 
