@@ -135,7 +135,8 @@ namespace SetOffs1
                     {
                         HolidayList holiday = new HolidayList();
                         DateTime dateTimeValue = reader.GetDateTime(0);
-                        holiday.Date = dateTimeValue.Date.ToString("yyyy-MM-dd") ;
+                        // holiday.Date = dateTimeValue.Date.ToString("yyyy-MM-dd") ;
+                        holiday.Date = dateTimeValue.Date.ToString("dd-MMM-yyyy");
                         holiday.Holiday = reader.GetString(1);
                         upcomingHolidays.Add(holiday);
                     }
