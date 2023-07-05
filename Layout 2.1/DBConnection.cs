@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -7,7 +8,9 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Remoting.Lifetime;
+using System.Security.Cryptography;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 //using static Layout_2.2.DBConnection;
@@ -19,12 +22,13 @@ namespace SetOffs1
     public class DBConnection
     {
         private SqlConnection con;
-        private DataTable profile ;
+        private DataTable profile;
+
         public DBConnection()
         {
             this.con = new SqlConnection(connectionString: ConfigurationManager.ConnectionStrings["Setoffs"].ConnectionString);
         }
-        
+
         public List<EmployeeLeave> GetEmployeeLeave(DateTime date)
         {
             Employee emp = new Employee();
@@ -39,7 +43,7 @@ namespace SetOffs1
                         EmployeeLeave e = new EmployeeLeave();
                         e.FirstName = reader.GetString(0);
                         e.LeaveType = reader.GetString(reader.GetOrdinal("LeaveType"));
-                      
+
                         users.Add(e);
                     }
                 }
@@ -58,10 +62,10 @@ namespace SetOffs1
                 {
                     while (reader.Read())
                     {
-                      string  value1 = reader["FirstName"].ToString();
-                      string  value2 = reader["LastName"].ToString();
+                        string value1 = reader["FirstName"].ToString();
+                        string value2 = reader["LastName"].ToString();
 
-                        
+
                         users.Add(value1 + " " + value2);
                     }
                 }
@@ -89,11 +93,11 @@ namespace SetOffs1
                 con.Close();
             }
         }
-        
+
         public Employee GetEmployee(string email)
         {
             Employee emp = new Employee();
-            using (SqlCommand command = new SqlCommand("SELECT * FROM Employee where Email='" +email + "'", con))
+            using (SqlCommand command = new SqlCommand("SELECT * FROM Employee where Email='" + email + "'", con))
             {
                 con.Open();
 
@@ -110,7 +114,7 @@ namespace SetOffs1
                         emp.Email = reader.GetString(4);
                         emp.Designation = reader.GetString(3);
                         emp.Password = reader.GetString(5); //reader.GetString(reader.GetOrdinal("Password"));
-                        emp.Flx_Id=reader.GetString(6);
+                        emp.Flx_Id = reader.GetString(6);
 
                     }
                 }
@@ -183,14 +187,211 @@ namespace SetOffs1
                     {
                         l.EmpId = reader.GetInt32(0);
                     }
-                    
                 }
                 con.Close();
                 AddLeave(l);
             }
         }
 
-        public Leave GetLeave(int id)
+        // GetAll Leave from data base for search 
+
+        public int getEmployeeId(String s)
+        {
+            int i=0;
+            string[] nameParts = s.Split(' ');
+
+            string firstName = nameParts[0];
+            string lastName = nameParts[1];
+            string query = "SELECT id FROM Employee WHERE FirstName = @firstName AND LastName = @lastName";
+            con.Open();
+            using (SqlCommand command = new SqlCommand(query, con))
+            {
+                command.Parameters.AddWithValue("@firstName", firstName);
+                command.Parameters.AddWithValue("@lastName", lastName);
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    i=int.Parse(reader.GetString(0));
+                }
+            }
+            return i;
+        }
+
+        public DataTable GetAllEmployeesLeave()
+        {
+            DataTable dt = new DataTable();
+            Leave leave = new Leave();
+            SqlCommand command = new SqlCommand("SELECT e.Id     ,e.FirstName     ,e.LastName  ,l.LeaveType     ,l.StartDate  ,l.EndDate      ,l.Days  FROM Employee e join Leave l on e.Id = l.EmpId order by e.FirstName ", con);
+
+
+            SqlDataAdapter reader = new SqlDataAdapter(command);
+                
+
+                reader.Fill(dt);
+
+            return dt;
+            }
+
+        public DataTable GetAllEmployeesLeave(String s)
+        {
+            int i = getEmployeeId(s);
+            DataTable dt = new DataTable();
+
+            string query = "SELECT e.Id     ,e.FirstName     ,e.LastName  ,l.LeaveType     ,l.StartDate  ,l.EndDate      ,l.Days  FROM Employee e join Leave l on e.Id = l.EmpId where l.EmpId=@EmpId order by e.FirstName ";
+            con.Open();
+            using (SqlCommand command = new SqlCommand(query, con))
+            {
+                command.Parameters.AddWithValue("@EmpId", i);
+                SqlDataAdapter reader = new SqlDataAdapter(command);
+               
+
+                reader.Fill(dt);
+            }
+            return dt;
+        }
+
+
+        public DataTable GetAllEmployeesLeave(String s ,DateTime startDate)
+        {
+            int i = getEmployeeId(s);
+            DataTable dt = new DataTable();
+
+            string query = "SELECT e.Id     ,e.FirstName     ,e.LastName  ,l.LeaveType     ,l.StartDate  ,l.EndDate      ,l.Days  FROM Employee e join Leave l on e.Id = l.EmpId where l.EmpId=@EmpId AND StartDate = @StartDate order by e.FirstName ";
+            con.Open();
+            using (SqlCommand command = new SqlCommand(query, con))
+            {
+                command.Parameters.AddWithValue("@EmpId", i);
+                command.Parameters.AddWithValue("@StartDate", startDate);
+                SqlDataAdapter reader = new SqlDataAdapter(command);
+
+
+                reader.Fill(dt);
+            }
+            return dt;
+        }
+
+        public DataTable GetAllEmployeesLeave(String s, DateTime startDate,DateTime endDate)
+        {
+            int i = getEmployeeId(s);
+            DataTable dt = new DataTable();
+
+            string query = "SELECT e.Id     ,e.FirstName     ,e.LastName  ,l.LeaveType     ,l.StartDate  ,l.EndDate      ,l.Days  FROM Employee e join Leave l on e.Id = l.EmpId where l.EmpId=@EmpId AND (l.StartDate = @StartDate OR l.EndDate = @EndDate) order by e.FirstName ";
+            con.Open();
+            using (SqlCommand command = new SqlCommand(query, con))
+            {
+                command.Parameters.AddWithValue("@EmpId", i);
+                command.Parameters.AddWithValue("@StartDate", startDate);
+                command.Parameters.AddWithValue("@EndDate", endDate);
+
+
+                SqlDataAdapter reader = new SqlDataAdapter(command);
+
+
+                reader.Fill(dt);
+            }
+            con.Close();
+            return dt;
+        }
+
+
+
+        public int CountLeave(string s)
+        {
+
+            int count;
+            string[] nameParts = s.Split(' ');
+
+            string firstName = nameParts[0];
+            string lastName = nameParts[1];
+            string query = "SELECT COUNT(*)  FROM Employee e join Leave l on e.Id = l.EmpId  WHERE e.FirstName = @firstName AND e.LastName = @lastName";
+            con.Open();
+            using (SqlCommand command = new SqlCommand(query, con))
+            {
+                command.Parameters.AddWithValue("@FirstName", firstName);
+                command.Parameters.AddWithValue("@LastName", lastName);
+
+
+                count = (int)command.ExecuteScalar();
+
+            }
+            con.Close() ;
+            return count;
+        }
+
+        public int CountLeave(string s,DateTime startDate)
+        {
+
+            int count;
+            string[] nameParts = s.Split(' ');
+
+            string firstName = nameParts[0];
+            string lastName = nameParts[1];
+            string query = "SELECT COUNT(*)  FROM Employee e join Leave l on e.Id = l.EmpId  WHERE e.FirstName = @firstName AND e.LastName = @lastName";
+            con.Open();
+            using (SqlCommand command = new SqlCommand(query, con))
+            {
+                command.Parameters.AddWithValue("@FirstName", firstName);
+                command.Parameters.AddWithValue("@LastName", lastName);
+
+
+                count = (int)command.ExecuteScalar();
+
+            }
+            con.Close();
+            return count;
+        }
+
+        public void DeleteLeave(string s)
+        {
+           int id =getEmployeeId(s);
+           
+            string query = "DELETE FROM  Leave WHERE EmpID = @EmpId";
+            con.Open();
+            using (SqlCommand command = new SqlCommand(query, con))
+            {
+                command.Parameters.AddWithValue("@EmpId", id);
+
+                command.ExecuteReader();
+            }
+
+                
+        }
+
+        public void DeleteLeave(string s, DateTime startDate)
+        {
+            int id = getEmployeeId(s);
+
+            string query = "DELETE FROM  Leave WHERE EmpID = @EmpId  AND StartDate = @StartDate ";
+            con.Open();
+            using (SqlCommand command = new SqlCommand(query, con))
+            {
+                command.Parameters.AddWithValue("@EmpId", id);
+                command.Parameters.AddWithValue("@StartDate", startDate);
+
+                command.ExecuteReader();
+            }
+        }
+        public void DeleteLeave(string s,DateTime startDate, DateTime endDate)
+        {
+            int id = getEmployeeId(s);
+
+            string query = "DELETE FROM  Leave WHERE EmpID = @EmpId  AND (StartDate = @StartDate OR EndDate = @EndDate) ";
+            con.Open();
+            using (SqlCommand command = new SqlCommand(query, con))
+            {
+                command.Parameters.AddWithValue("@EmpId", id);
+                command.Parameters.AddWithValue("@StartDate", startDate);
+                command.Parameters.AddWithValue("@EndDate", endDate);
+
+
+                command.ExecuteReader();
+            }
+
+        }
+
+
+
+    public Leave GetLeave(int id)
         {
             Leave leave = new Leave();
             using (SqlCommand command = new SqlCommand("SELECT * FROM Leave where EmpId=" + id + "", con))
@@ -250,7 +451,9 @@ namespace SetOffs1
 
             return dt;
         }
+
     }
+
     public class HolidayList
     {
         public string Date { get; set; }
