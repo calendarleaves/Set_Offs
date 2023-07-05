@@ -1,34 +1,164 @@
 ﻿using SetOffs1;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Reflection.Emit;
+using System.Diagnostics.Eventing.Reader;
+using Layout_2._1;
 
 namespace Layout_2._1
 {
     public partial class AddLeave : System.Web.UI.Page
     {
+        string selectedValue;
+        int id;
+        string value1;
+        string value2;
+
+        string item;
         DateTime currentDate;
+
+
+
+
+
+
+
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                Calendar1.Visible = false;
-                Calendar2.Visible = false;
-            }
+
 
             if (from.Text == null)
             {
                 Calendar2.Enabled = false;
+
+            }
+
+            if (!IsPostBack)
+            {
+                Calendar1.Visible = false;
+                Calendar2.Visible = false;
+
+                DBConnection s = new DBConnection();
+
+                List<string> data = new List<string>();
+                data = s.GetAllEmployeeLeave();
+
+                DropDownList1.DataSource = data;
+                DropDownList1.DataBind();
+
             }
 
 
         }
+
+
+
+
+
+
+
+
+        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+        protected void Submit_click(object sender, EventArgs e)
+        {
+
+
+
+
+
+
+
+
+
+
+
+
+            try
+            {
+
+                string fullName = DropDownList1.SelectedItem.Value;
+
+
+                string[] nameParts = fullName.Split(' ');
+
+                string firstName = nameParts[0];
+                string lastName = nameParts[1];
+
+
+
+
+
+
+
+                Calendar1.Visible = false;
+                Calendar2.Visible = false;
+                DateTime start1 = Calendar1.SelectedDate;
+                DateTime end1 = Calendar2.SelectedDate;
+
+
+                if (Drop.SelectedValue == "")
+
+                {
+                    LeaveLable.Text = "* Please Select Leave";
+                    Drop.Focus();
+
+
+                }
+                else if (from.Text == "")
+                {
+                    calendar1lable.Text = "* Please Select Start Date";
+                    from.Focus();
+
+                }
+                else if (To.Text == "")
+                {
+                    Calendar3Label.Text = "* Please Select End Date";
+                    To.Focus();
+
+                }
+                else
+                {
+                    Leave l = new Leave();
+                    l.LeaveType = Drop.SelectedValue;
+                    l.StartDate = Calendar1.SelectedDate;
+                    l.EndDate = Calendar2.SelectedDate;
+                    l.Days = Int16.Parse(Total_Days.Text);
+                    l.Comments = CommentBox.Text;
+
+                    DBConnection s = new DBConnection();
+
+                    s.Addleave(firstName, lastName, l);
+
+                    Server.Transfer("Calendar 1.aspx");
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                Custom.ErrorHandle(ex, Response);
+
+
+            }
+        }
+
+
+
         public string totalDays()
         {
             if (from.Text != "" && To.Text != "")
@@ -62,6 +192,18 @@ namespace Layout_2._1
             return Total_Days.Text;
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
         protected void Calendar1_Click(object sender, ImageClickEventArgs e)
         {
             Calendar1.SelectedDate = currentDate;
@@ -80,6 +222,8 @@ namespace Layout_2._1
             {
                 Calendar1.Visible = true;
             }
+
+
 
             Calendar1.Attributes.Add("style", "position:absolute");
 
@@ -126,62 +270,7 @@ namespace Layout_2._1
         }
 
 
-        protected void Submit_click(object sender, EventArgs e)
-        {
-            try
-            {
-                Calendar1.Visible = false;
-                Calendar2.Visible = false;
-                DateTime start1 = Calendar1.SelectedDate;
-                DateTime end1 = Calendar2.SelectedDate;
-                if (Drop.SelectedValue == "")
-                {
-                    LeaveLable.Text = "* Please select leave";
-                    Drop.Focus();
-                    FormError.Text = "* Incompleted info";
 
-                }
-                else if (from.Text == "")
-                {
-                    calendar1lable.Text = "* Please select Startdate";
-                    from.Focus();
-                    FormError.Text = " * Incompleted info";
-                }
-                else if (To.Text == "")
-                {
-                    Calendar3Label.Text = "* Please select Enddate";
-                    To.Focus();
-                    FormError.Text = " * Incompleted info";
-                }
-                else
-                {
-                    DBConnection cmd = new DBConnection();
-                    Employee emp = new Employee();
-                    emp = cmd.GetEmployee(Session["ID"] as string);
-
-
-
-                    Leave l = new Leave();
-                    l.EmpId = emp.Id;
-                    l.LeaveType = Drop.SelectedValue;
-                    l.StartDate = Calendar1.SelectedDate;
-                    l.EndDate = Calendar2.SelectedDate;
-                    l.Days = Int16.Parse(Total_Days.Text);
-                    l.Comments = CommentBox.Text;
-
-
-                    cmd.AddLeave(l);
-                    Response.Redirect("Calendar 1.aspx");
-                }
-            }
-            catch (Exception ex)
-            {
-
-                Response.Write("error");
-
-
-            }
-        }
 
         protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
         {
@@ -240,6 +329,11 @@ namespace Layout_2._1
             {
                 LeaveLable.Text = "";
             }
+        }
+
+        protected void Cancel_Click(object sender, EventArgs e)
+        {
+            Server.Transfer("Calendar 1.aspx");
         }
     }
 }
