@@ -191,25 +191,7 @@ namespace WebApplication1
                 {
                     e.Day.IsSelectable = false;
                 }
-                else
-                {
-                    DateTime date = e.Day.Date;
-                    List<EmployeeLeave> employeeLeaves = d1.GetEmployeeLeave(date);
-                    int recordCount = employeeLeaves.Count;
-
-                    if (recordCount == 1 || recordCount == 2)
-                    {
-                        e.Cell.CssClass = "colorCode1";
-                    }
-                    else if (recordCount > 2 && recordCount <= 5)
-                    {
-                        e.Cell.CssClass = "colorCode2";
-                    }
-                    else if (recordCount > 5)
-                    {
-                        e.Cell.CssClass = "colorCode3";
-                    }
-                }
+                
             }
             catch (Exception ex)
             {
