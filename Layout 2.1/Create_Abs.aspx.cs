@@ -150,22 +150,22 @@ namespace WebApplication1
                 DateTime end1 = Calendar2.SelectedDate;
                 if (Drop.SelectedValue == "")
                 {
-                    LeaveLable.Text = "* Please select leave";
+                    LeaveLable.Text = "* Please Select Leave";
                     Drop.Focus();
-                    FormError.Text = "* Incompleted info";
+                  
 
                 }
                 else if (from.Text == "")
                 {
-                    calendar1lable.Text = "* Please select Startdate";
+                    calendar1lable.Text = "* Please Select Start Date";
                     from.Focus();
-                    FormError.Text = " * Incompleted info";
+                    
                 }
                 else if (To.Text == "")
                 {
-                    Calendar3Label.Text = "* Please select Enddate";
+                    Calendar3Label.Text = "* Please Select End Date";
                     To.Focus();
-                    FormError.Text = " * Incompleted info";
+                    
                 }
                 else
                 {
@@ -251,6 +251,11 @@ namespace WebApplication1
             {
                 LeaveLable.Text = "";
             }
+        }
+
+        protected void Cancel_Click(object sender, EventArgs e)
+        {
+            Server.Transfer("Calendar 1.aspx");
         }
     }
 }
