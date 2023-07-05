@@ -57,7 +57,7 @@
 .division-divider {
     margin-top: 5px;
     margin-bottom: 5px;
-    border: 1px solid #000f;
+    border: 1px solid #000;
 }
 .GriedViewContainer {
     height: 500px;
@@ -70,7 +70,7 @@
     padding: 10px;
 }
 .TodaySelect {
-    background: linear-gradient(to bottom, #4e82eb, #b6c4db)
+    background: linear-gradient(to bottom, #4e82eb, #b6c4db)!important;
 }
 
 .DayHeader {
@@ -83,24 +83,7 @@
    
     background-color:#bebcbc !important;
 }
-.colorCode1 {
-    background-color: #f59a9a;
-     border: 1px solid white !important;
-    border-collapse: collapse !important;
-    
-}
-.colorCode2 {
-    background-color: #fb2525;
-     border: 1px solid white !important;
-    border-collapse: collapse !important;
-    
-}
-.colorCode3 {
-    background-color: #960404;
-     border: 1px solid white !important;
-    border-collapse: collapse !important;
-    
-}
+
     </style>
 </head>
 <body>
