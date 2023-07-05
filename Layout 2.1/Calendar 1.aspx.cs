@@ -257,7 +257,7 @@ namespace WebApplication1
             Session["ID"] = null;
             try
             {
-                Response.Redirect("Login.aspx");
+                Server.Transfer("Login.aspx");
             }
             catch(Exception ex) {
                 //Response.Redirect("Create_Abs.aspx");
