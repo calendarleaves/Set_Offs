@@ -32,10 +32,10 @@
     font-size: 10px;
 }
      .AbsButton {
-	margin-top: 20px;
+	margin-top: 15px;
     margin-left: 80px;
     width: 130px;
-    padding: 5px;
+    padding: 3px;
     border-radius: 5px;
     background-color: #7499f1;
 }  
@@ -57,7 +57,7 @@
 .division-divider {
     margin-top: 5px;
     margin-bottom: 5px;
-    border: 1px solid #000;
+    border: 1px solid #808080;
 }
 .GriedViewContainer {
     height: 500px;
@@ -85,6 +85,25 @@
 }
 
     </style>
+
+
+    <script>
+document.addEventListener('click', function (event) {
+    var calendar = document.getElementById('<%= Calendar1.ClientID %>');
+    var target = event.target;
+    var dateCell = target.closest('.date-cell');
+
+    if (dateCell) {
+        // Add code to handle the selected date
+        var selectedDate = dateCell.dataset.date;
+        console.log('Selected date:', selectedDate);
+
+        // Add code to update the UI or perform any other actions with the selected date
+        dateCell.classList.add('selected');
+    }
+});
+    </script>
+
 </head>
 <body>
     <form id="form1" runat="server">
