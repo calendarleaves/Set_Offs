@@ -38,7 +38,6 @@ namespace Layout_2._1
                     Session["ID"] = UsernameTextBox.Text;
                     Server.Transfer("Calendar 1.aspx");
                 }
-
                 else
                 {
                     if (UsernameTextBox.Text != "" && PasswordTextBox.Text != "")

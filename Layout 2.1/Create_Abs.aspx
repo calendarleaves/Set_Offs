@@ -145,7 +145,7 @@
 
              <asp:Label class="comment" ID="Lable1" runat="server" Text="Comment :" ></asp:Label><br />
        <!--      <asp:TextBox ID="TextBox1" cssclass="text2" runat="server" TextMode="MultiLine"  Rows="4" Font-Size="Medium" class="form-control" style="max-width:300px; max-height:50px" OnGotFocus="focusforpass"></asp:TextBox>  <br /><br />-->
-                 <asp:TextBox ID="CommentBox" runat="server" type="text" placeholder="text" class="form-control text2" TextMode="MultiLine"  Rows="4" Font-Size="Medium"  OnGotFocus="focusforpass"></asp:TextBox> <br />
+                 <asp:TextBox ID="CommentBox" runat="server" type="text" placeholder="Text" class="form-control text2" TextMode="MultiLine"  Rows="4" Font-Size="Medium"  OnGotFocus="focusforpass"></asp:TextBox> <br />
            <asp:Label ID="FormError" runat="server" CssClass="error" Text="" ForeColor="#FF3300"></asp:Label><br />
             
              <asp:Button CssClass ="submit" runat="server"  Text="SUBMIT" OnClick="Submit_click"  />
