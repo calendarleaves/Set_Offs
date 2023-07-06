@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 namespace Layout_2._1
 {
     public partial class WebForm1 : System.Web.UI.Page
-    {       protected void Page_Load(object sender, EventArgs e)
+    { protected void Page_Load(object sender, EventArgs e)
         {
             Session["ID"] = null;
         }
@@ -23,15 +23,22 @@ namespace Layout_2._1
                 DBConnection con = new DBConnection();
                 employee = con.GetEmployee(UsernameTextBox.Text);
 
+                if (PasswordTextBox.Text == "")
+                {
+                    pass.Text = " *";
+                    PasswordTextBox.Focus();
+                }
+                else
+                { pass.Text = ""; }
+
                 if (UsernameTextBox.Text == "")
-                { { user.Text = " * Please Fill Username "; } }
+                {
+                    user.Text = " * ";
+                    UsernameTextBox.Focus();
+                }
                 else
                 { user.Text = ""; }
 
-                if (PasswordTextBox.Text == "")
-                { { pass.Text = " * Please Fill Password"; } }
-                else
-                { pass.Text = ""; }
 
                 if (UsernameTextBox.Text == employee.Email && PasswordTextBox.Text == employee.Password)
                 {
@@ -50,6 +57,6 @@ namespace Layout_2._1
                 Custom.ErrorHandle(ex, Response);
             }
 
-        }
-    }
-}
+        } } }
+    
+

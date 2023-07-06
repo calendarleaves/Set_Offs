@@ -62,8 +62,9 @@ namespace WebApplication1
                 LoadHolidays();
                 if (!IsPostBack)
                 {
-                    if (Session["ID"] != null && Session["ID"].ToString() == "sumeet.kulkarni@flexur.com")
-                    {
+                    
+                        if (Session["ID"] != null && Session["ID"].ToString() == "admin@flexur.com")
+                        {
                         Button1.Text = "Add Leave";
                         Button2.Visible = true;
                         Button2.Enabled = true;
@@ -225,7 +226,7 @@ namespace WebApplication1
         {
             try
             {
-                if (Session["ID"] != null && Session["ID"].ToString() == "sumeet.kulkarni@flexur.com")
+                if (Session["ID"] != null && Session["ID"].ToString() == "admin@flexur.com")
                 {
                     Server.Transfer("AddLeave.aspx");
                 }
@@ -256,7 +257,7 @@ namespace WebApplication1
             Session["ID"] = null;
             try
             {
-                Response.Redirect("Login.aspx");
+                Server.Transfer("Login.aspx");
             }
             catch(Exception ex) {
                 //Response.Redirect("Create_Abs.aspx");

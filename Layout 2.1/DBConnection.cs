@@ -52,7 +52,7 @@ namespace SetOffs1
 
             return users;
         }
-        public List<string> GetAllEmployeeLeave()
+        public List<string> GetAllEmployeeName()
         {
             List<string> users = new List<string>();
             using (SqlCommand command = new SqlCommand("SELECT FirstName, LastName FROM Employee", con))
@@ -192,17 +192,24 @@ namespace SetOffs1
                 AddLeave(l);
             }
         }
-
         // GetAll Leave from data base for search 
 
         public int getEmployeeId(String s)
         {
-            int i=0;
+            string firstName = "";
+            string lastName = "";
+            int i = 0;
             string[] nameParts = s.Split(' ');
+            if (nameParts.Length > 0)
+                firstName = nameParts[0];
+            if (nameParts.Length > 1)
+                lastName = nameParts[1];
+            else
+            {
 
-            string firstName = nameParts[0];
-            string lastName = nameParts[1];
-            string query = "SELECT id FROM Employee WHERE FirstName = @firstName AND LastName = @lastName";
+            }
+
+            string query = "SELECT id FROM Employee WHERE FirstName =@firstName and LastName = @lastName";
             con.Open();
             using (SqlCommand command = new SqlCommand(query, con))
             {
@@ -211,26 +218,34 @@ namespace SetOffs1
 
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    i=int.Parse(reader.GetString(0));
+                    if (reader.Read())
+                    {
+                        i = reader.GetInt32(0);
+                    }
                 }
+
+
             }
+            con.Close();
             return i;
         }
 
         public DataTable GetAllEmployeesLeave()
         {
             DataTable dt = new DataTable();
-            Leave leave = new Leave();
+
+            con.Open();
+
             SqlCommand command = new SqlCommand("SELECT e.Id     ,e.FirstName     ,e.LastName  ,l.LeaveType     ,l.StartDate  ,l.EndDate      ,l.Days  FROM Employee e join Leave l on e.Id = l.EmpId order by e.FirstName ", con);
 
 
             SqlDataAdapter reader = new SqlDataAdapter(command);
-                
 
-                reader.Fill(dt);
 
+            reader.Fill(dt);
+            con.Close();
             return dt;
-            }
+        }
 
         public DataTable GetAllEmployeesLeave(String s)
         {
@@ -243,15 +258,16 @@ namespace SetOffs1
             {
                 command.Parameters.AddWithValue("@EmpId", i);
                 SqlDataAdapter reader = new SqlDataAdapter(command);
-               
+
 
                 reader.Fill(dt);
             }
+            con.Close();
             return dt;
         }
 
 
-        public DataTable GetAllEmployeesLeave(String s ,DateTime startDate)
+        public DataTable GetAllEmployeesLeave(String s, DateTime startDate)
         {
             int i = getEmployeeId(s);
             DataTable dt = new DataTable();
@@ -267,10 +283,11 @@ namespace SetOffs1
 
                 reader.Fill(dt);
             }
+            con.Close();
             return dt;
         }
 
-        public DataTable GetAllEmployeesLeave(String s, DateTime startDate,DateTime endDate)
+        public DataTable GetAllEmployeesLeave(String s, DateTime startDate, DateTime endDate)
         {
             int i = getEmployeeId(s);
             DataTable dt = new DataTable();
@@ -298,40 +315,33 @@ namespace SetOffs1
         public int CountLeave(string s)
         {
 
+            int id = getEmployeeId(s);
             int count;
-            string[] nameParts = s.Split(' ');
 
-            string firstName = nameParts[0];
-            string lastName = nameParts[1];
-            string query = "SELECT COUNT(*)  FROM Employee e join Leave l on e.Id = l.EmpId  WHERE e.FirstName = @firstName AND e.LastName = @lastName";
+            string query = "SELECT COUNT(*)  FROM Employee e join Leave l on e.Id = l.EmpId  WHERE l.EmpId =@EmpId ";
             con.Open();
             using (SqlCommand command = new SqlCommand(query, con))
             {
-                command.Parameters.AddWithValue("@FirstName", firstName);
-                command.Parameters.AddWithValue("@LastName", lastName);
-
+                command.Parameters.AddWithValue("@EmpId", id);
 
                 count = (int)command.ExecuteScalar();
 
             }
-            con.Close() ;
+            con.Close();
             return count;
         }
 
-        public int CountLeave(string s,DateTime startDate)
+        public int CountLeave(string s, DateTime startDate)
         {
-
+            int id = getEmployeeId(s);
             int count;
-            string[] nameParts = s.Split(' ');
 
-            string firstName = nameParts[0];
-            string lastName = nameParts[1];
-            string query = "SELECT COUNT(*)  FROM Employee e join Leave l on e.Id = l.EmpId  WHERE e.FirstName = @firstName AND e.LastName = @lastName";
+            string query = "SELECT COUNT(*)  FROM Employee e join Leave l on e.Id = l.EmpId  WHERE l.EmpId =@EmpId AND l.StartDate= @startDate";
             con.Open();
             using (SqlCommand command = new SqlCommand(query, con))
             {
-                command.Parameters.AddWithValue("@FirstName", firstName);
-                command.Parameters.AddWithValue("@LastName", lastName);
+                command.Parameters.AddWithValue("@EmpId", id);
+                command.Parameters.AddWithValue("@startDate", startDate);
 
 
                 count = (int)command.ExecuteScalar();
@@ -343,8 +353,8 @@ namespace SetOffs1
 
         public void DeleteLeave(string s)
         {
-           int id =getEmployeeId(s);
-           
+            int id = getEmployeeId(s);
+
             string query = "DELETE FROM  Leave WHERE EmpID = @EmpId";
             con.Open();
             using (SqlCommand command = new SqlCommand(query, con))
@@ -353,8 +363,8 @@ namespace SetOffs1
 
                 command.ExecuteReader();
             }
+            con.Close();
 
-                
         }
 
         public void DeleteLeave(string s, DateTime startDate)
@@ -370,8 +380,9 @@ namespace SetOffs1
 
                 command.ExecuteReader();
             }
+            con.Close();
         }
-        public void DeleteLeave(string s,DateTime startDate, DateTime endDate)
+        public void DeleteLeave(string s, DateTime startDate, DateTime endDate)
         {
             int id = getEmployeeId(s);
 
@@ -386,12 +397,13 @@ namespace SetOffs1
 
                 command.ExecuteReader();
             }
-
+            con.Close();
         }
 
 
 
-    public Leave GetLeave(int id)
+
+        public Leave GetLeave(int id)
         {
             Leave leave = new Leave();
             using (SqlCommand command = new SqlCommand("SELECT * FROM Leave where EmpId=" + id + "", con))
