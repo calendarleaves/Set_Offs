@@ -35,7 +35,7 @@ namespace Layout_2._1
             // Redirect to the corresponding error page based on the status code
             switch (statusCode)
             {
-                case 0:
+                case 200:
                     break;
                 case 404:
                     Response.Redirect("~/Error Handler/Error404.aspx");
@@ -44,6 +44,7 @@ namespace Layout_2._1
                     Response.Redirect("~/Error Handler/Error500.aspx");
                     break;
                 default:
+
                     Response.Redirect("~/Error Handler/Error.aspx");
                     break;
             }
