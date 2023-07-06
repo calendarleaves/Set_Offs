@@ -32,10 +32,10 @@
     font-size: 10px;
 }
      .AbsButton {
-	margin-top: 15px;
+	margin-top: 20px;
     margin-left: 80px;
     width: 130px;
-    padding: 3px;
+    padding: 5px;
     border-radius: 5px;
     background-color: #7499f1;
 }  
@@ -57,7 +57,7 @@
 .division-divider {
     margin-top: 5px;
     margin-bottom: 5px;
-    border: 1px solid #808080;
+    border: 1px solid #000;
 }
 .GriedViewContainer {
     height: 500px;
@@ -85,25 +85,6 @@
 }
 
     </style>
-
-
-    <script>
-document.addEventListener('click', function (event) {
-    var calendar = document.getElementById('<%= Calendar1.ClientID %>');
-    var target = event.target;
-    var dateCell = target.closest('.date-cell');
-
-    if (dateCell) {
-        // Add code to handle the selected date
-        var selectedDate = dateCell.dataset.date;
-        console.log('Selected date:', selectedDate);
-
-        // Add code to update the UI or perform any other actions with the selected date
-        dateCell.classList.add('selected');
-    }
-});
-    </script>
-
 </head>
 <body>
     <form id="form1" runat="server">
@@ -203,7 +184,7 @@ document.addEventListener('click', function (event) {
        
    </div> </div></div>
 
-            
+            </div></div>
        <hr class="divider">
     <div class="container-fluid" style="display: flex; justify-content: flex-end; margin-right: 20px;">
           <asp:Button ID="Button2" cssClass="AbsButton" runat="server" Text="Delete Leave"  onClick="Button2_Click" Height:25px Visible="false" Enabled="false"/>
