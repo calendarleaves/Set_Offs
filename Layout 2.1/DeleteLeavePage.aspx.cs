@@ -1,4 +1,5 @@
 ﻿using System;
+using SetOffs1;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -18,11 +19,10 @@ namespace Layout_2._1
             {
                 Calendar1.Visible = false;
                 Calendar2.Visible = false;
-            }
-            BindGridView();
+                BindGridView();
+            }        
         }
 
-        DataTable dt = new DataTable();
         protected void StartDateCalendar_Click(object sender, ImageClickEventArgs e)
         {
 
@@ -30,7 +30,6 @@ namespace Layout_2._1
             if (Calendar1.Visible)
             {
                 Calendar1.Visible = false;
-
             }
             else
             {
@@ -61,206 +60,244 @@ namespace Layout_2._1
 
         protected void Calendar1_SelectionChanged(object sender, EventArgs e)
         {
-            StartDateSearch.Text = Calendar1.SelectedDate.ToString("dd/MM/yy");
+            StartDateSearch.Text = Calendar1.SelectedDate.ToString("dd/MM/yyyy");
             Calendar1.Visible = false;
         }
 
         protected void Calendar2_SelectionChanged(object sender, EventArgs e)
         {
-            EndDateSearch.Text = Calendar2.SelectedDate.ToString("dd/MM/yy");
+            EndDateSearch.Text = Calendar2.SelectedDate.ToString("dd/MM/yyyy");
             Calendar2.Visible = false;
         }
 
- 
+
+
         private void BindGridView()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand("SELECT * FROM DeleteLeave", con);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
+            DataTable dt = new DataTable();
+            DBConnection con = new DBConnection();
 
-                DeleteLeaveGridView.DataSource = dt;
-                DeleteLeaveGridView.DataBind();
+            dt = con.GetAllEmployeesLeave();
 
-            }
+            DeleteLeaveGridView.DataSource = dt;
+            DeleteLeaveGridView.DataBind();
+
         }
+        
 
         protected void btnDelete_Click(object sender, EventArgs e)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(connectionString))
+            DBConnection con = new DBConnection();
+
+            if (string.IsNullOrEmpty(txtSearch.Text) && string.IsNullOrEmpty(StartDateSearch.Text) && string.IsNullOrEmpty(EndDateSearch.Text))
             {
-                if (string.IsNullOrEmpty(txtSearch.Text) && string.IsNullOrEmpty(StartDateSearch.Text) && string.IsNullOrEmpty(EndDateSearch.Text))
+
+                //string script = "alert('Please enter a value in at least one textbox.');";
+                //ClientScript.RegisterStartupScript(this.GetType(), "EmptyTextBoxPrompt", script, true);
+                MainLabel.Text = "* Please enter atleast one input.";
+                EmpNameLabel.Visible = false;
+                StartDateLabel.Visible = false;
+                EndDateLabel.Visible = false;
+                txtSearch.Focus();
+            }
+            else if(string.IsNullOrEmpty(txtSearch.Text) && string.IsNullOrEmpty(StartDateSearch.Text))
+            {
+                MainLabel.Visible = false;
+                EmpNameLabel.Text = "* Please enter employee full name.";
+                StartDateLabel.Visible = false;
+                EndDateLabel.Visible = false;
+                txtSearch.Focus();
+            }
+            else if(string.IsNullOrEmpty(txtSearch.Text) && string.IsNullOrEmpty(EndDateSearch.Text))
                 {
+                MainLabel.Visible = false;
+                EmpNameLabel.Text = "* Please enter employee full name.";
+                StartDateLabel.Visible = false;
+                EndDateLabel.Visible = false;
+                txtSearch.Focus();
+            }
 
-                    string script = "alert('Please enter a value in at least one textbox.');";
-                    ClientScript.RegisterStartupScript(this.GetType(), "EmptyTextBoxPrompt", script, true);
-                }
+            else if (string.IsNullOrEmpty(StartDateSearch.Text) && string.IsNullOrEmpty(EndDateSearch.Text))
+            {
 
-                else if (string.IsNullOrEmpty(StartDateSearch.Text) && string.IsNullOrEmpty(EndDateSearch.Text))
+
+                int recordCount = con.CountLeave(txtSearch.Text); // to check if record count ==1;pooja devare
+
+                if (recordCount == 1)
                 {
-
-                    string countQuery = "SELECT COUNT(*) FROM DeleteLeave WHERE EmployeeName = @EmployeeName  ";
-                    SqlCommand countCmd = new SqlCommand(countQuery, con);
-                    countCmd.Parameters.AddWithValue("@EmployeeName", txtSearch.Text);
-
-                    con.Open();
-                    int recordCount = (int)countCmd.ExecuteScalar(); // to check if record count ==1;
-                    con.Close();
-
-                    if (recordCount == 1)
-                    {
-                        // Only one record matches the criteria
-                        // Proceed with the deletion
-                        string deleteQuery = "DELETE FROM DeleteLeave WHERE EmployeeName = @EmployeeName  ";
-                        SqlCommand deleteCmd = new SqlCommand(deleteQuery, con);
-                        deleteCmd.Parameters.AddWithValue("@EmployeeName", txtSearch.Text);
-
-
-                        con.Open();
-                        deleteCmd.ExecuteNonQuery();
-                        con.Close();
-
-                        BindGridView();
-
-
-                    }
-                    else
-                    {
-                        string script = "alert('Please enter start date.');";
-                        ClientScript.RegisterStartupScript(this.GetType(), "EmptyTextBoxPrompt", script, true);
-
-                    }
-
-                }
-                else if (string.IsNullOrEmpty(EndDateSearch.Text))
-                {
-                    string countQuery = "SELECT COUNT(*) FROM DeleteLeave WHERE EmployeeName = @EmployeeName AND StartDate = @StartDate ";
-                    SqlCommand countCmd = new SqlCommand(countQuery, con);
-                    countCmd.Parameters.AddWithValue("@EmployeeName", txtSearch.Text);
-                    countCmd.Parameters.AddWithValue("@StartDate", DateTime.Parse(StartDateSearch.Text));
-
-                    con.Open();
-                    int recordCount = (int)countCmd.ExecuteScalar(); // to check if record count ==1;
-                    con.Close();
-
-                    if (recordCount == 1)
-                    {
-                        // Only one record matches the criteria
-                        // Proceed with the deletion
-                        string deleteQuery = "DELETE FROM DeleteLeave WHERE EmployeeName = @EmployeeName AND StartDate = @StartDate ";
-                        SqlCommand deleteCmd = new SqlCommand(deleteQuery, con);
-                        deleteCmd.Parameters.AddWithValue("@EmployeeName", txtSearch.Text);
-                        deleteCmd.Parameters.AddWithValue("@StartDate", DateTime.Parse(StartDateSearch.Text));
-
-
-                        con.Open();
-                        deleteCmd.ExecuteNonQuery();
-                        con.Close();
-
-                        BindGridView();
-
-
-                    }
-                    else
-                    {
-                        string script = "alert('Please enter end date.');";
-                        ClientScript.RegisterStartupScript(this.GetType(), "EmptyTextBoxPrompt", script, true);
-
-                    }
+                    con.DeleteLeave(txtSearch.Text);
+                    BindGridView();
                 }
                 else
                 {
-                    string query = "Delete from DeleteLeave  where EmployeeName= @EmployeeName AND (StartDate = @StartDate OR EndDate = @EndDate)";
-                    SqlCommand cmd = new SqlCommand(query, con);
-                    cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@Employeename", txtSearch.Text);
-                    cmd.Parameters.AddWithValue("@StartDate", DateTime.Parse(StartDateSearch.Text));
-                    cmd.Parameters.AddWithValue("@EndDate", DateTime.Parse(EndDateSearch.Text));
-
-
-                    con.Open();
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-
-                    BindGridView();
-
+                    //string script = "alert('Please enter start date.');";
+                    //ClientScript.RegisterStartupScript(this.GetType(), "EmptyTextBoxPrompt", script, true);
+                    MainLabel.Visible = false;
+                    EmpNameLabel.Visible = false;
+                    StartDateLabel.Text = "* Please enter start date.";
+                    EndDateLabel.Visible = false;
+                    StartDateSearch.Focus();
                 }
+            }
+            else if (string.IsNullOrEmpty(EndDateSearch.Text))
+            {
+
+                int recordCount = con.CountLeave(txtSearch.Text, DateTime.Parse(StartDateSearch.Text)); // to check if record count ==1;
+                if (recordCount == 1)
+                {
+                    con.DeleteLeave(txtSearch.Text, DateTime.Parse(StartDateSearch.Text));
+                    BindGridView();
+                }
+                else
+                {
+                    //string script = "alert('Please enter end date.');";
+                    //ClientScript.RegisterStartupScript(this.GetType(), "EmptyTextBoxPrompt", script, true);
+                    MainLabel.Visible = false;
+                    EmpNameLabel.Visible = false;
+                    StartDateLabel.Visible = false;
+                    EndDateLabel.Text = "* Please enter end date.";
+                    EndDateSearch.Focus();
+                }
+            }
+            else
+            {
+                con.DeleteLeave(txtSearch.Text, DateTime.Parse(StartDateSearch.Text), DateTime.Parse(EndDateSearch.Text));
+                BindGridView();
             }
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            //string employeeName = txtSearch.Text.Trim();
-            string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(connectionString))
+            DBConnection con = new DBConnection();
+
+            if (string.IsNullOrEmpty(txtSearch.Text) && string.IsNullOrEmpty(StartDateSearch.Text) && string.IsNullOrEmpty(EndDateSearch.Text))
             {
-                if (string.IsNullOrEmpty(txtSearch.Text) && string.IsNullOrEmpty(StartDateSearch.Text) && string.IsNullOrEmpty(EndDateSearch.Text))
+                MainLabel.Text = "* Please enter atleast one input.";
+                EmpNameLabel.Visible = false;
+                StartDateLabel.Visible = false;
+                EndDateLabel.Visible = false;
+                txtSearch.Focus();
+            }
+            else if (string.IsNullOrEmpty(txtSearch.Text) && string.IsNullOrEmpty(StartDateSearch.Text))
+            {
+                MainLabel.Visible = false;
+                EmpNameLabel.Text = "* Please enter employee full name.";
+                StartDateLabel.Visible = false;
+                EndDateLabel.Visible = false;
+                txtSearch.Focus();
+            }
+            else if (string.IsNullOrEmpty(txtSearch.Text) && string.IsNullOrEmpty(EndDateSearch.Text))
+            {
+                MainLabel.Visible = false;
+                EmpNameLabel.Text = "* Please enter employee full name.";
+                StartDateLabel.Visible = false;
+                EndDateLabel.Visible = false;
+                txtSearch.Focus();
+            }
+            
+
+            else if (string.IsNullOrEmpty(StartDateSearch.Text) && string.IsNullOrEmpty(EndDateSearch.Text))
+            {
+                DataTable dt = new DataTable();
+                dt = con.GetAllEmployeesLeave(txtSearch.Text);
+                if (dt.Rows.Count == 0)
                 {
-
-                    string script = "alert('Please enter a value in at least one textbox.');";
-                    ClientScript.RegisterStartupScript(this.GetType(), "EmptyTextBoxPrompt", script, true);
-                }
-
-                else if (string.IsNullOrEmpty(StartDateSearch.Text) && string.IsNullOrEmpty(EndDateSearch.Text))
-                {
-                    string query = "Select * from DeleteLeave where EmployeeName= @EmployeeName";
-                    SqlDataAdapter sda = new SqlDataAdapter(query, con);
-                    sda.SelectCommand.Parameters.AddWithValue("@EmployeeName", txtSearch.Text.Trim());
-
-                    DataTable dt = new DataTable();
-                    sda.Fill(dt);
-
-                    if (dt.Rows.Count > 0)
-                    {
-                        DeleteLeaveGridView.DataSource = dt;
-                        DeleteLeaveGridView.DataBind();
-                    }
-                }
-
-                else if (string.IsNullOrEmpty(EndDateSearch.Text))
-                {
-                    string query = "Select * from DeleteLeave where EmployeeName= @EmployeeName AND StartDate = @StartDate ";
-                    SqlDataAdapter sda = new SqlDataAdapter(query, con);
-                    sda.SelectCommand.Parameters.AddWithValue("@EmployeeName", txtSearch.Text.Trim());
-                    sda.SelectCommand.Parameters.AddWithValue("@StartDate", DateTime.Parse(StartDateSearch.Text));
-
-                    DataTable dt = new DataTable();
-                    sda.Fill(dt);
-
-                    if (dt.Rows.Count > 0)
-                    {
-                        DeleteLeaveGridView.DataSource = dt;
-                        DeleteLeaveGridView.DataBind();
-                    }
+                    DeleteLeaveGridView.DataSource = null;
+                    DeleteLeaveGridView.DataBind();
+                    lblmessage.Text = "No Records!";
                 }
                 else
                 {
-
-                    string query = "Select * from DeleteLeave where EmployeeName= @EmployeeName AND (StartDate = @StartDate OR EndDate = @EndDate)";
-                    SqlDataAdapter sda = new SqlDataAdapter(query, con);
-                    sda.SelectCommand.Parameters.AddWithValue("@EmployeeName", txtSearch.Text.Trim());
-                    sda.SelectCommand.Parameters.AddWithValue("@StartDate", DateTime.Parse(StartDateSearch.Text));
-                    sda.SelectCommand.Parameters.AddWithValue("@EndDate", DateTime.Parse(EndDateSearch.Text));
-                    DataTable dt = new DataTable();
-                    sda.Fill(dt);
-
-                    if (dt.Rows.Count > 0)
-                    {
-                        DeleteLeaveGridView.DataSource = dt;
-                        DeleteLeaveGridView.DataBind();
-                    }
+                    DeleteLeaveGridView.DataSource = dt;
+                    DeleteLeaveGridView.DataBind();
+                    lblmessage.Text = string.Empty; 
+                    lblmessage.Visible = false;
                 }
+            }
 
+            else if (string.IsNullOrEmpty(EndDateSearch.Text))
+            {
+                DataTable dt = new DataTable();
 
+                dt = con.GetAllEmployeesLeave(txtSearch.Text, DateTime.Parse(StartDateSearch.Text));
 
-
+                if (dt.Rows.Count == 0)
+                {
+                    DeleteLeaveGridView.DataSource = null;
+                    DeleteLeaveGridView.DataBind();
+                    lblmessage.Text = "No Records!";
+                }
+                else
+                {
+                    DeleteLeaveGridView.DataSource = dt;
+                    DeleteLeaveGridView.DataBind();
+                    lblmessage.Text = string.Empty;
+                    lblmessage.Visible = false;
+                }
+            }
+            else
+            {
+                DataTable dt = new DataTable();
+                dt = con.GetAllEmployeesLeave(txtSearch.Text, DateTime.Parse(StartDateSearch.Text), DateTime.Parse(EndDateSearch.Text));
+                if (dt.Rows.Count == 0)
+                {
+                    DeleteLeaveGridView.DataSource = null;
+                    DeleteLeaveGridView.DataBind();
+                    lblmessage.Text = "No Records!";
+                }
+                else
+                {
+                    DeleteLeaveGridView.DataSource = dt;
+                    DeleteLeaveGridView.DataBind();
+                    lblmessage.Text = string.Empty;
+                    lblmessage.Visible = false;
+                }
             }
         }
 
+        protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
+        {
+            if (e.Day.IsWeekend)
+            {
+                e.Day.IsSelectable = false;              
+            }
+            else if (e.Day.IsOtherMonth)
+            {
+                e.Day.IsSelectable = false;
+            }
+        }
 
+        protected void Calendar2_DayRender(object sender, DayRenderEventArgs e)
+        {
+            if (e.Day.IsWeekend)
+            {
+                e.Day.IsSelectable = false;             
+            }
+            else if (e.Day.IsOtherMonth)
+            {
+                e.Day.IsSelectable = false;
+            }
+        }
+
+        private void IsValid()
+        {
+            if (string.IsNullOrEmpty(txtSearch.Text) && string.IsNullOrEmpty(StartDateSearch.Text) && string.IsNullOrEmpty(EndDateSearch.Text))
+            {
+
+                MainLabel.Text = "* Please enter atleast one input.";
+                EmpNameLabel.Visible = false;
+                StartDateLabel.Visible = false;
+                EndDateLabel.Visible = false;
+                txtSearch.Focus();
+            }
+            else if(string.IsNullOrEmpty(StartDateSearch.Text) && string.IsNullOrEmpty(EndDateSearch.Text))
+            {
+                MainLabel.Text = "* Please enter atleast one input.";
+                EmpNameLabel.Visible = false;
+                StartDateLabel.Visible = false;
+                EndDateLabel.Visible = false;
+                txtSearch.Focus();
+            }
+        }
     }
-}
+ }
