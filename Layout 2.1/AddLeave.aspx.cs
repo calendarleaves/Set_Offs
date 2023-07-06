@@ -24,14 +24,6 @@ namespace Layout_2._1
         string item;
         DateTime currentDate;
 
-
-
-
-
-
-
-
-
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -59,14 +51,6 @@ namespace Layout_2._1
 
 
         }
-
-
-
-
-
-
-
-
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -76,19 +60,7 @@ namespace Layout_2._1
 
         protected void Submit_click(object sender, EventArgs e)
         {
-
-
-
-
-
-
-
-
-
-
-
-
-            try
+             try
             {
 
                 string fullName = DropDownList1.SelectedItem.Value;
@@ -98,11 +70,6 @@ namespace Layout_2._1
 
                 string firstName = nameParts[0];
                 string lastName = nameParts[1];
-
-
-
-
-
 
 
                 Calendar1.Visible = false;
@@ -157,8 +124,6 @@ namespace Layout_2._1
             }
         }
 
-
-
         public string totalDays()
         {
             if (from.Text != "" && To.Text != "")
@@ -191,16 +156,6 @@ namespace Layout_2._1
             }
             return Total_Days.Text;
         }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -268,8 +223,6 @@ namespace Layout_2._1
             totalDays();
 
         }
-
-
 
 
         protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
