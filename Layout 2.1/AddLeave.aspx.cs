@@ -50,7 +50,7 @@ namespace Layout_2._1
                 DBConnection s = new DBConnection();
 
                 List<string> data = new List<string>();
-                data = s.GetAllEmployeeName();
+                data = s.GetAllEmployeeLeave();
 
                 DropDownList1.DataSource = data;
                 DropDownList1.DataBind();
@@ -90,7 +90,7 @@ namespace Layout_2._1
 
             try
             {
-                
+
                 string fullName = DropDownList1.SelectedItem.Value;
 
 
