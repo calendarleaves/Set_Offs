@@ -452,6 +452,30 @@ namespace SetOffs1
             return dt;
         }
 
+        public int test()
+        {
+            string s = "Bhimashankar Patil";
+            int i = 0;
+            string[] nameParts = s.Split(' ');
+
+            string firstName = nameParts[0];
+            string lastName = nameParts[1];
+            string query = "SELECT id FROM Employee WHERE FirstName = @firstName AND LastName = @lastName";
+            con.Open();
+            using (SqlCommand command = new SqlCommand(query, con))
+            {
+                command.Parameters.AddWithValue("@firstName", firstName);
+                command.Parameters.AddWithValue("@lastName", lastName);
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    i = int.Parse(reader.GetString(0));
+                }
+            }
+            return i;
+
+        }
+
     }
 
     public class HolidayList
