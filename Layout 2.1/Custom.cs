@@ -22,7 +22,7 @@ namespace Layout_2._1
             }
             else if(ex is ThreadAbortException) 
             {
-                statusCode = 0;
+                statusCode = 200;
             }
             else
             {

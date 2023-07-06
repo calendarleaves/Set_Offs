@@ -33,7 +33,7 @@ namespace SetOffs1
         {
             Employee emp = new Employee();
             List<EmployeeLeave> users = new List<EmployeeLeave>();
-            using (SqlCommand command = new SqlCommand("SELECT e.FirstName, l.LeaveType FROM Employee e INNER JOIN Leave l ON e.id = l.EMPID WHERE  '" + date.ToString("yyyy-MM-dd") + "'between l.StartDate AND l.EndDate;", con))
+            using (SqlCommand command = new SqlCommand("SELECT e.FirstName, l.LeaveType FROM Employee e INNER JOIN Leave l ON e.id = l.EMPID WHERE  '" + date.ToString("yyyy-MM-dd") + "'between l.StartDate AND l.EndDate orderby e.FirstName;", con))
             {
                 con.Open();
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -462,6 +462,30 @@ namespace SetOffs1
             // ...
 
             return dt;
+        }
+
+        public int test()
+        {
+            string s = "Bhimashankar Patil";
+            int i = 0;
+            string[] nameParts = s.Split(' ');
+
+            string firstName = nameParts[0];
+            string lastName = nameParts[1];
+            string query = "SELECT id FROM Employee WHERE FirstName = @firstName AND LastName = @lastName";
+            con.Open();
+            using (SqlCommand command = new SqlCommand(query, con))
+            {
+                command.Parameters.AddWithValue("@firstName", firstName);
+                command.Parameters.AddWithValue("@lastName", lastName);
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    i = int.Parse(reader.GetString(0));
+                }
+            }
+            return i;
+
         }
 
     }

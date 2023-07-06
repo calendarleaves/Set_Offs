@@ -42,7 +42,7 @@ namespace Layout_2._1
                 DBConnection s = new DBConnection();
 
                 List<string> data = new List<string>();
-                data = s.GetAllEmployeeLeave();
+                data = s.GetAllEmployeeName();
 
                 DropDownList1.DataSource = data;
                 DropDownList1.DataBind();
