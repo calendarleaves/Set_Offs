@@ -1,6 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Calendar 1.aspx.cs" Inherits="WebApplication1.WebForm11" %>
 <%@ Register TagPrefix="uc" TagName="Holidays" Src="~/Holidays.ascx" %>
-
+<%@ Register TagPrefix="uc" TagName="Leave_Records" Src="~/Leave_Records.ascx" %>
+<%@ Register TagPrefix="uc" TagName="Add_Leave" Src="~/Add_Leave.ascx" %>
+<%@ Register TagPrefix="uc" TagName="Delete_Leave" Src="~/Delete_Leave.ascx" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -92,6 +94,16 @@
 }
 
     </style>
+     <script>
+     function showAdd_Leave() {
+         // Show the modal dialog
+         $('#<%= Add_Leave.ClientID %>').modal('show');
+         }
+         function showDelete_Leave() {
+             // Show the modal dialog
+             $('#<%= Delete_Leave.ClientID %>').modal('show');
+     }
+     </script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -206,10 +218,16 @@
         <button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal">Holidays</button>     
          <uc:Holidays ID="Holidays" runat="server" />
 
-        <button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal">Leave Records</button>     
-		<button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal">Add Leave</button>     
-     <button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal">Delete Leave</button>     
-	</div>
+        <button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal2">Leave Records</button>     
+		 <uc:Leave_Records ID="Leave_Records" runat="server" />
+               
+                <button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal3">Add Leave</button>     
+      <uc:Add_Leave ID="Add_Leave" runat="server" />
+                
+                <button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal4">Delete Leave</button>     
+	 <uc:Delete_Leave ID="Delete_Leave" runat="server" />
+            
+            </div>
        
        <!-- <footer class="footer">
             <div class="container-fluid">
