@@ -220,7 +220,7 @@ namespace Layout_2._1
                 else if (string.IsNullOrEmpty(StartDateSearch.Text) && string.IsNullOrEmpty(EndDateSearch.Text))
                 {
                     DataTable dt = new DataTable();
-                    dt = con.GetAllEmployeesLeave(txtSearch.Text);
+                    dt = con.GetAllEmployeesLeavebyName(txtSearch.Text);
                     if (dt.Rows.Count == 0)
                     {
                         DeleteLeaveGridView.DataSource = null;
