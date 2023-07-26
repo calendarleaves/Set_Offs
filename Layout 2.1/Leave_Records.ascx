@@ -11,9 +11,17 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
 
-        <div class="modal-body">
+         <div class="modal-body">
          
-  <h1>Leave Records  view</h1>
+  <asp:GridView ID="GridView4" runat="server" AutoGenerateColumns="false" Width="97%"  BorderColor="White" BorderWidth="0px" >
+                           <Columns>
+                <asp:BoundField DataField="Name" Headertext="Name" />                     
+                                <asp:BoundField DataField="StartDate" Headertext="StartDate"/>
+                                <asp:BoundField DataField="EndDate" Headertext="EndDate"/>
+            <asp:BoundField DataField="Comments" Headertext="Comments" />  
+                           </Columns>      
+            <EditRowStyle Height="50px" />
+                        </asp:GridView>
         </div>
 
         <div class="modal-footer">

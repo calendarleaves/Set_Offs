@@ -117,7 +117,7 @@
 
         <div class="navbar-header d-md-flex ">
             <!-- Title in the Middle -->
-            <h1 class="navbar-item " style="margin-left: 100px;">Set Offs</h1>
+            <h1 class="navbar-item " style="margin-left: 100px;">Leave Portal</h1>
         </div>
              
             <!-- Dropdown on the Right -->
