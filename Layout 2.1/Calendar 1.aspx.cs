@@ -59,7 +59,8 @@ namespace WebApplication1
                     EmpName_profile.Text = emp.FirstName;
                     //EmpId_profile.Text = emp.Id.ToString();
                 }
-                LoadHolidays();
+                // LoadHolidays();
+                LoadUpcomingleaves();
                 if (!IsPostBack)
                 {
                     
@@ -74,7 +75,7 @@ namespace WebApplication1
             }
             catch(Exception ex) 
             {
-                Custom.ErrorHandle(ex, Response);
+                Custom.ErrorHandle(ex, Response,Context);
             }
         }
 
@@ -289,18 +290,62 @@ namespace WebApplication1
 
         //    return dt;
         //}
+        private void LoadUpcomingleaves()
+        {
+            try
+            {
+                DateTime currentDate = DateTime.Now;
 
+                int daysUntilNextMonday = ((int)DayOfWeek.Monday - (int)currentDate.DayOfWeek + 7) % 7;
+                DateTime nextFriday = currentDate.AddDays(daysUntilNextMonday+5);
+                //List<EmployeeLeave> leaves = new List<EmployeeLeave>();
+                DBConnection d = new DBConnection();
+
+                DataTable dt = d.GetUpcomingLeaves(currentDate, nextFriday);
+                //for (int i = 0; i < daysUntilNextMonday + 5; i++) 
+                //{
+                //    if (currentDate.DayOfWeek == DayOfWeek.Saturday || currentDate.DayOfWeek == DayOfWeek.Sunday)
+                //    {
+                //        i = i + 2;
+                //        currentDate.AddDays(daysUntilNextMonday);
+                //    }
+                //    currentDate.AddDays(daysUntilNextMonday);
+                //    leaves.AddRange(d.GetEmployeeLeave(currentDate));
+
+                //}
+
+                GridView2.DataSource = dt;
+                GridView2.DataBind();
+
+            }
+            catch (Exception ex)
+            {
+                Custom.ErrorHandle(ex, Response,Context);
+
+            }
+        }
+        //private List<DateTime> upcommingleaveDate()
+        //{
+        //    DateTime currentDate = DateTime.Now;
+        //    int daysUntilNextMonday = ((int)DayOfWeek.Monday - (int)currentDate.DayOfWeek + 7) % 7;
+
+        //    // Find the next Monday by adding the daysUntilNextMonday to the currentDate
+        //    DateTime nextMonday = currentDate.AddDays(daysUntilNextMonday);
+
+        //    List<DateTime> nextWeekDates = new List<DateTime>();
+        //    return nextWeekDates;
+        //}
         private void LoadHolidays() // this will load next Holidays
         {
             try
             {
-                DateTime today = DateTime.Today;
-                DBConnection d = new DBConnection();
-                List<HolidayList> nextHolidays = d.GetUpcomingHolidays(today);
+            //    DateTime today = DateTime.Today;
+            //    DBConnection d = new DBConnection();
+            //    List<HolidayList> nextHolidays = d.GetUpcomingHolidays(today);
 
 
-                GridView2.DataSource = nextHolidays;
-                GridView2.DataBind();
+            //    GridView2.DataSource = nextHolidays;
+            //    GridView2.DataBind();
 
 
 
