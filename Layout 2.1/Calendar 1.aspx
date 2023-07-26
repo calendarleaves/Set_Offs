@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Calendar 1.aspx.cs" Inherits="WebApplication1.WebForm11" %>
+<%@ Register TagPrefix="uc" TagName="Holidays" Src="~/Holidays.ascx" %>
 
 <!DOCTYPE html>
 
@@ -39,6 +40,12 @@
     border-radius: 5px;
     background-color: #7499f1;
 }  
+     .popUpButtons {
+        margin-top: 20px;
+             margin-right: 20px;
+    padding: 5px;
+    border-radius: 5px;
+        }
 
 .AbsButton:hover
 {
@@ -170,13 +177,16 @@
                         </div>
       <!--GridView Section - Upcoming Holiday -->
                     <div class="Griedview2Div">
-                        <h4 class="division-heading">Upcoming Holidays</h4>
+                        <h4 class="division-heading">Upcoming Leaves</h4>
                         <hr class="division-divider">
                         
                         <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" Width="97%" cssClass="Griedview2Style" BorderColor="White" BorderWidth="0px" >
                            <Columns>
-                <asp:BoundField DataField="Date" Headertext="Date" />                     
-               <asp:BoundField DataField="Holiday" Headertext="Holiday"/>
+                               <asp:BoundField DataField="FirstName" Headertext="FirstName"/>
+                               <asp:BoundField DataField="LastName" Headertext="LastName"/>
+                                <asp:BoundField DataField="StartDate" Headertext="StartDate" /> 
+                               <asp:BoundField DataField="EndDate" Headertext="EndDate" /> 
+               
             </Columns>      
             <EditRowStyle Height="50px" />
                         </asp:GridView>
@@ -190,7 +200,18 @@
           <asp:Button ID="Button2" cssClass="AbsButton" runat="server" Text="Delete Leave"  onClick="Button2_Click" Height:25px Visible="false" Enabled="false"/>
         <asp:Button ID="Button1" CssClass="AbsButton" runat="server" Text="Create Absence"  OnClick="Button1_Click" Height:25px/>
       </div>
-        <footer class="footer">
+        <hr class="divider">
+            <div class="container-fluid" style="display: flex; justify-content: flex-end; margin-right: 20px;">
+             
+        <button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal">Holidays</button>     
+         <uc:Holidays ID="Holidays" runat="server" />
+
+        <button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal">Leave Records</button>     
+		<button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal">Add Leave</button>     
+     <button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal">Delete Leave</button>     
+	</div>
+       
+       <!-- <footer class="footer">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
@@ -199,7 +220,7 @@
                     </div>
                 </div>
             </div>
-        </footer>
+        </footer> -->
 			
        
     </form>

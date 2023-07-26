@@ -73,6 +73,7 @@
     <Content Include="Error Handler\Error404.aspx" />
     <Content Include="Error Handler\Error500.aspx" />
     <Content Include="DeleteLeave.aspx" />
+    <Content Include="Holidays.ascx" />
     <Content Include="images\flexur2 - Copy.jpg" />
     <Content Include="images\flexur2.jpg" />
     <Content Include="images\holiday.jpg" />
@@ -142,6 +143,13 @@
     </Compile>
     <Compile Include="DeleteLeave.aspx.designer.cs">
       <DependentUpon>DeleteLeave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Holidays.ascx.cs">
+      <DependentUpon>Holidays.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Holidays.ascx.designer.cs">
+      <DependentUpon>Holidays.ascx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Login.aspx.cs">
