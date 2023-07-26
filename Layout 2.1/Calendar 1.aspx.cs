@@ -181,6 +181,7 @@ namespace WebApplication1
 
         protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
         {
+           
             try
             {
                 if (e.Day.IsWeekend)
@@ -193,7 +194,26 @@ namespace WebApplication1
                 {
                     e.Day.IsSelectable = false;
                 }
-                
+
+                //code for holidays red colour-forEach{}
+                DBConnection db = new DBConnection();
+                DataTable dt = db.GetAllHolidayDates();
+                foreach (DataRow row in dt.Rows)
+                {
+                    // Parse the date from the DataTable
+                    DateTime targetDate = Convert.ToDateTime(row["Date"]);
+
+                    // Compare the date from the DataTable with the date being rendered on the Calendar
+                    if (e.Day.Date == targetDate)
+                    {
+                       
+                      
+                        e.Cell.ForeColor = System.Drawing.Color.Red;
+                        e.Day.IsSelectable = false;
+                        // e.Cell.ToolTip = "This is a holiday!";
+                    }
+                }
+
             }
             catch (Exception ex)
             {
