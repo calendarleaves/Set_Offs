@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.Remoting.Lifetime;
 using System.Security.Cryptography;
 using System.Web;
@@ -240,14 +241,12 @@ namespace SetOffs1
 
 
             SqlDataAdapter reader = new SqlDataAdapter(command);
-
-
             reader.Fill(dt);
             con.Close();
             return dt;
         }
 
-        public DataTable GetAllEmployeesLeave(String s)
+        public DataTable GetAllEmployeesLeavebyName(String s)
         {
             int i = getEmployeeId(s);
             DataTable dt = new DataTable();
@@ -257,6 +256,37 @@ namespace SetOffs1
             using (SqlCommand command = new SqlCommand(query, con))
             {
                 command.Parameters.AddWithValue("@EmpId", i);
+                SqlDataAdapter reader = new SqlDataAdapter(command);
+
+
+                reader.Fill(dt);
+            }
+            con.Close();
+            return dt;
+        }
+
+        public DataTable GetAllEmployeesLeaveLikeName(String s)
+        {
+            string firstName = "";
+            string lastName = "";
+            int i = 0;
+            string[] nameParts = s.Split(' ');
+            if (nameParts.Length > 0)
+                firstName = nameParts[0];
+            if (nameParts.Length > 1)
+                lastName = nameParts[1];
+            else
+            {
+
+            }
+            DataTable dt = new DataTable();
+
+            string query = "SELECT e.Id     ,e.FirstName     ,e.LastName  ,l.LeaveType     ,l.StartDate  ,l.EndDate      ,l.Days  FROM Employee e join Leave l on e.Id = l.EmpId where FirstName like'@firstName%' and LastName like '@lastName%' order by e.FirstName ";
+            con.Open();
+            using (SqlCommand command = new SqlCommand(query, con))
+            {
+                command.Parameters.AddWithValue("@firstName", firstName);
+                command.Parameters.AddWithValue("@lastName", lastName);
                 SqlDataAdapter reader = new SqlDataAdapter(command);
 
 
@@ -464,6 +494,27 @@ namespace SetOffs1
             return dt;
         }
 
+        public DataTable GetUpcomingLeaves(DateTime curentDate,DateTime nextFriday)
+        {
+            DataTable dt = new DataTable();
+
+            string query = "SELECT e.Id, e.FirstName, e.LastName,  FORMAT(l.StartDate, 'dd-MM-yyyy') as StartDate , FORMAT(l.EndDate, 'dd-MM-yyyy') as EndDate FROM Employee e JOIN Leave l ON e.Id = l.EmpId WHERE (l.StartDate >= @Variable1 AND l.StartDate <= @Variable2)   OR    (l.EndDate >= @Variable1 AND l.EndDate <= @Variable2)   OR  (l.StartDate <= @Variable1 AND l.EndDate >= @Variable2)";
+            con.Open();
+            using (SqlCommand command = new SqlCommand(query, con))
+            {
+                command.Parameters.AddWithValue("@Variable1", curentDate);
+                command.Parameters.AddWithValue("@Variable2", nextFriday);
+
+
+                SqlDataAdapter reader = new SqlDataAdapter(command);
+
+
+                reader.Fill(dt);
+            }
+
+                return dt;
+        }
+
         public int test()
         {
             string s = "Bhimashankar Patil";
@@ -501,6 +552,14 @@ namespace SetOffs1
         
         public string LeaveType { get; set; } = "Leave";
        
+    }
+    public class Upcomingleaves
+    {
+        public string FirstName{ get; set; } = "NotSpecified";
+        public string LastName { get; set; } = "NotSpecified";
+        public DateTime StartDate { get; set; } = DateTime.Now;
+        public DateTime EndDate  { get; set; } = DateTime.Now;
+
     }
     public class Employee
     {

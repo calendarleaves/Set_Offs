@@ -189,13 +189,16 @@
                         </div>
       <!--GridView Section - Upcoming Holiday -->
                     <div class="Griedview2Div">
-                        <h4 class="division-heading">Upcoming Holidays</h4>
+                        <h4 class="division-heading">Upcoming Leaves</h4>
                         <hr class="division-divider">
                         
                         <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" Width="97%" cssClass="Griedview2Style" BorderColor="White" BorderWidth="0px" >
                            <Columns>
-                <asp:BoundField DataField="Date" Headertext="Date" />                     
-               <asp:BoundField DataField="Holiday" Headertext="Holiday"/>
+                               <asp:BoundField DataField="FirstName" Headertext="FirstName"/>
+                               <asp:BoundField DataField="LastName" Headertext="LastName"/>
+                                <asp:BoundField DataField="StartDate" Headertext="StartDate" /> 
+                               <asp:BoundField DataField="EndDate" Headertext="EndDate" /> 
+               
             </Columns>      
             <EditRowStyle Height="50px" />
                         </asp:GridView>
