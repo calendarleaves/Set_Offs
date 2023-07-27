@@ -9,40 +9,8 @@
 <head runat="server">
     <title>Delete Leave</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-
-    <style>
-        .container {
-            border: solid;
-            border-width: 1px;
-            align-items: center;
-            height: 600px;
-            justify-content: center;
-            padding: 8px;
-            margin-top: 20px;
-            align-content: center !important;
-            position: relative;
-        }
-        .refreshButton {
-            background-color: #e4e3e3;
-            border: 1px solid #808080;
-            height: 35px;
-            margin-right: 50px;
-        }
-        .gridview-container {
-            max-height: 400px;
-            overflow-y: auto !important;
-        }
-            .gridview-container th {
-                position: sticky !important;
-                top: 0 !important;
-                background-color: #e4e3e3 !important;
-                z-index: 1 !important;
-                border: 1px solid #808080;
-            }
-            .gridview-container tbody {
-                scrollbar-width: thin !important;
-            }
-    </style>
+    <link rel="stylesheet" href="DeleteleavePageStyleSheet.css" />
+ 
 </head>
 
 <body>

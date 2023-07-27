@@ -226,7 +226,7 @@ namespace WebApplication1
                     e.Cell.ForeColor = System.Drawing.Color.Silver;
                 }
 
-
+                ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal4').modal('show');", true);
 
             }
             catch (Exception ex)
