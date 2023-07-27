@@ -4,6 +4,7 @@
 <%@ Register TagPrefix="uc" TagName="Add_Leave" Src="~/Add_Leave.ascx" %>
 <%@ Register TagPrefix="uc" TagName="Delete_Leave" Src="~/Delete_Leave.ascx" %>
 <%@ Register TagPrefix="uc" TagName="Add_Leave_User" Src="~/Add_Leave_User.ascx" %>
+<%@ Register TagPrefix="uc" TagName="Delete_Leave_User" Src="~/Delete_Leave_User.ascx" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -111,6 +112,10 @@
              $('#<%= Delete_Leave.ClientID %>').modal('show');
          }
          function showAdd_Leave_User() {
+             // Show the modal dialog
+             $('#<%= Delete_Leave.ClientID %>').modal('show');
+         }
+         function showDelete_Leave_User() {
              // Show the modal dialog
              $('#<%= Delete_Leave.ClientID %>').modal('show');
           }
@@ -238,6 +243,9 @@
                 <button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal3">Add Leave</button>     
       <uc:Add_Leave ID="Add_Leave" runat="server" />
                 
+                <button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal8">Delete Leave User</button>     
+	 <uc:Delete_Leave_User ID="Delete_Leave_User" runat="server" />
+
                 <button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal4">Delete Leave</button>     
 	 <uc:Delete_Leave ID="Delete_Leave" runat="server" />
             
