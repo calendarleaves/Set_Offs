@@ -139,5 +139,32 @@ namespace WebApplication1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Layout_2._1.Holidays Holidays;
+
+        /// <summary>
+        /// Leave_Records control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Layout_2._1.Leave_Records Leave_Records;
+
+        /// <summary>
+        /// Add_Leave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Layout_2._1.Add_Leave Add_Leave;
+
+        /// <summary>
+        /// Delete_Leave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Layout_2._1.Delete_Leave Delete_Leave;
     }
 }
