@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Text.RegularExpressions;
 
 namespace Layout_2._1
 {
@@ -19,60 +20,10 @@ namespace Layout_2._1
         {
             if (!IsPostBack)
             {
-                Calendar1.Visible = false;
-                Calendar2.Visible = false;
                 BindGridView();
             }
-        }
-
-        protected void StartDateCalendar_Click(object sender, ImageClickEventArgs e)
-        {
-
-            Calendar2.Visible = false;
-            if (Calendar1.Visible)
-            {
-                Calendar1.Visible = false;
-            }
-            else
-            {
-                Calendar1.Visible = true;
-            }
-
-            Calendar1.Attributes.Add("style", "position:absolute");
 
         }
-
-        protected void EndDateCalendar_Click(object sender, ImageClickEventArgs e)
-        {
-            if (StartDateSearch.Text != "")
-            {
-                Calendar2.Enabled = true;
-            }
-            Calendar1.Visible = false;
-            if (Calendar2.Visible)
-            {
-                Calendar2.Visible = false;
-            }
-            else
-            {
-                Calendar2.Visible = true;
-            }
-            Calendar2.Attributes.Add("style", "position:absolute");
-        }
-
-        protected void Calendar1_SelectionChanged(object sender, EventArgs e)
-        {
-            StartDateSearch.Text = Calendar1.SelectedDate.ToString("dd/MM/yyyy");
-            Calendar1.Visible = false;
-        }
-
-        protected void Calendar2_SelectionChanged(object sender, EventArgs e)
-        {
-            EndDateSearch.Text = Calendar2.SelectedDate.ToString("dd/MM/yyyy");
-            Calendar2.Visible = false;
-        }
-
-
 
         private void BindGridView()
         {
@@ -82,102 +33,19 @@ namespace Layout_2._1
                 DBConnection con = new DBConnection();
 
                 dt = con.GetAllEmployeesLeave();
-
-                DeleteLeaveGridView.DataSource = dt;
-                DeleteLeaveGridView.DataBind();
-
-            }
-            catch (Exception ex)
-            {
-                Custom.ErrorHandle(ex, Response);
-            }
-
-
-        }
-
-
-        protected void btnDelete_Click(object sender, EventArgs e)
-        {
-            try
-            {
-
-
-                DBConnection con = new DBConnection();
-
-                if (string.IsNullOrEmpty(txtSearch.Text) && string.IsNullOrEmpty(StartDateSearch.Text) && string.IsNullOrEmpty(EndDateSearch.Text))
+                if (dt.Rows.Count == 0)
                 {
+                    DeleteLeaveGridView.DataSource = null;
+                    DeleteLeaveGridView.DataBind();
+                    lblmessage.Text = "No Records!";
 
-                    //string script = "alert('Please enter a value in at least one textbox.');";
-                    //ClientScript.RegisterStartupScript(this.GetType(), "EmptyTextBoxPrompt", script, true);
-                    MainLabel.Text = "* Please enter atleast one input.";
-                    EmpNameLabel.Visible = false;
-                    StartDateLabel.Visible = false;
-                    EndDateLabel.Visible = false;
-                    txtSearch.Focus();
-                }
-                else if (string.IsNullOrEmpty(txtSearch.Text) && string.IsNullOrEmpty(StartDateSearch.Text))
-                {
-                    MainLabel.Visible = false;
-                    EmpNameLabel.Text = "* Please enter employee full name.";
-                    StartDateLabel.Visible = false;
-                    EndDateLabel.Visible = false;
-                    txtSearch.Focus();
-                }
-                else if (string.IsNullOrEmpty(txtSearch.Text) && string.IsNullOrEmpty(EndDateSearch.Text))
-                {
-                    MainLabel.Visible = false;
-                    EmpNameLabel.Text = "* Please enter employee full name.";
-                    StartDateLabel.Visible = false;
-                    EndDateLabel.Visible = false;
-                    txtSearch.Focus();
-                }
-
-                else if (string.IsNullOrEmpty(StartDateSearch.Text) && string.IsNullOrEmpty(EndDateSearch.Text))
-                {
-
-
-                    int recordCount = con.CountLeave(txtSearch.Text); // to check if record count ==1;pooja devare
-
-                    if (recordCount == 1)
-                    {
-                        con.DeleteLeave(txtSearch.Text);
-                        BindGridView();
-                    }
-                    else
-                    {
-                        //string script = "alert('Please enter start date.');";
-                        //ClientScript.RegisterStartupScript(this.GetType(), "EmptyTextBoxPrompt", script, true);
-                        MainLabel.Visible = false;
-                        EmpNameLabel.Visible = false;
-                        StartDateLabel.Text = "* Please enter start date.";
-                        EndDateLabel.Visible = false;
-                        StartDateSearch.Focus();
-                    }
-                }
-                else if (string.IsNullOrEmpty(EndDateSearch.Text))
-                {
-
-                    int recordCount = con.CountLeave(txtSearch.Text, DateTime.Parse(StartDateSearch.Text)); // to check if record count ==1;
-                    if (recordCount == 1)
-                    {
-                        con.DeleteLeave(txtSearch.Text, DateTime.Parse(StartDateSearch.Text));
-                        BindGridView();
-                    }
-                    else
-                    {
-                        //string script = "alert('Please enter end date.');";
-                        //ClientScript.RegisterStartupScript(this.GetType(), "EmptyTextBoxPrompt", script, true);
-                        MainLabel.Visible = false;
-                        EmpNameLabel.Visible = false;
-                        StartDateLabel.Visible = false;
-                        EndDateLabel.Text = "* Please enter end date.";
-                        EndDateSearch.Focus();
-                    }
                 }
                 else
                 {
-                    con.DeleteLeave(txtSearch.Text, DateTime.Parse(StartDateSearch.Text), DateTime.Parse(EndDateSearch.Text));
-                    BindGridView();
+                    DeleteLeaveGridView.DataSource = dt;
+                    DeleteLeaveGridView.DataBind();
+                    lblmessage.Text = string.Empty;
+                    lblmessage.Visible = false;
                 }
             }
             catch (Exception ex)
@@ -190,93 +58,44 @@ namespace Layout_2._1
         {
             try
             {
-
-
+                DataTable dt = new DataTable();
                 DBConnection con = new DBConnection();
 
-                if (string.IsNullOrEmpty(txtSearch.Text) && string.IsNullOrEmpty(StartDateSearch.Text) && string.IsNullOrEmpty(EndDateSearch.Text))
+                string searchText = txtSearch.Text.Trim();
+                Regex regex = new Regex("^[A-Za-z\\s]+$");
+
+                if (string.IsNullOrEmpty(txtSearch.Text))
                 {
-                    MainLabel.Text = "* Please enter atleast one input.";
-                    EmpNameLabel.Visible = false;
-                    StartDateLabel.Visible = false;
-                    EndDateLabel.Visible = false;
+                    lblErrorMessage.Text = "Enter Employee Name..";
                     txtSearch.Focus();
                 }
-                else if (string.IsNullOrEmpty(txtSearch.Text) && string.IsNullOrEmpty(StartDateSearch.Text))
+                else if (!regex.IsMatch(searchText))
                 {
-                    MainLabel.Visible = false;
-                    EmpNameLabel.Text = "* Please enter employee full name.";
-                    StartDateLabel.Visible = false;
-                    EndDateLabel.Visible = false;
-                    txtSearch.Focus();
-                }
-                else if (string.IsNullOrEmpty(txtSearch.Text) && string.IsNullOrEmpty(EndDateSearch.Text))
-                {
-                    MainLabel.Visible = false;
-                    EmpNameLabel.Text = "* Please enter employee full name.";
-                    StartDateLabel.Visible = false;
-                    EndDateLabel.Visible = false;
-                    txtSearch.Focus();
-                }
-
-
-                else if (string.IsNullOrEmpty(StartDateSearch.Text) && string.IsNullOrEmpty(EndDateSearch.Text))
-                {
-                    DataTable dt = new DataTable();
-                    dt = con.GetAllEmployeesLeavebyName(txtSearch.Text);
-                    if (dt.Rows.Count == 0)
-                    {
-                        DeleteLeaveGridView.DataSource = null;
-                        DeleteLeaveGridView.DataBind();
-                        lblmessage.Text = "No Records!";
-
-                    }
-                    else
-                    {
-                        DeleteLeaveGridView.DataSource = dt;
-                        DeleteLeaveGridView.DataBind();
-                        lblmessage.Text = string.Empty;
-                        lblmessage.Visible = false;
-                    }
-
-                }
-
-                else if (string.IsNullOrEmpty(EndDateSearch.Text))
-                {
-                    DataTable dt = new DataTable();
-
-                    dt = con.GetAllEmployeesLeave(txtSearch.Text, DateTime.Parse(StartDateSearch.Text));
-
-                    if (dt.Rows.Count == 0)
-                    {
-                        DeleteLeaveGridView.DataSource = null;
-                        DeleteLeaveGridView.DataBind();
-                        lblmessage.Text = "No Records!";
-                    }
-                    else
-                    {
-                        DeleteLeaveGridView.DataSource = dt;
-                        DeleteLeaveGridView.DataBind();
-                        lblmessage.Text = string.Empty;
-                        lblmessage.Visible = false;
-                    }
-
+                    lblErrorMessage.Visible = true;
+                    lblErrorMessage.Text = "Wrong input! Only letters  are allowed.";
+                    lblmessage.Visible = false;
+                    return;
                 }
                 else
                 {
-                    DataTable dt = new DataTable();
-                    dt = con.GetAllEmployeesLeave(txtSearch.Text, DateTime.Parse(StartDateSearch.Text), DateTime.Parse(EndDateSearch.Text));
+                    dt = con.GetAllEmployeesLeaveLikeName(searchText);
+
                     if (dt.Rows.Count == 0)
                     {
                         DeleteLeaveGridView.DataSource = null;
                         DeleteLeaveGridView.DataBind();
+                        lblmessage.Visible = true;
                         lblmessage.Text = "No Records!";
+                        lblErrorMessage.Text = string.Empty;
+                        lblErrorMessage.Visible = false;
                     }
                     else
                     {
                         DeleteLeaveGridView.DataSource = dt;
                         DeleteLeaveGridView.DataBind();
                         lblmessage.Text = string.Empty;
+                        lblmessage.Visible = false;
+                        lblErrorMessage.Text = string.Empty;
                         lblmessage.Visible = false;
                     }
                 }
@@ -287,44 +106,45 @@ namespace Layout_2._1
             }
         }
 
-        protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
+        protected void DeleteLeaveGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (e.Day.IsWeekend)
-            {
-                e.Day.IsSelectable = false;
-            }
-            else if (e.Day.IsOtherMonth)
-            {
-                e.Day.IsSelectable = false;
-            }
-        }
 
-        protected void Calendar2_DayRender(object sender, DayRenderEventArgs e)
-        {
-            if (e.Day.IsWeekend)
-            {
-                e.Day.IsSelectable = false;
-            }
-            else if (e.Day.IsOtherMonth)
-            {
-                e.Day.IsSelectable = false;
-            }
-        }
-
-
-
-        protected void btnCancel_Click(object sender, EventArgs e)
-        {
             try
             {
+                string fullName = DeleteLeaveGridView.Rows[e.RowIndex].Cells[1].Text + " " + DeleteLeaveGridView.Rows[e.RowIndex].Cells[2].Text;
+                string startDate = DeleteLeaveGridView.Rows[e.RowIndex].Cells[4].Text;
+                string endDate = DeleteLeaveGridView.Rows[e.RowIndex].Cells[5].Text;
 
+                DBConnection con = new DBConnection();
+                con.DeleteLeave(fullName, DateTime.Parse(startDate), DateTime.Parse(endDate));
 
-                Server.Transfer("Calendar 1.aspx");
+                BindGridView();
+
             }
             catch (Exception ex)
             {
                 Custom.ErrorHandle(ex, Response);
             }
+
+        }
+
+        protected void btnRefresh_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lblmessage.Text = string.Empty;
+                lblmessage.Visible = false;
+                lblErrorMessage.Text = string.Empty;
+                lblmessage.Visible = false;
+                txtSearch.Text = "";
+                txtSearch.Focus();
+                BindGridView();
+            }
+            catch (Exception ex)
+            {
+                Custom.ErrorHandle(ex, Response);
+            }
+
         }
 
 
