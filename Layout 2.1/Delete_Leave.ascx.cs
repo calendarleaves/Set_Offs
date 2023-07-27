@@ -34,7 +34,7 @@ namespace Layout_2._1
                     DeleteLeaveGridView.DataSource = null;
                     DeleteLeaveGridView.DataBind();
                     lblmessage.Text = "No Records!";
-                    ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal6').modal('show');", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal4').modal('show');", true);
 
                 }
                 else
@@ -43,7 +43,7 @@ namespace Layout_2._1
                     DeleteLeaveGridView.DataBind();
                     lblmessage.Text = string.Empty;
                     lblmessage.Visible = false;
-                    ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal6').modal('show');", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal4').modal('show');", true);
                 }
             }
             catch (Exception ex)
@@ -102,7 +102,7 @@ namespace Layout_2._1
 
                     }
                 }
-                ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal6').modal('show');", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal4').modal('show');", true);
             }
             catch (Exception ex)
             {
@@ -139,7 +139,7 @@ namespace Layout_2._1
 
                 Custom.ErrorHandle(ex, Response);
             }
-            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal6').modal('show');", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal4').modal('show');", true);
 
         }
 
@@ -161,7 +161,7 @@ namespace Layout_2._1
             {
                 Custom.ErrorHandle(ex, Response);
             }
-            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal6').modal('show');", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal4').modal('show');", true);
         }
 
         protected void DeleteLeaveGridView_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -175,7 +175,7 @@ namespace Layout_2._1
                     e.Row.CssClass = "selected-row";
                 }
             }
-            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal6').modal('show');", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal4').modal('show');", true);
         }
 
         protected void DeleteLeaveGridView_SelectedIndexChanged(object sender, EventArgs e)
@@ -184,7 +184,7 @@ namespace Layout_2._1
             //ClientScriptManager.RegisterStartupScript(this.GetType(), "keepModalOpen", script,true);
             // ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('.modal').modal('show');", true);
             DeleteLeaveGridView.SelectedIndex = DeleteLeaveGridView.SelectedRow.RowIndex;
-            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal6').modal('show');", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal4').modal('show');", true);
         }
 
 
