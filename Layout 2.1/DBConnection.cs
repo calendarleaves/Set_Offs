@@ -265,6 +265,95 @@ namespace SetOffs1
             return dt;
         }
 
+        public DataTable GetAllLeaveRecords()
+        {
+            DataTable dt = new DataTable();
+
+            int currentYear = DateTime.Now.Year;
+
+            SqlCommand command = new SqlCommand(@"
+        SELECT 
+            CONCAT(e.FirstName, ' ', e.LastName) AS Name,
+            CONVERT(varchar, l.StartDate, 106) AS StartDate,
+            CONVERT(varchar, l.EndDate, 106) AS EndDate,
+            l.Comments
+        FROM 
+            Employee e
+        JOIN 
+            Leave l ON e.Id = l.EmpId
+        WHERE 
+            l.StartDate >= @StartDate AND l.StartDate <= @EndDate
+        ORDER BY 
+            e.FirstName", con);
+
+            // Construct date ranges for 1st July to 31st July of the current year
+            DateTime startDate = new DateTime(currentYear, 1, 1);
+            DateTime endDate = new DateTime(currentYear, 12, 31);
+
+            command.Parameters.AddWithValue("@StartDate", startDate);
+            command.Parameters.AddWithValue("@EndDate", endDate);
+
+            SqlDataAdapter reader = new SqlDataAdapter(command);
+
+
+            reader.Fill(dt);
+            con.Close();
+            return dt;
+        }
+
+        public DataTable GetUserLeaveRecords(string employeeId)
+        {
+            DataTable dt = new DataTable();
+
+            int currentYear = DateTime.Now.Year;
+
+            SqlCommand command = new SqlCommand(@"
+        SELECT 
+            CONCAT(e.FirstName, ' ', e.LastName) AS Name,
+            CONVERT(varchar, l.StartDate, 106) AS StartDate,
+            CONVERT(varchar, l.EndDate, 106) AS EndDate,
+            l.Comments
+        FROM 
+            Employee e
+        JOIN 
+            Leave l ON e.Id = l.EmpId
+        WHERE 
+            e.Email = @EmployeeId
+            AND l.StartDate >= @StartDate AND l.StartDate <= @EndDate
+        ORDER BY 
+            e.FirstName", con);
+
+            // Construct date ranges for 1st July to 31st July of the current year
+            DateTime startDate = new DateTime(currentYear, 7, 1);
+            DateTime endDate = new DateTime(currentYear, 7, 31);
+
+            command.Parameters.AddWithValue("@EmployeeId", employeeId);
+            command.Parameters.AddWithValue("@StartDate", startDate);
+            command.Parameters.AddWithValue("@EndDate", endDate);
+
+            SqlDataAdapter reader = new SqlDataAdapter(command);
+
+
+            reader.Fill(dt);
+            con.Close();
+            return dt;
+        }
+
+        public DataTable GetAllHolidayDates()
+        {
+            DataTable dt = new DataTable();
+
+            con.Open();
+
+            SqlCommand command = new SqlCommand("SELECT Date FROM HolidayList", con);
+
+
+            SqlDataAdapter reader = new SqlDataAdapter(command);
+            reader.Fill(dt);
+            con.Close();
+            return dt;
+        }
+
         public DataTable GetAllEmployeesLeaveLikeName(String s)
         {
             string firstName = "";
@@ -281,7 +370,7 @@ namespace SetOffs1
             }
             DataTable dt = new DataTable();
 
-            string query = "SELECT e.Id     ,e.FirstName     ,e.LastName  ,l.LeaveType     ,l.StartDate  ,l.EndDate      ,l.Days  FROM Employee e join Leave l on e.Id = l.EmpId where FirstName like'@firstName%' and LastName like '@lastName%' order by e.FirstName ";
+            string query = "SELECT e.Id     ,e.FirstName     ,e.LastName  ,l.LeaveType     ,l.StartDate  ,l.EndDate      ,l.Days  FROM Employee e join Leave l on e.Id = l.EmpId where e.FirstName LIKE @firstName + '%' AND e.LastName LIKE @lastName + '%' order by e.FirstName ";
             con.Open();
             using (SqlCommand command = new SqlCommand(query, con))
             {

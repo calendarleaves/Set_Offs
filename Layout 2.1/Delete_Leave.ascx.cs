@@ -1,28 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using SetOffs1;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Text.RegularExpressions;
+using SetOffs1;
 
 namespace Layout_2._1
 {
-    public partial class WebForm2 : System.Web.UI.Page
+    public partial class Delete_Leave : System.Web.UI.UserControl
     {
-
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 BindGridView();
             }
-
         }
 
         private void BindGridView()
@@ -38,6 +34,7 @@ namespace Layout_2._1
                     DeleteLeaveGridView.DataSource = null;
                     DeleteLeaveGridView.DataBind();
                     lblmessage.Text = "No Records!";
+                    ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal6').modal('show');", true);
 
                 }
                 else
@@ -46,6 +43,7 @@ namespace Layout_2._1
                     DeleteLeaveGridView.DataBind();
                     lblmessage.Text = string.Empty;
                     lblmessage.Visible = false;
+                    ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal6').modal('show');", true);
                 }
             }
             catch (Exception ex)
@@ -58,6 +56,7 @@ namespace Layout_2._1
         {
             try
             {
+
                 DataTable dt = new DataTable();
                 DBConnection con = new DBConnection();
 
@@ -68,6 +67,7 @@ namespace Layout_2._1
                 {
                     lblErrorMessage.Text = "Enter Employee Name..";
                     txtSearch.Focus();
+
                 }
                 else if (!regex.IsMatch(searchText))
                 {
@@ -75,6 +75,7 @@ namespace Layout_2._1
                     lblErrorMessage.Text = "Wrong input! Only letters  are allowed.";
                     lblmessage.Visible = false;
                     return;
+
                 }
                 else
                 {
@@ -88,6 +89,7 @@ namespace Layout_2._1
                         lblmessage.Text = "No Records!";
                         lblErrorMessage.Text = string.Empty;
                         lblErrorMessage.Visible = false;
+
                     }
                     else
                     {
@@ -97,8 +99,10 @@ namespace Layout_2._1
                         lblmessage.Visible = false;
                         lblErrorMessage.Text = string.Empty;
                         lblmessage.Visible = false;
+
                     }
                 }
+                ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal6').modal('show');", true);
             }
             catch (Exception ex)
             {
@@ -111,6 +115,8 @@ namespace Layout_2._1
 
             try
             {
+
+                //int id = Convert.ToInt32(DeleteLeaveGridView.Rows[e.RowIndex].Cells[0].Text);
                 string fullName = DeleteLeaveGridView.Rows[e.RowIndex].Cells[1].Text + " " + DeleteLeaveGridView.Rows[e.RowIndex].Cells[2].Text;
                 string startDate = DeleteLeaveGridView.Rows[e.RowIndex].Cells[4].Text;
                 string endDate = DeleteLeaveGridView.Rows[e.RowIndex].Cells[5].Text;
@@ -118,13 +124,22 @@ namespace Layout_2._1
                 DBConnection con = new DBConnection();
                 con.DeleteLeave(fullName, DateTime.Parse(startDate), DateTime.Parse(endDate));
 
+                //string successMessage = "Record has been deleted.";
+                //string script = $"<script>showSuccessAlert(\"{successMessage}\");</script>";
+                //ClientScript.RegisterStartupScript(GetType(), "ShowSuccessAlert", script);
+                //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Deleted Successfully')", true);
                 BindGridView();
 
             }
             catch (Exception ex)
             {
+                //string errorMessage = "Failed to delete the record.";
+                //string script = $"<script>showWarningAlert(\"{errorMessage}\");</script>";
+                //ClientScript.RegisterStartupScript(GetType(), "ShowWarningAlert", script);
+
                 Custom.ErrorHandle(ex, Response);
             }
+            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal6').modal('show');", true);
 
         }
 
@@ -132,6 +147,7 @@ namespace Layout_2._1
         {
             try
             {
+
                 lblmessage.Text = string.Empty;
                 lblmessage.Visible = false;
                 lblErrorMessage.Text = string.Empty;
@@ -139,13 +155,39 @@ namespace Layout_2._1
                 txtSearch.Text = "";
                 txtSearch.Focus();
                 BindGridView();
+
             }
             catch (Exception ex)
             {
                 Custom.ErrorHandle(ex, Response);
             }
-
+            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal6').modal('show');", true);
         }
+
+        protected void DeleteLeaveGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+
+                if (e.Row.RowIndex == DeleteLeaveGridView.SelectedIndex)
+                {
+                    e.Row.CssClass = "selected-row";
+                }
+            }
+            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal6').modal('show');", true);
+        }
+
+        protected void DeleteLeaveGridView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //String script = "$('#myModal6').modal('show')";
+            //ClientScriptManager.RegisterStartupScript(this.GetType(), "keepModalOpen", script,true);
+            // ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('.modal').modal('show');", true);
+            DeleteLeaveGridView.SelectedIndex = DeleteLeaveGridView.SelectedRow.RowIndex;
+            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal6').modal('show');", true);
+        }
+
+
 
 
     }
