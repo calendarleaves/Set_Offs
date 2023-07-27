@@ -3,6 +3,7 @@
 <%@ Register TagPrefix="uc" TagName="Leave_Records" Src="~/Leave_Records.ascx" %>
 <%@ Register TagPrefix="uc" TagName="Add_Leave" Src="~/Add_Leave.ascx" %>
 <%@ Register TagPrefix="uc" TagName="Delete_Leave" Src="~/Delete_Leave.ascx" %>
+<%@ Register TagPrefix="uc" TagName="Add_Leave_User" Src="~/Add_Leave_User.ascx" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -102,7 +103,11 @@
          function showDelete_Leave() {
              // Show the modal dialog
              $('#<%= Delete_Leave.ClientID %>').modal('show');
-     }
+         }
+         function showAdd_Leave_User() {
+             // Show the modal dialog
+             $('#<%= Delete_Leave.ClientID %>').modal('show');
+          }
      </script>
 </head>
 <body>
@@ -221,6 +226,9 @@
         <button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal2">Leave Records</button>     
 		 <uc:Leave_Records ID="Leave_Records" runat="server" />
                
+                          <button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal7">Add Leave User</button>     
+      <uc:Add_Leave_User ID="Add_Leave_User" runat="server" />
+
                 <button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal3">Add Leave</button>     
       <uc:Add_Leave ID="Add_Leave" runat="server" />
                 

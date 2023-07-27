@@ -69,6 +69,7 @@
     <Content Include="AbsencePageCSS.css" />
     <Content Include="AddLeave.aspx" />
     <Content Include="Add_Leave.ascx" />
+    <Content Include="Add_Leave_User.ascx" />
     <Content Include="CreateAbsence.css" />
     <Content Include="Delete_Leave.ascx" />
     <Content Include="Error Handler\Error.aspx" />
@@ -109,6 +110,13 @@
     </Compile>
     <Compile Include="Add_Leave.ascx.designer.cs">
       <DependentUpon>Add_Leave.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Add_Leave_User.ascx.cs">
+      <DependentUpon>Add_Leave_User.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Add_Leave_User.ascx.designer.cs">
+      <DependentUpon>Add_Leave_User.ascx</DependentUpon>
     </Compile>
     <Compile Include="Calendar 1.aspx.cs">
       <DependentUpon>Calendar 1.aspx</DependentUpon>
