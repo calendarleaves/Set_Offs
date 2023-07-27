@@ -214,6 +214,20 @@ namespace WebApplication1
                     }
                 }
 
+                //code to show only this year dates
+                int currentYear = DateTime.Now.Year;
+
+                DateTime startDate = new DateTime(currentYear, 1, 1);
+                DateTime endDate = new DateTime(currentYear, 12, 31);
+
+                if (e.Day.Date < startDate || e.Day.Date > endDate)
+                {
+                    e.Day.IsSelectable = false;
+                    e.Cell.ForeColor = System.Drawing.Color.Silver;
+                }
+
+
+
             }
             catch (Exception ex)
             {
