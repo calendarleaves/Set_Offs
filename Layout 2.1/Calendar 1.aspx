@@ -4,17 +4,20 @@
 <%@ Register TagPrefix="uc" TagName="Add_Leave" Src="~/Add_Leave.ascx" %>
 <%@ Register TagPrefix="uc" TagName="Delete_Leave" Src="~/Delete_Leave.ascx" %>
 <%@ Register TagPrefix="uc" TagName="Add_Leave_User" Src="~/Add_Leave_User.ascx" %>
+<%@ Register TagPrefix="uc" TagName="Delete_Leave_User" Src="~/Delete_Leave_User.ascx" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title> Calendar Page </title>
-     <%--<link rel="stylesheet" type="text/css" href="CalendarStylesheet2.css" />--%>
-    	 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>	
+    <title>Calendar Page </title>
+    <%--<link rel="stylesheet" type="text/css" href="CalendarStylesheet2.css" />--%>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
     <style>
     
         .profile-circle {
@@ -109,6 +112,10 @@
              $('#<%= Delete_Leave.ClientID %>').modal('show');
          }
          function showAdd_Leave_User() {
+             // Show the modal dialog
+             $('#<%= Delete_Leave.ClientID %>').modal('show');
+         }
+         function showDelete_Leave_User() {
              // Show the modal dialog
              $('#<%= Delete_Leave.ClientID %>').modal('show');
           }
@@ -236,6 +243,9 @@
                 <button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal3">Add Leave</button>     
       <uc:Add_Leave ID="Add_Leave" runat="server" />
                 
+                <button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal8">Delete Leave User</button>     
+	 <uc:Delete_Leave_User ID="Delete_Leave_User" runat="server" />
+
                 <button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal4">Delete Leave</button>     
 	 <uc:Delete_Leave ID="Delete_Leave" runat="server" />
             
@@ -255,9 +265,7 @@
        
     </form>
     
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 
 </body>
 </html>

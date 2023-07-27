@@ -73,6 +73,7 @@
     <Content Include="CreateAbsence.css" />
     <Content Include="DeleteLeavePageStyleSheet.css" />
     <Content Include="Delete_Leave.ascx" />
+    <Content Include="Delete_Leave_User.ascx" />
     <Content Include="Error Handler\Error.aspx" />
     <Content Include="Error Handler\Error404.aspx" />
     <Content Include="Error Handler\Error500.aspx" />
@@ -141,6 +142,13 @@
     </Compile>
     <Compile Include="Delete_Leave.ascx.designer.cs">
       <DependentUpon>Delete_Leave.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Delete_Leave_User.ascx.cs">
+      <DependentUpon>Delete_Leave_User.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Delete_Leave_User.ascx.designer.cs">
+      <DependentUpon>Delete_Leave_User.ascx</DependentUpon>
     </Compile>
     <Compile Include="Error Handler\Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>

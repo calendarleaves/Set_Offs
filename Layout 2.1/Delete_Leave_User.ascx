@@ -1,4 +1,5 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Add_Leave_User.ascx.cs" Inherits="Layout_2._1.Add_Leave_User" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Delete_Leave_User.ascx.cs" Inherits="Layout_2._1.Delete_Leave_User" %>
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-KyZXEAgltcdPwqR5gKkxzWfod5oMh4PrpQmYfjELVYg=" crossorigin="anonymous"></script>
 
@@ -13,12 +14,12 @@
     });
 </script>
 
-<div class="modal" id="myModal7">
+<div class="modal" id="myModal8">
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">Add leave Form</h4>
+                <h4 class="modal-title">Delete Leave User</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
