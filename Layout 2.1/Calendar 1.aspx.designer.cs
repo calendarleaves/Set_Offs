@@ -168,6 +168,15 @@ namespace WebApplication1
         protected global::Layout_2._1.Add_Leave Add_Leave;
 
         /// <summary>
+        /// Delete_Leave_User control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Layout_2._1.Delete_Leave_User Delete_Leave_User;
+
+        /// <summary>
         /// Delete_Leave control.
         /// </summary>
         /// <remarks>
