@@ -273,7 +273,7 @@ namespace SetOffs1
             string[] nameParts = s.Split(' ');
             if (nameParts.Length > 0)
                 firstName = nameParts[0];
-            if (nameParts.Length > 1)
+            if (nameParts.Length > 1) 
                 lastName = nameParts[1];
             else
             {
@@ -281,7 +281,7 @@ namespace SetOffs1
             }
             DataTable dt = new DataTable();
 
-            string query = "SELECT e.Id     ,e.FirstName     ,e.LastName  ,l.LeaveType     ,l.StartDate  ,l.EndDate      ,l.Days  FROM Employee e join Leave l on e.Id = l.EmpId where FirstName like'@firstName%' and LastName like '@lastName%' order by e.FirstName ";
+            string query = "SELECT e.Id     ,e.FirstName     ,e.LastName  ,l.LeaveType     ,l.StartDate  ,l.EndDate      ,l.Days  FROM Employee e join Leave l on e.Id = l.EmpId where e.FirstName LIKE @firstName + '%' AND e.LastName LIKE @lastName + '%' order by e.FirstName ";
             con.Open();
             using (SqlCommand command = new SqlCommand(query, con))
             {
@@ -309,7 +309,6 @@ namespace SetOffs1
                 command.Parameters.AddWithValue("@EmpId", i);
                 command.Parameters.AddWithValue("@StartDate", startDate);
                 SqlDataAdapter reader = new SqlDataAdapter(command);
-
 
                 reader.Fill(dt);
             }
