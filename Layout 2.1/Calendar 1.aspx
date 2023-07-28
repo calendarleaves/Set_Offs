@@ -113,11 +113,11 @@
          }
          function showAdd_Leave_User() {
              // Show the modal dialog
-             $('#<%= Delete_Leave.ClientID %>').modal('show');
+             $('#<%= Add_Leave_User.ClientID %>').modal('show');
          }
          function showDelete_Leave_User() {
              // Show the modal dialog
-             $('#<%= Delete_Leave.ClientID %>').modal('show');
+             $('#<%= Delete_Leave_User.ClientID %>').modal('show');
           }
      </script>
 </head>

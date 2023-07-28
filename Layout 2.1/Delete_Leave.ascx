@@ -2,13 +2,14 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-KyZXEAgltcdPwqR5gKkxzWfod5oMh4PrpQmYfjELVYg=" crossorigin="anonymous"></script>
 
-
+<link href="DeleteLeavePageStyleSheet.css" rel="stylesheet" />
 
 
 
 <div class="modal" id="myModal4">
     <div class="modal-dialog">
         <div class="modal-content" style="height: 650px; width: 1000px;">
+            <div class="container ">
             <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title text-center ">Delete Leave</h4>
@@ -18,7 +19,7 @@
             <!-- Modal body -->
             <div class="modal-body">
 
-                <div class="container ">
+                
                     
                     <div class="row">
                         <div class="col-lg-8 offset-lg-2">
