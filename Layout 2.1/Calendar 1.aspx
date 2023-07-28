@@ -1,13 +1,23 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Calendar 1.aspx.cs" Inherits="WebApplication1.WebForm11" %>
 <%@ Register TagPrefix="uc" TagName="Holidays" Src="~/Holidays.ascx" %>
-
+<%@ Register TagPrefix="uc" TagName="Leave_Records" Src="~/Leave_Records.ascx" %>
+<%@ Register TagPrefix="uc" TagName="Add_Leave" Src="~/Add_Leave.ascx" %>
+<%@ Register TagPrefix="uc" TagName="Delete_Leave" Src="~/Delete_Leave.ascx" %>
+<%@ Register TagPrefix="uc" TagName="Add_Leave_User" Src="~/Add_Leave_User.ascx" %>
+<%@ Register TagPrefix="uc" TagName="Delete_Leave_User" Src="~/Delete_Leave_User.ascx" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title> Calendar Page </title>
-     <%--<link rel="stylesheet" type="text/css" href="CalendarStylesheet2.css" />--%>
-    	 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>	
+    <title>Calendar Page </title>
+    <%--<link rel="stylesheet" type="text/css" href="CalendarStylesheet2.css" />--%>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
     <style>
     
         .profile-circle {
@@ -92,6 +102,24 @@
 }
 
     </style>
+     <script>
+     function showAdd_Leave() {
+         // Show the modal dialog
+         $('#<%= Add_Leave.ClientID %>').modal('show');
+         }
+         function showDelete_Leave() {
+             // Show the modal dialog
+             $('#<%= Delete_Leave.ClientID %>').modal('show');
+         }
+         function showAdd_Leave_User() {
+             // Show the modal dialog
+             $('#<%= Add_Leave_User.ClientID %>').modal('show');
+         }
+         function showDelete_Leave_User() {
+             // Show the modal dialog
+             $('#<%= Delete_Leave_User.ClientID %>').modal('show');
+          }
+     </script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -105,7 +133,7 @@
 
         <div class="navbar-header d-md-flex ">
             <!-- Title in the Middle -->
-            <h1 class="navbar-item " style="margin-left: 100px;">Set Offs</h1>
+            <h1 class="navbar-item " style="margin-left: 100px;">Leave Portal</h1>
         </div>
              
             <!-- Dropdown on the Right -->
@@ -206,10 +234,22 @@
         <button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal">Holidays</button>     
          <uc:Holidays ID="Holidays" runat="server" />
 
-        <button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal">Leave Records</button>     
-		<button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal">Add Leave</button>     
-     <button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal">Delete Leave</button>     
-	</div>
+        <button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal2">Leave Records</button>     
+		 <uc:Leave_Records ID="Leave_Records" runat="server" />
+               
+                          <button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal7">Add Leave User</button>     
+      <uc:Add_Leave_User ID="Add_Leave_User" runat="server" />
+
+                <button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal3">Add Leave</button>     
+      <uc:Add_Leave ID="Add_Leave" runat="server" />
+                
+                <button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal8">Delete Leave User</button>     
+	 <uc:Delete_Leave_User ID="Delete_Leave_User" runat="server" />
+
+                <button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal4">Delete Leave</button>     
+	 <uc:Delete_Leave ID="Delete_Leave" runat="server" />
+            
+            </div>
        
        <!-- <footer class="footer">
             <div class="container-fluid">
@@ -225,9 +265,7 @@
        
     </form>
     
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 
 </body>
 </html>
