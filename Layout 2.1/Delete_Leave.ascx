@@ -2,7 +2,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-KyZXEAgltcdPwqR5gKkxzWfod5oMh4PrpQmYfjELVYg=" crossorigin="anonymous"></script>
 
-
+<link href="DeleteLeavePageStyleSheet.css" rel="stylesheet" />
 
 
 
