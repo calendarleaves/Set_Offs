@@ -15,8 +15,7 @@ namespace Layout_2._1
     { protected void Page_Load(object sender, EventArgs e)
         {
             Session["ID"] = null;
-            DBConnection con = new DBConnection();
-            DataTable dt = con.GetAllEmployeesLeaveLikeName("sum");
+            
         }
         protected void Login_Click(object sender, EventArgs e)
         {
@@ -43,7 +42,7 @@ namespace Layout_2._1
                 { user.Text = ""; }
 
 
-                if (UsernameTextBox.Text == employee.Email && PasswordTextBox.Text == employee.Password)
+                if (UsernameTextBox.Text == employee.Email && DBConnection.VerifyPassword(PasswordTextBox.Text, employee.Password))
                 {
                     Session["ID"] = UsernameTextBox.Text;
                     Server.Transfer("Calendar 1.aspx");
@@ -58,6 +57,7 @@ namespace Layout_2._1
             catch (Exception ex)
             {
                 Custom.ErrorHandle(ex, Response);
+                
             }
 
         } } }

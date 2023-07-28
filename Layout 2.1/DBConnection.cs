@@ -599,8 +599,79 @@ namespace SetOffs1
 
                 reader.Fill(dt);
             }
+            con.Close();
 
-                return dt;
+            return dt;
+        }
+
+        public DataTable allEmployees()
+        {
+            DataTable dt = new DataTable();
+
+            string query = "SELECT * FROM Employee ";
+            con.Open();
+            using (SqlCommand command = new SqlCommand(query, con))
+            {
+                SqlDataAdapter reader = new SqlDataAdapter(command);
+
+
+                reader.Fill(dt);
+            }
+            con.Close();
+            return dt;
+        }
+        public void UpdatePassword()
+        {
+            DBConnection d = new DBConnection();
+            DataTable dt = d.allEmployees();
+
+            
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                DataRow row = dt.Rows[i];
+                var id = row["Id"];
+                var Password = DBConnection.HashPassword(row["Password"].ToString()); 
+                using (SqlCommand command = new SqlCommand("update Employee set Password='" + Password + "' where Id=" + id + "", con))
+                {
+                    con.Open();
+                    command.ExecuteReader();
+                    con.Close();
+                }
+            }
+            
+
+        }
+        public void UpdatePassword(string s,string password)
+        {
+            DBConnection d = new DBConnection();
+            Employee emp = d.GetEmployee(s);
+            var id = emp.Id;
+            var Password = DBConnection.HashPassword(password);
+            using (SqlCommand command = new SqlCommand("update Employee set Password='" + Password + "' where Id=" + id + "", con))
+            {
+                con.Open();
+                command.ExecuteReader();
+                con.Close();
+            }
+
+
+        }
+
+        public static string HashPassword(string password)
+        {
+            // Generate a random salt with a work factor of 12
+            string salt = BCrypt.Net.BCrypt.GenerateSalt(12);
+
+            // Hash the password with the salt
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password, salt);
+
+            return hashedPassword;
+        }
+
+        public static bool VerifyPassword(string password, string hashedPassword)
+        {
+            // Verify the password by comparing it with the stored hashed password
+            return BCrypt.Net.BCrypt.Verify(password, hashedPassword);
         }
 
         public int test()
