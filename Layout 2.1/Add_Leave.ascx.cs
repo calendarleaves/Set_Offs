@@ -1,6 +1,8 @@
-﻿using System;
+﻿using SetOffs1;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -10,83 +12,450 @@ namespace Layout_2._1
 {
     public partial class Add_Leave : System.Web.UI.UserControl
     {
+        string selectedValue;
+        int id;
+        string value1;
+        string value2;
+
+        string item;
+        DateTime currentDate;
+
+
+        SqlConnection conn = new SqlConnection(@"Data Source=DESKTOP-HDH00MK;Initial Catalog=PCCOE;Integrated Security=True");
+
+        private List<DateTime> holidays = new List<DateTime>();
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
+
+            holidays.Add(new DateTime(2023, 8, 15));
+            holidays.Add(new DateTime(2023, 9, 19));
+            if (from.Text == null)
+            {
+                Calendar2.Enabled = false;
+            }
+
+            if (!IsPostBack)
+            {
+                Calendar1.Visible = false;
+                Calendar2.Visible = false;
+
+                DBConnection s = new DBConnection();
+
+                List<string> data = new List<string>();
+
+
+                data = s.GetAllEmployeeName();
+                data.Insert(0, "--Select Employee--");
+                DropDownList1.DataSource = data;
+                DropDownList1.DataBind();
+
+                /*      DropDownList1.DataSource = data;
+                      DropDownList1.DataBind(); */
+
+
+            }
+
+
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string connectionString = "Data Source=DESKTOP-45HGR8T;Initial Catalog=Setoffs;Integrated Security=True";
 
-            // Get the value from the text box
-            string nameValue = txtName.Text;
+            if (DropDownList1.SelectedValue != "--Select Employee--")
+            {
+                DropdownlistError.Text = "";
 
-            // Create the SQL query to insert the value into the table
-            string insertQuery = "INSERT INTO Trial1 (name) VALUES (@Name)";
+            }
+            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal3').modal('show');", true);
+
+        }
+
+
+
+        protected void Submit_click(object sender, EventArgs e)
+        {
+
+
+
 
             try
             {
-                // Create a new SqlConnection using the connection string
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                string fullName = DropDownList1.SelectedItem.Value;
+
+
+                string[] nameParts = fullName.Split(' ');
+
+                string firstName = nameParts[0];
+                string lastName = nameParts[1];
+
+                Calendar1.Visible = false;
+                Calendar2.Visible = false;
+                DateTime start1 = Calendar1.SelectedDate;
+                DateTime end1 = Calendar2.SelectedDate;
+
+
+                if (DropDownList1.SelectedValue == "--Select Employee--")
+
                 {
-                    // Open the connection
-                    connection.Open();
+                    DropdownlistError.Text = "leave";
+                    DropDownList1.Focus();
 
-                    // Create a new SqlCommand with the query and the connection
-                    using (SqlCommand command = new SqlCommand(insertQuery, connection))
-                    {
-                        // Add a parameter to the command to avoid SQL injection
-                        command.Parameters.AddWithValue("@Name", nameValue);
+                }
+                else if (Drop.SelectedValue == "--Select Leave--")
 
-                        // Execute the query
-                        command.ExecuteNonQuery();
-                    }
+                {
+                    LeaveLable.Text = "* Please select leave";
+                    Drop.Focus();
+
+                }
+                else if (from.Text == "")
+                {
+                    calendar1lable.Text = "* Please select start date";
+                    from.Focus();
+
+
+
+                }
+                else if (To.Text == "")
+                {
+                    Calendar3Label.Text = "* Please select end ate";
+                    To.Focus();
+
+
+                }
+                else if (comment.Text == "")
+                {
+                    commentError.Text = " * Please mention leave reason";
+                    comment.Focus();
+
+
+
+                }
+                else
+                {
+
+
+                    Leave l = new Leave();
+                    l.LeaveType = Drop.SelectedValue;
+                    l.StartDate = Calendar1.SelectedDate;
+                    l.EndDate = Calendar2.SelectedDate;
+                    l.Days = Int16.Parse(Total_Days.Text);
+                    l.Comments = comment.Text;
+
+                    DBConnection s = new DBConnection();
+
+                    s.Addleave(firstName, lastName, l);
+
+                    Server.Transfer("Calendar 1.aspx");
+
+
+
                 }
 
-                // If the execution reaches here, the insertion was successful
-                // You can add any additional code or messages if needed
-                Response.Write("Data inserted successfully!");
             }
             catch (Exception ex)
             {
-                // Handle any exceptions that might occur during the database operation
-                // You can display an error message or log the exception details
-                Response.Write("An error occurred: " + ex.Message);
+                Custom.ErrorHandle(ex, Response);
+
             }
 
-            DateTime selectedDate = Calendar1.SelectedDate;
+            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal3').modal('show');", true);
 
-            // Insert the selected date into the Trial1 table
-            InsertIntoTrial1(selectedDate);
-
-            // Optionally, close the modal pop-up after inserting the date
-            //PopupForm.Hide();
         }
 
-        private void InsertIntoTrial1(DateTime selectedDate)
+
+
+        public string totalDays()
         {
-            // Implement your database connection and insert logic here.
-            // This is just a sample to demonstrate the concept.
-
-            // For simplicity, assume you are using SqlConnection and SqlCommand
-            string connectionString = "Data Source=DESKTOP-45HGR8T;Initial Catalog=Setoffs;Integrated Security=True";
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            if (from.Text != "" && To.Text != "")
             {
-                string insertQuery = "INSERT INTO Trial1 (Date) VALUES (@SelectedDate)";
-                SqlCommand command = new SqlCommand(insertQuery, connection);
-                command.Parameters.AddWithValue("@SelectedDate", selectedDate);
-
-                try
+                int weekoff = 0;
+                int holidaysCount = 0;
+                DateTime startDate;
+                DateTime endDate;
+                if (Drop.SelectedValue == "First Half " || Drop.SelectedValue == "Second Half")
                 {
-                    connection.Open();
-                    command.ExecuteNonQuery();
+                    startDate = Calendar1.SelectedDate;
+                    endDate = Calendar1.SelectedDate;
                 }
-                catch (Exception ex)
+                else
                 {
-                    // Handle the exception appropriately.
+
+
+                    startDate = Calendar1.SelectedDate;
+                    endDate = Calendar2.SelectedDate;
+                }
+
+                {
+
+                    currentDate = startDate;
+
+
+                    while (currentDate <= endDate)
+                    {
+                        if (currentDate.DayOfWeek == DayOfWeek.Saturday || currentDate.DayOfWeek == DayOfWeek.Sunday)
+                        {
+                            weekoff++;
+                        }
+                        if (holidays.Contains(currentDate))
+                        {
+                            holidaysCount++;
+                        }
+
+                        currentDate = currentDate.AddDays(1);
+                    }
+
+
+                }
+
+                TimeSpan difference = endDate - startDate;
+                string m = difference.ToString("dd");
+
+                if (Drop.SelectedValue == "First Half " || Drop.SelectedValue == "Second Half")
+
+                {
+                    Total_Days.Text = "0.5";
+
+                    float floatValue = float.Parse(Total_Days.Text); // Convert the string to a floating-point number
+                    int intValue = (int)floatValue;    // Cast the floating-point number to an integer
+                    Total_Days.Text = intValue.ToString();
+                }
+                else
+                {
+                    int n = Int16.Parse(m) + 1 - weekoff - holidaysCount;
+                    Total_Days.Text = n.ToString();
+                }
+
+
+
+            }
+            return Total_Days.Text;
+        }
+
+        protected void Calendar1_Click(object sender, ImageClickEventArgs e)
+        {
+
+            Calendar1.SelectedDate = currentDate;
+            calendar1lable.Text = "";
+            from.Text = "";
+
+            Total_Days.Text = "";
+
+            if (Drop.SelectedValue == "First Half " || Drop.SelectedValue == "Second Half")
+            {
+                To.Text = "";
+            }
+
+            Calendar2.Visible = false;
+            if (Calendar1.Visible)
+            {
+                Calendar1.Visible = false;
+
+            }
+            else
+            {
+                Calendar1.Visible = true;
+            }
+
+
+
+            Calendar1.Attributes.Add("style", "position:absolute");
+            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal3').modal('show');", true);
+
+
+        }
+
+        protected void Calendar2_Click(object sender, ImageClickEventArgs e)
+        {
+
+            Calendar2.SelectedDate = currentDate;
+            Calendar3Label.Text = "";
+            To.Text = "";
+            Total_Days.Text = "";
+            if (from.Text != "")
+            {
+                Calendar2.Enabled = true;
+            }
+            Calendar1.Visible = false;
+            if (Calendar2.Visible)
+            {
+                Calendar2.Visible = false;
+            }
+            else
+            {
+                Calendar2.Visible = true;
+            }
+            Calendar2.Attributes.Add("style", "position:absolute");
+            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal3').modal('show');", true);
+
+
+        }
+
+        protected void Calendar1_SelectionChanged(object sender, EventArgs e)
+        {
+            from.Text = Calendar1.SelectedDate.ToString("dd/MM/yy");
+
+            if (Drop.SelectedValue == "First Half " || Drop.SelectedValue == "Second Half")
+            {
+                To.Text = from.Text;
+            }
+
+            Calendar1.Visible = false;
+            totalDays();
+            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal3').modal('show');", true);
+
+        }
+
+        protected void Calendar2_SelectionChanged(object sender, EventArgs e)
+        {
+
+            To.Text = Calendar2.SelectedDate.ToString("dd/MM/yy");
+            Calendar2.Visible = false;
+            totalDays();
+            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal3').modal('show');", true);
+
+
+        }
+
+
+
+
+        protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
+        {
+
+            Calendar1.BackColor = Color.White;
+            Calendar1.TitleFormat = TitleFormat.Month;
+
+            DateTime startDate1 = new DateTime(2023, 4, 1);
+            DateTime endDate1 = new DateTime(2024, 3, 31);
+
+            if (e.Day.Date < startDate1 || e.Day.Date > endDate1) // Disable dates outside the specified range
+            {
+                e.Day.IsSelectable = false;
+                e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
+            }
+
+            if (e.Day.Date < DateTime.Now.Date) // Replace DateTime.Now with your selected value
+            {
+                e.Day.IsSelectable = false;
+                e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
+            }
+
+            if (To.Text != "")
+            {
+                if (e.Day.Date > Calendar2.SelectedDate) // Replace DateTime.Now with your selected value
+                {
+                    e.Day.IsSelectable = false;
+                    e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
                 }
             }
+            if (e.Day.Date.DayOfWeek == DayOfWeek.Saturday || e.Day.Date.DayOfWeek == DayOfWeek.Sunday)
+            {
+                e.Day.IsSelectable = false;
+                e.Cell.ForeColor = System.Drawing.Color.Red;
+
+            }
+            if (holidays.Contains(e.Day.Date))
+            {
+                e.Day.IsSelectable = false;
+                e.Cell.ForeColor = System.Drawing.Color.Red; // Optionally, change the color of the holiday dates
+            }
+            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal3').modal('show');", true);
+
+
+        }
+
+        protected void Calendar2_DayRender(object sender, DayRenderEventArgs e)
+        {
+
+            DateTime startDate1 = new DateTime(2023, 4, 1);
+            DateTime endDate1 = new DateTime(2024, 3, 31);
+
+            if (e.Day.Date < startDate1 || e.Day.Date > endDate1) // Disable dates outside the specified range
+            {
+                e.Day.IsSelectable = false;
+                e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
+            }
+            if (e.Day.Date < DateTime.Now.Date) // Replace DateTime.Now with your selected value
+            {
+                e.Day.IsSelectable = false;
+                e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
+            }
+            if (e.Day.Date < Calendar1.SelectedDate) // Replace DateTime.Now with your selected value
+            {
+                e.Day.IsSelectable = false;
+                e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
+            }
+            if (e.Day.Date.DayOfWeek == DayOfWeek.Saturday || e.Day.Date.DayOfWeek == DayOfWeek.Sunday)
+            {
+                e.Day.IsSelectable = false;
+                e.Cell.ForeColor = System.Drawing.Color.Red;
+
+            }
+            if (holidays.Contains(e.Day.Date))
+            {
+                e.Day.IsSelectable = false;
+                e.Cell.ForeColor = System.Drawing.Color.Red; // Optionally, change the color of the holiday dates
+            }
+            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal3').modal('show');", true);
+
+
+        }
+
+        protected void Drop_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Total_Days.Text = "";
+            from.Text = "";
+            To.Text = "";
+
+            string selectedValue = Drop.SelectedValue;
+
+            if (!string.IsNullOrEmpty(selectedValue) && selectedValue != "--Select Leave--")
+            {
+                LeaveLable.Text = "";
+
+                if (Drop.SelectedValue == "First Half " || Drop.SelectedValue == "Second Half")
+                {
+                    Cal1.Enabled = false;
+                    Cal1.BackColor = System.Drawing.Color.Gray;
+                    Cal1.Visible = false;
+                }
+                else
+                {
+                    Cal1.Enabled = true;
+                    Cal1.BackColor = System.Drawing.Color.White;
+                    Cal1.Visible = true;
+                }
+
+            }
+            if (Calendar1.Visible)
+            {
+                Calendar1.Visible = false;
+
+            }
+            if (Calendar2.Visible)
+            {
+                Calendar2.Visible = false;
+
+            }
+            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal3').modal('show');", true);
+
+
+        }
+
+        protected void Cancel_Click(object sender, EventArgs e)
+        {
+            DropDownList1.ClearSelection();
+            from.Text = "";
+            To.Text = "";
+            Drop.ClearSelection();
+            comment.Text = "";
+            Total_Days.Text = "";
+
+            Calendar1.Visible = false;
+            Calendar2.Visible = false;
         }
 
 
