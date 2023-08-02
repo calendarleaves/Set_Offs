@@ -68,11 +68,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="5259.jpg" />
-    <Content Include="AbsencePageCSS1.css" />
     <Content Include="AbsencePageCSS.css" />
     <Content Include="AddLeave.aspx" />
+    <Content Include="AddLeaveCss.css" />
     <Content Include="Add_Leave.ascx" />
     <Content Include="Add_Leave_User.ascx" />
+    <Content Include="CalendarStylesheet3.css" />
     <Content Include="CreateAbsence.css" />
     <Content Include="DeleteLeavePageStyleSheet.css" />
     <Content Include="Delete_Leave.ascx" />
