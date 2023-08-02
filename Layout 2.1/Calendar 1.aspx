@@ -51,11 +51,26 @@
     background-color: #7499f1;
 }  
      .popUpButtons {
-        margin-top: 20px;
-             margin-right: 20px;
-    padding: 5px;
-    border-radius: 5px;
+            margin-top: 20px;
+            margin-right:10px;
+            margin-bottom:10px;
+            width: 150px;
+            height:30px;
+            padding: 5px;
+            border:1px solid #000;
+            border-radius: 5px;
+            background-color: #2222f2;
+            color:white;
+            
+            
         }
+
+            .popUpButtons:hover {
+                background-color: #7499f1;
+                color:black;
+                border:1px solid #000;
+              
+            }
 
 .AbsButton:hover
 {
@@ -111,7 +126,7 @@
      <script>
          window.onload = function () {
 
-             var Hfield = document.getElementById('<%= hiddenField.ClientID %>').value;
+             var Hfield = "";
              if (Hfield == "true") {
                  ButnVis();
              }
@@ -263,22 +278,22 @@
         <hr class="divider">
             <div class="container-fluid" style="display: flex; justify-content: flex-end; margin-right: 20px;">
               <asp:HiddenField ID="hiddenField" runat="server" Value="" />
-        <button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal">Holidays</button>     
+        <button type="button" class="btn btn-primary  popUpButtons" data-toggle="modal" data-target="#myModal">Holidays</button>     
          <uc:Holidays ID="Holidays" runat="server" />
 
-        <button type="button" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal2">Leave Records</button>     
+        <button type="button" class="btn btn-primary  popUpButtons" data-toggle="modal" data-target="#myModal2">Leave Records</button>     
 		 <uc:Leave_Records ID="Leave_Records" runat="server" />
                
-                          <button type="button" id="AddUsrBtn" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal7">Add Leave User</button>     
+                          <button type="button" id="AddUsrBtn" class="btn btn-primary  popUpButtons" data-toggle="modal" data-target="#myModal7">Add Leave User</button>     
       <uc:Add_Leave_User ID="Add_Leave_User" runat="server" />
 
-                <button type="button" id="AddAdmnBtn" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal3">Add Leave</button>     
+                <button type="button" id="AddAdmnBtn" class="btn btn-primary  popUpButtons" data-toggle="modal" data-target="#myModal3">Add Leave</button>     
       <uc:Add_Leave ID="Add_Leave" runat="server" />
                 
-                <button type="button" id="DltUsrBtn" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal8">Delete Leave User</button>     
+                <button type="button" id="DltUsrBtn" class="btn btn-primary  popUpButtons" data-toggle="modal" data-target="#myModal8">Delete Leave User</button>     
 	 <uc:Delete_Leave_User ID="Delete_Leave_User" runat="server" />
 
-                <button type="button" id="DltAdmnBtn" class="btn btn-primary btn-lg popUpButtons" data-toggle="modal" data-target="#myModal4">Delete Leave</button>     
+                <button type="button" id="DltAdmnBtn" class="btn btn-primary  popUpButtons" data-toggle="modal" data-target="#myModal4">Delete Leave</button>     
 	 <uc:Delete_Leave ID="Delete_Leave" runat="server" />
             
             </div>

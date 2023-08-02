@@ -116,7 +116,7 @@ namespace Layout_2._1
             try
             {
 
-                //int id = Convert.ToInt32(DeleteLeaveGridView.Rows[e.RowIndex].Cells[0].Text);
+                
                 string fullName = DeleteLeaveGridView.Rows[e.RowIndex].Cells[1].Text + " " + DeleteLeaveGridView.Rows[e.RowIndex].Cells[2].Text;
                 string startDate = DeleteLeaveGridView.Rows[e.RowIndex].Cells[4].Text;
                 string endDate = DeleteLeaveGridView.Rows[e.RowIndex].Cells[5].Text;
@@ -124,18 +124,13 @@ namespace Layout_2._1
                 DBConnection con = new DBConnection();
                 con.DeleteLeave(fullName, DateTime.Parse(startDate), DateTime.Parse(endDate));
 
-                //string successMessage = "Record has been deleted.";
-                //string script = $"<script>showSuccessAlert(\"{successMessage}\");</script>";
-                //ClientScript.RegisterStartupScript(GetType(), "ShowSuccessAlert", script);
-                //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Deleted Successfully')", true);
+                
                 BindGridView();
 
             }
             catch (Exception ex)
             {
-                //string errorMessage = "Failed to delete the record.";
-                //string script = $"<script>showWarningAlert(\"{errorMessage}\");</script>";
-                //ClientScript.RegisterStartupScript(GetType(), "ShowWarningAlert", script);
+                
 
                 Custom.ErrorHandle(ex, Response);
             }
@@ -180,9 +175,7 @@ namespace Layout_2._1
 
         protected void DeleteLeaveGridView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //String script = "$('#myModal6').modal('show')";
-            //ClientScriptManager.RegisterStartupScript(this.GetType(), "keepModalOpen", script,true);
-            // ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('.modal').modal('show');", true);
+            
             DeleteLeaveGridView.SelectedIndex = DeleteLeaveGridView.SelectedRow.RowIndex;
             ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal4').modal('show');", true);
         }
