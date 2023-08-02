@@ -191,7 +191,7 @@
                   
               <asp:Label ID="EmpName_profile" runat="server" Text="Profile" CssClass="mb-0 h5"></asp:Label>
               
-                       <asp:Image ID="Image1" runat="server" ImageUrl="profile.png" CssClass="profile-circle img-fluid" />
+                       <asp:Image ID="Image1" runat="server" ImageUrl="Profile.png" CssClass="profile-circle img-fluid" />
                     
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
