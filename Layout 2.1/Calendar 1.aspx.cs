@@ -336,6 +336,17 @@ namespace WebApplication1
                 DBConnection d = new DBConnection();
 
                 DataTable dt = d.GetUpcomingLeaves(currentDate, nextFriday);
+                dt.Columns.Add("FullName", typeof(string));
+
+                // Loop through each row and set the value for the "FullName" column
+                foreach (DataRow row in dt.Rows)
+                {
+                    string firstName = row["FirstName"].ToString();
+                    string lastName = row["LastName"].ToString();
+                    string fullName = $"{firstName} {lastName}";
+
+                    row["FullName"] = fullName;
+                }
                 //for (int i = 0; i < daysUntilNextMonday + 5; i++) 
                 //{
                 //    if (currentDate.DayOfWeek == DayOfWeek.Saturday || currentDate.DayOfWeek == DayOfWeek.Sunday)

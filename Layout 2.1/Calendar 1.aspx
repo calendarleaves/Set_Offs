@@ -124,7 +124,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container-fluid">
             
             <!-- Logo or Image on the Left -->
@@ -137,7 +137,7 @@
         </div>
              
             <!-- Dropdown on the Right -->
-            <ul class="navbar-nav flex-row  d-none d-md-flex  justify-content-end">
+            <ul class="navbar-nav flex-row d-none d-md-flex  justify-content-end">
             <li class="nav-item dropdown">
                 
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -162,7 +162,7 @@
                     <asp:Label ID="Label2" runat="server"   CssClass="ml-3 "></asp:Label>
                     <div class="dropdown-divider"></div>
                     <div class="text-right pr-2">
-                        <asp:Button ID="Button3" runat="server" OnClick="logout" Text="Logout" CssClass="AbsButton" Width="80px" Style="margin-top: 2px;"/>
+                        <asp:Button ID="Button3" runat="server" OnClick="logout" Text="Logout" CssClass="<%--AbsButton--%>btn btn-primary" Width="80px" Style="margin-top: 2px;"/>
                     </div>
                 </div>
             </li>
@@ -210,8 +210,9 @@
                         
                         <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" Width="97%" cssClass="Griedview2Style" BorderColor="White" BorderWidth="0px" >
                            <Columns>
-                               <asp:BoundField DataField="FirstName" Headertext="FirstName"/>
-                               <asp:BoundField DataField="LastName" Headertext="LastName"/>
+                               <%--<asp:BoundField DataField="FirstName" Headertext="FirstName"/>
+                               <asp:BoundField DataField="LastName" Headertext="LastName"/>--%>
+                                <asp:BoundField DataField="FullName" Headertext="Name"/>
                                 <asp:BoundField DataField="StartDate" Headertext="StartDate" /> 
                                <asp:BoundField DataField="EndDate" Headertext="EndDate" /> 
                
