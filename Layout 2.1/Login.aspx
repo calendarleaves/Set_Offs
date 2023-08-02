@@ -23,7 +23,14 @@
              <div class="col-md-8">
                     <div class="Images">
                        
-                        <asp:Image ID="Image1" src="images/flexur2.jpg" class=" img-fluid Flexur" runat="server" /><br />
+                      
+                        <div class="Flx">
+                        <asp:Image ID="Image1" src="images/flexur2.jpg" class=" img-fluid Flexur" runat="server" />
+                           
+                         <asp:Label class="H1" runat="server" Text="Leave Portal" ></asp:Label>
+
+                        </div>
+                          
 
 
                        <asp:Image ID="Image2" src="images/holiday.jpg" class=" img-fluid holiday" runat="server" />

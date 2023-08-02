@@ -64,6 +64,22 @@
     transform-origin: bottom right;
     animation: animate 6s linear infinite;
 }
+.H1 {
+    vertical-align: bottom;
+    margin-top: 70px;
+    height: 20px;
+    font-size: 40px;
+    font-weight: 600;
+    margin-left: 300px;
+    background-image: linear-gradient(to right, #553c9a 45%, #ee4b2b);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+.flx {
+    max-width: 100px;
+}
 
 @keyframes animate {
     0% {
