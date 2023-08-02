@@ -67,13 +67,13 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="314534-P8X7PS-657.jpg" />
     <Content Include="5259.jpg" />
     <Content Include="AbsencePageCSS.css" />
     <Content Include="AddLeave.aspx" />
     <Content Include="AddLeaveCss.css" />
     <Content Include="Add_Leave.ascx" />
     <Content Include="Add_Leave_User.ascx" />
-    <Content Include="CalendarStylesheet3.css" />
     <Content Include="CreateAbsence.css" />
     <Content Include="DeleteLeavePageStyleSheet.css" />
     <Content Include="Delete_Leave.ascx" />
@@ -95,7 +95,7 @@
     <Content Include="CalendarStylesheet2.css" />
     <Content Include="Create_Abs.aspx" />
     <Content Include="flexur2.jpg" />
-    <Content Include="LoginCSSboot1.css" />
+    <Content Include="LoginCSSboot.css" />
     <Content Include="Profile.png" />
     <Content Include="undraw_pic_profile_re_7g2h.svg" />
     <Content Include="Web.config" />
