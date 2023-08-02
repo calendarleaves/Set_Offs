@@ -49,8 +49,26 @@ namespace Layout_2._1
                 }
                 else
                 {
-                    if (UsernameTextBox.Text != "" && PasswordTextBox.Text != "")
+                  /*  if (UsernameTextBox.Text != "" && PasswordTextBox.Text != "")
                     { error.Text = "* Username or password is incorrect  "; }
+                    else { error.Text = ""; } */
+
+                    if (UsernameTextBox.Text == "" && PasswordTextBox.Text == "")
+                    {
+                        error.Text = "* Fill approprite data  ";
+                    }
+                    else if (UsernameTextBox.Text == "" && PasswordTextBox.Text != "")
+                    {
+                        error.Text = "* Fill Username  ";
+                    }
+                    else if (UsernameTextBox.Text != "" && PasswordTextBox.Text == "")
+                    {
+                        error.Text = "* Fill Password  ";
+                    }
+                    else if (UsernameTextBox.Text != "" && PasswordTextBox.Text != "")
+                    {
+                        error.Text = "* Username or password is incorrect  ";
+                    }
                     else { error.Text = ""; }
                 }
             }
