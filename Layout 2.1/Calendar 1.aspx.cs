@@ -66,14 +66,18 @@ namespace WebApplication1
                     
                         if (Session["ID"] != null && Session["ID"].ToString() == "admin@flexur.com")
                         {
+                        hiddenField.Value = "true";
                         Button1.Text = "Add Leave";
                         Button2.Visible = true;
                         Button2.Enabled = true;
                     }
                 }
 
+               
+
+
             }
-            catch(Exception ex) 
+            catch (Exception ex) 
             {
                 Custom.ErrorHandle(ex, Response,Context);
             }
@@ -184,6 +188,15 @@ namespace WebApplication1
            
             try
             {
+                //color code  starts
+                DateTime date = e.Day.Date; List<EmployeeLeave> employeeLeaves = d1.GetEmployeeLeave(date); int recordCount = employeeLeaves.Count;
+
+                if (recordCount > 0)
+                {
+                    e.Cell.ForeColor = System.Drawing.Color.Orange;
+                    e.Cell.CssClass = "colorCode1";
+                }
+                //color code  ends
                 if (e.Day.IsWeekend)
                 {
                     e.Day.IsSelectable = false;
@@ -194,6 +207,11 @@ namespace WebApplication1
                 {
                     e.Day.IsSelectable = false;
                 }
+                else if (e.Day.Date <= DateTime.Today && recordCount == 0)
+                {
+                    e.Cell.ForeColor = System.Drawing.Color.Green;
+                }
+
 
                 //code for holidays red colour-forEach{}
                 DBConnection db = new DBConnection();
@@ -226,7 +244,7 @@ namespace WebApplication1
                     e.Cell.ForeColor = System.Drawing.Color.Silver;
                 }
 
-                ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal4').modal('show');", true);
+               // ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal4').modal('show');", true);
 
             }
             catch (Exception ex)

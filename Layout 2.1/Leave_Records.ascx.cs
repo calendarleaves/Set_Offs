@@ -12,12 +12,14 @@ namespace Layout_2._1
 {
     public partial class Leave_Records : System.Web.UI.UserControl
     {
-        string usId = HttpContext.Current.Session["ID"].ToString();
+        //string usId;
+       string usId = HttpContext.Current.Session["ID"].ToString();
         protected void Page_Load(object sender, EventArgs e)
         {
             List<HolidayList> nextHolidays = LoadHolidays2();
             try
             {
+                //usId = HttpContext.Current.Session["ID"].ToString();
                 GridView4.DataSource = nextHolidays;
                 GridView4.DataBind();
             }
