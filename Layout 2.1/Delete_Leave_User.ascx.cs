@@ -1,5 +1,7 @@
-﻿using System;
+﻿using SetOffs1;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -12,80 +14,89 @@ namespace Layout_2._1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                BindGridView();
+            }
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        private void BindGridView()
         {
-            string connectionString = "Data Source=DESKTOP-45HGR8T;Initial Catalog=Setoffs;Integrated Security=True";
-
-            // Get the value from the text box
-            string nameValue = txtName.Text;
-
-            // Create the SQL query to insert the value into the table
-            string insertQuery = "INSERT INTO Trial1 (name) VALUES (@Name)";
-
             try
             {
-                // Create a new SqlConnection using the connection string
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                // string email = Session["ID"].ToString();
+
+                DataTable dt = new DataTable();
+                DBConnection con = new DBConnection();
+
+                Employee emp = new Employee();
+                emp = con.GetEmployee(Session["Id"] as string);
+                string name = emp.FirstName + " " + emp.LastName;
+                dt = con.GetAllEmployeesLeaveLikeName(name);
+
+                if (dt.Rows.Count == 0)
                 {
-                    // Open the connection
-                    connection.Open();
+                    DeleteLeaveGridView.DataSource = null;
+                    DeleteLeaveGridView.DataBind();
+                    lblmessage.Text = "No Records!";
 
-                    // Create a new SqlCommand with the query and the connection
-                    using (SqlCommand command = new SqlCommand(insertQuery, connection))
-                    {
-                        // Add a parameter to the command to avoid SQL injection
-                        command.Parameters.AddWithValue("@Name", nameValue);
-
-                        // Execute the query
-                        command.ExecuteNonQuery();
-                    }
                 }
-
-                // If the execution reaches here, the insertion was successful
-                // You can add any additional code or messages if needed
-                Response.Write("Data inserted successfully!");
+                else
+                {
+                    DeleteLeaveGridView.DataSource = dt;
+                    DeleteLeaveGridView.DataBind();
+                    lblmessage.Text = string.Empty;
+                    lblmessage.Visible = false;
+                }
             }
             catch (Exception ex)
             {
-                // Handle any exceptions that might occur during the database operation
-                // You can display an error message or log the exception details
-                Response.Write("An error occurred: " + ex.Message);
+                Custom.ErrorHandle(ex, Response);
             }
-
-            DateTime selectedDate = Calendar1.SelectedDate;
-
-            // Insert the selected date into the Trial1 table
-            InsertIntoTrial1(selectedDate);
-
-            // Optionally, close the modal pop-up after inserting the date
-            //PopupForm.Hide();
         }
-        private void InsertIntoTrial1(DateTime selectedDate)
+
+        protected void DeleteLeaveGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            // Implement your database connection and insert logic here.
-            // This is just a sample to demonstrate the concept.
-
-            // For simplicity, assume you are using SqlConnection and SqlCommand
-            string connectionString = "Data Source=DESKTOP-45HGR8T;Initial Catalog=Setoffs;Integrated Security=True";
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            try
             {
-                string insertQuery = "INSERT INTO Trial1 (Date) VALUES (@SelectedDate)";
-                SqlCommand command = new SqlCommand(insertQuery, connection);
-                command.Parameters.AddWithValue("@SelectedDate", selectedDate);
+                //int id = Convert.ToInt32(DeleteLeaveGridView.Rows[e.RowIndex].Cells[0].Text);
+                string fullName = DeleteLeaveGridView.Rows[e.RowIndex].Cells[1].Text + " " + DeleteLeaveGridView.Rows[e.RowIndex].Cells[2].Text;
+                string startDate = DeleteLeaveGridView.Rows[e.RowIndex].Cells[4].Text;
+                string endDate = DeleteLeaveGridView.Rows[e.RowIndex].Cells[5].Text;
 
-                try
+                DBConnection con = new DBConnection();
+                con.DeleteLeave(fullName, DateTime.Parse(startDate), DateTime.Parse(endDate));
+
+                BindGridView();
+            }
+            catch (Exception ex)
+            {
+                Custom.ErrorHandle(ex, Response);
+            }
+
+        }
+        protected void DeleteLeaveGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+
+                if (e.Row.RowIndex == DeleteLeaveGridView.SelectedIndex)
                 {
-                    connection.Open();
-                    command.ExecuteNonQuery();
+                    e.Row.CssClass = "selected-row";
                 }
-                catch (Exception ex)
+
+                DateTime StartDate = Convert.ToDateTime(e.Row.Cells[4].Text);
+
+                if (StartDate < DateTime.Today)
                 {
-                    // Handle the exception appropriately.
+                    Button btnDelete = e.Row.FindControl("btnDelete") as Button;
+                    btnDelete.Enabled = false;
                 }
             }
+        }
+        protected void DeleteLeaveGridView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DeleteLeaveGridView.SelectedIndex = DeleteLeaveGridView.SelectedRow.RowIndex;
         }
     }
 }

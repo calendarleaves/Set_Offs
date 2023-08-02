@@ -1,25 +1,8 @@
-﻿.container {
-    border: solid;
-    border-width: 1px;
-    align-items: center;
-    height: 600px;
-    justify-content: center;
-    padding: 8px;
-    margin-top: 20px;
-    align-content: center !important;
-    position: relative;
-}
-
-.refreshButton {
-    background-color: #e4e3e3;
-    border: 1px solid #808080;
-    height: 40px;
-    margin-right: 50px;
-}
-
+﻿
 .gridview-container {
-    max-height: 400px;
+    max-height: 450px !important;
     overflow-y: auto !important;
+    width: 700px !important;
 }
 
     .gridview-container th {
