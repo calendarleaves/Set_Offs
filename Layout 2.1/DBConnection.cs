@@ -301,7 +301,7 @@ namespace SetOffs1
             return dt;
         }
 
-        public DataTable GetUserLeaveRecords(string employeeId)
+        public DataTable GetUserLeaveRecords(string email)
         {
             DataTable dt = new DataTable();
 
@@ -324,10 +324,10 @@ namespace SetOffs1
             e.FirstName", con);
 
             // Construct date ranges for 1st July to 31st July of the current year
-            DateTime startDate = new DateTime(currentYear, 7, 1);
-            DateTime endDate = new DateTime(currentYear, 7, 31);
+            DateTime startDate = new DateTime(currentYear, 1, 1);
+            DateTime endDate = new DateTime(currentYear, 12, 31);
 
-            command.Parameters.AddWithValue("@EmployeeId", employeeId);
+            command.Parameters.AddWithValue("@EmployeeId", email);
             command.Parameters.AddWithValue("@StartDate", startDate);
             command.Parameters.AddWithValue("@EndDate", endDate);
 

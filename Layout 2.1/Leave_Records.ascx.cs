@@ -13,9 +13,10 @@ namespace Layout_2._1
     public partial class Leave_Records : System.Web.UI.UserControl
     {
         //string usId;
-       string usId = HttpContext.Current.Session["ID"].ToString();
+       //string usId = HttpContext.Current.Session["ID"].ToString();
         protected void Page_Load(object sender, EventArgs e)
         {
+            string usId = HttpContext.Current.Session["ID"].ToString();
             List<HolidayList> nextHolidays = LoadHolidays2();
             try
             {
