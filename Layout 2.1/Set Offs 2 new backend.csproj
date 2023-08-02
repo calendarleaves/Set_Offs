@@ -67,7 +67,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="314534-P8X7PS-657.jpg" />
     <Content Include="5259.jpg" />
+    <Content Include="Folder.png" />
     <Content Include="AbsencePageCSS1.css" />
     <Content Include="AbsencePageCSS.css" />
     <Content Include="AddLeave.aspx" />

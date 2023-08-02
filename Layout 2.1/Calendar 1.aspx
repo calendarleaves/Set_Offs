@@ -12,6 +12,7 @@
     <title>Calendar Page </title>
     <%--<link rel="stylesheet" type="text/css" href="CalendarStylesheet2.css" />--%>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link href="LoginCSSboot.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -180,18 +181,37 @@
 
         <div class="navbar-header d-md-flex ">
             <!-- Title in the Middle -->
-            <h1 class="navbar-item " style="margin-left: 100px;">Leave Portal</h1>
+            <h1 class="navbar-item" style="margin-left: 100px;background-image: linear-gradient(to right, #553c9a 45%, #ee4b2b);
+    color: transparent;-webkit-background-clip: text;">Leave Portal</h1>
         </div>
              
             <!-- Dropdown on the Right -->
-            <ul class="navbar-nav flex-row d-none d-md-flex  justify-content-end">
+            <ul class="navbar-nav flex-row  justify-content-end">
+                <li class=" d-none d-md-flex" style="margin-right: 20px;">
+                    <a class="nav-link" runat="server" href="#" id="holi" role="button" data-toggle="modal" data-target="#myModal" aria-haspopup="true" aria-expanded="false">
+                  
+              
+              
+                       <asp:Image ID="Image3" runat="server" ImageUrl="314534-P8X7PS-657.jpg" CssClass="profile-circle img-fluid" ToolTip="Holidays" />
+                    <uc:Holidays ID="Holidays" runat="server" />
+                </a>
+                    
+                      
+                </li >
+                <li class=" d-none d-md-flex" style="margin-right: 20px;">
+                    <a class="nav-link " runat="server" href="#" id="LeaveRecors" role="button" data-toggle="modal" data-target="#myModal2" aria-haspopup="true" aria-expanded="false">
+                  
+                       <asp:Image ID="Image4" runat="server" ImageUrl="Folder.png" CssClass="profile-circle img-fluid" ToolTip="Leave Records" />
+                     <uc:Leave_Records ID="Leave_Records" runat="server" />
+                </a>
+                </li>
             <li class="nav-item dropdown">
                 
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   
               <asp:Label ID="EmpName_profile" runat="server" Text="Profile" CssClass="mb-0 h5"></asp:Label>
               
-                       <asp:Image ID="Image1" runat="server" ImageUrl="Profile.png" CssClass="profile-circle img-fluid" />
+                       <asp:Image ID="Image1" runat="server" ImageUrl="Profile.png" CssClass="profile-circle img-fluid" ToolTip="Profile" />
                     
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -279,11 +299,7 @@
         <hr class="divider">
             <div class="container-fluid" style="display: flex; justify-content: flex-end; margin-right: 20px;">
               <asp:HiddenField ID="hiddenField" runat="server" Value="" />
-        <button type="button" class="btn btn-primary  popUpButtons" data-toggle="modal" data-target="#myModal">Holidays</button>     
-         <uc:Holidays ID="Holidays" runat="server" />
-
-        <button type="button" class="btn btn-primary  popUpButtons" data-toggle="modal" data-target="#myModal2">Leave Records</button>     
-		 <uc:Leave_Records ID="Leave_Records" runat="server" />
+       
                
                           <button type="button" id="AddUsrBtn" class="btn btn-primary  popUpButtons" data-toggle="modal" data-target="#myModal7">Add Leave User</button>     
       <uc:Add_Leave_User ID="Add_Leave_User" runat="server" />
