@@ -181,7 +181,7 @@
 
         <div class="navbar-header d-md-flex ">
             <!-- Title in the Middle -->
-            <h1 class="navbar-item" style="margin-left: 100px;background-image: linear-gradient(to right, #553c9a 45%, #ee4b2b);
+            <h1 class="navbar-item" style="margin-left: 230px;background-image: linear-gradient(to right, #553c9a 45%, #ee4b2b);
     color: transparent;-webkit-background-clip: text;">Leave Portal</h1>
         </div>
              
@@ -275,7 +275,7 @@
                         <h4 class="division-heading">Upcoming Leaves</h4>
                         <hr class="division-divider">
                         
-                        <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" Width="97%" cssClass="Griedview2Style" BorderColor="White" BorderWidth="0px" >
+                        <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" ShowHeaderWhenEmpty="True" Width="97%" cssClass="Griedview2Style" BorderColor="White" BorderWidth="0px" >
                            <Columns>
                                <%--<asp:BoundField DataField="FirstName" Headertext="FirstName"/>
                                <asp:BoundField DataField="LastName" Headertext="LastName"/>--%>
