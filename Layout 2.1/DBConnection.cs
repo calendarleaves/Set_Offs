@@ -539,7 +539,7 @@ namespace SetOffs1
                         leave.StartDate = reader.GetDateTime(2);
                         leave.EndDate = reader.GetDateTime(3);
                         leave.Comments = reader.GetString(reader.GetOrdinal("Designation"));
-                        leave.Days = reader.GetInt32(reader.GetOrdinal("Days"));
+                        leave.Days = reader.GetOrdinal("Days");
 
                     }
                 }
@@ -739,6 +739,6 @@ namespace SetOffs1
 
         public DateTime EndDate { get; set; } = DateTime.Now.AddDays(1);
         public string Comments { get; set; } = "NoComments";
-        public int Days { get; set; } = 0;
+        public float Days { get; set; } = 0;
     }
 }
