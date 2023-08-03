@@ -33,12 +33,12 @@ namespace Layout_2._1
         protected global::System.Web.UI.WebControls.Button Button1;
 
         /// <summary>
-        /// Calendar1 control.
+        /// Calendar3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar Calendar1;
+        protected global::System.Web.UI.WebControls.Calendar Calendar3;
     }
 }

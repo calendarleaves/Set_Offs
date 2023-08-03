@@ -61,19 +61,19 @@ namespace WebApplication1
                 }
                 // LoadHolidays();
                 LoadUpcomingleaves();
-                if (!IsPostBack)
-                {
-                    
-                        if (Session["ID"] != null && Session["ID"].ToString() == "admin@flexur.com")
-                        {
-                        hiddenField.Value = "true";
-                        Button1.Text = "Add Leave";
-                        Button2.Visible = true;
-                        Button2.Enabled = true;
-                    }
-                }
+                //if (!IsPostBack)
+                //{
 
-               
+                //    if (Session["ID"] != null && Session["ID"].ToString() == "admin@flexur.com")
+                //    {
+                //        hiddenField.Value = "true";
+                //        Button1.Text = "Add Leave";
+                //        Button2.Visible = true;
+                //        Button2.Enabled = true;
+                //    }
+                //}
+
+
 
 
             }
@@ -183,75 +183,77 @@ namespace WebApplication1
             }
         }
 
-        protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
-        {
+        //protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
+        //{
            
-            try
-            {
-                //color code  starts
-                DateTime date = e.Day.Date; List<EmployeeLeave> employeeLeaves = d1.GetEmployeeLeave(date); int recordCount = employeeLeaves.Count;
+        //    try
+        //    {
+        //        //color code  starts
+        //        DateTime date = e.Day.Date;
+        //        List<EmployeeLeave> employeeLeaves = d1.GetEmployeeLeave(date); 
+        //        int recordCount = employeeLeaves.Count;
 
-                if (recordCount > 0)
-                {
-                    e.Cell.ForeColor = System.Drawing.Color.Orange;
-                    e.Cell.CssClass = "colorCode1";
-                }
-                //color code  ends
-                if (e.Day.IsWeekend)
-                {
-                    e.Day.IsSelectable = false;
-                    e.Cell.ToolTip = "Chhuti hai bhai..";
+        //        if (recordCount > 0)
+        //        {
+        //            e.Cell.ForeColor = System.Drawing.Color.Orange;
+        //            e.Cell.CssClass = "colorCode1";
+        //        }
+        //        //color code  ends
+        //        if (e.Day.IsWeekend)
+        //        {
+        //            e.Day.IsSelectable = false;
+        //            e.Cell.ToolTip = "Chhuti hai bhai..";
 
-                }
-                else if (e.Day.IsOtherMonth)
-                {
-                    e.Day.IsSelectable = false;
-                }
-                else if (e.Day.Date <= DateTime.Today && recordCount == 0)
-                {
-                    e.Cell.ForeColor = System.Drawing.Color.Green;
-                }
+        //        }
+        //        else if (e.Day.IsOtherMonth)
+        //        {
+        //            e.Day.IsSelectable = false;
+        //        }
+        //        else if (e.Day.Date <= DateTime.Today && recordCount == 0)
+        //        {
+        //            e.Cell.ForeColor = System.Drawing.Color.Green;
+        //        }
 
 
-                //code for holidays red colour-forEach{}
-                DBConnection db = new DBConnection();
-                DataTable dt = db.GetAllHolidayDates();
-                foreach (DataRow row in dt.Rows)
-                {
-                    // Parse the date from the DataTable
-                    DateTime targetDate = Convert.ToDateTime(row["Date"]);
+        //        //code for holidays red colour-forEach{}
+        //        DBConnection db = new DBConnection();
+        //        DataTable dt = db.GetAllHolidayDates();
+        //        foreach (DataRow row in dt.Rows)
+        //        {
+        //            // Parse the date from the DataTable
+        //            DateTime targetDate = Convert.ToDateTime(row["Date"]);
 
-                    // Compare the date from the DataTable with the date being rendered on the Calendar
-                    if (e.Day.Date == targetDate)
-                    {
+        //            // Compare the date from the DataTable with the date being rendered on the Calendar
+        //            if (e.Day.Date == targetDate)
+        //            {
                        
                       
-                        e.Cell.ForeColor = System.Drawing.Color.Red;
-                        e.Day.IsSelectable = false;
-                        // e.Cell.ToolTip = "This is a holiday!";
-                    }
-                }
+        //                e.Cell.ForeColor = System.Drawing.Color.Red;
+        //                e.Day.IsSelectable = false;
+        //                // e.Cell.ToolTip = "This is a holiday!";
+        //            }
+        //        }
 
-                //code to show only this year dates
-                int currentYear = DateTime.Now.Year;
+        //        //code to show only this year dates
+        //        int currentYear = DateTime.Now.Year;
 
-                DateTime startDate = new DateTime(currentYear, 1, 1);
-                DateTime endDate = new DateTime(currentYear, 12, 31);
+        //        DateTime startDate = new DateTime(currentYear, 1, 1);
+        //        DateTime endDate = new DateTime(currentYear, 12, 31);
 
-                if (e.Day.Date < startDate || e.Day.Date > endDate)
-                {
-                    e.Day.IsSelectable = false;
-                    e.Cell.ForeColor = System.Drawing.Color.Silver;
-                }
+        //        if (e.Day.Date < startDate || e.Day.Date > endDate)
+        //        {
+        //            e.Day.IsSelectable = false;
+        //            e.Cell.ForeColor = System.Drawing.Color.Silver;
+        //        }
 
-               // ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal4').modal('show');", true);
+               
 
-            }
-            catch (Exception ex)
-            {
-                Custom.ErrorHandle(ex, Response);
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Custom.ErrorHandle(ex, Response);
+        //    }
+        //}
 
         protected void Calendar1_VisibleMonthChanged(object sender, MonthChangedEventArgs e)
         {
@@ -267,6 +269,8 @@ namespace WebApplication1
                 {
                     GridView1.DataSource = null; //  else Clear the data source
                     GridView1.DataBind();
+
+                    
                 }
             }
             catch (Exception ex)
@@ -275,36 +279,36 @@ namespace WebApplication1
             }
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (Session["ID"] != null && Session["ID"].ToString() == "admin@flexur.com")
-                {
-                    Server.Transfer("AddLeave.aspx");
-                }
-                else
-                {
-                    Server.Transfer("Create_Abs.aspx");
-                }
-            }
-            catch (Exception ex)
-            {
-                Custom.ErrorHandle(ex, Response);
-            }
-        }
-        protected void Button2_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Server.Transfer("DeleteLeavePage.aspx");
-            }
-            catch (Exception ex)
-            {
-                Custom.ErrorHandle(ex, Response);
-            }
+        //protected void Button1_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (Session["ID"] != null && Session["ID"].ToString() == "admin@flexur.com")
+        //        {
+        //            Server.Transfer("AddLeave.aspx");
+        //        }
+        //        else
+        //        {
+        //            Server.Transfer("Create_Abs.aspx");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Custom.ErrorHandle(ex, Response);
+        //    }
+        //}
+        //protected void Button2_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        Server.Transfer("DeleteLeavePage.aspx");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Custom.ErrorHandle(ex, Response);
+        //    }
 
-        }
+        //}
         protected void logout(object sender, EventArgs e)
         {
             Session["ID"] = null;

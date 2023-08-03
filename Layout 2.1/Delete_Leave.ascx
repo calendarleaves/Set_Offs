@@ -37,6 +37,11 @@
     .selected-row{
         background-color:skyblue;
     }
+    .gridview-container {
+    max-height: 450px !important;
+    overflow-y: auto !important;
+    width: 700px !important;
+}
 </style>
 
 
@@ -70,8 +75,8 @@
 					</div>
 					<!--Gridview Container  -->
 					<div class="col-lg-10 offset-lg-1 mt-3 text-center">
-						<div class="gridview-container">
-							<asp:GridView ID="DeleteLeaveGridView" runat="server" AutoGenerateColumns="false" CssClass="table" OnRowDeleting="DeleteLeaveGridView_RowDeleting" DataKeyNames="Id" OnRowDataBound="DeleteLeaveGridView_RowDataBound" OnSelectedIndexChanged="DeleteLeaveGridView_SelectedIndexChanged">
+						<div class="gridview-container" style="height:400px;">
+							<asp:GridView ID="DeleteLeaveGridView" runat="server" AutoGenerateColumns="false" CssClass="table"  OnRowDeleting="DeleteLeaveGridView_RowDeleting" DataKeyNames="Id" OnRowDataBound="DeleteLeaveGridView_RowDataBound" OnSelectedIndexChanged="DeleteLeaveGridView_SelectedIndexChanged">
 								<Columns>
 									<asp:BoundField DataField="Id" HeaderText="Emp ID"/>
 									<asp:BoundField DataField="FirstName" HeaderText="First Name"/>
@@ -82,8 +87,8 @@
 									<asp:BoundField DataField="Days" HeaderText="Total Days"/>
 									<asp:TemplateField HeaderText="Action">
 										<ItemTemplate>
-											<asp:Button CommandName="Delete" runat="server" CssClass="btn btn-danger" Text="Delete"
-                                            OnClientClick="return confirm('Are you sure you want to delete this entry?');"/>
+											<asp:Button CommandName="Delete" runat="server" CssClass="btn btn-danger" Text="Delete" />
+                                          
                                         </ItemTemplate>
 									</asp:TemplateField>
 								</Columns>

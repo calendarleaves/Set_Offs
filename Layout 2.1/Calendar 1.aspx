@@ -126,7 +126,7 @@
      <script>
          window.onload = function () {
 
-             var Hfield = "";
+             var Hfield = "true";
              if (Hfield == "true") {
                  ButnVis();
              }
@@ -150,7 +150,7 @@
              var DltAdmnBtn1 = document.getElementById("DltAdmnBtn");
              DltAdmnBtn1.style.display = "none";
          }
-     function showAdd_Leave() {
+     <%--function showAdd_Leave() {
          // Show the modal dialog
          $('#<%= Add_Leave.ClientID %>').modal('show');
          }
@@ -165,7 +165,7 @@
          function showDelete_Leave_User() {
              // Show the modal dialog
              $('#<%= Delete_Leave_User.ClientID %>').modal('show');
-          }
+          }--%>
      </script>
 </head>
 <body>
@@ -223,7 +223,7 @@
             <div class="row">
             
         <div class="col-lg-8 col-md-12 calendar-container">
-            <asp:Calendar ID="Calendar1" runat="server" Height="500px" Width="100%" CssClass="CalendarCss" OnSelectionChanged="Calendar1_SelectionChanged" CellSpacing="2" Font-Bold="True" Font-Size="Large" OnDayRender="Calendar1_DayRender" OnVisibleMonthChanged="Calendar1_VisibleMonthChanged" NextMonthText="Next &gt;" PrevMonthText="&lt; Previous" BorderColor="White" FirstDayOfWeek="Monday">
+            <asp:Calendar ID="Calendar1" runat="server" Height="500px" Width="100%" CssClass="CalendarCss" OnSelectionChanged="Calendar1_SelectionChanged" CellSpacing="2" Font-Bold="True" Font-Size="Large"  OnVisibleMonthChanged="Calendar1_VisibleMonthChanged" NextMonthText="Next &gt;" PrevMonthText="&lt; Previous" BorderColor="White" FirstDayOfWeek="Monday">
             <DayHeaderStyle BorderColor="White" BorderWidth="1px" Font-Bold="True" HorizontalAlign="Center" VerticalAlign="Middle" CssClass="DayHeader" />
             <DayStyle ForeColor="Black" HorizontalAlign="Center" CssClass="CalendarDay" BorderColor="#FFFFCC" BorderWidth="0px" />
             <NextPrevStyle BackColor="White" ForeColor="Black" Font-Bold="True" Font-Overline="False"  Font-Underline="False" />
@@ -271,10 +271,10 @@
 
             </div></div>
        <hr class="divider">
-    <div class="container-fluid" style="display: flex; justify-content: flex-end; margin-right: 20px;">
+   <%-- <div class="container-fluid" style="display: flex; justify-content: flex-end; margin-right: 20px;">
           <asp:Button ID="Button2" cssClass="AbsButton" runat="server" Text="Delete Leave"  onClick="Button2_Click" Height:25px Visible="false" Enabled="false"/>
         <asp:Button ID="Button1" CssClass="AbsButton" runat="server" Text="Create Absence"  OnClick="Button1_Click" Height:25px/>
-      </div>
+      </div>--%>
         <hr class="divider">
             <div class="container-fluid" style="display: flex; justify-content: flex-end; margin-right: 20px;">
               <asp:HiddenField ID="hiddenField" runat="server" Value="" />

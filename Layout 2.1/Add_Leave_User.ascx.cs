@@ -55,7 +55,7 @@ namespace Layout_2._1
                 Response.Write("An error occurred: " + ex.Message);
             }
 
-            DateTime selectedDate = Calendar1.SelectedDate;
+            DateTime selectedDate = Calendar2.SelectedDate;
 
             // Insert the selected date into the Trial1 table
             InsertIntoTrial1(selectedDate);

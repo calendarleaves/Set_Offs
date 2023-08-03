@@ -3,15 +3,15 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-KyZXEAgltcdPwqR5gKkxzWfod5oMh4PrpQmYfjELVYg=" crossorigin="anonymous"></script>
 
 <!-- Place this script block after adding the jQuery library -->
-<script>
+<%--<script>
     $(document).ready(function () {
         // When a date is clicked in the calendar, prevent the default postback behavior
-        $('#<%= Calendar1.ClientID %> td:not(.ajax__calendar_other)').on('click', function (e) {
+        $('#<%= Calendar2.ClientID %> td:not(.ajax__calendar_other)').on('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
         });
     });
-</script>
+</script>--%>
 
 <div class="modal" id="myModal7">
     <div class="modal-dialog">
@@ -29,7 +29,7 @@
                 <!-- Add other form elements here -->
                 <asp:Button ID="Button1" runat="server" Text="Add" OnClick="Button1_Click" />
             </div>
-            <asp:Calendar ID="Calendar1" CssClass="calendarView" DayNameFormat="FirstLetter"     runat="server" BackColor="white"   CellPadding="4" 
+            <asp:Calendar ID="Calendar2" CssClass="calendarView" DayNameFormat="FirstLetter"     runat="server" BackColor="white"   CellPadding="4" 
       BorderColor="#999999" Font-Names="Verdana" Font-Size="8pt" 
       Height="180px" ForeColor="Black" 
       Width="200px" >
