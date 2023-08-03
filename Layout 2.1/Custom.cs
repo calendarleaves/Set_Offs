@@ -31,7 +31,7 @@ namespace Layout_2._1
 
             //Set the response status code
             
-            Response.StatusCode = statusCode;
+            //Response.StatusCode = statusCode;
 
             // Redirect to the corresponding error page based on the status code
             switch (statusCode)
@@ -73,7 +73,7 @@ namespace Layout_2._1
 
             //Set the response status code
 
-            Response.StatusCode = statusCode;
+            //Response.StatusCode = statusCode;
 
             // Redirect to the corresponding error page based on the status code
             switch (statusCode)

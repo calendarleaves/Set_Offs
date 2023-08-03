@@ -16,7 +16,11 @@ namespace Layout_2._1
        //string usId = HttpContext.Current.Session["ID"].ToString();
         protected void Page_Load(object sender, EventArgs e)
         {
-            string usId = HttpContext.Current.Session["ID"].ToString();
+            string usId="";
+            if (Session["ID"] != null)
+            {
+                usId = HttpContext.Current.Session["ID"].ToString();
+            }
             List<HolidayList> nextHolidays = LoadHolidays2();
             try
             {

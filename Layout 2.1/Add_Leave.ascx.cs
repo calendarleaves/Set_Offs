@@ -141,7 +141,7 @@ namespace Layout_2._1
                     l.LeaveType = Drop.SelectedValue;
                     l.StartDate = Calendar1.SelectedDate;
                     l.EndDate = Calendar2.SelectedDate;
-                    l.Days = Int16.Parse(Total_Days.Text);
+                    l.Days = float.Parse(Total_Days.Text);
                     l.Comments = comment.Text;
 
                     DBConnection s = new DBConnection();
@@ -218,9 +218,7 @@ namespace Layout_2._1
                 {
                     Total_Days.Text = "0.5";
 
-                    float floatValue = float.Parse(Total_Days.Text); // Convert the string to a floating-point number
-                    int intValue = (int)floatValue;    // Cast the floating-point number to an integer
-                    Total_Days.Text = intValue.ToString();
+                    
                 }
                 else
                 {
