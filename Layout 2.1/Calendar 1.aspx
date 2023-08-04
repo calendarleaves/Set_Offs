@@ -217,7 +217,8 @@
                 <li class=" d-none d-md-flex" style="margin-right: 20px;">
                     <a class="nav-link " runat="server" href="#" id="LeaveRecors" role="button" data-toggle="modal" data-target="#myModal2" aria-haspopup="true" aria-expanded="false">
                   
-                       <asp:Image ID="Image4" runat="server" ImageUrl="Folder.png" CssClass="profile-circle img-fluid" ToolTip="Leave Records" />
+                      <asp:Image ID="Image4" runat="server" ImageUrl="Folder.png" CssClass="profile-circle img-fluid" ToolTip="Leave Records" />
+                       
                      <uc:Leave_Records ID="Leave_Records" runat="server" />
                 </a>
                 </li>
@@ -245,7 +246,7 @@
                     <asp:Label ID="Label2" runat="server"   CssClass="ml-3 "></asp:Label>
                     <div class="dropdown-divider"></div>
                     <div class="text-right pr-2">
-                        <asp:Button ID="Button3" runat="server" OnClick="logout" Text="Logout" CssClass="<%--AbsButton--%>btn btn-primary" Width="80px" Style="margin-top: 2px;"/>
+                        <asp:Button ID="Button3" runat="server" OnClick="logout" Text="Logout" CssClass="<%--AbsButton--%>btn btn-primary popUpButtons" Width="80px" Style="margin-top: 2px;"/>
                     </div>
                 </div>
             </li>
@@ -279,7 +280,7 @@
       <asp:GridView ID="GridView1" runat="server"   CssClass="GridViewStyle" RowStyle-CssClass="CustomRowStyle"
             AutoGenerateColumns="False" ShowHeaderWhenEmpty="True" Width="97%" BorderColor="White" BorderWidth="0px">
             <Columns>
-                <asp:BoundField DataField="FirstName" Headertext="On Leave" />                     
+                <asp:BoundField DataField="Name" Headertext="On Leave" />                     
                <asp:BoundField DataField="LeaveType" Headertext="Leave Type"/>
             </Columns>      
             <EditRowStyle Height="50px" />
