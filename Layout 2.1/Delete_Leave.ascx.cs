@@ -112,33 +112,7 @@ namespace Layout_2._1
            ScriptManager.RegisterStartupScript(this,GetType(), "Popup", "$('#myModal4').modal('show')", true);
         }
 
-        protected void DeleteLeaveGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-
-            try
-            {
-
-                
-                string fullName = DeleteLeaveGridView.Rows[e.RowIndex].Cells[1].Text + " " + DeleteLeaveGridView.Rows[e.RowIndex].Cells[2].Text;
-                string startDate = DeleteLeaveGridView.Rows[e.RowIndex].Cells[4].Text;
-                string endDate = DeleteLeaveGridView.Rows[e.RowIndex].Cells[5].Text;
-
-                DBConnection con = new DBConnection();
-                con.DeleteLeave(fullName, DateTime.Parse(startDate), DateTime.Parse(endDate));
-
-                
-                BindGridView();
-
-            }
-            catch (Exception ex)
-            {
-                
-
-                Custom.ErrorHandle(ex, Response);
-            }
-           
-            ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "$('#myModal4').modal('show')", true);
-        }
+        
 
         protected void btnRefresh_Click(object sender, EventArgs e)
         {
@@ -185,8 +159,16 @@ namespace Layout_2._1
              ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal4').modal('show');", true);
         }
 
+        protected void DeleteLeaveGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            string fullName = DeleteLeaveGridView.Rows[e.RowIndex].Cells[1].Text + " " + DeleteLeaveGridView.Rows[e.RowIndex].Cells[2].Text;
+            string startDate = DeleteLeaveGridView.Rows[e.RowIndex].Cells[4].Text;
+            string endDate = DeleteLeaveGridView.Rows[e.RowIndex].Cells[5].Text;
 
+            DBConnection con = new DBConnection();
+            con.DeleteLeave(fullName, DateTime.Parse(startDate), DateTime.Parse(endDate));
 
-
+            BindGridView();
+        }
     }
 }

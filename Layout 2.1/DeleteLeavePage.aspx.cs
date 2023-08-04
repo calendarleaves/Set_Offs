@@ -147,6 +147,16 @@ namespace Layout_2._1
 
         }
 
-
+        protected void btnClose_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Server.Transfer("Calendar 1.aspx");
+            }
+            catch (Exception ex)
+            {
+                Custom.ErrorHandle(ex, Response);
+            }
+        }
     }
 }

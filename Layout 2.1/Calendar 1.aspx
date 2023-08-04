@@ -171,6 +171,13 @@
              // Show the modal dialog
              $('#<%= Test_Delete_Leave.ClientID %>').modal('show');
           }--%>
+
+
+            
+
+
+
+
      </script>
 </head>
 <body>
@@ -300,6 +307,9 @@
     <div class="container-fluid" style="display: flex; justify-content: flex-end; margin-right: 20px;">
           <asp:Button ID="Button2" cssClass="popUpButtons" runat="server" Text="Delete Leave"  onClick="Button2_Click" Height:25px Visible="true" Enabled="true"/>
         <asp:Button ID="Button1" CssClass="popUpButtons" runat="server" Text="Create Absence"  OnClick="Button1_Click" Height:25px/>
+       
+
+
       </div>
         <hr class="divider">
             <div class="container-fluid" style="display: flex; justify-content: flex-end; margin-right: 20px;">
