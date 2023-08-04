@@ -99,7 +99,7 @@ namespace Layout_2._1
                 if (DropDownList1.SelectedValue == "--Select Employee--")
 
                 {
-                    DropdownlistError.Text = "leave";
+                    DropdownlistError.Text = "* Please select Employee";
                     DropDownList1.Focus();
 
                 }

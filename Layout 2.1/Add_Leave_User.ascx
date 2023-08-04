@@ -140,7 +140,9 @@
                    <!--     <asp:TextBox ID="Total_Days1"  ReadOnly="true" runat="server" type="text" placeholder="" class="form-control text2"  OnGotFocus="focusforpass" style="max-height:30px" ></asp:TextBox>-->
             <br />
 
-             <asp:Label class="comment" ID="Lable1" runat="server" Text="Comment :" ></asp:Label><br />
+             <asp:Label class="comment" ID="Lable1" runat="server" Text="Reason :" ></asp:Label>
+                 <asp:Label ID="Label2" runat="server" class=" form-label"  Text="Label" ForeColor="#FF3300">*</asp:Label><br />
+
        <!--      <asp:TextBox ID="TextBox1" cssclass="text2" runat="server" TextMode="MultiLine"  Rows="4" Font-Size="Medium" class="form-control" style="max-width:300px; max-height:50px" OnGotFocus="focusforpass"></asp:TextBox>  <br /><br />-->
                  <asp:TextBox ID="comment" runat="server" type="text" placeholder="Enter here" class="form-control text2" TextMode="MultiLine"  Rows="4" Font-Size="Medium"  OnGotFocus="focusforpass"></asp:TextBox> 
                  <asp:Label class="error" ID="commentError" runat="server" Text="" ></asp:Label><br /><br />
