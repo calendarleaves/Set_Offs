@@ -191,7 +191,7 @@ namespace WebApplication1
                 //color code  starts
                 DateTime date = e.Day.Date; List<EmployeeLeave> employeeLeaves = d1.GetEmployeeLeave(date); int recordCount = employeeLeaves.Count;
 
-                if (recordCount > 0 && !e.Day.IsWeekend)
+                if (recordCount > 0 && !e.Day.IsWeekend && !e.Day.IsOtherMonth)
                 {
                     e.Cell.ForeColor = System.Drawing.Color.Orange;
                     e.Cell.CssClass = "colorCode1";
