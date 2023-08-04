@@ -98,15 +98,14 @@ namespace Layout_2._1
                 {
                     Total_Days.Text = "0.5";
 
-                    float floatValue = float.Parse(Total_Days.Text); // Convert the string to a floating-point number
-                    int intValue = (int)floatValue;    // Cast the floating-point number to an integer
-                    Total_Days.Text = intValue.ToString();
+
                 }
                 else
                 {
                     int n = Int16.Parse(m) + 1 - weekoff - holidaysCount;
                     Total_Days.Text = n.ToString();
                 }
+
 
 
 
@@ -165,7 +164,14 @@ namespace Layout_2._1
         protected void Calendar1_SelectionChanged(object sender, EventArgs e)
         {
 
+
             from.Text = Calendar1.SelectedDate.ToString("dd/MM/yy");
+
+            if (Drop.SelectedValue == "First Half " || Drop.SelectedValue == "Second Half")
+            {
+                To.Text = from.Text;
+            }
+
             Calendar1.Visible = false;
             totalDays();
             ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal7').modal('show');", true);
@@ -223,8 +229,20 @@ namespace Layout_2._1
                     l.EmpId = emp.Id;
                     l.LeaveType = Drop.SelectedValue;
                     l.StartDate = Calendar1.SelectedDate;
-                    l.EndDate = Calendar2.SelectedDate;
-                    l.Days = Int16.Parse(Total_Days.Text);
+
+
+                    if (Drop.SelectedValue == "First Half " || Drop.SelectedValue == "Second Half")
+
+                    {
+                        l.EndDate = Calendar1.SelectedDate;
+
+
+                    }
+                    else
+                    {
+                        l.EndDate = Calendar2.SelectedDate;
+                    }
+                    l.Days = float.Parse(Total_Days.Text);
                     l.Comments = comment.Text;
 
 
