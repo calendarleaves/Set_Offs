@@ -279,7 +279,7 @@
       <asp:GridView ID="GridView1" runat="server"   CssClass="GridViewStyle" RowStyle-CssClass="CustomRowStyle"
             AutoGenerateColumns="False" ShowHeaderWhenEmpty="True" Width="97%" BorderColor="White" BorderWidth="0px">
             <Columns>
-                <asp:BoundField DataField="FirstName" Headertext="On Leave" />                     
+                <asp:BoundField DataField="Name" Headertext="On Leave" />                     
                <asp:BoundField DataField="LeaveType" Headertext="Leave Type"/>
             </Columns>      
             <EditRowStyle Height="50px" />
