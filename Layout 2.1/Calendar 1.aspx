@@ -217,8 +217,8 @@
                 <li class=" d-none d-md-flex" style="margin-right: 20px;">
                     <a class="nav-link " runat="server" href="#" id="LeaveRecors" role="button" data-toggle="modal" data-target="#myModal2" aria-haspopup="true" aria-expanded="false">
                   
-                       <%--<asp:Image ID="Image4" runat="server" ImageUrl="Folder.png" CssClass="profile-circle img-fluid" ToolTip="Leave Records" />--%>
-                        <i class="bi bi-airplane-engines"></i>
+                      <asp:Image ID="Image4" runat="server" ImageUrl="Folder.png" CssClass="profile-circle img-fluid" ToolTip="Leave Records" />
+                       
                      <uc:Leave_Records ID="Leave_Records" runat="server" />
                 </a>
                 </li>
