@@ -1,7 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Add_Leave_User.ascx.cs" Inherits="Layout_2._1.Add_Leave_User" %>
 
+ 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-KyZXEAgltcdPwqR5gKkxzWfod5oMh4PrpQmYfjELVYg=" crossorigin="anonymous"></script>
-
+<link href="AddLeaveForAdmin.css" rel="stylesheet" />
 <!-- Place this script block after adding the jQuery library -->
 <script>
 
@@ -44,7 +45,7 @@
     });
 
 </script>
-<link href="AddLeaveCss.css" rel="stylesheet" />
+
 <div class="modal" id="myModal7">
     <div class="modal-dialog">
         <div class="modal-content" style="height:650px; width:600px">
@@ -139,9 +140,11 @@
                    <!--     <asp:TextBox ID="Total_Days1"  ReadOnly="true" runat="server" type="text" placeholder="" class="form-control text2"  OnGotFocus="focusforpass" style="max-height:30px" ></asp:TextBox>-->
             <br />
 
-             <asp:Label class="comment" ID="Lable1" runat="server" Text="Comment :" ></asp:Label><br />
+             <asp:Label class="comment" ID="Lable1" runat="server" Text="Reason :" ></asp:Label>
+                 <asp:Label ID="Label2" runat="server" class=" form-label"  Text="Label" ForeColor="#FF3300">*</asp:Label><br />
+
        <!--      <asp:TextBox ID="TextBox1" cssclass="text2" runat="server" TextMode="MultiLine"  Rows="4" Font-Size="Medium" class="form-control" style="max-width:300px; max-height:50px" OnGotFocus="focusforpass"></asp:TextBox>  <br /><br />-->
-                 <asp:TextBox ID="comment" runat="server" type="text" placeholder="text" class="form-control text2" TextMode="MultiLine"  Rows="4" Font-Size="Medium"  OnGotFocus="focusforpass"></asp:TextBox> 
+                 <asp:TextBox ID="comment" runat="server" type="text" placeholder="Enter here" class="form-control text2" TextMode="MultiLine"  Rows="4" Font-Size="Medium"  OnGotFocus="focusforpass"></asp:TextBox> 
                  <asp:Label class="error" ID="commentError" runat="server" Text="" ></asp:Label><br /><br />
 
              <asp:Button CssClass ="submit" runat="server"  Text="Submit" OnClick="Submit_click"  />

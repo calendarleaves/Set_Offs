@@ -4,10 +4,10 @@
     <div class="modal-dialog">
     
    
-      <div class="modal-content">
+      <div class="modal-content" style="max-height:650px; width:600px; overflow-y:auto">
 
         <div class="modal-header">
-             <h4 class="modal-title">Upcoming Holidays</h4>
+             <h4 class="modal-title" style="margin-left:180px;">Upcoming Holidays</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
 
@@ -20,6 +20,7 @@
             </Columns>      
             <EditRowStyle Height="50px" />
                         </asp:GridView>
+             <asp:Label ID="InfoMsg" runat="server" Font-Bold="true" display="flex"></asp:Label>
         </div>
 
         <div class="modal-footer">

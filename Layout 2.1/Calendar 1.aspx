@@ -128,6 +128,7 @@
          window.onload = function () {
 
              var Hfield = document.getElementById('<%= hiddenField.ClientID %>').value;
+              
              if (Hfield == "true") {
                  ButnVis();
              }
@@ -143,6 +144,9 @@
 
              var DltUsrBtn1 = document.getElementById("DltUsrBtn");
              DltUsrBtn1.style.display = "none";
+
+              var DltAdmnBtn2 = document.getElementById("DltAdmnBtn");
+             DltAdmnBtn2.style.display = "none";
          }
          function ButnVis1() {
              var AddAdmnBtn1 = document.getElementById("AddAdmnBtn");
@@ -171,6 +175,13 @@
              // Show the modal dialog
              $('#<%= Test_Delete_Leave.ClientID %>').modal('show');
           }--%>
+
+
+            
+
+
+
+
      </script>
 </head>
 <body>
@@ -297,11 +308,11 @@
    </div> </div></div>
 
            
-       <hr class="divider">
+       <!--<hr class="divider">
     <div class="container-fluid" style="display: flex; justify-content: flex-end; margin-right: 20px;">
           <asp:Button ID="Button2" cssClass="popUpButtons" runat="server" Text="Delete Leave"  onClick="Button2_Click" Height:25px Visible="true" Enabled="true"/>
         <asp:Button ID="Button1" CssClass="popUpButtons" runat="server" Text="Create Absence"  OnClick="Button1_Click" Height:25px/>
-      </div>
+      </div>-->
         <hr class="divider">
             <div class="container-fluid" style="display: flex; justify-content: flex-end; margin-right: 20px;">
               <asp:HiddenField ID="hiddenField" runat="server" Value="" />
@@ -316,8 +327,10 @@
                 <button type="button" id="DltUsrBtn" class="btn btn-primary  popUpButtons" data-toggle="modal" data-target="#myModal8">Delete Leave User</button>     
 	 <uc:Delete_Leave_User ID="Delete_Leave_User" runat="server" />
 
-                <button type="button" id="DltAdmnBtn" class="btn btn-primary  popUpButtons" data-toggle="modal" data-target="#myModal4">Delete Leave</button>     
+                <button type="button" id="DltAdmnBtn" class="btn btn-primary  popUpButtons" data-toggle="modal" data-target="#myModal4">Delete Leave pop up</button>     
 	 <uc:Delete_Leave ID="Delete_Leave" runat="server" />
+                <asp:Button ID="DltAdmnBtn2" cssClass="popUpButtons" runat="server" Text="Delete Leave"  onClick="Button2_Click" Height:25px Visible="false" Enabled="false"/>
+     
                 
                <%-- <%--<button type="button" id="DeleteLeaveBtn" class="btn btn-primary popUpButtons" data-toggle="modal" data-target="DeleteLeaveModal">Test Delete Popup</button>
                 <uc:Test_Delete_Leave ID="Test_Delete_Leave" runat="server"></uc:Test_Delete_Leave>--%>

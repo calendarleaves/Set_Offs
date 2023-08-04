@@ -21,54 +21,52 @@ namespace Layout_2._1
             {
                 usId = HttpContext.Current.Session["ID"].ToString();
             }
-            List<HolidayList> nextHolidays = LoadHolidays2();
-            try
-            {
-                //usId = HttpContext.Current.Session["ID"].ToString();
-                GridView4.DataSource = nextHolidays;
-                GridView4.DataBind();
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-
+          
             DBConnection d = new DBConnection();
             DataTable dt = new DataTable();
             if (usId == "admin@flexur.com")
             {
                  dt = d.GetAllLeaveRecords();
-                GridView4.DataSource = dt;
-                GridView4.DataBind();
+
+                if (dt.Rows.Count == 0)
+                {
+                    GridView4.DataSource = null;
+                    GridView4.DataBind();
+                    lblMsg.Text = "No Records!";
+
+                }
+                else
+                {
+                    GridView4.DataSource = dt;
+                    GridView4.DataBind();
+                    lblMsg.Text = string.Empty;
+                    lblMsg.Visible = false;
+                }
+                            
                 
             }
             else {
                  dt = d.GetUserLeaveRecords(usId);
-                GridView4.DataSource = dt;
-                GridView4.DataBind();
-                GridView4.Columns[0].Visible = false;
-            }
 
-            
-           
+                if (dt.Rows.Count == 0)
+                {
+                    GridView4.DataSource = null;
+                    GridView4.DataBind();
+                    lblMsg.Text = "No Records!";
+
+                }
+                else
+                {
+                    GridView4.DataSource = dt;
+                    GridView4.DataBind();
+                    GridView4.Columns[0].Visible = false;
+                    lblMsg.Text = string.Empty;
+                    lblMsg.Visible = false;
+                }
+                         
+            }
+                      
         }
-        private List<HolidayList> LoadHolidays2() // this will load next Holidays
-        {
-            try
-            {
-                DateTime today = DateTime.Today;
-                DBConnection d = new DBConnection();
-                List<HolidayList> nextHolidays = d.GetUpcomingHolidays(today);
-
-                return nextHolidays;
-
-            }
-            catch (Exception ex)
-            {
-                Custom.ErrorHandle(ex, Response);
-                return new List<HolidayList>();
-            }
-        }
+        
     }
 }
