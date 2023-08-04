@@ -297,7 +297,11 @@ namespace WebApplication1
         {
             try
             {
-                Server.Transfer("DeleteLeavePage.aspx");
+                if (Session["ID"] != null && Session["ID"].ToString() == "admin@flexur.com")
+                {
+                    Server.Transfer("DeleteLeavePage.aspx");
+                }
+               
             }
             catch (Exception ex)
             {
