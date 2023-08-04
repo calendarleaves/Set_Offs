@@ -76,7 +76,7 @@
 					<!--Gridview Container  -->
 					<div class="col-lg-10 offset-lg-1 mt-3 text-center">
 						<div class="gridview-container">
-							<asp:GridView ID="DeleteLeaveGridView" runat="server" AutoGenerateColumns="false" CssClass="table" OnRowDeleting="DeleteLeaveGridView_RowDeleting" DataKeyNames="Id" OnRowDataBound="DeleteLeaveGridView_RowDataBound" OnSelectedIndexChanged="DeleteLeaveGridView_SelectedIndexChanged">
+							<asp:GridView ID="DeleteLeaveGridView" runat="server" AutoGenerateColumns="false" CssClass="table" OnRowDeleting="DeleteLeaveGridView_RowDeleting"  DataKeyNames="Id"  OnSelectedIndexChanged="DeleteLeaveGridView_SelectedIndexChanged">
 								<Columns>
 									<asp:BoundField DataField="Id" HeaderText="Emp ID"/>
 									<asp:BoundField DataField="FirstName" HeaderText="First Name"/>
