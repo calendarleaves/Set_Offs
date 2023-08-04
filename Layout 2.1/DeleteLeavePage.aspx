@@ -3,20 +3,81 @@
 
 
 
-!DOCTYPE html>
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Delete Leave</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="DeleteleavePageStyleSheet.css" />
- 
+ <style>
+     .container {
+         border: 1px solid;
+         align-items: center;
+         height: 570px;
+         justify-content: center;
+         padding: 10px 15px 10px 15px;
+         margin-top: 10px;
+         align-content: center !important;
+         position: relative;
+         background-color: white;
+         width: 930px;
+     }
+
+     .header {
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+     }
+
+     .header-text {
+         flex: 1;
+         text-align: center;
+     }
+
+     .close-button-container {
+         padding-left: 10px;
+     }
+
+     .closeButton {
+        
+         cursor: pointer;
+     }
+
+     .refreshButton {
+         background-color: #e4e3e3;
+         border: 1px solid #808080;
+         height: 40px;
+         width: 70px !important;
+         margin-right: 50px;
+     }
+    .selected-row{
+        background-color:skyblue;
+    }
+    .gridview-container {
+    max-height: 400px !important;
+    overflow-y: auto !important;
+    width: 750px !important;
+}
+     </style>
 </head>
 
 <body>
     <form id="form1" runat="server">
+      <%--******************************************************************** --%>
+       
+     
+          <%--******************************************************************** --%>    
+            
         <div class="container ">
-            <h2 class="text-center">Delete Leave</h2>
+            <div class="header">
+                 <div class="header-text">
+                <h2 class="text-center">Delete Leave</h2>
+                     </div>
+                <div class="close-button-container">
+                <asp:Button runat="server" ID="btnClose" CssClass="closeButton" Text="Close" OnClick="btnClose_Click" />
+                    </div>
+            </div>      
             <hr />
             <div class="row">
                 <div class="col-lg-8 offset-lg-2">
@@ -29,6 +90,7 @@
                             <div class="col-lg-12 text-right">
 
                                 <asp:Button runat="server" ID="btnRefresh" CssClass="refreshButton" Text="Refresh" OnClick="btnRefresh_Click" />
+                                
                             </div>
                         </div>
 
