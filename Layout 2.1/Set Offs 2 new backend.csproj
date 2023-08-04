@@ -97,6 +97,7 @@
     <Content Include="flexur2.jpg" />
     <Content Include="LoginCSSboot.css" />
     <Content Include="Profile.png" />
+    <Content Include="Test_Delete_Leave.ascx" />
     <Content Include="undraw_pic_profile_re_7g2h.svg" />
     <Content Include="Web.config" />
     <Content Include="Login.aspx" />
@@ -210,6 +211,13 @@
     </Compile>
     <Compile Include="DeleteLeavePage.aspx.designer.cs">
       <DependentUpon>DeleteLeavePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_Delete_Leave.ascx.cs">
+      <DependentUpon>Test_Delete_Leave.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_Delete_Leave.ascx.designer.cs">
+      <DependentUpon>Test_Delete_Leave.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -5,6 +5,7 @@
 <%@ Register TagPrefix="uc" TagName="Delete_Leave" Src="~/Delete_Leave.ascx" %>
 <%@ Register TagPrefix="uc" TagName="Add_Leave_User" Src="~/Add_Leave_User.ascx" %>
 <%@ Register TagPrefix="uc" TagName="Delete_Leave_User" Src="~/Delete_Leave_User.ascx" %>
+<%@ Register TagPrefix="uc" TagName="Test_Delete_Leave" Src="~/Test_Delete_Leave.ascx" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -58,12 +59,10 @@
             width: 150px;
             height:30px;
             padding: 5px;
-            border:1px solid #000;
-            border-radius: 5px;
-            background-color: #2222f2;
+            border:1px solid #000;         
+            background-color: #0555fb;
             color:white;
-            
-            
+                     
         }
 
             .popUpButtons:hover {
@@ -110,6 +109,7 @@
     text-align: center;
     font-size: 18px;
     background-color: #a7c4f2 !important;
+    
 }
 
 .CalendarSelector {
@@ -155,7 +155,7 @@
          // Show the modal dialog
          $('#<%= Add_Leave.ClientID %>').modal('show');
          }
-         function showDelete_Leave() {
+      function showDelete_Leave() {
              // Show the modal dialog
              $('#<%= Delete_Leave.ClientID %>').modal('show');
          }
@@ -166,11 +166,16 @@
          function showDelete_Leave_User() {
              // Show the modal dialog
              $('#<%= Delete_Leave_User.ClientID %>').modal('show');
-          }
+         }
+        <%-- function showTest_Delete_Leave() {
+             // Show the modal dialog
+             $('#<%= Test_Delete_Leave.ClientID %>').modal('show');
+          }--%>
      </script>
 </head>
 <body>
     <form id="form1" runat="server">
+
         <div>
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container-fluid">
@@ -251,7 +256,7 @@
             <SelectedDayStyle  CssClass="CalendarSelector" ForeColor="Black" BackColor="White" />
               <SelectorStyle  CssClass="CalendarSelector"/> 
             <TitleStyle BackColor="White"  BorderStyle="none" BorderWidth="0px" Font-Bold="True" />
-            <TodayDayStyle BackColor="#99CCFF" BorderColor="Black" CssClass="TodaySelect" />
+            <TodayDayStyle BackColor="#60a4e8" BorderColor="Black" CssClass="TodaySelect" />
             <WeekendDayStyle ForeColor="#FF3300" />
         </asp:Calendar>
              </div>
@@ -293,8 +298,8 @@
            
        <hr class="divider">
     <div class="container-fluid" style="display: flex; justify-content: flex-end; margin-right: 20px;">
-          <asp:Button ID="Button2" cssClass="AbsButton" runat="server" Text="Delete Leave"  onClick="Button2_Click" Height:25px Visible="false" Enabled="false"/>
-        <asp:Button ID="Button1" CssClass="AbsButton" runat="server" Text="Create Absence"  OnClick="Button1_Click" Height:25px/>
+          <asp:Button ID="Button2" cssClass="popUpButtons" runat="server" Text="Delete Leave"  onClick="Button2_Click" Height:25px Visible="true" Enabled="true"/>
+        <asp:Button ID="Button1" CssClass="popUpButtons" runat="server" Text="Create Absence"  OnClick="Button1_Click" Height:25px/>
       </div>
         <hr class="divider">
             <div class="container-fluid" style="display: flex; justify-content: flex-end; margin-right: 20px;">
@@ -312,6 +317,9 @@
 
                 <button type="button" id="DltAdmnBtn" class="btn btn-primary  popUpButtons" data-toggle="modal" data-target="#myModal4">Delete Leave</button>     
 	 <uc:Delete_Leave ID="Delete_Leave" runat="server" />
+                
+               <%-- <%--<button type="button" id="DeleteLeaveBtn" class="btn btn-primary popUpButtons" data-toggle="modal" data-target="DeleteLeaveModal">Test Delete Popup</button>
+                <uc:Test_Delete_Leave ID="Test_Delete_Leave" runat="server"></uc:Test_Delete_Leave>--%>
             
             </div>
        

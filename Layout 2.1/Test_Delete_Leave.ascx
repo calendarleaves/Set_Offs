@@ -1,7 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Delete_Leave.ascx.cs" Inherits="Layout_2._1.Delete_Leave" %>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-KyZXEAgltcdPwqR5gKkxzWfod5oMh4PrpQmYfjELVYg=" crossorigin="anonymous"></script>
-
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Test_Delete_Leave.ascx.cs" Inherits="Layout_2._1.Test_Delete_Leave" %>
 <link href="DeleteLeavePageStyleSheet.css" rel="stylesheet" />
 <style>
     .container {
@@ -37,15 +34,9 @@
     .selected-row{
         background-color:skyblue;
     }
-    .gridview-container {
-    max-height: 400px !important;
-    overflow-y: auto !important;
-    width: 750px !important;
-}
 </style>
 
-
-<div class="modal" id="myModal4">
+<div class="modal" id="DeleteLeaveModal">
     <div class="modal-dialog"  >
         <div class="modal-content" style="height:600px; width:950px;" >
            <div class="container" >
@@ -55,7 +46,7 @@
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 
-            <!-- Modal body -->
+                <!-- Modal body -->
             <div class="modal-body">
                 <form >
                     
@@ -65,9 +56,9 @@
 							<div class="input-group">
 								<asp:TextBox runat="server" ID="txtSearch" class="form-control" placeholder="Search employee name"/>
 								<div class="input-group-append">
-									<asp:Button runat="server" ID="btnSearch" class="btn btn-primary" Text="Search" OnClick="btnSearch_Click"/>
+									<asp:Button runat="server" ID="btnSearch" class="btn btn-primary" Text="Search" />
 									<div class="col-lg-12 text-right">
-										<asp:Button runat="server" ID="btnRefresh" CssClass="refreshButton" Text="Refresh" OnClick="btnRefresh_Click"/>
+										<asp:Button runat="server" ID="btnRefresh" CssClass="refreshButton" Text="Refresh" />
 									</div>
 								</div>
 							</div>
@@ -76,7 +67,7 @@
 					<!--Gridview Container  -->
 					<div class="col-lg-10 offset-lg-1 mt-3 text-center">
 						<div class="gridview-container">
-							<asp:GridView ID="DeleteLeaveGridView" runat="server" AutoGenerateColumns="false" CssClass="table" OnRowDeleting="DeleteLeaveGridView_RowDeleting" DataKeyNames="Id" OnRowDataBound="DeleteLeaveGridView_RowDataBound" OnSelectedIndexChanged="DeleteLeaveGridView_SelectedIndexChanged">
+							<asp:GridView ID="DeleteLeaveGridView" runat="server" AutoGenerateColumns="false" CssClass="table">
 								<Columns>
 									<asp:BoundField DataField="Id" HeaderText="Emp ID"/>
 									<asp:BoundField DataField="FirstName" HeaderText="First Name"/>
@@ -99,10 +90,9 @@
 				
 					  </form>
 				</div>
-			</div>
 
+               </div>
                     </div>
-                                         
-                             <!-- Modal footer -->
+                <!-- Modal footer -->
            </div>
         </div>

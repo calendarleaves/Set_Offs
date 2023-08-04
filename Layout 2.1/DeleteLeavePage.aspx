@@ -3,7 +3,7 @@
 
 
 
-!DOCTYPE html>
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -15,6 +15,11 @@
 
 <body>
     <form id="form1" runat="server">
+      <%--******************************************************************** --%>
+       
+     
+          <%--******************************************************************** --%>    
+            
         <div class="container ">
             <h2 class="text-center">Delete Leave</h2>
             <hr />

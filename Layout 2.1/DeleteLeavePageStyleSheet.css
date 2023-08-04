@@ -1,9 +1,5 @@
 ﻿
-.gridview-container {
-    max-height: 450px !important;
-    overflow-y: auto !important;
-    width: 700px !important;
-}
+
 
     .gridview-container th {
         position: sticky !important;
