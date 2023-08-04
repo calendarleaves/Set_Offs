@@ -68,8 +68,8 @@ namespace WebApplication1
                         {
                         hiddenField.Value = "true";
                         Button1.Text = "Add Leave";
-                        Button2.Visible = true;
-                        Button2.Enabled = true;
+                        DltAdmnBtn2.Visible = true;
+                        DltAdmnBtn2.Enabled = true;
                     }
                 }
 
