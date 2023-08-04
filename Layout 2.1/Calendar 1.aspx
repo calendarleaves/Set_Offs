@@ -128,6 +128,7 @@
          window.onload = function () {
 
              var Hfield = document.getElementById('<%= hiddenField.ClientID %>').value;
+              
              if (Hfield == "true") {
                  ButnVis();
              }
@@ -143,6 +144,9 @@
 
              var DltUsrBtn1 = document.getElementById("DltUsrBtn");
              DltUsrBtn1.style.display = "none";
+
+              var DltAdmnBtn2 = document.getElementById("DltAdmnBtn");
+             DltAdmnBtn2.style.display = "none";
          }
          function ButnVis1() {
              var AddAdmnBtn1 = document.getElementById("AddAdmnBtn");
