@@ -12,11 +12,24 @@ namespace Layout_2._1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            List<HolidayList> nextHolidays = LoadHolidays2();
             try
             {
-                GridView4.DataSource = nextHolidays;
-                GridView4.DataBind();
+                List<HolidayList> nextHolidays = LoadHolidays2();
+            
+                if(nextHolidays.Count == 0)
+                {
+                    GridView4.DataSource = null;
+                    GridView4.DataBind();
+
+                    InfoMsg.Text = "NO RECORDS YET !!";
+                }
+                else
+                {
+                    GridView4.DataSource = nextHolidays;
+                    GridView4.DataBind();
+                    InfoMsg.Text = string.Empty;
+                }
+                
             }
             catch (Exception ex)
             {
