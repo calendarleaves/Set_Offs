@@ -108,18 +108,19 @@
     margin-left: 90px;
     width: 100px;
     padding: 5px;
-    border-radius: 5px;
-    background-color: #7499f1;
+    border: 1px solid #000;
+    background-color: #0555fb;
+    color: white;
 }
 #Label7,#Label9{
     padding:4px;
     font-size:20px;
     
 }
-.submit:hover
-{
-    background-color: blue;
-    color:white;
+.submit:hover {
+    background-color: #7499f1;
+    color: black;
+    border: 1px solid #000;
 }
 
 
