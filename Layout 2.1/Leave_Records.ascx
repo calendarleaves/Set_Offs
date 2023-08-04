@@ -7,7 +7,7 @@
       <div class="modal-content" style="max-height:650px; width:600px; overflow-y:auto" >
 
         <div class="modal-header">
-             <h4 class="modal-title" style="margin-left:180px;">Leave Reocrds</h4>
+             <h4 class="modal-title" style="margin-left:180px;">Leave Records</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
 
