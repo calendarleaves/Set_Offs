@@ -20,6 +20,7 @@
             </Columns>      
             <EditRowStyle Height="50px" />
                         </asp:GridView>
+             <asp:Label ID="InfoMsg" runat="server" Font-Bold="true" display="flex"></asp:Label>
         </div>
 
         <div class="modal-footer">
