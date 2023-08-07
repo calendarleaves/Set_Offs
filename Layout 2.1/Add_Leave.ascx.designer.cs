@@ -15,6 +15,15 @@ namespace Layout_2._1
     {
 
         /// <summary>
+        /// close control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton close;
+
+        /// <summary>
         /// Employee control.
         /// </summary>
         /// <remarks>
@@ -22,6 +31,15 @@ namespace Layout_2._1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Employee;
+
+        /// <summary>
+        /// Label3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
         /// DropDownList1 control.
@@ -51,13 +69,22 @@ namespace Layout_2._1
         protected global::System.Web.UI.WebControls.Label LeaveType;
 
         /// <summary>
-        /// Drop control.
+        /// Label4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList Drop;
+        protected global::System.Web.UI.WebControls.Label Label4;
+
+        /// <summary>
+        /// drop control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drop;
 
         /// <summary>
         /// LeaveLable control.

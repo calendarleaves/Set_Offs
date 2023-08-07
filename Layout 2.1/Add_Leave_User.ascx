@@ -32,7 +32,7 @@
         } 
     });
 
-    $(document).ready(function () {
+   <%-- $(document).ready(function () {
 
       
         // When the document is ready, attach a click event handler to the TextBox
@@ -42,17 +42,19 @@
         });
 
 
-    });
+    });--%>
 
 </script>
 
 <div class="modal" id="myModal7">
     <div class="modal-dialog">
-        <div class="modal-content" style="height:650px; width:600px">
+        <div class="modal-content" style="height:600px; width:600px; border:solid; border-color:blue  ">
             <!-- Modal Header -->
-            <div class="modal-header" style="height:50px; padding:10px">
+            <div class="modal-header">
                 <h2 class="modal-title" style="margin-left:180px; ">ADD LEAVE</h2>
-               
+                 
+                <asp:ImageButton ID="close" CssClass="Close" ImageUrl="images/Close1.png" ImageAlign="AbsBottom" runat="server" OnClick="close_Click" />
+           
             </div>
 
             <!-- Modal body -->
@@ -64,10 +66,10 @@
              
              <asp:DropDownList  CssClass="drop" runat="server" ID="Drop" DataTextField="Drop" OnSelectedIndexChanged="Drop_SelectedIndexChanged" AutoPostBack="true" >
                  
-                   <asp:ListItem>--Select Leave--</asp:ListItem>  
-                 <asp:ListItem>Full Day </asp:ListItem>  
-                 <asp:ListItem>First Half </asp:ListItem>  
-                <asp:ListItem>Second Half</asp:ListItem>  
+                     <asp:ListItem Text="--Select Leave--" Value="" Disabled="true" Selected="true" />
+     <asp:ListItem>Full Day </asp:ListItem>  
+                   <asp:ListItem>First Half </asp:ListItem>  
+                  <asp:ListItem>Second Half</asp:ListItem>  
                  <asp:ListItem>Work From  Home</asp:ListItem> 
                  
             
@@ -145,7 +147,7 @@
 
        <!--      <asp:TextBox ID="TextBox1" cssclass="text2" runat="server" TextMode="MultiLine"  Rows="4" Font-Size="Medium" class="form-control" style="max-width:300px; max-height:50px" OnGotFocus="focusforpass"></asp:TextBox>  <br /><br />-->
                  <asp:TextBox ID="comment" runat="server" type="text" placeholder="Enter here" class="form-control text2" TextMode="MultiLine"  Rows="4" Font-Size="Medium"  OnGotFocus="focusforpass"></asp:TextBox> 
-                 <asp:Label class="error" ID="commentError" runat="server" Text="" ></asp:Label><br /><br />
+                 <asp:Label class="error" ID="commentError" runat="server" Text="" ></asp:Label><br />
 
              <asp:Button CssClass ="submit" runat="server"  Text="Submit" OnClick="Submit_click"  />
             <asp:Button CssClass ="Cancel" runat="server"  Text="Cancel" onclick="Cancel_Click" /> <br />

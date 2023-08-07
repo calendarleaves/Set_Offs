@@ -10,8 +10,11 @@
     <form id="form1" runat="server">
         <div>
                 <h2 style="color:red"><strong>500 Internal Server Error </strong></h2>
-                <p>Oops! Something went wrong on our end, and we couldn't process your request at the moment.<br> Our team has been notified, and we're working to fix this as soon as possible. </p>
-                <p>Try after sometime or try go to the <a href="../Calendar 1.aspx">Calendar page</a>.</p>
+                <%--<p>Oops! Something went wrong on our end, and we couldn't process your request at the moment.<br> Our team has been notified, and we're working to fix this as soon as possible. </p>--%>
+            <p>network error check your network and try again.</p>
+                <%--<p>Try after sometime or try go to the <a href="../Calendar 1.aspx">Calendar page</a>.</p>--%>
+            <p>navigate back to the <a href="../Calendar 1.aspx">homepage</a>.</p>
+
         </div>
     </form>
 </body>

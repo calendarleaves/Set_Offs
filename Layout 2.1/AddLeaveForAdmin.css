@@ -101,6 +101,10 @@
     padding-left: 10px;
     padding-top: 10px;
 }
+.Close {
+    height: 20px;
+    width: 20px;
+}
 
 /*.box form {
     position: absolute;
