@@ -10,8 +10,9 @@
     <form id="form1" runat="server">
         <div>
             <h2 style="color:red"><strong>404 Page Not Found</strong></h2>
-    <p>Oops! Something went wrong on our end, and we couldn't process your request at the moment.<br> Our team has been notified, and we're working to fix this as soon as possible. </p>
-    <p>Please check the URL or navigate back to the <a href="../Calendar 1.aspx">homepage</a>.</p>
+    <%--<p>Oops! Something went wrong on our end, and we couldn't process your request at the moment.<br> Our team has been notified, and we're working to fix this as soon as possible. </p>--%>
+   <p>Requested Page not foun.check Url and try again.</p>
+            <p>navigate back to the <a href="../Calendar 1.aspx">homepage</a>.</p>
         
         </div>
     </form>

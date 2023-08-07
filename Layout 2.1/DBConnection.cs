@@ -34,7 +34,7 @@ namespace SetOffs1
         {
             Employee emp = new Employee();
             List<EmployeeLeave> users = new List<EmployeeLeave>();
-            using (SqlCommand command = new SqlCommand("SELECT e.FirstName, l.LeaveType FROM Employee e INNER JOIN Leave l ON e.id = l.EMPID WHERE  '" + date.ToString("yyyy-MM-dd") + "'between l.StartDate AND l.EndDate ;", con))
+            using (SqlCommand command = new SqlCommand("SELECT  CONCAT(e.FirstName, ' ', e.LastName) AS Name, l.LeaveType FROM Employee e INNER JOIN Leave l ON e.id = l.EMPID WHERE  '" + date.ToString("yyyy-MM-dd") + "'between l.StartDate AND l.EndDate ;", con))
             {
                 con.Open();
                 using (SqlDataReader reader = command.ExecuteReader())
