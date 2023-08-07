@@ -101,6 +101,8 @@
     <Content Include="flexur2.jpg" />
     <Content Include="LoginCSSboot.css" />
     <Content Include="Profile.png" />
+    <Content Include="LeaveRecordsIcon.svg" />
+    <Content Include="HolidayIcon.svg" />
     <Content Include="Test_Delete_Leave.ascx" />
     <Content Include="undraw_pic_profile_re_7g2h.svg" />
     <Content Include="Web.config" />
