@@ -195,7 +195,13 @@ namespace WebApplication1
                 {
                     e.Cell.ForeColor = System.Drawing.Color.Orange;
                     e.Cell.CssClass = "colorCode1";
+
+                    if (e.Day.IsToday)
+                    {
+                        e.Cell.CssClass = "TodaySelect";
+                    }
                 }
+
                 //color code  ends
                 if (e.Day.IsWeekend)
                 {

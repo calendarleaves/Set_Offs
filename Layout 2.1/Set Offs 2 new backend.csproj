@@ -86,6 +86,8 @@
     <Content Include="Error Handler\Error500.aspx" />
     <Content Include="DeleteLeave.aspx" />
     <Content Include="Holidays.ascx" />
+    <Content Include="images\close.png" />
+    <Content Include="images\Close1.png" />
     <Content Include="images\flexur2 - Copy.jpg" />
     <Content Include="images\flexur2.jpg" />
     <Content Include="images\holiday.jpg" />

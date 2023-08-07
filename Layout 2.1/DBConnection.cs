@@ -430,6 +430,7 @@ namespace SetOffs1
 
 
 
+
         public int CountLeave(string s)
         {
 
@@ -509,6 +510,23 @@ namespace SetOffs1
             using (SqlCommand command = new SqlCommand(query, con))
             {
                 command.Parameters.AddWithValue("@EmpId", id);
+                command.Parameters.AddWithValue("@StartDate", startDate);
+                command.Parameters.AddWithValue("@EndDate", endDate);
+
+
+                command.ExecuteReader();
+            }
+            con.Close();
+        }
+        public void DeleteLeave(DateTime startDate, DateTime endDate)
+        {
+          
+
+            string query = "DELETE FROM  Leave WHERE   (StartDate = @StartDate OR EndDate = @EndDate) ";
+            con.Open();
+            using (SqlCommand command = new SqlCommand(query, con))
+            {
+              
                 command.Parameters.AddWithValue("@StartDate", startDate);
                 command.Parameters.AddWithValue("@EndDate", endDate);
 

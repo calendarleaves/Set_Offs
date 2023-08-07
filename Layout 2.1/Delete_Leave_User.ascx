@@ -41,7 +41,7 @@
             <div class="container ">
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Delete Leave User</h4>
+                     <h3 class="modal-title" style="margin-left:350px;">Delete Leave</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 

@@ -1,6 +1,7 @@
 ﻿using SetOffs1;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
@@ -10,6 +11,7 @@ using System.Web.UI.WebControls;
 
 namespace Layout_2._1
 {
+   
     public partial class Add_Leave_User : System.Web.UI.UserControl
     {
         string selectedValue;
@@ -19,38 +21,52 @@ namespace Layout_2._1
 
         string item;
         DateTime currentDate;
+        DateTime targetDate;
 
 
 
         private List<DateTime> holidays = new List<DateTime>();
 
 
-
-
+       
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            DBConnection db = new DBConnection();
+            DataTable dt = db.GetAllHolidayDates();
+
+            ;
+
+            foreach (DataRow row in dt.Rows)
+            {
+                DateTime targetDate = Convert.ToDateTime(row["Date"]);
+                holidays.Add(targetDate);
+            }
+
+
             if (!IsPostBack)
             {
                 Calendar1.Visible = false;
                 Calendar2.Visible = false;
             }
 
-            holidays.Add(new DateTime(2023, 8, 15));
-            holidays.Add(new DateTime(2023, 9, 19));
+            
             if (from.Text == null)
             {
                 Calendar2.Enabled = false;
             }
 
-
-
+            
 
         }
         public string totalDays()
         {
             if (from.Text != "" && To.Text != "")
             {
+            //    DBConnection d = new DBConnection();
+            //    List<HolidayList> holidays = d.GetUpcomingHolidays(currentDate);
+
+
                 int weekoff = 0;
                 int holidaysCount = 0;
                 DateTime startDate;
@@ -217,6 +233,14 @@ namespace Layout_2._1
                     To.Focus();
 
                 }
+                else if (comment.Text == "")
+                {
+                    commentError.Text = " * Please mention leave reason";
+                    comment.Focus();
+
+
+
+                }
                 else
                 {
                     DBConnection cmd = new DBConnection();
@@ -283,6 +307,12 @@ namespace Layout_2._1
                 e.Cell.ForeColor = System.Drawing.Color.Red;
 
             }
+            if (holidays.Contains(e.Day.Date))
+            {
+                e.Day.IsSelectable = false;
+                e.Cell.ForeColor = System.Drawing.Color.Red; // Optionally, change the color of the holiday dates
+            }
+
             ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal7').modal('show');", true);
 
 
@@ -305,6 +335,11 @@ namespace Layout_2._1
                 e.Day.IsSelectable = false;
                 e.Cell.ForeColor = System.Drawing.Color.Red;
 
+            }
+            if (holidays.Contains(e.Day.Date))
+            {
+                e.Day.IsSelectable = false;
+                e.Cell.ForeColor = System.Drawing.Color.Red; // Optionally, change the color of the holiday dates
             }
             ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal7').modal('show');", true);
 
@@ -340,5 +375,9 @@ namespace Layout_2._1
             Server.Transfer("Calendar 1.aspx");
         }
 
+        protected void close_Click(object sender, ImageClickEventArgs e)
+        {
+            Server.Transfer("Calendar 1.aspx");
+        }
     }
 }
