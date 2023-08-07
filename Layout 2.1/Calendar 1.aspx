@@ -315,7 +315,7 @@
             </Columns>      
             <EditRowStyle Height="50px" />
                         </asp:GridView>
-                        <asp:Label ID="Label3" runat="server" Font-Bold="true" display="flex"></asp:Label>
+                        <asp:Label ID="Label3" runat="server" Font-Bold="false" display="flex"></asp:Label>
                                 
                     </div>
        
