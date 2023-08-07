@@ -34,7 +34,7 @@ namespace SetOffs1
         {
             Employee emp = new Employee();
             List<EmployeeLeave> users = new List<EmployeeLeave>();
-            using (SqlCommand command = new SqlCommand("SELECT  CONCAT(e.FirstName, ' ', e.LastName) AS Name, l.LeaveType FROM Employee e INNER JOIN Leave l ON e.id = l.EMPID WHERE  '" + date.ToString("yyyy-MM-dd") + "'between l.StartDate AND l.EndDate ;", con))
+            using (SqlCommand command = new SqlCommand("SELECT e.FirstName, l.LeaveType FROM Employee e INNER JOIN Leave l ON e.id = l.EMPID WHERE  '" + date.ToString("yyyy-MM-dd") + "'between l.StartDate AND l.EndDate ;", con))
             {
                 con.Open();
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -353,7 +353,7 @@ namespace SetOffs1
             con.Close();
             return dt;
         }
-
+       
         public DataTable GetAllEmployeesLeaveLikeName(String s)
         {
             string firstName = "";
@@ -427,6 +427,7 @@ namespace SetOffs1
             con.Close();
             return dt;
         }
+
 
 
 
@@ -517,6 +518,23 @@ namespace SetOffs1
             }
             con.Close();
         }
+        public void DeleteLeave(DateTime startDate, DateTime endDate)
+        {
+          
+
+            string query = "DELETE FROM  Leave WHERE   (StartDate = @StartDate OR EndDate = @EndDate) ";
+            con.Open();
+            using (SqlCommand command = new SqlCommand(query, con))
+            {
+              
+                command.Parameters.AddWithValue("@StartDate", startDate);
+                command.Parameters.AddWithValue("@EndDate", endDate);
+
+
+                command.ExecuteReader();
+            }
+            con.Close();
+        }
 
 
 
@@ -586,7 +604,7 @@ namespace SetOffs1
         {
             DataTable dt = new DataTable();
 
-            string query = "SELECT e.Id, e.FirstName, e.LastName,  FORMAT(l.StartDate, 'dd-MM-yyyy') as StartDate , FORMAT(l.EndDate, 'dd-MM-yyyy') as EndDate FROM Employee e JOIN Leave l ON e.Id = l.EmpId WHERE (l.StartDate >= @Variable1 AND l.StartDate <= @Variable2)   OR    (l.EndDate >= @Variable1 AND l.EndDate <= @Variable2)   OR  (l.StartDate <= @Variable1 AND l.EndDate >= @Variable2)";
+            string query = "SELECT e.Id, e.FirstName, e.LastName,  FORMAT(l.StartDate, 'dd MMM') as StartDate , FORMAT(l.EndDate, 'dd MMM') as EndDate FROM Employee e JOIN Leave l ON e.Id = l.EmpId WHERE (l.StartDate >= @Variable1 AND l.StartDate <= @Variable2)   OR    (l.EndDate >= @Variable1 AND l.EndDate <= @Variable2)   OR  (l.StartDate <= @Variable1 AND l.EndDate >= @Variable2)";
             con.Open();
             using (SqlCommand command = new SqlCommand(query, con))
             {

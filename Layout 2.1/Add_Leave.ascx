@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Add_Leave.ascx.cs" Inherits="Layout_2._1.Add_Leave" %>
 
  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-KyZXEAgltcdPwqR5gKkxzWfod5oMh4PrpQmYfjELVYg=" crossorigin="anonymous"></script>
-<link href="AddLeaveForAdmin.css" rel="stylesheet" />
+ <link href="AddLeaveForAdmin.css" rel="stylesheet" />
 
 <!-- Place this script block after adding the jQuery library -->
 <script>
@@ -32,7 +32,7 @@
         } 
     });
 
-    $(document).ready(function () {
+   <%-- $(document).ready(function () {
 
       
         // When the document is ready, attach a click event handler to the TextBox
@@ -42,16 +42,18 @@
         });
 
 
-    });
+    });--%>
 
 </script>
- <link href="AddLeaveCss.css" rel="stylesheet" />
+ >
 <div class="modal" id="myModal3">
     <div class="modal-dialog">
-        <div class="modal-content" style="height:650px; width:600px">
+        <div class="modal-content" style="height:630px; width:600px; border:solid;border-color:blue;overflow: auto; max-height:630px;">
             <!-- Modal Header -->
-            <div class="modal-header" style="height:50px; padding:10px">
-                <h2 class="modal-title" style="margin-left:180px; ">ADD LEAVE</h2>
+            <div class="modal-header" style="padding:10px;">
+                <h2 style="margin-left:180px; ">ADD LEAVE</h2>
+               <asp:ImageButton ID="close" CssClass="Close" ImageUrl="images/Close1.png" ImageAlign="AbsBottom" runat="server" OnClick="close_Click" />
+           
                
             </div>
 
@@ -59,17 +61,30 @@
             <div class="modal-body" style="margin-left:100px">
                 
 
-                <asp:Label ID="Employee" runat="server" Text="Employee:"></asp:Label>  <br />                
-             <asp:DropDownList ID="DropDownList1"  CssClass="drop"  OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" onAutoPostBack="true" runat="server" ></asp:DropDownList><br />
+                <asp:Label ID="Employee" runat="server" Text="Employee:"></asp:Label> 
+                  <asp:Label ID="Label3" runat="server" class=" form-label"  Text="Label" ForeColor="#FF3300">*</asp:Label><br />
+                                               
+                 <asp:DropDownList ID="DropDownList1"  CssClass="drop"  OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" onAutoPostBack="true" runat="server"> </asp:DropDownList>
+           
+               
+                   <br />
+
+  
 
                  <asp:Label ID="DropdownlistError" class="error" runat="server" Text="" ForeColor="Red"></asp:Label><br />
            
 
-              <asp:Label ID="LeaveType" runat="server"  Text="LeaveType:"></asp:Label>  <br />                
+              <asp:Label ID="LeaveType" runat="server"  Text="LeaveType:"></asp:Label> 
+                 <asp:Label ID="Label4" runat="server" class=" form-label"  Text="Label" ForeColor="#FF3300">*</asp:Label><br />
+
+               
              
-             <asp:DropDownList  CssClass="drop" runat="server" ID="Drop" DataTextField="Drop" OnSelectedIndexChanged="Drop_SelectedIndexChanged" AutoPostBack="true" >
+             <asp:DropDownList  CssClass="drop" runat="server" ID="drop" DataTextField="Drop"  OnSelectedIndexChanged="Drop_SelectedIndexChanged" AutoPostBack="true" >
                  
-                   <asp:ListItem>--Select Leave--</asp:ListItem>  
+              
+
+                 <asp:ListItem Text="--Select Leave--" Value="" Disabled="true" Selected="true" />
+   
                  <asp:ListItem>Full Day </asp:ListItem>  
                  <asp:ListItem>First Half </asp:ListItem>  
                 <asp:ListItem>Second Half</asp:ListItem>  
