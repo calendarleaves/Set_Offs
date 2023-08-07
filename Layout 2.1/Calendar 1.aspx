@@ -94,12 +94,22 @@
 .GriedViewContainer {
     height: 500px;
 }
-.Griedview1Div, .Griedview2Div {
+.Griedview1Div {
     max-height: 50%;
     min-height:50%;
     background-color: white;
     overflow-y: auto;
     padding: 10px;
+}
+ .Griedview2Div {
+    max-height: 40%;
+    min-height:40%;
+    background-color: white;
+    overflow-y: auto;
+    padding: 10px;
+}
+ .small-case {
+    font-size: 14px;
 }
 .TodaySelect {
     background: linear-gradient(to bottom, #4e82eb, #b6c4db)!important;
@@ -208,7 +218,7 @@
                   
               
               
-                       <asp:Image ID="Image3" runat="server" ImageUrl="314534-P8X7PS-657.jpg" CssClass="profile-circle img-fluid" ToolTip="Holidays" />
+                       <asp:Image ID="Image3" runat="server" ImageUrl="314534-P8X7PS-657.jpg" CssClass="profile-circle img-fluid" ToolTip="Upcoming Holidays" />
                     <uc:Holidays ID="Holidays" runat="server" />
                 </a>
                     
@@ -287,22 +297,26 @@
         </asp:GridView>
        <asp:Label ID="lblMessage" runat="server" ></asp:Label>
                         </div>
-      <!--GridView Section - Upcoming Holiday -->
-                    <div class="Griedview2Div">
-                        <h4 class="division-heading">Upcoming Leaves</h4>
-                        <hr class="division-divider">
+      <!--GridView Section - Upcoming Leaves -->
+       <h4 class="division-heading">Upcoming Leaves<span class="small-case"> (upto next friday)</span></h4>
+       <hr class="division-divider">
+                    <div class="Griedview2Div" >
+                        
+                        
                         
                         <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" ShowHeaderWhenEmpty="True" Width="97%" cssClass="Griedview2Style" BorderColor="White" BorderWidth="0px" >
                            <Columns>
                                <%--<asp:BoundField DataField="FirstName" Headertext="FirstName"/>
                                <asp:BoundField DataField="LastName" Headertext="LastName"/>--%>
                                 <asp:BoundField DataField="FullName" Headertext="Name"/>
-                                <asp:BoundField DataField="StartDate" Headertext="StartDate" /> 
-                               <asp:BoundField DataField="EndDate" Headertext="EndDate" /> 
+                                <asp:BoundField DataField="StartDate" Headertext="From" /> 
+                               <asp:BoundField DataField="EndDate" Headertext="To" /> 
                
             </Columns>      
             <EditRowStyle Height="50px" />
                         </asp:GridView>
+                        <asp:Label ID="Label3" runat="server" Font-Bold="true" display="flex"></asp:Label>
+                                
                     </div>
        
    </div> </div></div>
@@ -318,13 +332,13 @@
               <asp:HiddenField ID="hiddenField" runat="server" Value="" />
        
                
-                          <button type="button" id="AddUsrBtn" class="btn btn-primary  popUpButtons" data-toggle="modal" data-target="#myModal7">Add Leave User</button>     
+                          <button type="button" id="AddUsrBtn" class="btn btn-primary  popUpButtons" data-toggle="modal" data-target="#myModal7">Add Leave</button>     
       <uc:Add_Leave_User ID="Add_Leave_User" runat="server" />
 
                 <button type="button" id="AddAdmnBtn" class="btn btn-primary  popUpButtons" data-toggle="modal" data-target="#myModal3">Add Leave</button>     
       <uc:Add_Leave ID="Add_Leave" runat="server" />
                 
-                <button type="button" id="DltUsrBtn" class="btn btn-primary  popUpButtons" data-toggle="modal" data-target="#myModal8">Delete Leave </button>     
+                <button type="button" id="DltUsrBtn" class="btn btn-primary  popUpButtons" data-toggle="modal" data-target="#myModal8">Delete Leave</button>     
 	 <uc:Delete_Leave_User ID="Delete_Leave_User" runat="server" />
 
                 <button type="button" id="DltAdmnBtn" class="btn btn-primary  popUpButtons" data-toggle="modal" data-target="#myModal4">Delete Leave pop up</button>     
