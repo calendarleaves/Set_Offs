@@ -279,7 +279,7 @@
       <asp:GridView ID="GridView1" runat="server"   CssClass="GridViewStyle" RowStyle-CssClass="CustomRowStyle"
             AutoGenerateColumns="False" ShowHeaderWhenEmpty="True" Width="97%" BorderColor="White" BorderWidth="0px">
             <Columns>
-                <asp:BoundField DataField="Name" Headertext="On Leave" />                     
+                <asp:BoundField DataField="FirstName" Headertext="On Leave" />                     
                <asp:BoundField DataField="LeaveType" Headertext="Leave Type"/>
             </Columns>      
             <EditRowStyle Height="50px" />
@@ -323,7 +323,7 @@
                 <button type="button" id="AddAdmnBtn" class="btn btn-primary  popUpButtons" data-toggle="modal" data-target="#myModal3">Add Leave</button>     
       <uc:Add_Leave ID="Add_Leave" runat="server" />
                 
-                <button type="button" id="DltUsrBtn" class="btn btn-primary  popUpButtons" data-toggle="modal" data-target="#myModal8">Delete Leave User</button>     
+                <button type="button" id="DltUsrBtn" class="btn btn-primary  popUpButtons" data-toggle="modal" data-target="#myModal8">Delete Leave </button>     
 	 <uc:Delete_Leave_User ID="Delete_Leave_User" runat="server" />
 
                 <button type="button" id="DltAdmnBtn" class="btn btn-primary  popUpButtons" data-toggle="modal" data-target="#myModal4">Delete Leave pop up</button>     
