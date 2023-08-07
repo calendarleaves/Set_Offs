@@ -59,13 +59,12 @@ namespace Layout_2._1
         {
             try
             {
-                //int id = Convert.ToInt32(DeleteLeaveGridView.Rows[e.RowIndex].Cells[0].Text);
-                string fullName = DeleteLeaveGridView.Rows[e.RowIndex].Cells[1].Text + " " + DeleteLeaveGridView.Rows[e.RowIndex].Cells[2].Text;
+               
                 string startDate = DeleteLeaveGridView.Rows[e.RowIndex].Cells[4].Text;
                 string endDate = DeleteLeaveGridView.Rows[e.RowIndex].Cells[5].Text;
 
                 DBConnection con = new DBConnection();
-                con.DeleteLeave(fullName, DateTime.Parse(startDate), DateTime.Parse(endDate));
+                con.DeleteLeave(DateTime.Parse(startDate), DateTime.Parse(endDate));
 
                 BindGridView();
             }
