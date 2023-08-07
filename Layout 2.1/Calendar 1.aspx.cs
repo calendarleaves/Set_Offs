@@ -299,7 +299,7 @@ namespace WebApplication1
             {
                 if (Session["ID"] != null && Session["ID"].ToString() == "admin@flexur.com")
                 {
-                    Server.Transfer("DeleteLeavePage.aspx");
+                    Response.Redirect("DeleteLeavePage.aspx");
                 }
                
             }
@@ -353,6 +353,11 @@ namespace WebApplication1
                 DateTime currentDate = DateTime.Now;
 
                 int daysUntilNextMonday = ((int)DayOfWeek.Monday - (int)currentDate.DayOfWeek + 7) % 7;
+                if (daysUntilNextMonday == 0)
+                {
+                    // Today is already Monday, so set daysUntilNextMonday to 7 to represent next week's Monday.
+                    daysUntilNextMonday = 7;
+                }
                 DateTime nextFriday = currentDate.AddDays(daysUntilNextMonday+5);
                 //List<EmployeeLeave> leaves = new List<EmployeeLeave>();
                 DBConnection d = new DBConnection();
@@ -369,20 +374,17 @@ namespace WebApplication1
 
                     row["FullName"] = fullName;
                 }
-                //for (int i = 0; i < daysUntilNextMonday + 5; i++) 
-                //{
-                //    if (currentDate.DayOfWeek == DayOfWeek.Saturday || currentDate.DayOfWeek == DayOfWeek.Sunday)
-                //    {
-                //        i = i + 2;
-                //        currentDate.AddDays(daysUntilNextMonday);
-                //    }
-                //    currentDate.AddDays(daysUntilNextMonday);
-                //    leaves.AddRange(d.GetEmployeeLeave(currentDate));
-
-                //}
-
-                GridView2.DataSource = dt;
-                GridView2.DataBind();
+                if (dt.Rows.Count == 0)
+                {
+                    GridView2.DataSource = null;
+                    GridView2.DataBind();
+                    Label3.Text = "NO RECORDS YET !!";
+                }
+                else
+                {
+                    GridView2.DataSource = dt;
+                    GridView2.DataBind();
+                }
 
             }
             catch (Exception ex)

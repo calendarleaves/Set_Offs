@@ -151,7 +151,7 @@ namespace Layout_2._1
         {
             try
             {
-                Server.Transfer("Calendar 1.aspx");
+               Response.Redirect("Calendar 1.aspx");
             }
             catch (Exception ex)
             {
