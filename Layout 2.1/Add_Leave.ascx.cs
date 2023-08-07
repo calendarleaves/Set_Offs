@@ -51,17 +51,30 @@ namespace Layout_2._1
                 Calendar1.Visible = false;
                 Calendar2.Visible = false;
 
-                DBConnection s = new DBConnection();
-
-                List<string> data = new List<string>();
-
-
-                data = s.GetAllEmployeeName();
-                data.Insert(0, "--Select Employee--");
-                DropDownList1.DataSource = data;
-                DropDownList1.DataBind();
+             //   DBConnection s = new DBConnection();
 
                
+
+
+                /*      data = s.GetAllEmployeeName();
+                      data.Insert(0, "--Select Employee--");
+                      DropDownList1.DataSource = data;
+                      DropDownList1.DataBind(); */
+
+                DropDownList1.Items.Clear();
+                DropDownList1.Items.Add(new ListItem("--Select Employee--", "null"));
+                DropDownList1.Items[0].Attributes["disabled"] = "disabled"; // Disable the item
+
+                DBConnection s = new DBConnection();
+                List<string> data = s.GetAllEmployeeName();
+
+                // Add the remaining employee data to the DropDownList
+                foreach (string employeeName in data)
+                {
+                    DropDownList1.Items.Add(new ListItem(employeeName, employeeName));
+                }
+
+
 
             }
 
