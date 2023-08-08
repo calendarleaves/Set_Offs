@@ -108,20 +108,25 @@
     margin-left: 90px;
     width: 100px;
     padding: 5px;
+    border-radius: 5px;
     border: 1px solid #000;
     background-color: #0555fb;
     color: white;
+}
+
+
+    .submit:hover {
+        background-color: #7499f1;
+        color: black;
+        border: 1px solid #000;
+    }
 }
 #Label7,#Label9{
     padding:4px;
     font-size:20px;
     
 }
-.submit:hover {
-    background-color: #7499f1;
-    color: black;
-    border: 1px solid #000;
-}
+
 
 
 @media screen and (max-width: 767px) {

@@ -51,30 +51,32 @@ namespace Layout_2._1
                 Calendar1.Visible = false;
                 Calendar2.Visible = false;
 
+                SelectEmployee.Items.Clear();
+                SelectEmployee.Items.Add(new ListItem("--Select Employee--", "null"));
+                SelectEmployee.Items[0].Attributes["disabled"] = "disabled"; // Disable the item
+
                 DBConnection s = new DBConnection();
+                List<string> data = s.GetAllEmployeeName();
 
-                List<string> data = new List<string>();
+            foreach (string employeeName in data)
+                {
+                    SelectEmployee.Items.Add(new ListItem(employeeName, employeeName));
+                }
 
 
-                data = s.GetAllEmployeeName();
-                data.Insert(0, "--Select Employee--");
-                DropDownList1.DataSource = data;
-                DropDownList1.DataBind();
-
-               
 
             }
 
 
         }
 
-        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+        protected void SelectEmployee_SelectedIndexChanged(object sender, EventArgs e)
         {
+            DropdownlistError.Text = "";
 
 
 
-
-            if (DropDownList1.SelectedValue != "--Select Employee--")
+            if (SelectEmployee.SelectedValue != "null")
 
             {
                 DropdownlistError.Text = "";
@@ -90,18 +92,9 @@ namespace Layout_2._1
         protected void Submit_click(object sender, EventArgs e)
         {
 
-
-
-
             try
             {
-                string fullName = DropDownList1.SelectedItem.Value;
-
-
-                string[] nameParts = fullName.Split(' ');
-
-                string firstName = nameParts[0];
-                string lastName = nameParts[1];
+                string fullName = SelectEmployee.SelectedItem.Value;
 
                 Calendar1.Visible = false;
                 Calendar2.Visible = false;
@@ -109,11 +102,11 @@ namespace Layout_2._1
                 DateTime end1 = Calendar2.SelectedDate;
 
 
-                if (DropDownList1.SelectedValue == "--Select Employee--")
+                if (SelectEmployee.SelectedValue == "null")
 
                 {
                     DropdownlistError.Text = "* Please select Employee";
-                    DropDownList1.Focus();
+                    SelectEmployee.Focus();
 
                 }
                 else if (drop.SelectedValue == "")
@@ -149,7 +142,10 @@ namespace Layout_2._1
                 else
                 {
 
+                    string[] nameParts = fullName.Split(' ');
 
+                    string firstName = nameParts[0];
+                    string lastName = nameParts[1];
                     Leave l = new Leave();
                     l.LeaveType = drop.SelectedValue;
                     l.StartDate = Calendar1.SelectedDate;
@@ -212,10 +208,7 @@ namespace Layout_2._1
                         {
                             weekoff++;
                         }
-                        //if (holidays.Contains(currentDate))
-                        //{
-                        //    holidaysCount++;
-                        //}
+                       
                         if (holidays.Contains(currentDate))
                         {
 
@@ -336,9 +329,6 @@ namespace Layout_2._1
 
         }
 
-
-
-
         protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
         {
 
@@ -379,14 +369,7 @@ namespace Layout_2._1
                 e.Day.IsSelectable = false;
                 e.Cell.ForeColor = System.Drawing.Color.Red; // Optionally, change the color of the holiday dates
             }
-            //if (e.Day.Date == targetDate)
-            //{
-
-
-            //    e.Cell.ForeColor = System.Drawing.Color.Red;
-            //    e.Day.IsSelectable = false;
-            //    // e.Cell.ToolTip = "This is a holiday!";
-            //}
+          
             ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal3').modal('show');", true);
 
 
@@ -419,14 +402,7 @@ namespace Layout_2._1
                 e.Cell.ForeColor = System.Drawing.Color.Red;
 
             }
-            //if (e.Day.Date == targetDate)
-            //{
-
-
-            //    e.Cell.ForeColor = System.Drawing.Color.Red;
-            //    e.Day.IsSelectable = false;
-            //    // e.Cell.ToolTip = "This is a holiday!";
-            //}
+          
             if (holidays.Contains(e.Day.Date))
             {
                 e.Day.IsSelectable = false;
@@ -439,6 +415,7 @@ namespace Layout_2._1
 
         protected void Drop_SelectedIndexChanged(object sender, EventArgs e)
         {
+            LeaveLable.Text = "";
             Total_Days.Text = "";
             from.Text = "";
             To.Text = "";
@@ -447,13 +424,15 @@ namespace Layout_2._1
 
             if (!string.IsNullOrEmpty(selectedValue) && selectedValue != "--Select Leave--")
             {
-                LeaveLable.Text = "";
+               
+                
 
                 if (drop.SelectedValue == "First Half " || drop.SelectedValue == "Second Half")
                 {
                     Cal1.Enabled = false;
                     Cal1.BackColor = System.Drawing.Color.Gray;
                     Cal1.Visible = false;
+                    
                 }
                 else
                 {
@@ -480,19 +459,6 @@ namespace Layout_2._1
 
         protected void Cancel_Click(object sender, EventArgs e)
         {
-            //    DropDownList1.ClearSelection();
-            //    from.Text = "";
-            //    To.Text = "";
-            //    drop.ClearSelection();
-            //    comment.Text = "";
-            //    Total_Days.Text = "";
-            //    commentError.Text = "";
-            //    Calendar1.Visible = false;
-            //    Calendar2.Visible = false;
-            //    DropdownlistError.Text = "";
-            //    LeaveLable.Text = "";
-            //    calendar1lable.Text = "";
-            //    Calendar3Label.Text = "";
 
             Server.Transfer("Calendar 1.aspx");
 
