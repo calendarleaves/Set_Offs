@@ -48,7 +48,7 @@
  
 <div class="modal" id="myModal3">
     <div class="modal-dialog">
-        <div class="modal-content" style="height:640px; width:640px; border:solid;border-color:blue; max-height:630px;">
+        <div class="modal-content" style="height:640px; width:600px; border:solid; border-color:#5d6e8a ; max-height:640px;">
             <!-- Modal Header -->
             <div class="modal-header" style="padding:10px; height:55px;">
                 <h2 style="margin-left:180px; ">ADD LEAVE</h2>
@@ -167,7 +167,7 @@
                  <asp:TextBox ID="comment" runat="server" type="text" placeholder="Enter here " class="form-control text2" TextMode="MultiLine"  Rows="4" Font-Size="Medium"  OnGotFocus="focusforpass"></asp:TextBox> 
                  <asp:Label class="error" ID="commentError" runat="server" Text="" ></asp:Label><br />
 
-             <asp:Button CssClass ="submit" runat="server"  Text="Submit" OnClick="Submit_click"  style="margin-top:10px;" />
+             <asp:Button CssClass ="submit" runat="server"  Text="Submit" OnClick="Submit_click"  style="margin-top:15px;" />
             <asp:Button CssClass ="Cancel" runat="server"  Text="Cancel" onclick="Cancel_Click" /> <br />
                  
          
