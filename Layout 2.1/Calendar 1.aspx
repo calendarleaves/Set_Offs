@@ -74,7 +74,24 @@
                 border:1px solid #000;
               
             }
+     
+.logout {
+    margin-top: 20px;
+    margin-left: 90px;
+    width: 100px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #000;
+    background-color: #0555fb;
+    color: white;
+}
 
+
+    .logout:hover {
+        background-color: #7499f1;
+        color: black;
+        border: 1px solid #000;
+    }
             
 
 .AbsButton:hover
@@ -261,7 +278,7 @@
                     <asp:Label ID="Label2" runat="server"   CssClass="ml-3 "></asp:Label>
                     <div class="dropdown-divider"></div>
                     <div class="text-right pr-2">
-                        <asp:Button ID="Button3" runat="server" OnClick="logout" Text="Logout" CssClass="<%--AbsButton--%>btn btn-primary popUpButtons" Width="80px" Style="margin-top: 2px;"/>
+                        <asp:Button ID="Button3" runat="server" OnClick="logout" Text="Logout" CssClass="<%--AbsButton--%>btn btn-primary logout" Width="80px" Style="margin-top: 2px;"/>
                     </div>
                 </div>
             </li>
