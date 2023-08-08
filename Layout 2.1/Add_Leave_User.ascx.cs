@@ -45,7 +45,7 @@ namespace Layout_2._1
 
 
             if (!IsPostBack)
-            {
+            { 
                 Calendar1.Visible = false;
                 Calendar2.Visible = false;
             }
@@ -348,7 +348,8 @@ namespace Layout_2._1
 
         protected void Drop_SelectedIndexChanged(object sender, EventArgs e)
         {
-          
+
+           ;
 
 
             LeaveLable.Text = "";

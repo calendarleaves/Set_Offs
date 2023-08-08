@@ -45,7 +45,7 @@
     });--%>
 
 </script>
- >
+ 
 <div class="modal" id="myModal3">
     <div class="modal-dialog">
         <div class="modal-content" style="height:630px; width:600px; border:solid;border-color:blue; max-height:630px;">
@@ -106,7 +106,7 @@
 
            <asp:TextBox ID="from" CssClass="text" runat="server"  ReadOnly="true" style=" max-width:320px; max-height:30px" OnGotFocus="focusforpass"></asp:TextBox>
               
-       <!--       <asp:TextBox ID="from1" runat="server" type="text" placeholder="" class="form-control" style=" max-width:250px; max-height:30px" OnGotFocus="focusforpass"></asp:TextBox> -->
+  
              <asp:ImageButton ID="ca1" CssClass="button1" runat="server" ImageUrl="cal1.jpg" ImageAlign="AbsBottom" onclick="Calendar1_Click" /> <br />
            <asp:Label ID="calendar1lable" class="error" runat="server" Text="" ForeColor="#FF3300"></asp:Label>
 
