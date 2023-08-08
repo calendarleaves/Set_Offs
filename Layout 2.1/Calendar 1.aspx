@@ -79,7 +79,7 @@
 }     
      .divider {
     border: none;
-    border-top: 1px solid #000;
+    border-top: 1px solid #bebcbc !important;
     margin: 0px 0;
 }
      .division-heading {
@@ -89,7 +89,7 @@
 .division-divider {
     margin-top: 5px;
     margin-bottom: 5px;
-    border: 1px solid #000;
+    border: 1px solid #bebcbc;
 }
 .GriedViewContainer {
     height: 500px;
