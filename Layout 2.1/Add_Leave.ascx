@@ -48,7 +48,7 @@
  
 <div class="modal" id="myModal3">
     <div class="modal-dialog">
-        <div class="modal-content" style="height:630px; width:600px; border:solid;border-color:blue; max-height:630px;">
+        <div class="modal-content" style="height:630px; width:600px; border:solid;border-color:#5d6e8a; max-height:630px;">
             <!-- Modal Header -->
             <div class="modal-header" style="padding:10px;">
                 <h2 style="margin-left:180px; ">ADD LEAVE</h2>
