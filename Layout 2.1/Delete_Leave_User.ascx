@@ -32,6 +32,11 @@
     .selected-row{
         background-color:skyblue;
     }
+    .gridview-container {
+    max-height: 400px !important;
+    overflow-y: auto !important;
+    width:900px !important;
+}
 </style>
 
 
@@ -51,7 +56,7 @@
                         <div class="row">
                            
                             <!--Gridview Container  -->
-                            <div class="col-lg-10 offset-lg-1 mt-4 text-center">
+                            <div class="col-lg-10  mt-4 text-center">
                                 <div class="gridview-container">
                                     <asp:GridView ID="DeleteLeaveGridView" runat="server" AutoGenerateColumns="false" CssClass="table" OnRowDeleting="DeleteLeaveGridView_RowDeleting" DataKeyNames="Id" OnRowDataBound="DeleteLeaveGridView_RowDataBound" OnSelectedIndexChanged="DeleteLeaveGridView_SelectedIndexChanged">
                                         <Columns>
@@ -59,9 +64,10 @@
                                             <asp:BoundField DataField="FirstName" HeaderText="First Name" />
                                             <asp:BoundField DataField="LastName" HeaderText="Last Name" />
                                             <asp:BoundField DataField="LeaveType" HeaderText="Leave Type" />
-                                            <asp:BoundField DataField="StartDate" HeaderText="Start Date" DataFormatString="{0:dd/MM/yyyy}" />
-                                            <asp:BoundField DataField="EndDate" HeaderText="End Date" DataFormatString="{0:dd/MM/yyyy}" />
+                                            <asp:BoundField DataField="StartDate" HeaderText="From" DataFormatString="{0:dd/MM/yyyy}" />
+                                            <asp:BoundField DataField="EndDate" HeaderText="To" DataFormatString="{0:dd/MM/yyyy}" />
                                             <asp:BoundField DataField="Days" HeaderText="Total Days" />
+                                            <asp:BoundField DataField="Comments" HeaderText="Reason" />
                                             <asp:TemplateField HeaderText="Action">
                                                 <ItemTemplate>
                                                     <asp:Button CommandName="Delete" runat="server" CssClass="btn btn-danger" Text="Delete" ID="btnDelete" />
