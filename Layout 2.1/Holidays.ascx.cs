@@ -53,5 +53,10 @@ namespace Layout_2._1
                 return new List<HolidayList>();
             }
         }
+
+        protected void closeHoli_Click(object sender, ImageClickEventArgs e)
+        {
+            Server.Transfer("Calendar 1.aspx");
+        }
     }
 }

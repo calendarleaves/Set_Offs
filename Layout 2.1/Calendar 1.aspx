@@ -52,25 +52,47 @@
     border-radius: 5px;
     background-color: #7499f1;
 }  
-     .popUpButtons {
-            margin-top: 20px;
-            margin-right:10px;
-            margin-bottom:10px;
-            width: 150px;
-            height:30px;
-            padding: 5px;
-            border:1px solid #000;         
-            background-color: #0555fb;
-            color:white;
-                     
-        }
+     
 
-            .popUpButtons:hover {
+     .popUpButtons2{
+        
+          margin-top: 20px;
+            margin-right:15px;
+            margin-bottom:10px;
+    width: 125px;
+    padding: 2px;
+    height:40px;
+    border-radius: 5px;
+    border: 1px solid #000;
+    background-color: #0555fb;
+    color: white;
+     }
+
+     .popUpButtons2:hover {
                 background-color: #7499f1;
                 color:black;
                 border:1px solid #000;
               
             }
+     
+.logout {
+    margin-top: 20px;
+    margin-left: 90px;
+    width: 100px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #000;
+    background-color: #0555fb;
+    color: white;
+}
+
+
+    .logout:hover {
+        background-color: #7499f1;
+        color: black;
+        border: 1px solid #000;
+    }
+            
 
 .AbsButton:hover
 {
@@ -79,7 +101,7 @@
 }     
      .divider {
     border: none;
-    border-top: 1px solid #000;
+    border-top: 1px solid #bebcbc !important;
     margin: 0px 0;
 }
      .division-heading {
@@ -89,7 +111,7 @@
 .division-divider {
     margin-top: 5px;
     margin-bottom: 5px;
-    border: 1px solid #000;
+    border: 1px solid #bebcbc;
 }
 .GriedViewContainer {
     height: 500px;
@@ -202,9 +224,9 @@
         <div class="container-fluid">
             
             <!-- Logo or Image on the Left -->
-            
+             
                  <asp:Image ID="Image2"  ImageUrl="flexur2.jpg" runat="server" CssClass="Image2" />
-
+                 
         <div class="navbar-header d-md-flex ">
             <!-- Title in the Middle -->
             <h1 class="navbar-item" style="margin-left: 230px;background-image: linear-gradient(to right, #553c9a 45%, #ee4b2b);
@@ -232,7 +254,7 @@
                      <uc:Leave_Records ID="Leave_Records" runat="server" />
                 </a>
                 </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown d-none d-md-flex">
                 
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   
@@ -256,7 +278,7 @@
                     <asp:Label ID="Label2" runat="server"   CssClass="ml-3 "></asp:Label>
                     <div class="dropdown-divider"></div>
                     <div class="text-right pr-2">
-                        <asp:Button ID="Button3" runat="server" OnClick="logout" Text="Logout" CssClass="<%--AbsButton--%>btn btn-primary popUpButtons" Width="80px" Style="margin-top: 2px;"/>
+                        <asp:Button ID="Button3" runat="server" OnClick="logout" Text="Logout" CssClass="<%--AbsButton--%>btn btn-primary logout" Width="80px" Style="margin-top: 2px;"/>
                     </div>
                 </div>
             </li>
@@ -329,21 +351,45 @@
       </div>-->
         <hr class="divider">
             <div class="container-fluid" style="display: flex; justify-content: flex-end; margin-right: 20px;">
-              <asp:HiddenField ID="hiddenField" runat="server" Value="" />
+            <!--code for color squares and info-->
+                 <div style="display: flex; justify-content: flex-start; margin-right: 760px;">
+    <!-- First Column -->
+    <div style="display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; margin-right: 20px;">
+        <span style="display: flex; align-items: center; margin-bottom: 5px; margin-top:15px;">
+            <div style="width: 10px; height: 10px; background-color: orange; margin-right: 5px;"></div>
+            Absent
+        </span>
+        <span style="display: flex; align-items: center; margin-bottom: 5px;">
+            <div style="width: 10px; height: 10px; background-color: green; margin-right: 5px;"></div>
+            Present
+        </span>
+    </div>
+
+    <!-- Second Column -->
+    <div style="display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start;">
+        <span style="display: flex; align-items: center; margin-top:15px;">
+            <div style="width: 10px; height: 10px; background-color: red; margin-right: 5px;"></div>
+            Holiday
+        </span>
+    </div>
+</div>
+
+
+                <asp:HiddenField ID="hiddenField" runat="server" Value="" />
        
                
-                          <button type="button" id="AddUsrBtn" class="btn btn-primary  popUpButtons" data-toggle="modal" data-target="#myModal7">Add Leave</button>     
+                          <button type="button" id="AddUsrBtn" class="btn btn-primary  popUpButtons2" data-toggle="modal" data-target="#myModal7">Apply Leave</button>     
       <uc:Add_Leave_User ID="Add_Leave_User" runat="server" />
 
-                <button type="button" id="AddAdmnBtn" class="btn btn-primary  popUpButtons" data-toggle="modal" data-target="#myModal3">Add Leave</button>     
+                <button type="button" id="AddAdmnBtn" class="btn btn-primary  popUpButtons2" data-toggle="modal" data-target="#myModal3">Apply Leave</button>     
       <uc:Add_Leave ID="Add_Leave" runat="server" />
                 
-                <button type="button" id="DltUsrBtn" class="btn btn-primary  popUpButtons" data-toggle="modal" data-target="#myModal8">Delete Leave</button>     
+                <button type="button" id="DltUsrBtn" class="btn btn-primary  popUpButtons2" style="text-align:center; justify-content:center"  data-toggle="modal" data-target="#myModal8">Delete Leave</button>     
 	 <uc:Delete_Leave_User ID="Delete_Leave_User" runat="server" />
 
-                <button type="button" id="DltAdmnBtn" class="btn btn-primary  popUpButtons" data-toggle="modal" data-target="#myModal4">Delete Leave pop up</button>     
+                <button type="button" id="DltAdmnBtn" class="btn btn-primary  popUpButtons2" data-toggle="modal" data-target="#myModal4">Delete Leave pop up</button>     
 	 <uc:Delete_Leave ID="Delete_Leave" runat="server" />
-                <asp:Button ID="DltAdmnBtn2" cssClass="popUpButtons" runat="server" Text="Delete Leave"  onClick="Button2_Click" Height:25px Visible="false" Enabled="false"/>
+                <asp:Button ID="DltAdmnBtn2" cssClass="popUpButtons2" runat="server" Text="Delete Leave"  onClick="Button2_Click" Height:25px Visible="false" Enabled="false"/>
      
                 
                <%-- <%--<button type="button" id="DeleteLeaveBtn" class="btn btn-primary popUpButtons" data-toggle="modal" data-target="DeleteLeaveModal">Test Delete Popup</button>
