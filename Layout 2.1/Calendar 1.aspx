@@ -218,7 +218,7 @@
                   
               
               
-                       <asp:Image ID="Image3" runat="server" ImageUrl="314534-P8X7PS-657.jpg" CssClass="profile-circle img-fluid" ToolTip="Upcoming Holidays" />
+                       <asp:Image ID="Image3" runat="server" ImageUrl="HolidayIcon.svg" CssClass="profile-circle img-fluid" ToolTip="Upcoming Holidays" />
                     <uc:Holidays ID="Holidays" runat="server" />
                 </a>
                     
@@ -227,7 +227,7 @@
                 <li class=" d-none d-md-flex" style="margin-right: 20px;">
                     <a class="nav-link " runat="server" href="#" id="LeaveRecors" role="button" data-toggle="modal" data-target="#myModal2" aria-haspopup="true" aria-expanded="false">
                   
-                      <asp:Image ID="Image4" runat="server" ImageUrl="Folder.png" CssClass="profile-circle img-fluid" ToolTip="Leave Records" />
+                      <asp:Image ID="Image4" runat="server" ImageUrl="LeaveRecordsIcon.svg" CssClass="profile-circle img-fluid" ToolTip="Leave Records" />
                        
                      <uc:Leave_Records ID="Leave_Records" runat="server" />
                 </a>
