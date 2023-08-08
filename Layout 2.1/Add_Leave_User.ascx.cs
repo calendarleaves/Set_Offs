@@ -45,7 +45,7 @@ namespace Layout_2._1
 
 
             if (!IsPostBack)
-            {
+            { 
                 Calendar1.Visible = false;
                 Calendar2.Visible = false;
             }
@@ -348,16 +348,28 @@ namespace Layout_2._1
 
         protected void Drop_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+           ;
+
+
+            LeaveLable.Text = "";
+            Total_Days.Text = "";
+            from.Text = "";
+            To.Text = "";
+
             string selectedValue = Drop.SelectedValue;
 
-            if (selectedValue != "")
+            if (!string.IsNullOrEmpty(selectedValue) && selectedValue != "--Select Leave--")
             {
-                LeaveLable.Text = "";
+
+
+
                 if (Drop.SelectedValue == "First Half " || Drop.SelectedValue == "Second Half")
                 {
                     Cal1.Enabled = false;
                     Cal1.BackColor = System.Drawing.Color.Gray;
                     Cal1.Visible = false;
+                   
                 }
                 else
                 {
@@ -365,6 +377,17 @@ namespace Layout_2._1
                     Cal1.BackColor = System.Drawing.Color.White;
                     Cal1.Visible = true;
                 }
+
+            }
+            if (Calendar1.Visible)
+            {
+                Calendar1.Visible = false;
+
+            }
+            if (Calendar2.Visible)
+            {
+                Calendar2.Visible = false;
+
             }
             ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal7').modal('show');", true);
 

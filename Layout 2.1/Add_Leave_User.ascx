@@ -52,9 +52,7 @@
             <!-- Modal Header -->
             <div class="modal-header">
                 <h2 class="modal-title" style="margin-left:180px; ">ADD LEAVE</h2>
-                 
                 <asp:ImageButton ID="close" CssClass="Close" ImageUrl="images/Close1.png" ImageAlign="AbsBottom" runat="server" OnClick="close_Click" />
-           
             </div>
 
             <!-- Modal body -->
@@ -62,23 +60,21 @@
                 
 
 
-              <asp:Label ID="LeaveType" runat="server"  Text="LeaveType:"></asp:Label>  <br />                
+              <asp:Label ID="LeaveType" runat="server"  Text="LeaveType:"></asp:Label> 
+                <asp:Label ID="Label3" runat="server" class=" form-label"  Text="Label" ForeColor="#FF3300">*</asp:Label><br />                
              
              <asp:DropDownList  CssClass="drop" runat="server" ID="Drop" DataTextField="Drop" OnSelectedIndexChanged="Drop_SelectedIndexChanged" AutoPostBack="true" >
                  
                      <asp:ListItem Text="--Select Leave--" Value="" Disabled="true" Selected="true" />
-     <asp:ListItem>Full Day </asp:ListItem>  
-                   <asp:ListItem>First Half </asp:ListItem>  
-                  <asp:ListItem>Second Half</asp:ListItem>  
-                 <asp:ListItem>Work From  Home</asp:ListItem> 
+                     <asp:ListItem>Full Day </asp:ListItem>  
+                     <asp:ListItem>First Half </asp:ListItem>  
+                     <asp:ListItem>Second Half</asp:ListItem>  
+                     <asp:ListItem>Work From  Home</asp:ListItem> 
                  
-            
-             </asp:DropDownList> 
-            
-            <br />
-            <asp:Label ID="LeaveLable" class="error" runat="server" Text="" ForeColor="Red"></asp:Label>
-           
-            <br /> 
+              </asp:DropDownList> <br />
+
+
+            <asp:Label ID="LeaveLable" class="error" runat="server" Text="" ForeColor="Red"></asp:Label><br /> 
              
        
 
@@ -88,8 +84,8 @@
 
            <asp:TextBox ID="from" CssClass="text" runat="server"  ReadOnly="true" style=" max-width:320px; max-height:30px" OnGotFocus="focusforpass"></asp:TextBox>
               
-       <!--       <asp:TextBox ID="from1" runat="server" type="text" placeholder="" class="form-control" style=" max-width:250px; max-height:30px" OnGotFocus="focusforpass"></asp:TextBox> -->
-             <asp:ImageButton ID="ca1" CssClass="button1" runat="server" ImageUrl="cal1.jpg" ImageAlign="AbsBottom" onclick="Calendar1_Click" /> <br />
+   
+           <asp:ImageButton ID="ca1" CssClass="button1" runat="server" ImageUrl="cal1.jpg" ImageAlign="AbsBottom" onclick="Calendar1_Click" /> <br />
            <asp:Label ID="calendar1lable" class="error" runat="server" Text="" ForeColor="#FF3300"></asp:Label>
 
             <asp:Calendar ID="Calendar1" CssClass="calendarView" DayNameFormat="FirstLetter"     runat="server" BackColor="white" OnSelectionChanged="Calendar1_SelectionChanged" OnDayRender="Calendar1_DayRender"  CellPadding="4" 

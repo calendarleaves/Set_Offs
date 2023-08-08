@@ -48,7 +48,7 @@
  
 <div class="modal" id="myModal3">
     <div class="modal-dialog">
-        <div class="modal-content" style="height:630px; width:600px; border:solid;border-color:blue;overflow: auto; max-height:630px;">
+        <div class="modal-content" style="height:630px; width:600px; border:solid;border-color:blue; max-height:630px;">
             <!-- Modal Header -->
             <div class="modal-header" style="padding:10px;">
                 <h2 style="margin-left:180px; ">ADD LEAVE</h2>
@@ -64,7 +64,7 @@
                 <asp:Label ID="Employee" runat="server" Text="Employee:"></asp:Label> 
                   <asp:Label ID="Label3" runat="server" class=" form-label"  Text="Label" ForeColor="#FF3300">*</asp:Label><br />
                                                
-                 <asp:DropDownList ID="DropDownList1"  CssClass="drop"  OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" onAutoPostBack="true" runat="server"> </asp:DropDownList>
+                 <asp:DropDownList ID="SelectEmployee"  CssClass="drop"  OnSelectedIndexChanged="SelectEmployee_SelectedIndexChanged" onAutoPostBack="true" runat="server"> </asp:DropDownList>
            
                
                    <br />
@@ -106,7 +106,7 @@
 
            <asp:TextBox ID="from" CssClass="text" runat="server"  ReadOnly="true" style=" max-width:320px; max-height:30px" OnGotFocus="focusforpass"></asp:TextBox>
               
-       <!--       <asp:TextBox ID="from1" runat="server" type="text" placeholder="" class="form-control" style=" max-width:250px; max-height:30px" OnGotFocus="focusforpass"></asp:TextBox> -->
+  
              <asp:ImageButton ID="ca1" CssClass="button1" runat="server" ImageUrl="cal1.jpg" ImageAlign="AbsBottom" onclick="Calendar1_Click" /> <br />
            <asp:Label ID="calendar1lable" class="error" runat="server" Text="" ForeColor="#FF3300"></asp:Label>
 
@@ -167,7 +167,7 @@
                  <asp:TextBox ID="comment" runat="server" type="text" placeholder="Enter here " class="form-control text2" TextMode="MultiLine"  Rows="4" Font-Size="Medium"  OnGotFocus="focusforpass"></asp:TextBox> 
                  <asp:Label class="error" ID="commentError" runat="server" Text="" ></asp:Label><br />
 
-             <asp:Button CssClass ="submit" runat="server"  Text="Submit" OnClick="Submit_click"  />
+             <asp:Button CssClass ="submit" runat="server"  Text="Submit" OnClick="Submit_click"  style="margin-top:1px;" />
             <asp:Button CssClass ="Cancel" runat="server"  Text="Cancel" onclick="Cancel_Click" /> <br />
                  
          

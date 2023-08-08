@@ -42,7 +42,7 @@
                 <!-- Modal Header -->
                 <div class="modal-header">
                      <h3 class="modal-title" style="margin-left:350px;">Delete Leave</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close" data-dismiss="modal" style="color:red">&times;</button>
                 </div>
 
                 <!-- Modal body -->
