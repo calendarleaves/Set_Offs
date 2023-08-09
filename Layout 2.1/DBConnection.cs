@@ -27,7 +27,7 @@ namespace SetOffs1
 
         public DBConnection()
         {
-            this.con = new SqlConnection(connectionString: ConfigurationManager.ConnectionStrings["Setoffs"].ConnectionString);
+            this.con = new SqlConnection(connectionString: ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString);
         }
 
         public List<EmployeeLeave> GetEmployeeLeave(DateTime date)
