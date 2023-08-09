@@ -66,6 +66,7 @@
     border: 1px solid #000;
     background-color: #0555fb;
     color: white;
+    font-weight:bold;
      }
 
      .popUpButtons2:hover {
@@ -84,6 +85,7 @@
     border: 1px solid #000;
     background-color: #0555fb;
     color: white;
+    font-weight:bold;
 }
 
 
@@ -352,26 +354,32 @@
         <hr class="divider">
             <div class="container-fluid" style="display: flex; justify-content: flex-end; margin-right: 20px;">
             <!--code for color squares and info-->
-                 <div style="display: flex; justify-content: flex-start; margin-right: 760px;">
+                 <div style="display: flex; justify-content: flex-start; margin-right:700px">
     <!-- First Column -->
     <div style="display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; margin-right: 20px;">
         <span style="display: flex; align-items: center; margin-bottom: 5px; margin-top:15px;">
             <div style="width: 10px; height: 10px; background-color: orange; margin-right: 5px;"></div>
             Absent
         </span>
-        <span style="display: flex; align-items: center; margin-bottom: 5px;">
+    </div>
+
+    <!-- Second Column -->
+    <div style="display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; margin-right: 20px;">
+        <span style="display: flex; align-items: center; margin-top:15px;">
             <div style="width: 10px; height: 10px; background-color: green; margin-right: 5px;"></div>
             Present
         </span>
     </div>
 
-    <!-- Second Column -->
-    <div style="display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start;">
-        <span style="display: flex; align-items: center; margin-top:15px;">
+                      <!-- Third Column (replicated from the Second Column) -->
+   
+    <div style="display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; margin-right: 20px;">
+        <span style="display: flex; align-items: center; margin-top: 15px;">
             <div style="width: 10px; height: 10px; background-color: red; margin-right: 5px;"></div>
             Holiday
         </span>
     </div>
+                     
 </div>
 
 
