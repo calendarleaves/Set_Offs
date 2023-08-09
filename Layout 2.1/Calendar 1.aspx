@@ -66,6 +66,7 @@
     border: 1px solid #000;
     background-color: #0555fb;
     color: white;
+    font-weight:bold;
      }
 
      .popUpButtons2:hover {
@@ -84,6 +85,7 @@
     border: 1px solid #000;
     background-color: #0555fb;
     color: white;
+    font-weight:bold;
 }
 
 
