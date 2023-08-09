@@ -56,7 +56,7 @@
                         <div class="row">
                            
                             <!--Gridview Container  -->
-                            <div class="col-lg-10  mt-4 text-center">
+                            <div class="col-lg-10 offset-lg-1 mt-4 text-center">
                                 <div class="gridview-container">
                                     <asp:GridView ID="DeleteLeaveGridView" runat="server" AutoGenerateColumns="false" CssClass="table" OnRowDeleting="DeleteLeaveGridView_RowDeleting" DataKeyNames="Id" OnRowDataBound="DeleteLeaveGridView_RowDataBound" OnSelectedIndexChanged="DeleteLeaveGridView_SelectedIndexChanged">
                                         <Columns>
