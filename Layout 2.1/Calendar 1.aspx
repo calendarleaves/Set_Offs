@@ -226,9 +226,9 @@
         <div class="container-fluid">
             
             <!-- Logo or Image on the Left -->
-            
+             
                  <asp:Image ID="Image2"  ImageUrl="flexur2.jpg" runat="server" CssClass="Image2" />
-
+                 
         <div class="navbar-header d-md-flex ">
             <!-- Title in the Middle -->
             <h1 class="navbar-item" style="margin-left: 230px;background-image: linear-gradient(to right, #553c9a 45%, #ee4b2b);
@@ -256,7 +256,7 @@
                      <uc:Leave_Records ID="Leave_Records" runat="server" />
                 </a>
                 </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown d-none d-md-flex">
                 
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   
@@ -386,10 +386,10 @@
                 <asp:HiddenField ID="hiddenField" runat="server" Value="" />
        
                
-                          <button type="button" id="AddUsrBtn" class="btn btn-primary  popUpButtons2" data-toggle="modal" data-target="#myModal7">Add Leave</button>     
+                          <button type="button" id="AddUsrBtn" class="btn btn-primary  popUpButtons2" data-toggle="modal" data-target="#myModal7">Apply Leave</button>     
       <uc:Add_Leave_User ID="Add_Leave_User" runat="server" />
 
-                <button type="button" id="AddAdmnBtn" class="btn btn-primary  popUpButtons2" data-toggle="modal" data-target="#myModal3">Add Leave</button>     
+                <button type="button" id="AddAdmnBtn" class="btn btn-primary  popUpButtons2" data-toggle="modal" data-target="#myModal3">Apply Leave</button>     
       <uc:Add_Leave ID="Add_Leave" runat="server" />
                 
                 <button type="button" id="DltUsrBtn" class="btn btn-primary  popUpButtons2" style="text-align:center; justify-content:center"  data-toggle="modal" data-target="#myModal8">Delete Leave</button>     

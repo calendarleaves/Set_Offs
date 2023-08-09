@@ -370,7 +370,7 @@ namespace SetOffs1
             }
             DataTable dt = new DataTable();
 
-            string query = "SELECT e.Id     ,e.FirstName     ,e.LastName  ,l.LeaveType     ,l.StartDate  ,l.EndDate      ,l.Days  FROM Employee e join Leave l on e.Id = l.EmpId where e.FirstName LIKE @firstName + '%' AND e.LastName LIKE @lastName + '%' order by e.FirstName ";
+            string query = "SELECT e.Id     ,e.FirstName     ,e.LastName  ,l.LeaveType     ,l.StartDate  ,l.EndDate      ,l.Days , l.Comments FROM Employee e join Leave l on e.Id = l.EmpId where e.FirstName LIKE @firstName + '%' AND e.LastName LIKE @lastName + '%' order by e.FirstName ";
             con.Open();
             using (SqlCommand command = new SqlCommand(query, con))
             {
@@ -604,7 +604,7 @@ namespace SetOffs1
         {
             DataTable dt = new DataTable();
 
-            string query = "SELECT e.Id, e.FirstName, e.LastName,  FORMAT(l.StartDate, 'dd MMM') as StartDate , FORMAT(l.EndDate, 'dd MMM') as EndDate FROM Employee e JOIN Leave l ON e.Id = l.EmpId WHERE (l.StartDate >= @Variable1 AND l.StartDate <= @Variable2)   OR    (l.EndDate >= @Variable1 AND l.EndDate <= @Variable2)   OR  (l.StartDate <= @Variable1 AND l.EndDate >= @Variable2)";
+            string query = "SELECT e.Id, e.FirstName, e.LastName,  FORMAT(l.StartDate, 'dd MMM') as StartDate , FORMAT(l.EndDate, 'dd MMM') as EndDate FROM Employee e JOIN Leave l ON e.Id = l.EmpId WHERE (l.StartDate >= @Variable1 AND l.StartDate <= @Variable2)   OR    (l.EndDate >= @Variable1 AND l.EndDate <= @Variable2)   OR  (l.StartDate <= @Variable1 AND l.EndDate >= @Variable2) ORDER BY l.StartDate";
             con.Open();
             using (SqlCommand command = new SqlCommand(query, con))
             {
