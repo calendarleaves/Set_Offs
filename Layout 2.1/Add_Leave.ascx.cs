@@ -150,7 +150,18 @@ namespace Layout_2._1
                     Leave l = new Leave();
                     l.LeaveType = drop.SelectedValue;
                     l.StartDate = Calendar1.SelectedDate;
-                    l.EndDate = Calendar2.SelectedDate;
+
+                    if (drop.SelectedValue == "First Half " || drop.SelectedValue == "Second Half")
+
+                    {
+                        l.EndDate = Calendar1.SelectedDate;
+
+
+                    }
+                    else
+                    {
+                        l.EndDate = Calendar2.SelectedDate;
+                    }
                     l.Days = float.Parse(Total_Days.Text);
                     l.Comments = comment.Text;
 

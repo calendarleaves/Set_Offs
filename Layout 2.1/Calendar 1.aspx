@@ -231,9 +231,10 @@
                  
         <div class="navbar-header d-md-flex ">
             <!-- Title in the Middle -->
-            <h1 class="navbar-item" style="margin-left: 230px;background-image: linear-gradient(to right, #553c9a 45%, #ee4b2b);
-    color: transparent;-webkit-background-clip: text;">Leave Portal</h1>
-        </div>
+             <h1 class="navbar-item" style="margin-left: 230px;background-image: linear-gradient(to right, #553c9a 45%, #ee4b2b);
+    color: transparent;-webkit-background-clip: text;">Leave </h1>
+            <h1 class="navbar-item" style="margin-left: 8px;background-image: linear-gradient(to right, #553c9a 45%, #ee4b2b);
+    color: transparent;-webkit-background-clip: text;">Portal</h1>
              
             <!-- Dropdown on the Right -->
             <ul class="navbar-nav flex-row  justify-content-end">
@@ -389,7 +390,7 @@
                           <button type="button" id="AddUsrBtn" class="btn btn-primary  popUpButtons2" data-toggle="modal" data-target="#myModal7">Apply Leave</button>     
       <uc:Add_Leave_User ID="Add_Leave_User" runat="server" />
 
-                <button type="button" id="AddAdmnBtn" class="btn btn-primary  popUpButtons2" data-toggle="modal" data-target="#myModal3">Apply Leave</button>     
+                <button type="button" id="AddAdmnBtn" class="btn btn-primary  popUpButtons2" data-toggle="modal" data-target="#myModal3">Add Leave</button>     
       <uc:Add_Leave ID="Add_Leave" runat="server" />
                 
                 <button type="button" id="DltUsrBtn" class="btn btn-primary  popUpButtons2" style="text-align:center; justify-content:center"  data-toggle="modal" data-target="#myModal8">Delete Leave</button>     
