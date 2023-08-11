@@ -27,7 +27,7 @@ namespace SetOffs1
 
         public DBConnection()
         {
-            this.con = new SqlConnection(connectionString: ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString);
+            this.con = new SqlConnection(connectionString: ConfigurationManager.ConnectionStrings["Setoffs"].ConnectionString);
         }
 
         public List<EmployeeLeave> GetEmployeeLeave(DateTime date)
@@ -505,7 +505,7 @@ namespace SetOffs1
         {
             int id = getEmployeeId(s);
 
-            string query = "DELETE FROM  Leave WHERE EmpID = @EmpId  AND (StartDate = @StartDate OR EndDate = @EndDate) ";
+            string query = "DELETE FROM  Leave WHERE EmpID = @EmpId  AND (StartDate = @StartDate and EndDate = @EndDate) ";
             con.Open();
             using (SqlCommand command = new SqlCommand(query, con))
             {
@@ -518,23 +518,23 @@ namespace SetOffs1
             }
             con.Close();
         }
-        public void DeleteLeave(DateTime startDate, DateTime endDate)
-        {
+        //public void DeleteLeave(DateTime startDate, DateTime endDate)
+        //{
           
 
-            string query = "DELETE FROM  Leave WHERE   (StartDate = @StartDate OR EndDate = @EndDate) ";
-            con.Open();
-            using (SqlCommand command = new SqlCommand(query, con))
-            {
+        //    string query = "DELETE FROM  Leave WHERE   (StartDate = @StartDate OR EndDate = @EndDate) ";
+        //    con.Open();
+        //    using (SqlCommand command = new SqlCommand(query, con))
+        //    {
               
-                command.Parameters.AddWithValue("@StartDate", startDate);
-                command.Parameters.AddWithValue("@EndDate", endDate);
+        //        command.Parameters.AddWithValue("@StartDate", startDate);
+        //        command.Parameters.AddWithValue("@EndDate", endDate);
 
 
-                command.ExecuteReader();
-            }
-            con.Close();
-        }
+        //        command.ExecuteReader();
+        //    }
+        //    con.Close();
+        //}
 
 
 
