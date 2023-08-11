@@ -235,7 +235,7 @@
     color: transparent;-webkit-background-clip: text;">Leave </h1>
             <h1 class="navbar-item" style="margin-left: 8px;background-image: linear-gradient(to right, #553c9a 45%, #ee4b2b);
     color: transparent;-webkit-background-clip: text;">Portal</h1>
-             
+             </div>
             <!-- Dropdown on the Right -->
             <ul class="navbar-nav flex-row  justify-content-end">
                 <li class=" d-none d-md-flex" style="margin-right: 20px;">
