@@ -171,9 +171,7 @@
             <asp:Button CssClass ="Cancel" runat="server"  Text="Cancel" onclick="Cancel_Click" /> <br />
                  
          
+                </div>
+            </div>
         </div>
     </div>
-</div>
-    </div>
-
-

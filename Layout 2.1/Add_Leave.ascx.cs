@@ -169,7 +169,7 @@ namespace Layout_2._1
 
                     s.Addleave(firstName, lastName, l);
 
-                    Server.Transfer("Calendar 1.aspx");
+                    Response.Redirect("Calendar 1.aspx");
 
 
 
@@ -182,7 +182,7 @@ namespace Layout_2._1
 
             }
 
-            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal3').modal('show');", true);
+            //ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal3').modal('show');", true);
 
         }
 
