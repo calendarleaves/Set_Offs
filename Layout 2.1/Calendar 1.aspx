@@ -6,6 +6,7 @@
 <%@ Register TagPrefix="uc" TagName="Add_Leave_User" Src="~/Add_Leave_User.ascx" %>
 <%@ Register TagPrefix="uc" TagName="Delete_Leave_User" Src="~/Delete_Leave_User.ascx" %>
 <%@ Register TagPrefix="uc" TagName="Test_Delete_Leave" Src="~/Test_Delete_Leave.ascx" %>
+<%@ Register TagPrefix="uc" TagName="PasswordChange" Src="~/PasswordChange.ascx" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -94,6 +95,15 @@
         color: black;
         border: 1px solid #000;
     }
+ .custom-link {
+            color: #007bff; /* Blue color for link */
+            text-decoration: none; /* Remove underline */
+            cursor: pointer; /* Hand cursor on hover */
+        }
+        .custom-link:hover {
+            color: #0056b3; /* Darker blue color for hover */
+            text-decoration: underline; /* Add underline on hover */
+        }
             
 
 .AbsButton:hover
@@ -278,12 +288,23 @@
                             </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
+                    <asp:label ID="Changepass" runat="server"   CssClass="ml-3 mb-2 custom-link cursor-pointer" data-toggle="modal" data-target="#PasswordUpdate">Change password</asp:label>
+                    <a href="#" data-toggle="modal" data-target="#PasswordUpdate">Open Popup</a>
+                    <uc:PasswordChange id="PasswordChange1" runat="server" />
                     <asp:Label ID="Label2" runat="server"   CssClass="ml-3 "></asp:Label>
                     <div class="dropdown-divider"></div>
-                    <div class="text-right pr-2">
-                        <asp:Button ID="Button3" runat="server" OnClick="logout" Text="Logout" CssClass="<%--AbsButton--%>btn btn-primary logout" Width="80px" Style="margin-top: 2px;"/>
-                    </div>
+                   <div class="d-flex justify-content-between align-items-center ml-3">
+                     
+                        <%--<a type="" class="btn btn-primary changepass mb-2" data-toggle="modal" data-target="#PasswordUpdate">Change_Pass</a>--%>
+        
+                        
+                    
+                        <asp:Button ID="Button3" runat="server" OnClick="logout" Text="Logout" CssClass="btn btn-primary logout mr-3" Width="80px" />
+                    
                 </div>
+                    
+                </div>
+                    
             </li>
         </ul>
             

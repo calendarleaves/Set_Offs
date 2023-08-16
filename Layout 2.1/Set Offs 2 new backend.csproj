@@ -100,6 +100,7 @@
     <Content Include="Create_Abs.aspx" />
     <Content Include="flexur2.jpg" />
     <Content Include="LoginCSSboot1.css" />
+    <Content Include="PasswordChange.ascx" />
     <Content Include="Profile.png" />
     <Content Include="LeaveRecordsIcon.svg" />
     <Content Include="HolidayIcon.svg" />
@@ -202,6 +203,13 @@
     </Compile>
     <Compile Include="Leave_Records.ascx.designer.cs">
       <DependentUpon>Leave_Records.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordChange.ascx.cs">
+      <DependentUpon>PasswordChange.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PasswordChange.ascx.designer.cs">
+      <DependentUpon>PasswordChange.ascx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Login.aspx.cs">

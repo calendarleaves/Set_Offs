@@ -271,7 +271,7 @@ namespace Layout_2._1
 
 
                     cmd.AddLeave(l);
-                    Server.Transfer("Calendar 1.aspx");
+                    Response.Redirect("Calendar 1.aspx");
                 }
             }
             catch (Exception ex)
