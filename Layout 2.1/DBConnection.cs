@@ -284,7 +284,7 @@ namespace SetOffs1
         WHERE 
             l.StartDate >= @StartDate AND l.StartDate <= @EndDate
         ORDER BY 
-            e.FirstName", con);
+            l.StartDate, e.FirstName", con);
 
             // Construct date ranges for 1st July to 31st July of the current year
             DateTime startDate = new DateTime(currentYear, 1, 1);
@@ -321,7 +321,7 @@ namespace SetOffs1
             e.Email = @EmployeeId
             AND l.StartDate >= @StartDate AND l.StartDate <= @EndDate
         ORDER BY 
-            e.FirstName", con);
+            l.StartDate", con);
 
             // Construct date ranges for 1st July to 31st July of the current year
             DateTime startDate = new DateTime(currentYear, 1, 1);

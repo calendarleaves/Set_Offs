@@ -105,7 +105,7 @@
         }
         .custom-link:hover {
             color: #0056b3; /* Darker blue color for hover */
-            text-decoration: underline; /* Add underline on hover */
+            text-decoration: ; /* Add underline on hover */
         }
             
 
