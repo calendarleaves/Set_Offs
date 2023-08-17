@@ -7,6 +7,9 @@
 <%@ Register TagPrefix="uc" TagName="Delete_Leave_User" Src="~/Delete_Leave_User.ascx" %>
 <%@ Register TagPrefix="uc" TagName="Test_Delete_Leave" Src="~/Test_Delete_Leave.ascx" %>
 <%@ Register TagPrefix="uc" TagName="PasswordChange" Src="~/PasswordChange.ascx" %>
+
+<%@ Register TagPrefix="uc" TagName="PassChange" Src="~/PassChange.ascx" %>
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -288,9 +291,11 @@
                             </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
-                    <asp:label ID="Changepass" runat="server"   CssClass="ml-3 mb-2 custom-link" data-toggle="modal" data-target="#PasswordUpdate">Change password</asp:label>
+                    <%--<asp:label ID="Changepass" runat="server"   CssClass="ml-3 mb-2 custom-link cursor-pointer" data-toggle="modal" data-target="#PasswordUpdate">Change password</asp:label>
                     <a href="#" data-toggle="modal" data-target="#PasswordUpdate">Open Popup</a>
                     <uc:PasswordChange id="PasswordChange1" runat="server" />
+                   --%>
+                     <a href="#" data-toggle="modal" data-target="#myModal15">Open Popup 2</a>
                     <asp:Label ID="Label2" runat="server"   CssClass="ml-3 "></asp:Label>
                     <div class="dropdown-divider"></div>
                    <div class="d-flex justify-content-between align-items-center ml-3">
@@ -419,6 +424,8 @@
 
                 <button type="button" id="DltAdmnBtn" class="btn btn-primary  popUpButtons2" data-toggle="modal" data-target="#myModal4">Delete Leave pop up</button>     
 	 <uc:Delete_Leave ID="Delete_Leave" runat="server" />
+
+                <uc:PassChange ID="PassChange" runat="server" />
                 <asp:Button ID="DltAdmnBtn2" cssClass="popUpButtons2" runat="server" Text="Delete Leave"  onClick="Button2_Click" Height:25px Visible="false" Enabled="false"/>
      
                 
