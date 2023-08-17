@@ -102,7 +102,7 @@
         }
         .custom-link:hover {
             color: #0056b3; /* Darker blue color for hover */
-            text-decoration: underline; /* Add underline on hover */
+            text-decoration: ; /* Add underline on hover */
         }
             
 
@@ -288,7 +288,7 @@
                             </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
-                    <asp:label ID="Changepass" runat="server"   CssClass="ml-3 mb-2 custom-link cursor-pointer" data-toggle="modal" data-target="#PasswordUpdate">Change password</asp:label>
+                    <asp:label ID="Changepass" runat="server"   CssClass="ml-3 mb-2 custom-link" data-toggle="modal" data-target="#PasswordUpdate">Change password</asp:label>
                     <a href="#" data-toggle="modal" data-target="#PasswordUpdate">Open Popup</a>
                     <uc:PasswordChange id="PasswordChange1" runat="server" />
                     <asp:Label ID="Label2" runat="server"   CssClass="ml-3 "></asp:Label>
