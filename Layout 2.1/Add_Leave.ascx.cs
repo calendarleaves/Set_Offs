@@ -182,7 +182,7 @@ namespace Layout_2._1
 
             }
 
-            //ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal3').modal('show');", true);
+           ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal3').modal('show');", true);
 
         }
 
@@ -480,6 +480,9 @@ namespace Layout_2._1
             Server.Transfer("Calendar 1.aspx");
         }
 
-
+        protected void comment_TextChanged(object sender, EventArgs e)
+        {
+            commentError.Text = "";
+        }
     }
 }
