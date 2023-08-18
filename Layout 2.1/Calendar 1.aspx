@@ -218,6 +218,10 @@
              // Show the modal dialog
              $('#<%= Delete_Leave_User.ClientID %>').modal('show');
          }
+         function showDelete_Leave_User() {
+             // Show the modal dialog
+             $('#<%= PassChange.ClientID %>').modal('show');
+         }
         <%-- function showTest_Delete_Leave() {
              // Show the modal dialog
              $('#<%= Test_Delete_Leave.ClientID %>').modal('show');
@@ -237,6 +241,9 @@
         <div>
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container-fluid">
+           <%-- <div class="alert alert-success" role="alert">
+  This is a success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+</div>--%>
             
             <!-- Logo or Image on the Left -->
              
@@ -291,11 +298,11 @@
                             </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
-                    <%--<asp:label ID="Changepass" runat="server"   CssClass="ml-3 mb-2 custom-link cursor-pointer" data-toggle="modal" data-target="#PasswordUpdate">Change password</asp:label>
-                    <a href="#" data-toggle="modal" data-target="#PasswordUpdate">Open Popup</a>
-                    <uc:PasswordChange id="PasswordChange1" runat="server" />
-                   --%>
-                     <a href="#" data-toggle="modal" data-target="#myModal15">Open Popup 2</a>
+                    <asp:label ID="Changepass" runat="server"   CssClass="ml-3 mb-2 custom-link cursor-pointer" data-toggle="modal" data-target="#myModal15">Change password</asp:label>
+                    <%--<a href="#" data-toggle="modal" data-target="#PasswordUpdate">Open Popup</a>--%>
+                   <%-- <uc:PasswordChange id="PasswordChange1" runat="server" />--%>
+                   
+                     <%--<a href="#" class="ml-3" data-toggle="modal" data-target="#myModal15" >Open Popup 2</a>--%>
                     <asp:Label ID="Label2" runat="server"   CssClass="ml-3 "></asp:Label>
                     <div class="dropdown-divider"></div>
                    <div class="d-flex justify-content-between align-items-center ml-3">

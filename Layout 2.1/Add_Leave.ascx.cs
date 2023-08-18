@@ -182,7 +182,7 @@ namespace Layout_2._1
 
             }
 
-            //ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal3').modal('show');", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal3').modal('show');", true);
 
         }
 
