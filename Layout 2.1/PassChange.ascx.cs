@@ -60,7 +60,13 @@ namespace Layout_2._1
                     newpasserror.Text = " * Please Password at least have 8 characters";
                     newpassbox.Focus();
                 }
-                else if (newpassbox.Text == confirmpassbox.Text)
+                else if(!DBConnection.VerifyPassword(oldpassbox.Text, employee.Password))
+                {
+                    error.Text = "Old password is wrong.";
+                    oldpassbox.Focus();
+                }
+
+                 else if (newpassbox.Text == confirmpassbox.Text)
                 {
 
 
