@@ -138,7 +138,13 @@ namespace Layout_2._1
             Total_Days.Text = "";
 
             Calendar2.Visible = false;
-            if (Calendar1.Visible)
+
+            if (Drop.SelectedValue == "First Half " || Drop.SelectedValue == "Second Half")
+            {
+                To.Text = "";
+            }
+
+                if (Calendar1.Visible)
             {
                 Calendar1.Visible = false;
 
@@ -401,6 +407,11 @@ namespace Layout_2._1
         protected void close_Click(object sender, ImageClickEventArgs e)
         {
             Server.Transfer("Calendar 1.aspx");
+        }
+
+        protected void comment_TextChanged(object sender, EventArgs e)
+        {
+            commentError.Text = "";
         }
     }
 }
