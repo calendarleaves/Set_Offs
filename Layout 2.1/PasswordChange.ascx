@@ -12,18 +12,10 @@
 
         <div class="modal-body">
          
-    <asp:GridView ID="GridView1" runat="server"
-            AutoGenerateColumns="False" ShowHeaderWhenEmpty="True" Width="97%" BorderColor="White" BorderWidth="0px">
-            <Columns>
-                <asp:BoundField DataField="Date" Headertext="On Leave" />                     
-               <asp:BoundField DataField="Holiday" Headertext="Leave Type"/>
-            </Columns>      
-            <EditRowStyle Height="50px" />
-        </asp:GridView>
+   
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
 

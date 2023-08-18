@@ -108,7 +108,11 @@
             text-decoration: ; /* Add underline on hover */
         }
             
-
+        .image {
+        opacity: 0.5; /* Lower opacity */
+        filter: grayscale(100%); /* Apply a grayscale effect */
+        pointer-events: none; /* Disable pointer events to make it non-interactable */
+    }
 .AbsButton:hover
 {
     background-color: blue;
@@ -218,6 +222,10 @@
              // Show the modal dialog
              $('#<%= Delete_Leave_User.ClientID %>').modal('show');
          }
+         function showDelete_Leave_User() {
+             // Show the modal dialog
+             $('#<%= PassChange.ClientID %>').modal('show');
+         }
         <%-- function showTest_Delete_Leave() {
              // Show the modal dialog
              $('#<%= Test_Delete_Leave.ClientID %>').modal('show');
@@ -236,21 +244,27 @@
 
         <div>
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
-        <div class="container-fluid">
+        <div class="container-fluid ">
+           <%-- <div class="alert alert-success" role="alert">
+  This is a success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+</div>--%>
             
             <!-- Logo or Image on the Left -->
+            <div class="navbar-item col-lg-5 col-md-12">
              
-                 <asp:Image ID="Image2"  ImageUrl="flexur2.jpg" runat="server" CssClass="Image2" />
-                 
-        <div class="navbar-header d-md-flex ">
+                 <asp:Image ID="Image2"  ImageUrl="flexur2.jpg" runat="server" CssClass="" />
+                 <asp:Image ID="Image5" ImageUrl="flexur2.jpg" runat="server" value="" CssClass="image" style="display: none;" />
+                </div>
+        <div class="navbar-header d-md-flex col-lg-3 col-md-12">
             <!-- Title in the Middle -->
-             <h1 class="navbar-item" style="margin-left: 230px;background-image: linear-gradient(to right, #553c9a 45%, #ee4b2b);
+            
+             <h1 class="navbar-item" style="background-image: linear-gradient(to right, #553c9a 45%, #ee4b2b);
     color: transparent;-webkit-background-clip: text;">Leave </h1>
             <h1 class="navbar-item" style="margin-left: 8px;background-image: linear-gradient(to right, #553c9a 45%, #ee4b2b);
     color: transparent;-webkit-background-clip: text;">Portal</h1>
              </div>
             <!-- Dropdown on the Right -->
-            <ul class="navbar-nav flex-row  justify-content-end">
+            <ul class="navbar-nav flex-row  justify-content-end col-lg-4 col-md-12">
                 <li class=" d-none d-md-flex" style="margin-right: 20px;">
                     <a class="nav-link" runat="server" href="#" id="holi" role="button" data-toggle="modal" data-target="#myModal" aria-haspopup="true" aria-expanded="false">
                   
@@ -291,14 +305,14 @@
                             </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
-                    <%--<asp:label ID="Changepass" runat="server"   CssClass="ml-3 mb-2 custom-link cursor-pointer" data-toggle="modal" data-target="#PasswordUpdate">Change password</asp:label>
-                    <a href="#" data-toggle="modal" data-target="#PasswordUpdate">Open Popup</a>
-                    <uc:PasswordChange id="PasswordChange1" runat="server" />
-                   --%>
-                     <a href="#" data-toggle="modal" data-target="#myModal15">Open Popup 2</a>
+                    <asp:label ID="Changepass" runat="server"   CssClass="ml-3 mb-2 custom-link cursor-pointer" data-toggle="modal" data-target="#myModal15">Change password</asp:label>
+                    <%--<a href="#" data-toggle="modal" data-target="#PasswordUpdate">Open Popup</a>--%>
+                   <%-- <uc:PasswordChange id="PasswordChange1" runat="server" />--%>
+                   
+                     <%--<a href="#" class="ml-3" data-toggle="modal" data-target="#myModal15" >Open Popup 2</a>--%>
                     <asp:Label ID="Label2" runat="server"   CssClass="ml-3 "></asp:Label>
                     <div class="dropdown-divider"></div>
-                   <div class="d-flex justify-content-between align-items-center ml-3">
+                   <div class="d-flex justify-content-end  align-items-center ml-3">
                      
                         <%--<a type="" class="btn btn-primary changepass mb-2" data-toggle="modal" data-target="#PasswordUpdate">Change_Pass</a>--%>
         
