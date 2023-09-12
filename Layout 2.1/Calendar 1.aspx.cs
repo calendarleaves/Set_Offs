@@ -70,6 +70,18 @@ namespace WebApplication1
                         Button1.Text = "Add Leave";
                         DltAdmnBtn2.Visible = true;
                         DltAdmnBtn2.Enabled = true;
+
+                        AddUsrBtn.InnerHtml = "Add Leave";
+                        AddUsrBtn.Attributes["data-target"] = "#myModal3";
+                        AddUsrBtn.Attributes["class"] = "popUpButtons2";
+
+
+                    }
+                    else
+                    {
+                        DltUsrBtn.Style.Remove("display");
+                        AddUsrBtn.Attributes["class"] = "popUpButtons2";
+
                     }
                 }
 
