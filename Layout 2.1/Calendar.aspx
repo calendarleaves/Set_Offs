@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Calendar 1.aspx.cs" Inherits="WebApplication1.WebForm11" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Calendar.aspx.cs" Inherits="WebApplication1.WebForm11" %>
 <%@ Register TagPrefix="uc" TagName="Holidays" Src="~/Holidays.ascx" %>
 <%@ Register TagPrefix="uc" TagName="Leave_Records" Src="~/Leave_Records.ascx" %>
 <%@ Register TagPrefix="uc" TagName="Add_Leave" Src="~/Add_Leave.ascx" %>
@@ -175,40 +175,7 @@
 }
 
     </style>
-     <script>
-       
-     function showAdd_Leave() {
-         // Show the modal dialog
-         $('#<%= Add_Leave.ClientID %>').modal('show');
-         }
-      function showDelete_Leave() {
-             // Show the modal dialog
-             $('#<%= Delete_Leave.ClientID %>').modal('show');
-         }
-         function showAdd_Leave_User() {
-             // Show the modal dialog
-             $('#<%= Add_Leave_User.ClientID %>').modal('show');
-         }
-         function showDelete_Leave_User() {
-             // Show the modal dialog
-             $('#<%= Delete_Leave_User.ClientID %>').modal('show');
-         }
-         function showDelete_Leave_User() {
-             // Show the modal dialog
-             $('#<%= PassChange.ClientID %>').modal('show');
-         }
-        <%-- function showTest_Delete_Leave() {
-             // Show the modal dialog
-             $('#<%= Test_Delete_Leave.ClientID %>').modal('show');
-          }--%>
-
-
-            
-
-
-
-
-     </script>
+   
 </head>
 <body>
     <form id="form1" runat="server">

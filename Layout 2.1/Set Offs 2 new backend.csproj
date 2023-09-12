@@ -95,7 +95,7 @@
     <Content Include="LoginCSS.css" />
     <Content Include="cal.jpg" />
     <Content Include="cal1.jpg" />
-    <Content Include="Calendar 1.aspx" />
+    <Content Include="Calendar.aspx" />
     <Content Include="CalendarStylesheet2.css" />
     <Content Include="Create_Abs.aspx" />
     <Content Include="flexur2.jpg" />
@@ -133,12 +133,12 @@
     <Compile Include="Add_Leave_User.ascx.designer.cs">
       <DependentUpon>Add_Leave_User.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Calendar 1.aspx.cs">
-      <DependentUpon>Calendar 1.aspx</DependentUpon>
+    <Compile Include="Calendar.aspx.cs">
+      <DependentUpon>Calendar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Calendar 1.aspx.designer.cs">
-      <DependentUpon>Calendar 1.aspx</DependentUpon>
+    <Compile Include="Calendar.aspx.designer.cs">
+      <DependentUpon>Calendar.aspx</DependentUpon>
     </Compile>
     <Compile Include="Create_Abs.aspx.cs">
       <DependentUpon>Create_Abs.aspx</DependentUpon>

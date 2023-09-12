@@ -70,7 +70,7 @@ namespace Layout_2._1
 
         protected void closeLRec_Click(object sender, ImageClickEventArgs e)
         {
-            Server.Transfer("Calendar 1.aspx");
+            Server.Transfer("Calendar.aspx");
         }
 
     }
