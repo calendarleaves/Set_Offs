@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Calendar 1.aspx.cs" Inherits="WebApplication1.WebForm11" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Calendar.aspx.cs" Inherits="WebApplication1.WebForm11" %>
 <%@ Register TagPrefix="uc" TagName="Holidays" Src="~/Holidays.ascx" %>
 <%@ Register TagPrefix="uc" TagName="Leave_Records" Src="~/Leave_Records.ascx" %>
 <%@ Register TagPrefix="uc" TagName="Add_Leave" Src="~/Add_Leave.ascx" %>
@@ -175,69 +175,7 @@
 }
 
     </style>
-     <script>
-         window.onload = function () {
-
-             var Hfield = document.getElementById('<%= hiddenField.ClientID %>').value;
-              
-             if (Hfield == "true") {
-                 ButnVis();
-             }
-             else
-             {
-                 ButnVis1();
-             }
-         };
-
-         function ButnVis() {
-             var AddUsrBtn1 = document.getElementById("AddUsrBtn");
-             AddUsrBtn1.style.display = "none";
-
-             var DltUsrBtn1 = document.getElementById("DltUsrBtn");
-             DltUsrBtn1.style.display = "none";
-
-              var DltAdmnBtn2 = document.getElementById("DltAdmnBtn");
-             DltAdmnBtn2.style.display = "none";
-         }
-         function ButnVis1() {
-             var AddAdmnBtn1 = document.getElementById("AddAdmnBtn");
-             AddAdmnBtn1.style.display = "none";
-
-             var DltAdmnBtn1 = document.getElementById("DltAdmnBtn");
-             DltAdmnBtn1.style.display = "none";
-         }
-     function showAdd_Leave() {
-         // Show the modal dialog
-         $('#<%= Add_Leave.ClientID %>').modal('show');
-         }
-      function showDelete_Leave() {
-             // Show the modal dialog
-             $('#<%= Delete_Leave.ClientID %>').modal('show');
-         }
-         function showAdd_Leave_User() {
-             // Show the modal dialog
-             $('#<%= Add_Leave_User.ClientID %>').modal('show');
-         }
-         function showDelete_Leave_User() {
-             // Show the modal dialog
-             $('#<%= Delete_Leave_User.ClientID %>').modal('show');
-         }
-         function showDelete_Leave_User() {
-             // Show the modal dialog
-             $('#<%= PassChange.ClientID %>').modal('show');
-         }
-        <%-- function showTest_Delete_Leave() {
-             // Show the modal dialog
-             $('#<%= Test_Delete_Leave.ClientID %>').modal('show');
-          }--%>
-
-
-            
-
-
-
-
-     </script>
+   
 </head>
 <body>
     <form id="form1" runat="server">
@@ -427,16 +365,16 @@
                 <asp:HiddenField ID="hiddenField" runat="server" Value="" />
        
                
-                          <button type="button" id="AddUsrBtn" class="btn btn-primary  popUpButtons2" data-toggle="modal" data-target="#myModal7">Apply Leave</button>     
+                          <button runat="server" type="button" id="AddUsrBtn" class="btn btn-primary  popUpButtons2" data-toggle="modal" data-target="#myModal7">Apply Leave</button>     
       <uc:Add_Leave_User ID="Add_Leave_User" runat="server" />
 
-                <button type="button" id="AddAdmnBtn" class="btn btn-primary  popUpButtons2" data-toggle="modal" data-target="#myModal3">Add Leave</button>     
+                <button type="button" id="AddAdmnBtn" class="btn btn-primary  popUpButtons2" data-toggle="modal" data-target="#myModal3" style="display:none">Add Leave</button>     
       <uc:Add_Leave ID="Add_Leave" runat="server" />
                 
-                <button type="button" id="DltUsrBtn" class="btn btn-primary  popUpButtons2" style="text-align:center; justify-content:center"  data-toggle="modal" data-target="#myModal8">Delete Leave</button>     
+                <button runat="server" type="button" id="DltUsrBtn" class="btn btn-primary  popUpButtons2" style="display:none; text-align:center; justify-content:center;"  data-toggle="modal" data-target="#myModal8">Delete Leave</button>     
 	 <uc:Delete_Leave_User ID="Delete_Leave_User" runat="server" />
 
-                <button type="button" id="DltAdmnBtn" class="btn btn-primary  popUpButtons2" data-toggle="modal" data-target="#myModal4">Delete Leave pop up</button>     
+                <button type="button" id="DltAdmnBtn" class="btn btn-primary  popUpButtons2" data-toggle="modal" data-target="#myModal4" style="display:none">Delete Leave pop up</button>     
 	 <uc:Delete_Leave ID="Delete_Leave" runat="server" />
 
                 <uc:PassChange ID="PassChange" runat="server" />

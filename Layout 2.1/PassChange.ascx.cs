@@ -30,7 +30,7 @@ namespace Layout_2._1
 
         protected void closeChangepass(object sender, ImageClickEventArgs e)
         {
-            Response.Redirect("Calendar 1.aspx");
+            Response.Redirect("Calendar.aspx");
         }
 
         protected void ChangePass(object sender, EventArgs e)
@@ -73,7 +73,7 @@ namespace Layout_2._1
                     if (DBConnection.VerifyPassword(oldpassbox.Text, employee.Password))
                     {
                         con.UpdatePassword(employee.Email, newpassbox.Text);
-                        Response.Redirect("Calendar 1.aspx");
+                        Response.Redirect("Calendar.aspx");
                     }
                     else
                     {

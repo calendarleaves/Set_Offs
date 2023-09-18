@@ -67,6 +67,8 @@ namespace Layout_2._1
                 con.DeleteLeave(fullname, DateTime.Parse(startDate), DateTime.Parse(endDate));
 
                 BindGridView();
+
+                Response.Redirect("Calendar.aspx");
             }
             catch (Exception ex)
             {

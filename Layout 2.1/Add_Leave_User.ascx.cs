@@ -277,7 +277,7 @@ namespace Layout_2._1
 
 
                     cmd.AddLeave(l);
-                    Response.Redirect("Calendar 1.aspx");
+                    Response.Redirect("Calendar.aspx");
                 }
             }
             catch (Exception ex)
@@ -401,12 +401,12 @@ namespace Layout_2._1
 
         protected void Cancel_Click(object sender, EventArgs e)
         {
-            Server.Transfer("Calendar 1.aspx");
+            Server.Transfer("Calendar.aspx");
         }
 
         protected void close_Click(object sender, ImageClickEventArgs e)
         {
-            Server.Transfer("Calendar 1.aspx");
+            Server.Transfer("Calendar.aspx");
         }
 
         protected void comment_TextChanged(object sender, EventArgs e)
