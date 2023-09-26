@@ -1,0 +1,10 @@
+﻿/****** Script to add leavebalance column ******/
+
+
+ALTER TABLE [LeavePortal].[dbo].[Employee]
+ADD [LeaveBalance] DECIMAL(5, 2);
+
+
+UPDATE [LeavePortal].[dbo].[Employee]
+SET [LeaveBalance] = 22
+WHERE [Email] = 'prasad.joshi@flexur.com';
