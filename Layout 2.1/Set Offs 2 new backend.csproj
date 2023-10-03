@@ -77,6 +77,8 @@
     <Content Include="Add_Leave.ascx" />
     <Content Include="Add_Leave_User.ascx" />
     <Content Include="CreateAbsence.css" />
+    <Content Include="Database Scripts\LeaveBalance_swapnil_26Sep2023.txt" />
+    <Content Include="Database Scripts\TimeStamp_Pooja_26Sep2023.txt" />
     <Content Include="DeleteLeavePageStyleSheet.css" />
     <Content Include="Delete_Leave.ascx" />
     <Content Include="Delete_Leave_User.ascx" />

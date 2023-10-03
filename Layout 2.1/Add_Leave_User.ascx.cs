@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 
 namespace Layout_2._1
 {
-   
+
     public partial class Add_Leave_User : System.Web.UI.UserControl
     {
         string selectedValue;
@@ -28,7 +28,7 @@ namespace Layout_2._1
         private List<DateTime> holidays = new List<DateTime>();
 
 
-       
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -45,26 +45,26 @@ namespace Layout_2._1
 
 
             if (!IsPostBack)
-            { 
+            {
                 Calendar1.Visible = false;
                 Calendar2.Visible = false;
             }
 
-            
+
             if (from.Text == null)
             {
                 Calendar2.Enabled = false;
             }
 
-            
+
 
         }
         public string totalDays()
         {
             if (from.Text != "" && To.Text != "")
             {
-            //    DBConnection d = new DBConnection();
-            //    List<HolidayList> holidays = d.GetUpcomingHolidays(currentDate);
+                //    DBConnection d = new DBConnection();
+                //    List<HolidayList> holidays = d.GetUpcomingHolidays(currentDate);
 
 
                 int weekoff = 0;
@@ -144,7 +144,7 @@ namespace Layout_2._1
                 To.Text = "";
             }
 
-                if (Calendar1.Visible)
+            if (Calendar1.Visible)
             {
                 Calendar1.Visible = false;
 
@@ -260,6 +260,8 @@ namespace Layout_2._1
                     l.LeaveType = Drop.SelectedValue;
                     l.StartDate = Calendar1.SelectedDate;
 
+                    l.CreatedOn = DateTime.Now;
+                    l.CreatedBy = emp.Email;
 
                     if (Drop.SelectedValue == "First Half " || Drop.SelectedValue == "Second Half")
 
@@ -355,7 +357,7 @@ namespace Layout_2._1
         protected void Drop_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-           ;
+            ;
 
 
             LeaveLable.Text = "";
@@ -375,7 +377,7 @@ namespace Layout_2._1
                     Cal1.Enabled = false;
                     Cal1.BackColor = System.Drawing.Color.Gray;
                     Cal1.Visible = false;
-                   
+
                 }
                 else
                 {

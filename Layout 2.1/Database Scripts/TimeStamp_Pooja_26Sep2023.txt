@@ -1,0 +1,5 @@
+﻿/****** Script to add  columns  ******/
+
+ ALTER TABLE [Setoffs].[dbo].[Leave]
+ADD [CreatedOn] DATE,
+    [CreatedBy] VARCHAR(100);

@@ -23,7 +23,7 @@ namespace Layout_2._1
         DateTime targetDate;
 
         List<DateTime> holidays = new List<DateTime>();
-           //private List<DateTime> holidays = new List<DateTime>();
+        //private List<DateTime> holidays = new List<DateTime>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -32,7 +32,7 @@ namespace Layout_2._1
             DBConnection db = new DBConnection();
             DataTable dt = db.GetAllHolidayDates();
 
-          
+
 
             foreach (DataRow row in dt.Rows)
             {
@@ -59,7 +59,7 @@ namespace Layout_2._1
                 DBConnection s = new DBConnection();
                 List<string> data = s.GetAllEmployeeName();
 
-            foreach (string employeeName in data)
+                foreach (string employeeName in data)
                 {
                     SelectEmployee.Items.Add(new ListItem(employeeName, employeeName));
                 }
@@ -81,7 +81,7 @@ namespace Layout_2._1
 
             {
                 DropdownlistError.Text = "";
-               
+
 
             }
             ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal3').modal('show');", true);
@@ -165,12 +165,14 @@ namespace Layout_2._1
                     l.Days = float.Parse(Total_Days.Text);
                     l.Comments = comment.Text;
 
-                    DBConnection s = new DBConnection();
+                    l.CreatedOn = DateTime.Now;
+                    l.CreatedBy = "admin@flexur.com";
 
+                    DBConnection s = new DBConnection();
                     s.Addleave(firstName, lastName, l);
 
-                    Response.Redirect("Calendar.aspx");
 
+                    Response.Redirect("Calendar.aspx");
 
 
                 }
@@ -182,7 +184,7 @@ namespace Layout_2._1
 
             }
 
-           ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal3').modal('show');", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal3').modal('show');", true);
 
         }
 
@@ -220,7 +222,7 @@ namespace Layout_2._1
                         {
                             weekoff++;
                         }
-                       
+
                         if (holidays.Contains(currentDate))
                         {
 
@@ -242,7 +244,7 @@ namespace Layout_2._1
                 {
                     Total_Days.Text = "0.5";
 
-                    
+
                 }
                 else
                 {
@@ -381,7 +383,7 @@ namespace Layout_2._1
                 e.Day.IsSelectable = false;
                 e.Cell.ForeColor = System.Drawing.Color.Red; // Optionally, change the color of the holiday dates
             }
-          
+
             ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal3').modal('show');", true);
 
 
@@ -414,7 +416,7 @@ namespace Layout_2._1
                 e.Cell.ForeColor = System.Drawing.Color.Red;
 
             }
-          
+
             if (holidays.Contains(e.Day.Date))
             {
                 e.Day.IsSelectable = false;
@@ -436,15 +438,15 @@ namespace Layout_2._1
 
             if (!string.IsNullOrEmpty(selectedValue) && selectedValue != "--Select Leave--")
             {
-               
-                
+
+
 
                 if (drop.SelectedValue == "First Half " || drop.SelectedValue == "Second Half")
                 {
                     Cal1.Enabled = false;
                     Cal1.BackColor = System.Drawing.Color.Gray;
                     Cal1.Visible = false;
-                    
+
                 }
                 else
                 {

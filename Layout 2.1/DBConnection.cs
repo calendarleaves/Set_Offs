@@ -154,7 +154,7 @@ namespace SetOffs1
 
         public void AddLeave(Leave leave)
         {
-            using (SqlCommand command = new SqlCommand("INSERT INTO Leave (EmpId, LeaveType, StartDate, EndDate, Comments,Days) VALUES (@EmpId,@LeaveType,@StartDate, @EndDate,@Comments, @Days)", con))
+            using (SqlCommand command = new SqlCommand("INSERT INTO Leave (EmpId, LeaveType, StartDate, EndDate, Comments,Days,CreatedOn,CreatedBy) VALUES (@EmpId,@LeaveType,@StartDate, @EndDate,@Comments, @Days,@CreatedOn,@CreatedBy)", con))
             {
                 command.Parameters.AddWithValue("@EmpId", leave.EmpId);
                 command.Parameters.AddWithValue("@LeaveType", leave.LeaveType);
@@ -162,6 +162,8 @@ namespace SetOffs1
                 command.Parameters.AddWithValue("@EndDate", leave.EndDate);
                 command.Parameters.AddWithValue("@Comments", leave.Comments);
                 command.Parameters.AddWithValue("@Days", leave.Days);
+                command.Parameters.AddWithValue("@CreatedOn", leave.CreatedOn);
+                command.Parameters.AddWithValue("@CreatedBy", leave.CreatedBy);
 
                 con.Open();
                 command.ExecuteNonQuery();
@@ -353,7 +355,7 @@ namespace SetOffs1
             con.Close();
             return dt;
         }
-       
+
         public DataTable GetAllEmployeesLeaveLikeName(String s)
         {
             string firstName = "";
@@ -362,7 +364,7 @@ namespace SetOffs1
             string[] nameParts = s.Split(' ');
             if (nameParts.Length > 0)
                 firstName = nameParts[0];
-            if (nameParts.Length > 1) 
+            if (nameParts.Length > 1)
                 lastName = nameParts[1];
             else
             {
@@ -520,13 +522,13 @@ namespace SetOffs1
         }
         //public void DeleteLeave(DateTime startDate, DateTime endDate)
         //{
-          
+
 
         //    string query = "DELETE FROM  Leave WHERE   (StartDate = @StartDate OR EndDate = @EndDate) ";
         //    con.Open();
         //    using (SqlCommand command = new SqlCommand(query, con))
         //    {
-              
+
         //        command.Parameters.AddWithValue("@StartDate", startDate);
         //        command.Parameters.AddWithValue("@EndDate", endDate);
 
@@ -573,7 +575,7 @@ namespace SetOffs1
 
             return values;
         }
-        
+
         public DataTable GetProfileDataTable(String s)
         {
             // Replace with your data retrieval logic
@@ -600,7 +602,7 @@ namespace SetOffs1
             return dt;
         }
 
-        public DataTable GetUpcomingLeaves(DateTime curentDate,DateTime nextFriday)
+        public DataTable GetUpcomingLeaves(DateTime curentDate, DateTime nextFriday)
         {
             DataTable dt = new DataTable();
 
@@ -643,12 +645,12 @@ namespace SetOffs1
             DBConnection d = new DBConnection();
             DataTable dt = d.allEmployees();
 
-            
+
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 DataRow row = dt.Rows[i];
                 var id = row["Id"];
-                var Password = DBConnection.HashPassword(row["Password"].ToString()); 
+                var Password = DBConnection.HashPassword(row["Password"].ToString());
                 using (SqlCommand command = new SqlCommand("update Employee set Password='" + Password + "' where Id=" + id + "", con))
                 {
                     con.Open();
@@ -656,10 +658,10 @@ namespace SetOffs1
                     con.Close();
                 }
             }
-            
+
 
         }
-        public void UpdatePassword(string s,string password)
+        public void UpdatePassword(string s, string password)
         {
             DBConnection d = new DBConnection();
             Employee emp = d.GetEmployee(s);
@@ -726,16 +728,16 @@ namespace SetOffs1
     public class EmployeeLeave
     {
         public string FirstName { get; set; } = "NotSpecified";
-        
+
         public string LeaveType { get; set; } = "Leave";
-       
+
     }
     public class Upcomingleaves
     {
-        public string FirstName{ get; set; } = "NotSpecified";
+        public string FirstName { get; set; } = "NotSpecified";
         public string LastName { get; set; } = "NotSpecified";
         public DateTime StartDate { get; set; } = DateTime.Now;
-        public DateTime EndDate  { get; set; } = DateTime.Now;
+        public DateTime EndDate { get; set; } = DateTime.Now;
 
     }
     public class Employee
@@ -758,5 +760,9 @@ namespace SetOffs1
         public DateTime EndDate { get; set; } = DateTime.Now.AddDays(1);
         public string Comments { get; set; } = "NoComments";
         public float Days { get; set; } = 0;
+
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
+
+        public string CreatedBy { get; set; } = "NoUser";
     }
 }
