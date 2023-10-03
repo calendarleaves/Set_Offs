@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Add_Leave.ascx.cs" Inherits="Layout_2._1.Add_Leave" %>
 
  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-KyZXEAgltcdPwqR5gKkxzWfod5oMh4PrpQmYfjELVYg=" crossorigin="anonymous"></script>
- <link href="AddLeaveForAdmin.css" rel="stylesheet" />
+ <link href="Stylesheets/AddLeaveForAdmin.css" rel="stylesheet" />
 
 <!-- Place this script block after adding the jQuery library -->
 <script>

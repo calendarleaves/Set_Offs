@@ -70,20 +70,19 @@
     <Content Include="314534-P8X7PS-657.jpg" />
     <Content Include="5259.jpg" />
     <Content Include="AddLeave.aspx" />
-    <Content Include="AddLeave1.css" />
-    <Content Include="AddLeaveForAdmin.css" />
+    <Content Include="Stylesheets\AddLeaveForAdmin.css" />
     <Content Include="Add_Leave.ascx" />
     <Content Include="Add_Leave_User.ascx" />
-    <Content Include="CreateAbsence.css" />
+    <Content Include="Old ASPX PAGES\CreateAbsence.css" />
     <Content Include="Database Scripts\LeaveBalance_swapnil_26Sep2023.txt" />
     <Content Include="Database Scripts\TimeStamp_Pooja_26Sep2023.txt" />
-    <Content Include="DeleteLeavePageStyleSheet.css" />
+    <Content Include="Stylesheets\DeleteLeavePageStyleSheet.css" />
     <Content Include="Delete_Leave.ascx" />
     <Content Include="Delete_Leave_User.ascx" />
     <Content Include="Error Handler\Error.aspx" />
     <Content Include="Error Handler\Error404.aspx" />
     <Content Include="Error Handler\Error500.aspx" />
-    <Content Include="DeleteLeave.aspx" />
+    <Content Include="Old ASPX PAGES\DeleteLeave.aspx" />
     <Content Include="Holidays.ascx" />
     <Content Include="images\close.png" />
     <Content Include="images\Close1.png" />
@@ -96,7 +95,7 @@
     <Content Include="cal1.jpg" />
     <Content Include="Calendar.aspx" />
     <Content Include="Stylesheets\CalendarStylesheet2.css" />
-    <Content Include="Create_Abs.aspx" />
+    <Content Include="Old ASPX PAGES\Create_Abs.aspx" />
     <Content Include="flexur2.jpg" />
     <Content Include="Stylesheets\LoginCSSboot1.css" />
     <Content Include="PassChange.ascx" />
@@ -139,11 +138,11 @@
     <Compile Include="Calendar.aspx.designer.cs">
       <DependentUpon>Calendar.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Create_Abs.aspx.cs">
+    <Compile Include="Old ASPX PAGES\Create_Abs.aspx.cs">
       <DependentUpon>Create_Abs.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Create_Abs.aspx.designer.cs">
+    <Compile Include="Old ASPX PAGES\Create_Abs.aspx.designer.cs">
       <DependentUpon>Create_Abs.aspx</DependentUpon>
     </Compile>
     <Compile Include="Custom.cs" />
@@ -183,11 +182,11 @@
     <Compile Include="Error Handler\Error500.aspx.designer.cs">
       <DependentUpon>Error500.aspx</DependentUpon>
     </Compile>
-    <Compile Include="DeleteLeave.aspx.cs">
+    <Compile Include="Old ASPX PAGES\DeleteLeave.aspx.cs">
       <DependentUpon>DeleteLeave.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="DeleteLeave.aspx.designer.cs">
+    <Compile Include="Old ASPX PAGES\DeleteLeave.aspx.designer.cs">
       <DependentUpon>DeleteLeave.aspx</DependentUpon>
     </Compile>
     <Compile Include="Holidays.ascx.cs">
@@ -253,7 +252,6 @@
   <ItemGroup>
     <Folder Include="Admin Functions\" />
     <Folder Include="Aspx Pages\" />
-    <Folder Include="Style\" />
     <Folder Include="User Functions\" />
     <Folder Include="Views\" />
   </ItemGroup>
