@@ -208,7 +208,7 @@
                   
               
               
-                       <asp:Image ID="Image3" runat="server" ImageUrl="HolidayIcon.svg" CssClass="profile-circle img-fluid" ToolTip="Upcoming Holidays" />
+                       <asp:Image ID="Image3" runat="server" ImageUrl="images/HolidayIcon.svg" CssClass="profile-circle img-fluid" ToolTip="Upcoming Holidays" />
                     <uc:Holidays ID="Holidays" runat="server" />
                 </a>
                     
