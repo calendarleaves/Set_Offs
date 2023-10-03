@@ -69,8 +69,6 @@
   <ItemGroup>
     <Content Include="314534-P8X7PS-657.jpg" />
     <Content Include="5259.jpg" />
-    <Content Include="AbsencePageCSS2.css" />
-    <Content Include="AbsencePageCSS.css" />
     <Content Include="AddLeave.aspx" />
     <Content Include="AddLeave1.css" />
     <Content Include="AddLeaveForAdmin.css" />
@@ -94,14 +92,13 @@
     <Content Include="images\holiday.jpg" />
     <Content Include="images\LoginLogo.gif" />
     <Content Include="Leave_Records.ascx" />
-    <Content Include="LoginCSS.css" />
     <Content Include="cal.jpg" />
     <Content Include="cal1.jpg" />
     <Content Include="Calendar.aspx" />
-    <Content Include="CalendarStylesheet2.css" />
+    <Content Include="Stylesheets\CalendarStylesheet2.css" />
     <Content Include="Create_Abs.aspx" />
     <Content Include="flexur2.jpg" />
-    <Content Include="LoginCSSboot1.css" />
+    <Content Include="Stylesheets\LoginCSSboot1.css" />
     <Content Include="PassChange.ascx" />
     <Content Include="PasswordChange.ascx" />
     <Content Include="Profile.png" />
@@ -254,7 +251,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Admin Functions\" />
+    <Folder Include="Aspx Pages\" />
     <Folder Include="Style\" />
+    <Folder Include="User Functions\" />
+    <Folder Include="Views\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
