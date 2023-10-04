@@ -1,0 +1,1 @@
+﻿ update Employee set Password='$2a$12$Ac3K9DJ3THTuIbc5n5XWYedBmYhr0JlwEaBzVgoX250DkHjY1OA/S' where Email='pooja.devare@flexur.com';

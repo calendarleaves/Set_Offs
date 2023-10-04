@@ -1,0 +1,108 @@
+﻿USE [master];
+-- Create the login 'Employeeuser' with a password
+CREATE LOGIN [Employeeuser] WITH PASSWORD = 'Employeeuser';
+
+USE [LeavePortal];
+/**** Object:  User [Employeeuser]    Script Date: 08-08-2023 18:41:41 ****/
+CREATE USER [Employeeuser] FOR LOGIN [Employeeuser] WITH DEFAULT_SCHEMA=[dbo]
+
+ALTER ROLE [db_owner] ADD MEMBER [Employeeuser]
+
+ALTER ROLE [db_datareader] ADD MEMBER [Employeeuser]
+
+ALTER ROLE [db_datawriter] ADD MEMBER [Employeeuser]
+
+
+/**** Object:  Table [dbo].[Employee]    Script Date: 08-08-2023 18:41:41 ****/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[Employee](
+	[Id] [int] NOT NULL,
+	[FirstName] [varchar](100) NOT NULL,
+	[LastName] [varchar](100) NOT NULL,
+	[Designation] [varchar](100) NOT NULL,
+	[Email] [varchar](150) NOT NULL,
+	[Password] [varchar](60) NULL,
+	[Flx_Id] [nvarchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+/**** Object:  Table [dbo].[HolidayList]    Script Date: 08-08-2023 18:41:41 ****/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[HolidayList](
+	[Date] [date] NOT NULL,
+	[Holiday] [varchar](50) NOT NULL
+) ON [PRIMARY]
+
+/**** Object:  Table [dbo].[Leave]    Script Date: 08-08-2023 18:41:41 ****/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[Leave](
+	[EmpId] [int] NOT NULL,
+	[LeaveType] [varchar](100) NOT NULL,
+	[StartDate] [date] NULL,
+	[EndDate] [date] NULL,
+	[Comments] [varchar](100) NULL,
+	[Days] [float] NULL
+) ON [PRIMARY]
+
+INSERT [dbo].[Employee] ([Id], [FirstName], [LastName], [Designation], [Email], [Password], [Flx_Id]) VALUES (1, N'Prasad', N'Joshi', N'Director', N'prasad.joshi@flexur.com', N'$2a$12$V1V3XZfVo93363T4RFZPh.LCULIDYzBjznakoaS7ltOHbDOOC9Smq', N'FLX001')
+INSERT [dbo].[Employee] ([Id], [FirstName], [LastName], [Designation], [Email], [Password], [Flx_Id]) VALUES (2, N'Chetan', N'Chauhan', N'Director', N'chetan.chauhan@flexur.com', N'$2a$12$rdQf7NLGtc/s5znIcU62f.36mSq0mlipt1Xk3zWOuW3Jdo1CfExOu', N'FLX003')
+INSERT [dbo].[Employee] ([Id], [FirstName], [LastName], [Designation], [Email], [Password], [Flx_Id]) VALUES (3, N'Sumeet', N'Kulkarni', N'HR', N'sumeet.kulkarni@flexur.com', N'$2a$12$VOz9xWlR8IsCKufvuBcNqujwOVjhANvLNZVeOaSEGHYSz6TFWXAb.', N'FLX032')
+INSERT [dbo].[Employee] ([Id], [FirstName], [LastName], [Designation], [Email], [Password], [Flx_Id]) VALUES (4, N'Abhijit', N'Limaye', N'Project Manager', N'abhijit.limaye@flexur.com', N'$2a$12$fYcBkB9uWiq/gTY/snwPH.y0VPyMotx627r4mpWbweG6qm3dwT1Q.', N'FLX020')
+INSERT [dbo].[Employee] ([Id], [FirstName], [LastName], [Designation], [Email], [Password], [Flx_Id]) VALUES (5, N'Sanman', N'Kale', N'Tech Lead', N'sanman.kale@flexur.com', N'$2a$12$HhB/8JoClgRoqdQpxBw0cuVtV6aTRx7TauufLxxpZ5NvX6ZOC7Ap2', N'FLX024')
+INSERT [dbo].[Employee] ([Id], [FirstName], [LastName], [Designation], [Email], [Password], [Flx_Id]) VALUES (6, N'Kaushal', N'Sharma', N'Senior Software Engineer', N'kaushal.sharma@flexur.com', N'$2a$12$7YDSb6sYaqikCDt1S/HJdecBWnryC4o0VKQ5OC5Ne9mPF3W5aF58y', N'FLX038')
+INSERT [dbo].[Employee] ([Id], [FirstName], [LastName], [Designation], [Email], [Password], [Flx_Id]) VALUES (7, N'Shrutika', N'Shelke', N'Senior Software Engineer', N'shrutika.shelke@flexur.com', N'$2a$12$hjdGFORDz0J9UT4JpJOtbe7fIRHMsIjpvpJRQ0gfp/EE8iHdZiokS', N'FLX037')
+INSERT [dbo].[Employee] ([Id], [FirstName], [LastName], [Designation], [Email], [Password], [Flx_Id]) VALUES (8, N'Nikhil', N'Tripathi', N'Software Engineer', N'nikhil.tripathi@flexur.com', N'$2a$12$4Wrg/wPCabd0Q11.jVeegupGwsD4dnHJXBAm4Dw7N.8vWjVme2eJC', N'FLX046')
+INSERT [dbo].[Employee] ([Id], [FirstName], [LastName], [Designation], [Email], [Password], [Flx_Id]) VALUES (9, N'Mayur', N'Bhalekar', N'Software Engineer', N'mayur.bhalekar@flexur.com', N'$2a$12$A79EKELd9YV8BVaj5VNiquwdPGLjeqJ85cKIcVov0kKpAYpaOVuDe', N'FLX043')
+INSERT [dbo].[Employee] ([Id], [FirstName], [LastName], [Designation], [Email], [Password], [Flx_Id]) VALUES (10, N'Piyush', N'Patle', N'QT', N'piyush.patle@flexur.com', N'$2a$12$klnPXpYZXcDNGEQjfLAlp.i1Sfco3Qn6SprOJbFUoYbkajcYrF29O', N'FLX050')
+INSERT [dbo].[Employee] ([Id], [FirstName], [LastName], [Designation], [Email], [Password], [Flx_Id]) VALUES (11, N'Prathamesh', N'Jadhav', N'Software Engineer', N'prathamesh.jadhav@flexur.com', N'$2a$12$ZTNgZ4ybKWXzyrhZTFKkKeRctwDSta5I0J.fSHdmJrpIByLxxXmhq', N'FLX047')
+INSERT [dbo].[Employee] ([Id], [FirstName], [LastName], [Designation], [Email], [Password], [Flx_Id]) VALUES (12, N'Shubham', N'Gurav', N'Software Engineer', N'shubham.gurav@flexur.com', N'$2a$12$zMAYfspPzYyVadM.HglgVOJQDT2Lk38.ZOcdQDwtRy7vEHRzKXp56', N'FLX045')
+INSERT [dbo].[Employee] ([Id], [FirstName], [LastName], [Designation], [Email], [Password], [Flx_Id]) VALUES (13, N'Chandrasagar', N'Khandagale', N'Software Engineer', N'chandrasagar.khandagale@flexur.com', N'$2a$12$zmeRE7x9myPbMWQsBfbES.q83uLCQXHSO2iG95mgPwjUWUWTKyhRq', N'FLX048')
+INSERT [dbo].[Employee] ([Id], [FirstName], [LastName], [Designation], [Email], [Password], [Flx_Id]) VALUES (14, N'Rajnandini', N'Suryakar', N'Faculty', N'rajnandini.suryakar@flexur.com', N'$2a$12$pbw/nhGBuSCJEOwhw0Uc6u1xEzC5CJSmrTku.fe7HQrY5RuF4gRAK', N'FLX049')
+INSERT [dbo].[Employee] ([Id], [FirstName], [LastName], [Designation], [Email], [Password], [Flx_Id]) VALUES (15, N'Sohan', N'Lanke', N'Admin', N'sohan.lanke.ext@flexur.com', N'$2a$12$hfHmebH3SMeRAIuaxU7.seFEdV8iubbXDnJfvfWIGgRrxOQk6wXtO', N'FLX-EXT003')
+INSERT [dbo].[Employee] ([Id], [FirstName], [LastName], [Designation], [Email], [Password], [Flx_Id]) VALUES (16, N'Pooja', N'Devare', N'Trainee Software Engineer', N'pooja.devare@flexur.com', N'$2a$12$Ac3K9DJ3THTuIbc5n5XWYedBmYhr0JlwEaBzVX250DkHjY1OA/S', N'FLX051')
+INSERT [dbo].[Employee] ([Id], [FirstName], [LastName], [Designation], [Email], [Password], [Flx_Id]) VALUES (17, N'Suraj', N'Patil', N'Trainee Software Engineer', N'suraj.patil@flexur.com', N'$2a$12$QSQBXsYwKG.LosQIB9.FzOFKWL/zfda8hNC1rm5DAt1k3o1DlnFtC', N'FLX052')
+INSERT [dbo].[Employee] ([Id], [FirstName], [LastName], [Designation], [Email], [Password], [Flx_Id]) VALUES (18, N'Swapnil', N'Suradkar', N'Trainee Software Engineer', N'swapnil.suradkar@flexur.com', N'$2a$12$Val0emYdvgGz7JjLGBj2IeII.lQR7b3hYyg.UQ/onTj8e42GKil1S', N'FLX053')
+INSERT [dbo].[Employee] ([Id], [FirstName], [LastName], [Designation], [Email], [Password], [Flx_Id]) VALUES (19, N'Bhimashankar', N'Patil', N'Trainee Software Engineer', N'bhimashankar.patil@flexur.com', N'$2a$12$UPXJ6MBZ.mIJzkmKnIWKNeDfBMz216uNqnvCWe8zb3TKAj4piQPrC', N'FLX054')
+INSERT [dbo].[Employee] ([Id], [FirstName], [LastName], [Designation], [Email], [Password], [Flx_Id]) VALUES (20, N'Admin', N'Account', N'admin', N'admin@flexur.com', N'$2a$12$40YuhxfDbKRLKpT4O8wfD.p/cuqLWX9cbalTzD2jFtApEP34WPoj6', N'FLXadmin')
+INSERT [dbo].[Employee] ([Id], [FirstName], [LastName], [Designation], [Email], [Password], [Flx_Id]) VALUES (21, N'Test', N'User', N'Tester', N'test@flexur.com', N'12345', N'Tester')
+
+INSERT [dbo].[HolidayList] ([Date], [Holiday]) VALUES (CAST(N'2023-05-01' AS Date), N'Labor Day')
+INSERT [dbo].[HolidayList] ([Date], [Holiday]) VALUES (CAST(N'2023-08-15' AS Date), N'Independence Day')
+INSERT [dbo].[HolidayList] ([Date], [Holiday]) VALUES (CAST(N'2023-09-19' AS Date), N'Ganesh Chaturthi')
+INSERT [dbo].[HolidayList] ([Date], [Holiday]) VALUES (CAST(N'2023-10-02' AS Date), N'Mahatma Gandhi Jayanti')
+INSERT [dbo].[HolidayList] ([Date], [Holiday]) VALUES (CAST(N'2023-10-24' AS Date), N'Dassara')
+INSERT [dbo].[HolidayList] ([Date], [Holiday]) VALUES (CAST(N'2023-11-13' AS Date), N'Diwali')
+INSERT [dbo].[HolidayList] ([Date], [Holiday]) VALUES (CAST(N'2023-11-14' AS Date), N'Diwali - Padwa')
+INSERT [dbo].[HolidayList] ([Date], [Holiday]) VALUES (CAST(N'2023-12-25' AS Date), N'Christmas')
+INSERT [dbo].[HolidayList] ([Date], [Holiday]) VALUES (CAST(N'2024-01-01' AS Date), N'New year Day')
+INSERT [dbo].[HolidayList] ([Date], [Holiday]) VALUES (CAST(N'2024-01-26' AS Date), N'Republic Day')
+INSERT [dbo].[HolidayList] ([Date], [Holiday]) VALUES (CAST(N'2024-03-08' AS Date), N'Mahashivratri')
+INSERT [dbo].[HolidayList] ([Date], [Holiday]) VALUES (CAST(N'2024-03-25' AS Date), N'Holi')
+
+SET ANSI_PADDING ON
+
+/**** Object:  Index [UQ__Employee__A9D10534A04C0C5A]    Script Date: 08-08-2023 18:41:41 ****/
+ALTER TABLE [dbo].[Employee] ADD UNIQUE NONCLUSTERED 
+(
+	[Email] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+
+ALTER TABLE [dbo].[Leave] ADD  DEFAULT ((0)) FOR [LeaveType]
+
+ALTER TABLE [dbo].[Leave] ADD  DEFAULT (NULL) FOR [Comments]
+
+ALTER TABLE [dbo].[Leave]  WITH CHECK ADD FOREIGN KEY([EmpId])
+REFERENCES [dbo].[Employee] ([Id])
+

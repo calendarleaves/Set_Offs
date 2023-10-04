@@ -190,8 +190,8 @@
             <!-- Logo or Image on the Left -->
             <div class="navbar-item col-lg-5 col-md-12">
              
-                 <asp:Image ID="Image2"  ImageUrl="flexur2.jpg" runat="server" CssClass="" />
-                 <asp:Image ID="Image5" ImageUrl="flexur2.jpg" runat="server" value="" CssClass="image" style="display: none;" />
+                 <asp:Image ID="Image2"  ImageUrl="images/flexur2.jpg" runat="server" CssClass="" />
+                 <asp:Image ID="Image5" ImageUrl="images/flexur2.jpg" runat="server" value="" CssClass="image" style="display: none;" />
                 </div>
         <div class="navbar-header d-md-flex col-lg-3 col-md-12">
             <!-- Title in the Middle -->
@@ -217,7 +217,7 @@
                 <li class=" d-none d-md-flex" style="margin-right: 20px;">
                     <a class="nav-link " runat="server" href="#" id="LeaveRecors" role="button" data-toggle="modal" data-target="#myModal2" aria-haspopup="true" aria-expanded="false">
                   
-                      <asp:Image ID="Image4" runat="server" ImageUrl="LeaveRecordsIcon.svg" CssClass="profile-circle img-fluid" ToolTip="Leave Records" />
+                      <asp:Image ID="Image4" runat="server" ImageUrl="images/LeaveRecordsIcon.svg" CssClass="profile-circle img-fluid" ToolTip="Leave Records" />
                        
                      <uc:Leave_Records ID="Leave_Records" runat="server" />
                 </a>
@@ -228,7 +228,7 @@
                   
               <asp:Label ID="EmpName_profile" runat="server" Text="Profile" CssClass="mb-0 h5"></asp:Label>
               
-                       <asp:Image ID="Image1" runat="server" ImageUrl="Profile.png" CssClass="profile-circle img-fluid" ToolTip="Profile" />
+                       <asp:Image ID="Image1" runat="server" ImageUrl="images/Profile.png" CssClass="profile-circle img-fluid" ToolTip="Profile" />
                     
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

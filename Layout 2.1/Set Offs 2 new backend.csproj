@@ -67,9 +67,11 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="314534-P8X7PS-657.jpg" />
-    <Content Include="5259.jpg" />
     <Content Include="AddLeave.aspx" />
+    <Content Include="Database Scripts\1_Create Database_Version1.0.txt" />
+    <Content Include="Database Scripts\2_CreateLeavePortalAndUsers_Version1.0.txt" />
+    <Content Include="Database Scripts\3_UserDataUpdate_Version1.1.txt" />
+    <Content Include="Database Scripts\User Add.txt" />
     <Content Include="Stylesheets\AddLeaveForAdmin.css" />
     <Content Include="Add_Leave.ascx" />
     <Content Include="Add_Leave_User.ascx" />
@@ -91,20 +93,18 @@
     <Content Include="images\holiday.jpg" />
     <Content Include="images\LoginLogo.gif" />
     <Content Include="Leave_Records.ascx" />
-    <Content Include="cal.jpg" />
-    <Content Include="cal1.jpg" />
+    <Content Include="images\cal1.jpg" />
     <Content Include="Calendar.aspx" />
     <Content Include="Stylesheets\CalendarStylesheet2.css" />
     <Content Include="Old ASPX PAGES\Create_Abs.aspx" />
-    <Content Include="flexur2.jpg" />
     <Content Include="Stylesheets\LoginCSSboot1.css" />
     <Content Include="PassChange.ascx" />
     <Content Include="PasswordChange.ascx" />
-    <Content Include="Profile.png" />
-    <Content Include="LeaveRecordsIcon.svg" />
+    <Content Include="images\Profile.png" />
+    <Content Include="images\LeaveRecordsIcon.svg" />
     <Content Include="images\HolidayIcon.svg" />
     <Content Include="Test_Delete_Leave.ascx" />
-    <Content Include="undraw_pic_profile_re_7g2h.svg" />
+    <Content Include="images\undraw_pic_profile_re_7g2h.svg" />
     <Content Include="Web.config" />
     <Content Include="Login.aspx" />
     <Content Include="DeleteLeavePage.aspx" />

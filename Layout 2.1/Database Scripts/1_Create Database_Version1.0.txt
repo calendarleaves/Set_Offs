@@ -1,0 +1,6 @@
+﻿USE [master]
+
+/****** Object:  Database [LeavePortal]    Script Date: 08-08-2023 17:50:17 ******/
+CREATE DATABASE [LeavePortal]
+ 
+ 
