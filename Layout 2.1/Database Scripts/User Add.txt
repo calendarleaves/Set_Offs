@@ -1,0 +1,1 @@
+﻿INSERT [dbo].[Employee] ([Id], [FirstName], [LastName], [Designation], [Email], [Password], [Flx_Id]) VALUES (27, N'Asmita', N'Andhale', N'Software Engineer', N'asmita.andhale@flexur.com', N'$2a$12$QSQBXsYwKG.LosQIB9.FzOFKWL/zfda8hNC1rm5DAt1k3o1DlnFtC', N'FLX033')

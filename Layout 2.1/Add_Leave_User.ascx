@@ -85,7 +85,7 @@
            <asp:TextBox ID="from" CssClass="text" runat="server"  ReadOnly="true" style=" max-width:320px; max-height:30px" OnGotFocus="focusforpass"></asp:TextBox>
               
    
-           <asp:ImageButton ID="ca1" CssClass="button1" runat="server" ImageUrl="cal1.jpg" ImageAlign="AbsBottom" onclick="Calendar1_Click" /> <br />
+           <asp:ImageButton ID="ca1" CssClass="button1" runat="server" ImageUrl="images/cal1.jpg" ImageAlign="AbsBottom" onclick="Calendar1_Click" /> <br />
            <asp:Label ID="calendar1lable" class="error" runat="server" Text="" ForeColor="#FF3300"></asp:Label>
 
             <asp:Calendar ID="Calendar1" CssClass="calendarView" DayNameFormat="FirstLetter"     runat="server" BackColor="white" OnSelectionChanged="Calendar1_SelectionChanged" OnDayRender="Calendar1_DayRender"  CellPadding="4" 
@@ -111,7 +111,7 @@
 
              <asp:TextBox ID="To" CssClass="text" runat="server" style=" max-width:320px; max-height:30px"  ReadOnly="true" ></asp:TextBox> 
          <!--   <asp:TextBox ID="To1" runat="server" type="text" placeholder="" class=" text2" style="max-width:320px; max-height:30px"  ReadOnly="true" OnGotFocus="focusforpass"></asp:TextBox> -->
-             <asp:ImageButton CssClass="button1" ID="Cal1" runat="server" ImageUrl="cal1.jpg" ImageAlign="AbsBottom"   onclick="Calendar2_Click" /><br/>
+             <asp:ImageButton CssClass="button1" ID="Cal1" runat="server" ImageUrl="images/cal1.jpg" ImageAlign="AbsBottom"   onclick="Calendar2_Click" /><br/>
       <!--       <asp:Label ID="Calendar2Label" CssClass="error" runat="server" Text="" ForeColor="Red"></asp:Label> -->
 
             <asp:Calendar ID="Calendar2" runat="server" BackColor="white" OnSelectionChanged="Calendar2_SelectionChanged" OnDayRender="Calendar2_DayRender"  AutoPostBack="true"
