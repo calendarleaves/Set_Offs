@@ -749,7 +749,7 @@ namespace SetOffs1
         {
             DataTable dt = new DataTable();
 
-            string query = "SELECT e.Id, e.FirstName, e.LastName,  FORMAT(l.StartDate, 'dd MMM') as StartDate , FORMAT(l.EndDate, 'dd MMM') as EndDate FROM Employee e JOIN Leave l ON e.Id = l.EmpId WHERE (l.StartDate >= @Variable1 AND l.StartDate <= @Variable2)   OR    (l.EndDate >= @Variable1 AND l.EndDate <= @Variable2)   OR  (l.StartDate <= @Variable1 AND l.EndDate >= @Variable2) ORDER BY l.StartDate";
+            string query = "SELECT e.Id, e.FirstName, e.LastName,l.LeaveType,  FORMAT(l.StartDate, 'dd MMM') as StartDate , FORMAT(l.EndDate, 'dd MMM') as EndDate FROM Employee e JOIN Leave l ON e.Id = l.EmpId WHERE (l.StartDate >= @Variable1 AND l.StartDate <= @Variable2)   OR    (l.EndDate >= @Variable1 AND l.EndDate <= @Variable2)   OR  (l.StartDate <= @Variable1 AND l.EndDate >= @Variable2) ORDER BY l.StartDate";
             con.Open();
             using (SqlCommand command = new SqlCommand(query, con))
             {
