@@ -163,14 +163,26 @@ namespace Layout_2._1
                         l.EndDate = Calendar2.SelectedDate;
                     }
                     l.Days = float.Parse(Total_Days.Text);
+
+
                     l.Comments = comment.Text;
 
                     l.CreatedOn = DateTime.Now;
                     l.CreatedBy = "admin@flexur.com";
 
+                    double l1;
+                    if (l.LeaveType == "Work From  Home")
+                    {
+                        l1 = 0;
+                    }
+                    else
+                    {
+                        l1 = double.Parse(Total_Days.Text);
+                    }
+
                     DBConnection s = new DBConnection();
                     s.Addleave(firstName, lastName, l);
-
+                    s.UpdateLeaveAfterAdd(fullName, l1);
 
                     Response.Redirect("Calendar.aspx");
 

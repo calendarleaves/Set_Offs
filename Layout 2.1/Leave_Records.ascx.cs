@@ -23,6 +23,27 @@ namespace Layout_2._1
             }
           
             DBConnection d = new DBConnection();
+
+            //get leave balance
+            DataTable dt1 = new DataTable();
+            if (usId == "admin@flexur.com")
+            {
+                //dt1 = d.GetLeaveBalance();
+                //GridView5.DataSource = dt1;
+                //GridView5.DataBind();
+                GridView5.Visible = false;
+            }
+            else
+            {
+                dt1 = d.GetLeaveBalance(usId);
+                GridView5.DataSource = dt1;
+                GridView5.DataBind();
+                GridView5.Columns[0].Visible = false;
+            }
+
+
+            //leave record list
+
             DataTable dt = new DataTable();
             if (usId == "admin@flexur.com")
             {

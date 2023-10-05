@@ -568,6 +568,149 @@ namespace SetOffs1
             return leave;
         }
 
+        public DataTable GetLeaveBalance(string usId)
+        {
+            DataTable dt = new DataTable();
+
+            // int currentYear = DateTime.Now.Year;
+
+
+            SqlCommand command = new SqlCommand(@"
+        SELECT 
+            CONCAT(e.FirstName, ' ', e.LastName) AS Name,
+			LeaveBalance
+        FROM 
+            Employee e 
+			WHERE
+			e.Email = @UserID", con);
+
+            command.Parameters.AddWithValue("@UserID", usId);
+            SqlDataAdapter reader = new SqlDataAdapter(command);
+
+
+            reader.Fill(dt);
+            con.Close();
+            return dt;
+        }
+
+        public void UpdateLeaveAfterDelete(string s, string l)
+        {
+            int id = getEmployeeId(s);
+
+
+            try
+            {
+                con.Open();
+                double leaveBalanceIncrement = double.Parse(l);
+
+
+
+                string updateQuery = "UPDATE Employee SET LeaveBalance = LeaveBalance + @LeaveBalanceIncrement WHERE Id = @EmpId";
+
+
+
+                using (SqlCommand updateCommand = new SqlCommand(updateQuery, con))
+                {
+
+                    updateCommand.Parameters.AddWithValue("@LeaveBalanceIncrement", leaveBalanceIncrement);
+                    updateCommand.Parameters.AddWithValue("@EmpId", id);
+
+                    updateCommand.ExecuteReader();
+
+                }
+
+                con.Close();
+            }
+            catch (Exception ex) { }
+
+        }
+
+        public void UpdateLeaveAfterAdd(string s, double l)
+        {
+            int id = getEmployeeId(s);
+
+
+            try
+            {
+                con.Open();
+                // double leaveBalanceIncrement = double.Parse(l);
+                double leaveBalanceIncrement = l;
+
+
+                string updateQuery = "UPDATE Employee SET LeaveBalance = LeaveBalance - @LeaveBalanceIncrement WHERE Id = @EmpId";
+
+
+
+                using (SqlCommand updateCommand = new SqlCommand(updateQuery, con))
+                {
+
+                    updateCommand.Parameters.AddWithValue("@LeaveBalanceIncrement", leaveBalanceIncrement);
+                    updateCommand.Parameters.AddWithValue("@EmpId", id);
+
+                    updateCommand.ExecuteReader();
+
+                }
+
+                con.Close();
+            }
+            catch (Exception ex) { }
+
+        }
+        public void UpdateLeaveAfterAdd2(int id, double l)
+        {
+            //int id = getEmployeeId(s);
+
+
+            try
+            {
+                con.Open();
+                // double leaveBalanceIncrement = double.Parse(l);
+                double leaveBalanceIncrement = l;
+
+
+                string updateQuery = "UPDATE Employee SET LeaveBalance = LeaveBalance - @LeaveBalanceIncrement WHERE Id = @EmpId";
+
+
+
+                using (SqlCommand updateCommand = new SqlCommand(updateQuery, con))
+                {
+
+                    updateCommand.Parameters.AddWithValue("@LeaveBalanceIncrement", leaveBalanceIncrement);
+                    updateCommand.Parameters.AddWithValue("@EmpId", id);
+
+                    updateCommand.ExecuteReader();
+
+                }
+
+                con.Close();
+            }
+            catch (Exception ex) { }
+
+        }
+
+        public DataTable GetLeaveBalance()
+        {
+            DataTable dt = new DataTable();
+
+            // int currentYear = DateTime.Now.Year;
+
+
+            SqlCommand command = new SqlCommand(@"
+        SELECT 
+            CONCAT(e.FirstName, ' ', e.LastName) AS Name,
+			LeaveBalance
+        FROM 
+            Employee e", con);
+
+            // command.Parameters.AddWithValue("@UserID", usId);
+            SqlDataAdapter reader = new SqlDataAdapter(command);
+
+
+            reader.Fill(dt);
+            con.Close();
+            return dt;
+        }
+
         public List<Employee> GetCalendarDetails()
         {
             List<Employee> values = new List<Employee>();
