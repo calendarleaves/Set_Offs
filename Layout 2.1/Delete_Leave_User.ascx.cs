@@ -62,10 +62,18 @@ namespace Layout_2._1
                 string fullname = DeleteLeaveGridView.Rows[e.RowIndex].Cells[1].Text + " " + DeleteLeaveGridView.Rows[e.RowIndex].Cells[2].Text;
                 string startDate = DeleteLeaveGridView.Rows[e.RowIndex].Cells[4].Text;
                 string endDate = DeleteLeaveGridView.Rows[e.RowIndex].Cells[5].Text;
+                string LeaveType = DeleteLeaveGridView.Rows[e.RowIndex].Cells[3].Text;
+                string TotalDays = DeleteLeaveGridView.Rows[e.RowIndex].Cells[6].Text;
+
+                if (LeaveType == "Work From  Home")
+                {
+                    TotalDays = "0";
+                }
+
 
                 DBConnection con = new DBConnection();
                 con.DeleteLeave(fullname, DateTime.Parse(startDate), DateTime.Parse(endDate));
-
+                con.UpdateLeaveAfterDelete(fullname, TotalDays);
                 BindGridView();
 
                 Response.Redirect("Calendar.aspx");

@@ -24,7 +24,13 @@
             </div>
 
          <div class="modal-body">
-         
+         <asp:GridView ID="GridView5" runat="server" AutoGenerateColumns="false" Width="97%"  BorderColor="White" BorderWidth="0px" cssClass="RecordGrid">
+             <Columns>
+                  <asp:BoundField DataField="Name" Headertext="Name" />   
+                  <asp:BoundField DataField="LeaveBalance" Headertext="Avl Leave" />   
+             </Columns>
+
+       </asp:GridView>
   <asp:GridView ID="GridView4" runat="server" AutoGenerateColumns="false" Width="97%"  BorderColor="White" BorderWidth="0px" cssClass="RecordGrid" >
                            <Columns>
                 <asp:BoundField DataField="Name" Headertext="Name" />                     

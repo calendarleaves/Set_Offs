@@ -277,8 +277,21 @@ namespace Layout_2._1
                     l.Days = float.Parse(Total_Days.Text);
                     l.Comments = comment.Text;
 
+                    //code to substract leavebalance
+                    double l1;
+                    if (l.LeaveType == "Work From  Home")
+                    {
+                        l1 = 0;
+                    }
+                    else
+                    {
+                        l1 = double.Parse(Total_Days.Text);
+                    }
+
+                    int id1 = emp.Id;
 
                     cmd.AddLeave(l);
+                    cmd.UpdateLeaveAfterAdd2(id1, l1);
                     Response.Redirect("Calendar.aspx");
                 }
             }
