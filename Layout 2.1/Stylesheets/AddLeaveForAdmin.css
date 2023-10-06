@@ -72,6 +72,11 @@
     color: black;
     border: 1px solid #000;
 }
+.submit:disabled {
+    background-color: #ccc; /* Change the background color to a disabled look */
+    cursor: not-allowed; /* Change the cursor to indicate it's not clickable */
+    /* Other styles for a disabled button */
+}
 
 .Cancel:hover {
     background-color: #7499f1;
@@ -80,12 +85,15 @@
 }
 
 .button1 {
-   
     background-color: transparent;
     position: absolute;
-    width:30px;
-    height:28px;
-    image-rendering:auto;
+    width: 30px;
+    height: 28px;
+    image-rendering: auto;
+    border-top: 1px solid gray; /* Specify the desired border styles for the top, right, bottom, and left borders */
+    border-right: 1px solid gray;
+    border-bottom: 1px solid gray;
+    border-left: none;
 }
 
 .error {
@@ -155,4 +163,7 @@
     padding-left:120px;
 
 
+}
+.textbox-no-right-border {
+    border-right: none; /* or border-right: 0; */
 }

@@ -32,6 +32,14 @@ namespace Layout_2._1
             DBConnection db = new DBConnection();
             DataTable dt = db.GetAllHolidayDates();
 
+            To.BackColor = System.Drawing.Color.LightGray;
+            from.BackColor = System.Drawing.Color.LightGray;
+            Total_Days.BackColor = System.Drawing.Color.LightGray;
+
+            To.Enabled = false;
+            from.Enabled = false;
+
+            Total_Days.Enabled = false;
 
 
             foreach (DataRow row in dt.Rows)
@@ -103,45 +111,8 @@ namespace Layout_2._1
                 DateTime end1 = Calendar2.SelectedDate;
 
 
-                if (SelectEmployee.SelectedValue == "null")
-
-                {
-                    DropdownlistError.Text = "* Please select Employee";
-                    SelectEmployee.Focus();
-
-                }
-                else if (drop.SelectedValue == "")
-
-                {
-                    LeaveLable.Text = "* Please select leave";
-                    drop.Focus();
-
-                }
-                else if (from.Text == "")
-                {
-                    calendar1lable.Text = "* Please select start date";
-                    from.Focus();
-
-
-
-                }
-                else if (To.Text == "")
-                {
-                    Calendar3Label.Text = "* Please select end date";
-                    To.Focus();
-
-
-                }
-                else if (comment.Text == "")
-                {
-                    commentError.Text = " * Please mention leave reason";
-                    comment.Focus();
-
-
-
-                }
-                else
-                {
+               
+                
 
                     string[] nameParts = fullName.Split(' ');
 
@@ -187,7 +158,8 @@ namespace Layout_2._1
                     Response.Redirect("Calendar.aspx");
 
 
-                }
+
+              //  }
 
             }
             catch (Exception ex)
@@ -370,11 +342,11 @@ namespace Layout_2._1
                 e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
             }
 
-            if (e.Day.Date < DateTime.Now.Date) // Replace DateTime.Now with your selected value
-            {
-                e.Day.IsSelectable = false;
-                e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
-            }
+            //if (e.Day.Date < DateTime.Now.Date) // Replace DateTime.Now with your selected value
+            //{
+            //    e.Day.IsSelectable = false;
+            //    e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
+            //}
 
             if (To.Text != "")
             {
@@ -412,11 +384,11 @@ namespace Layout_2._1
                 e.Day.IsSelectable = false;
                 e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
             }
-            if (e.Day.Date < DateTime.Now.Date) // Replace DateTime.Now with your selected value
-            {
-                e.Day.IsSelectable = false;
-                e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
-            }
+            //if (e.Day.Date < DateTime.Now.Date) // Replace DateTime.Now with your selected value
+            //{
+            //    e.Day.IsSelectable = false;
+            //    e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
+            //}
             if (e.Day.Date < Calendar1.SelectedDate) // Replace DateTime.Now with your selected value
             {
                 e.Day.IsSelectable = false;
@@ -452,12 +424,13 @@ namespace Layout_2._1
             {
 
 
-
                 if (drop.SelectedValue == "First Half " || drop.SelectedValue == "Second Half")
                 {
                     Cal1.Enabled = false;
-                    Cal1.BackColor = System.Drawing.Color.Gray;
-                    Cal1.Visible = false;
+                    Cal1.BackColor = System.Drawing.Color.LightGray;
+
+
+                    //   Cal1.Visible = false;
 
                 }
                 else

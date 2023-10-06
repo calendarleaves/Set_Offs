@@ -860,6 +860,68 @@ namespace SetOffs1
             return i;
 
         }
+        public DataTable LeaveApproval()
+        {
+            con.Open();
+
+            DataTable dt = new DataTable();
+            SqlCommand command = new SqlCommand("SELECT * FROM Leave ", con);
+            
+               
+                //                using (SqlDataReader reader = command.ExecuteReader())
+                //                {
+
+                //                    SqlDataAdapter reader = new SqlDataAdapter(command);
+                //                    reader.Fill(dt);
+                //}
+                //                con.Close();
+                //            }
+                //            return dt;
+
+                SqlDataAdapter reader = new SqlDataAdapter(command);
+
+
+                reader.Fill(dt);
+                con.Close();
+                return dt;
+            }
+
+
+        public void UpdateRowInDatabase2( string LeaveType, string ApprovalStatus)
+        {
+            con.Open();
+            //string updateQuery = "UPDATE Leave SET LeaveType = @LeaveType WHERE ApprovalStatus = @ApprovalStatus";
+
+            //using (SqlCommand command = new SqlCommand(updateQuery, con))
+            //{
+            //    command.Parameters.AddWithValue("@LeaveType", leaveType);
+            //    command.Parameters.AddWithValue("@ApprovalStatus", approvalStatus);
+
+
+            //    command.ExecuteReader();
+            //}
+
+
+            string updateQuery2 = "UPDATE Leave SET ApprovalStatus = @value1 WHERE LeaveType = @value2";
+      using (SqlCommand cmd = new SqlCommand(updateQuery2, con))
+                {
+
+                    cmd.Parameters.AddWithValue("@value1", ApprovalStatus);
+                    cmd.Parameters.AddWithValue("@value2", LeaveType);
+
+
+                   
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                
+            }
+
+            con.Close();
+        }
+
+
+
+
 
     }
 
@@ -908,4 +970,5 @@ namespace SetOffs1
 
         public string CreatedBy { get; set; } = "NoUser";
     }
+
 }
