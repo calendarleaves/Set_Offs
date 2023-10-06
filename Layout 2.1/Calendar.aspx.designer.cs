@@ -222,6 +222,15 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.HiddenField hiddenField;
 
         /// <summary>
+        /// LeaveApproval control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Layout_2._1.LeaveApproval LeaveApproval;
+
+        /// <summary>
         /// AddUsrBtn control.
         /// </summary>
         /// <remarks>

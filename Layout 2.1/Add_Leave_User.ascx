@@ -1,6 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Add_Leave_User.ascx.cs" Inherits="Layout_2._1.Add_Leave_User" %>
 
- 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-KyZXEAgltcdPwqR5gKkxzWfod5oMh4PrpQmYfjELVYg=" crossorigin="anonymous"></script>
 <link href="Stylesheets/AddLeaveForAdmin.css" rel="stylesheet" />
 <!-- Place this script block after adding the jQuery library -->
@@ -31,18 +30,44 @@
 
         } 
     });
+    
+    function checkFields2()
+    {
+        // Get references to the input fields
+       
+        var fromDate = document.getElementById('<%= from.ClientID %>');
+        var toDate = document.getElementById('<%= To.ClientID %>');
+        var comment = document.getElementById('<%= comment.ClientID %>');
+        
+    // Get the submit button
+        var btnSubmit = document.getElementById('<%=SubmitButton.ClientID %>');
 
-   <%-- $(document).ready(function () {
+        // Check if all fields have values
+        if (
+            
+            fromDate.value.trim() !== '' &&
+            toDate.value.trim() !== '' &&
+            comment.value.trim() !== '')
+        {
+            btnSubmit.disabled = false; // Enable the submit button
+            btnSubmit.style.backgroundColor = "#0555fb";
+        } else
+        {
+            btnSubmit.disabled = true; // Disable the submit button
 
-      
-        // When the document is ready, attach a click event handler to the TextBox
-        $('#<%= comment.ClientID %>').click(function () {
-            // Empty the Label's text
-            $('#<%= commentError.ClientID %>').text('');
-        });
+            btnSubmit.style.backgroundColor = "lightgray";
 
+        }
 
-    });--%>
+    }
+
+    window.onload = function ()
+    {
+        checkFields2();
+        
+    };
+
+       
 
 </script>
 
@@ -65,7 +90,7 @@
              
              <asp:DropDownList  CssClass="drop" runat="server" ID="Drop" DataTextField="Drop" OnSelectedIndexChanged="Drop_SelectedIndexChanged" AutoPostBack="true" >
                  
-                     <asp:ListItem Text="--Select Leave--" Value="" Disabled="true" Selected="true" />
+                  <%--   <asp:ListItem Text="--Select Leave--" Value="" Disabled="true" Selected="true" />--%>     
                      <asp:ListItem>Full Day </asp:ListItem>  
                      <asp:ListItem>First Half </asp:ListItem>  
                      <asp:ListItem>Second Half</asp:ListItem>  
@@ -82,10 +107,10 @@
               <asp:Label ID="lable2" runat="server" class=" form-label"  Text="Label" ForeColor="#FF3300">*</asp:Label><br />
 
 
-           <asp:TextBox ID="from" CssClass="text" runat="server"  ReadOnly="true" style=" max-width:320px; max-height:30px" OnGotFocus="focusforpass"></asp:TextBox>
+           <asp:TextBox ID="from" CssClass="text" runat="server"  ReadOnly="true" style=" max-width:320px; max-height:30px" OnGotFocus="focusforpass" onchange="checkFields2()"></asp:TextBox>
               
    
-           <asp:ImageButton ID="ca1" CssClass="button1" runat="server" ImageUrl="images/cal1.jpg" ImageAlign="AbsBottom" onclick="Calendar1_Click" /> <br />
+           <asp:ImageButton ID="ca1" CssClass="button1" runat="server" ImageUrl="images/cal1.jpg" ImageAlign="AbsBottom" onclick="Calendar1_Click" Height="30px" /> <br />
            <asp:Label ID="calendar1lable" class="error" runat="server" Text="" ForeColor="#FF3300"></asp:Label>
 
             <asp:Calendar ID="Calendar1" CssClass="calendarView" DayNameFormat="FirstLetter"     runat="server" BackColor="white" OnSelectionChanged="Calendar1_SelectionChanged" OnDayRender="Calendar1_DayRender"  CellPadding="4" 
@@ -109,9 +134,9 @@
              <asp:Label  runat="server" class="TO" Text="End Date :"></asp:Label> 
               <asp:Label ID="Label1" runat="server" class=" form-label"  Text="Label" ForeColor="#FF3300">*</asp:Label><br />
 
-             <asp:TextBox ID="To" CssClass="text" runat="server" style=" max-width:320px; max-height:30px"  ReadOnly="true" ></asp:TextBox> 
+             <asp:TextBox ID="To" CssClass="text" runat="server" style=" max-width:320px; max-height:30px"  ReadOnly="true" onchange="checkFields2()" ></asp:TextBox> 
          <!--   <asp:TextBox ID="To1" runat="server" type="text" placeholder="" class=" text2" style="max-width:320px; max-height:30px"  ReadOnly="true" OnGotFocus="focusforpass"></asp:TextBox> -->
-             <asp:ImageButton CssClass="button1" ID="Cal1" runat="server" ImageUrl="images/cal1.jpg" ImageAlign="AbsBottom"   onclick="Calendar2_Click" /><br/>
+             <asp:ImageButton CssClass="button1" ID="Cal1" runat="server" ImageUrl="images/cal1.jpg" ImageAlign="AbsBottom"   onclick="Calendar2_Click" Height="30px" /><br/>
       <!--       <asp:Label ID="Calendar2Label" CssClass="error" runat="server" Text="" ForeColor="Red"></asp:Label> -->
 
             <asp:Calendar ID="Calendar2" runat="server" BackColor="white" OnSelectionChanged="Calendar2_SelectionChanged" OnDayRender="Calendar2_DayRender"  AutoPostBack="true"
@@ -145,7 +170,7 @@
                  <asp:TextBox ID="comment" runat="server" type="text" placeholder="Max 38 characters" class="form-control text2" TextMode="MultiLine"  Rows="4" Font-Size="Medium"  OnGotFocus="focusforpass" OnTextChanged="comment_TextChanged" MaxLength="38"></asp:TextBox> 
                  <asp:Label class="error" ID="commentError" runat="server" Text="" ></asp:Label><br />
 
-             <asp:Button CssClass ="submit" runat="server"  Text="Submit" OnClick="Submit_click"  />
+             <asp:Button ID="SubmitButton" CssClass ="submit" runat="server"  Text="Submit" OnClick="Submit_click" Enabled="false" />
             <asp:Button CssClass ="Cancel" runat="server"  Text="Cancel" onclick="Cancel_Click" /> <br />
                  
          
