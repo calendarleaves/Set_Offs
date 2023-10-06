@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -18,24 +19,24 @@ namespace Layout_2._1
         int id;
         string value1;
         string value2;
-
         string item;
         DateTime currentDate;
         DateTime targetDate;
-
-
-
         private List<DateTime> holidays = new List<DateTime>();
-
-
-
-
         protected void Page_Load(object sender, EventArgs e)
         {
+
             DBConnection db = new DBConnection();
             DataTable dt = db.GetAllHolidayDates();
 
-            ;
+            To.BackColor = System.Drawing.Color.LightGray;
+            from.BackColor = System.Drawing.Color.LightGray;
+            Total_Days.BackColor = System.Drawing.Color.LightGray;
+
+            To.Enabled = false;
+            from.Enabled = false;
+
+            Total_Days.Enabled = false;
 
             foreach (DataRow row in dt.Rows)
             {
@@ -43,30 +44,22 @@ namespace Layout_2._1
                 holidays.Add(targetDate);
             }
 
-
             if (!IsPostBack)
             {
                 Calendar1.Visible = false;
                 Calendar2.Visible = false;
             }
 
-
             if (from.Text == null)
             {
                 Calendar2.Enabled = false;
             }
-
-
 
         }
         public string totalDays()
         {
             if (from.Text != "" && To.Text != "")
             {
-                //    DBConnection d = new DBConnection();
-                //    List<HolidayList> holidays = d.GetUpcomingHolidays(currentDate);
-
-
                 int weekoff = 0;
                 int holidaysCount = 0;
                 DateTime startDate;
@@ -132,7 +125,7 @@ namespace Layout_2._1
         protected void Calendar1_Click(object sender, ImageClickEventArgs e)
         {
             Calendar1.SelectedDate = currentDate;
-            calendar1lable.Text = "";
+           // calendar1lable.Text = "";
             from.Text = "";
 
             Total_Days.Text = "";
@@ -162,7 +155,7 @@ namespace Layout_2._1
         protected void Calendar2_Click(object sender, ImageClickEventArgs e)
         {
             Calendar2.SelectedDate = currentDate;
-            Calendar3Label.Text = "";
+           // Calendar3Label.Text = "";
             To.Text = "";
             Total_Days.Text = "";
             if (from.Text != "")
@@ -211,44 +204,72 @@ namespace Layout_2._1
 
         }
 
+        protected void SendMail()
+        {
+            DBConnection cmd = new DBConnection();
+            Employee emp = new Employee();
+            emp = cmd.GetEmployee(Session["ID"] as string);
+
+            Leave leave = new Leave();
+
+
+            try
+            {
+                MailMessage Email = new MailMessage();
+                MailAddress Sender = new MailAddress("flexur.messanger@flexur.com");
+                Email.From = Sender;
+                //      Console.WriteLine("Enter receiver email address:");
+
+                // Email.To.Add("suraj.patil@flexur.com");
+
+                Email.To.Add(Session["ID"] as string);
+
+
+
+                Email.Subject = "Leave Application";
+
+
+                string format = @"Hello sir,
+                                          I will be unavailable in office from" + from.Text + "To" + To.Text + "\n           reason: " + comment.Text;
+
+
+                // Set the email body to the comments
+                Email.Body = format;
+
+
+
+                //        Console.WriteLine("Enter SMTP server name :");
+                string ServerName = "flxdev";
+                //        Console.WriteLine("Enter Port (default 25) :");
+                string Port = "25";
+                if (string.IsNullOrEmpty(Port))
+                    Port = "25";
+
+
+
+                SmtpClient MailClient = new SmtpClient(ServerName, int.Parse(Port));
+                MailClient.Send(Email)
+;
+                Email.Dispose();
+                //   Console.WriteLine("Message sent succesfully. Check receiver inbox or smtp delivery queue.");
+            }
+            catch (Exception ex)
+            {
+                Custom.ErrorHandle(ex, Response);
+            }
+        }
+
 
         protected void Submit_click(object sender, EventArgs e)
         {
+            SendMail();
             try
             {
                 Calendar1.Visible = false;
                 Calendar2.Visible = false;
                 DateTime start1 = Calendar1.SelectedDate;
                 DateTime end1 = Calendar2.SelectedDate;
-                if (Drop.SelectedValue == "")
-                {
-                    LeaveLable.Text = "* Please Select Leave";
-                    Drop.Focus();
-
-
-                }
-                else if (from.Text == "")
-                {
-                    calendar1lable.Text = "* Please Select Start Date";
-                    from.Focus();
-
-                }
-                else if (To.Text == "")
-                {
-                    Calendar3Label.Text = "* Please Select End Date";
-                    To.Focus();
-
-                }
-                else if (comment.Text == "")
-                {
-                    commentError.Text = " * Please mention leave reason";
-                    comment.Focus();
-
-
-
-                }
-                else
-                {
+                
                     DBConnection cmd = new DBConnection();
                     Employee emp = new Employee();
                     emp = cmd.GetEmployee(Session["ID"] as string);
@@ -277,7 +298,7 @@ namespace Layout_2._1
                     l.Days = float.Parse(Total_Days.Text);
                     l.Comments = comment.Text;
 
-                    //code to substract leavebalance
+ 
                     double l1;
                     if (l.LeaveType == "Work From  Home")
                     {
@@ -293,7 +314,7 @@ namespace Layout_2._1
                     cmd.AddLeave(l);
                     cmd.UpdateLeaveAfterAdd2(id1, l1);
                     Response.Redirect("Calendar.aspx");
-                }
+                
             }
             catch (Exception ex)
             {
@@ -308,18 +329,18 @@ namespace Layout_2._1
             Calendar1.BackColor = Color.White;
             Calendar1.TitleFormat = TitleFormat.Month;
 
-            if (e.Day.Date < DateTime.Now.Date) // Replace DateTime.Now with your selected value
+            if (e.Day.Date < DateTime.Now.Date) 
             {
                 e.Day.IsSelectable = false;
-                e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
+                e.Cell.ForeColor = System.Drawing.Color.Gray; 
             }
 
             if (To.Text != "")
             {
-                if (e.Day.Date > Calendar2.SelectedDate) // Replace DateTime.Now with your selected value
+                if (e.Day.Date > Calendar2.SelectedDate) 
                 {
                     e.Day.IsSelectable = false;
-                    e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
+                    e.Cell.ForeColor = System.Drawing.Color.Gray; 
                 }
             }
             if (e.Day.Date.DayOfWeek == DayOfWeek.Saturday || e.Day.Date.DayOfWeek == DayOfWeek.Sunday)
@@ -331,7 +352,7 @@ namespace Layout_2._1
             if (holidays.Contains(e.Day.Date))
             {
                 e.Day.IsSelectable = false;
-                e.Cell.ForeColor = System.Drawing.Color.Red; // Optionally, change the color of the holiday dates
+                e.Cell.ForeColor = System.Drawing.Color.Red; 
             }
 
             ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal7').modal('show');", true);
@@ -341,15 +362,15 @@ namespace Layout_2._1
 
         protected void Calendar2_DayRender(object sender, DayRenderEventArgs e)
         {
-            if (e.Day.Date < DateTime.Now.Date) // Replace DateTime.Now with your selected value
+            if (e.Day.Date < DateTime.Now.Date) 
             {
                 e.Day.IsSelectable = false;
-                e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
+                e.Cell.ForeColor = System.Drawing.Color.Gray; 
             }
-            if (e.Day.Date < Calendar1.SelectedDate) // Replace DateTime.Now with your selected value
+            if (e.Day.Date < Calendar1.SelectedDate) 
             {
                 e.Day.IsSelectable = false;
-                e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
+                e.Cell.ForeColor = System.Drawing.Color.Gray; 
             }
             if (e.Day.Date.DayOfWeek == DayOfWeek.Saturday || e.Day.Date.DayOfWeek == DayOfWeek.Sunday)
             {
@@ -360,7 +381,7 @@ namespace Layout_2._1
             if (holidays.Contains(e.Day.Date))
             {
                 e.Day.IsSelectable = false;
-                e.Cell.ForeColor = System.Drawing.Color.Red; // Optionally, change the color of the holiday dates
+                e.Cell.ForeColor = System.Drawing.Color.Red; 
             }
             ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal7').modal('show');", true);
 
@@ -373,7 +394,7 @@ namespace Layout_2._1
             ;
 
 
-            LeaveLable.Text = "";
+           // LeaveLable.Text = "";
             Total_Days.Text = "";
             from.Text = "";
             To.Text = "";
@@ -388,8 +409,10 @@ namespace Layout_2._1
                 if (Drop.SelectedValue == "First Half " || Drop.SelectedValue == "Second Half")
                 {
                     Cal1.Enabled = false;
-                    Cal1.BackColor = System.Drawing.Color.Gray;
-                    Cal1.Visible = false;
+                    Cal1.BackColor = System.Drawing.Color.LightGray;
+
+
+                    //   Cal1.Visible = false;
 
                 }
                 else
@@ -426,7 +449,7 @@ namespace Layout_2._1
 
         protected void comment_TextChanged(object sender, EventArgs e)
         {
-            commentError.Text = "";
+           // commentError.Text = "";
         }
     }
 }
