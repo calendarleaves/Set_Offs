@@ -96,7 +96,7 @@
                                            
          <asp:TemplateField HeaderText="Actions" ItemStyle-Width="200px">
             <ItemTemplate>
-                <asp:Button ID="btnUpdate" runat="server" CssClass="btn btn-success" Text="Approove" CommandName="Approove" CommandArgument='<%# Container.DataItemIndex %>' />
+                <asp:Button ID="btnUpdate" runat="server" CssClass="btn btn-success" Text="Approve" CommandName="Approove" CommandArgument='<%# Container.DataItemIndex %>' />
                 <asp:Button ID="btnUpdate2" runat="server" CssClass="btn btn-danger" Text="Reject" CommandName="Reject" CommandArgument='<%# Container.DataItemIndex %>' />
             </ItemTemplate>
          </asp:TemplateField>
