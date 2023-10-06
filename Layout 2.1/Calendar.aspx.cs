@@ -388,9 +388,20 @@ namespace WebApplication1
                 {
                     string firstName = row["FirstName"].ToString();
                     string lastName = row["LastName"].ToString();
+                    string leaveType = row["LeaveType"].ToString();
+
+                    //convat first and last name 
                     string fullName = $"{firstName} {lastName}";
 
                     row["FullName"] = fullName;
+
+                    //shorten the value work from home
+                    if (leaveType == "Work From  Home")
+                    {
+                        leaveType = "WFH";
+                        row["LeaveType"] = leaveType;
+
+                    }
                 }
                 if (dt.Rows.Count == 0)
                 {

@@ -314,6 +314,7 @@
                                <%--<asp:BoundField DataField="FirstName" Headertext="FirstName"/>
                                <asp:BoundField DataField="LastName" Headertext="LastName"/>--%>
                                 <asp:BoundField DataField="FullName" Headertext="Name"/>
+                                <asp:BoundField DataField="LeaveType" Headertext=" "/>
                                 <asp:BoundField DataField="StartDate" Headertext="From" /> 
                                <asp:BoundField DataField="EndDate" Headertext="To" /> 
                
