@@ -167,7 +167,7 @@
                  <asp:Label ID="Label2" runat="server" class=" form-label"  Text="Label" ForeColor="#FF3300">*</asp:Label><br />
 
        <!--      <asp:TextBox ID="TextBox1" cssclass="text2" runat="server" TextMode="MultiLine"  Rows="4" Font-Size="Medium" class="form-control" style="max-width:300px; max-height:50px" OnGotFocus="focusforpass"></asp:TextBox>  <br /><br />-->
-                 <asp:TextBox ID="comment" runat="server" type="text" placeholder="Max 38 characters" class="form-control text2" TextMode="MultiLine"  Rows="4" Font-Size="Medium"  OnGotFocus="focusforpass" OnTextChanged="comment_TextChanged" MaxLength="38"></asp:TextBox> 
+                 <asp:TextBox ID="comment" runat="server" type="text" placeholder="Enter here" class="form-control text2" TextMode="MultiLine"  Rows="4" Font-Size="Medium"  OnGotFocus="focusforpass" OnTextChanged="comment_TextChanged" onkeyup="checkFields2()" ></asp:TextBox> 
                  <asp:Label class="error" ID="commentError" runat="server" Text="" ></asp:Label><br />
 
              <asp:Button ID="SubmitButton" CssClass ="submit" runat="server"  Text="Submit" OnClick="Submit_click" Enabled="false" />
