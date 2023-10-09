@@ -13,15 +13,8 @@ namespace Layout_2._1
 {
     public partial class Add_Leave : System.Web.UI.UserControl
     {
-        string selectedValue;
-        int id;
-        string value1;
-        string value2;
-
-        string item;
-        DateTime currentDate;
-        DateTime targetDate;
-
+        string selectedValue; DateTime currentDate, targetDate;
+        
         List<DateTime> holidays = new List<DateTime>();
         //private List<DateTime> holidays = new List<DateTime>();
 
@@ -31,28 +24,13 @@ namespace Layout_2._1
 
             DBConnection db = new DBConnection();
             DataTable dt = db.GetAllHolidayDates();
-
-            To.BackColor = System.Drawing.Color.LightGray;
-            from.BackColor = System.Drawing.Color.LightGray;
-            Total_Days.BackColor = System.Drawing.Color.LightGray;
-
-            To.Enabled = false;
-            from.Enabled = false;
-
-            Total_Days.Enabled = false;
-
-
+            DefaultValues();
             foreach (DataRow row in dt.Rows)
             {
                 DateTime targetDate = Convert.ToDateTime(row["Date"]);
                 holidays.Add(targetDate);
             }
 
-
-            if (from.Text == null)
-            {
-                Calendar2.Enabled = false;
-            }
 
             if (!IsPostBack)
             {
@@ -75,6 +53,17 @@ namespace Layout_2._1
 
 
             }
+        }
+
+        protected void DefaultValues()
+        {
+
+            To.BackColor = System.Drawing.Color.LightGray;
+            from.BackColor = System.Drawing.Color.LightGray;
+            Total_Days.BackColor = System.Drawing.Color.LightGray;
+
+            To.Enabled = false;
+            from.Enabled = false;
 
 
         }
@@ -109,10 +98,6 @@ namespace Layout_2._1
                 Calendar2.Visible = false;
                 DateTime start1 = Calendar1.SelectedDate;
                 DateTime end1 = Calendar2.SelectedDate;
-
-
-               
-                
 
                     string[] nameParts = fullName.Split(' ');
 
@@ -164,12 +149,6 @@ namespace Layout_2._1
                 }
 
 
-
-
-
-
-
-                //  }
 
             }
             catch (Exception ex)
@@ -346,10 +325,10 @@ namespace Layout_2._1
             DateTime startDate1 = new DateTime(2023, 4, 1);
             DateTime endDate1 = new DateTime(2024, 3, 31);
 
-            if (e.Day.Date < startDate1 || e.Day.Date > endDate1) // Disable dates outside the specified range
+            if (e.Day.Date < startDate1 || e.Day.Date > endDate1) 
             {
                 e.Day.IsSelectable = false;
-                e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
+                e.Cell.ForeColor = System.Drawing.Color.Gray; 
             }
 
             //if (e.Day.Date < DateTime.Now.Date) // Replace DateTime.Now with your selected value
@@ -360,10 +339,10 @@ namespace Layout_2._1
 
             if (To.Text != "")
             {
-                if (e.Day.Date > Calendar2.SelectedDate) // Replace DateTime.Now with your selected value
+                if (e.Day.Date > Calendar2.SelectedDate) 
                 {
                     e.Day.IsSelectable = false;
-                    e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
+                    e.Cell.ForeColor = System.Drawing.Color.Gray; 
                 }
             }
             if (e.Day.Date.DayOfWeek == DayOfWeek.Saturday || e.Day.Date.DayOfWeek == DayOfWeek.Sunday)
@@ -375,7 +354,7 @@ namespace Layout_2._1
             if (holidays.Contains(e.Day.Date))
             {
                 e.Day.IsSelectable = false;
-                e.Cell.ForeColor = System.Drawing.Color.Red; // Optionally, change the color of the holiday dates
+                e.Cell.ForeColor = System.Drawing.Color.Red; 
             }
 
             ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal3').modal('show');", true);
@@ -389,20 +368,19 @@ namespace Layout_2._1
             DateTime startDate1 = new DateTime(2023, 4, 1);
             DateTime endDate1 = new DateTime(2024, 3, 31);
 
-            if (e.Day.Date < startDate1 || e.Day.Date > endDate1) // Disable dates outside the specified range
+            if (e.Day.Date < startDate1 || e.Day.Date > endDate1) 
             {
                 e.Day.IsSelectable = false;
-                e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
+                e.Cell.ForeColor = System.Drawing.Color.Gray; 
             }
-            //if (e.Day.Date < DateTime.Now.Date) // Replace DateTime.Now with your selected value
+            //if (e.Day.Date < DateTime.Now.Date) 
             //{
             //    e.Day.IsSelectable = false;
-            //    e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
-            //}
-            if (e.Day.Date < Calendar1.SelectedDate) // Replace DateTime.Now with your selected value
+            //    e.Cell.ForeColor = System.Drawing.Color.Gray; 
+            if (e.Day.Date < Calendar1.SelectedDate) 
             {
                 e.Day.IsSelectable = false;
-                e.Cell.ForeColor = System.Drawing.Color.Gray; // Change the color to gray to indicate the disabled day
+                e.Cell.ForeColor = System.Drawing.Color.Gray; 
             }
             if (e.Day.Date.DayOfWeek == DayOfWeek.Saturday || e.Day.Date.DayOfWeek == DayOfWeek.Sunday)
             {
@@ -414,7 +392,7 @@ namespace Layout_2._1
             if (holidays.Contains(e.Day.Date))
             {
                 e.Day.IsSelectable = false;
-                e.Cell.ForeColor = System.Drawing.Color.Red; // Optionally, change the color of the holiday dates
+                e.Cell.ForeColor = System.Drawing.Color.Red; 
             }
             ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal3').modal('show');", true);
 
@@ -438,9 +416,6 @@ namespace Layout_2._1
                 {
                     Cal1.Enabled = false;
                     Cal1.BackColor = System.Drawing.Color.LightGray;
-
-
-                    //   Cal1.Visible = false;
 
                 }
                 else

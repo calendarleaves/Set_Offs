@@ -6,6 +6,9 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Net.Mail;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Policy;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -15,28 +18,17 @@ namespace Layout_2._1
 
     public partial class Add_Leave_User : System.Web.UI.UserControl
     {
-        string selectedValue;
+        string selectedValue, value1, value2, item;
         int id;
-        string value1;
-        string value2;
-        string item;
-        DateTime currentDate;
-        DateTime targetDate;
+        DateTime currentDate, targetDate;
         private List<DateTime> holidays = new List<DateTime>();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            DefaultSetting();
             DBConnection db = new DBConnection();
             DataTable dt = db.GetAllHolidayDates();
 
-            To.BackColor = System.Drawing.Color.LightGray;
-            from.BackColor = System.Drawing.Color.LightGray;
-            Total_Days.BackColor = System.Drawing.Color.LightGray;
-
-            To.Enabled = false;
-            from.Enabled = false;
-
-            Total_Days.Enabled = false;
+        
 
             foreach (DataRow row in dt.Rows)
             {
@@ -50,20 +42,23 @@ namespace Layout_2._1
                 Calendar2.Visible = false;
             }
 
-            if (from.Text == null)
-            {
-                Calendar2.Enabled = false;
-            }
-
+        }
+        public void DefaultSetting()
+        {
+            To.BackColor = System.Drawing.Color.LightGray;
+            from.BackColor = System.Drawing.Color.LightGray;
+            Total_Days.BackColor = System.Drawing.Color.LightGray;
+            To.Enabled = false;
+            from.Enabled = false;
+            Total_Days.Enabled = false;
         }
         public string totalDays()
         {
+            int weekoff = 0, holidaysCount = 0; DateTime startDate, endDate; string m;
+
             if (from.Text != "" && To.Text != "")
             {
-                int weekoff = 0;
-                int holidaysCount = 0;
-                DateTime startDate;
-                DateTime endDate;
+               
                 if (Drop.SelectedValue == "First Half " || Drop.SelectedValue == "Second Half")
                 {
                     startDate = Calendar1.SelectedDate;
@@ -77,7 +72,7 @@ namespace Layout_2._1
                     endDate = Calendar2.SelectedDate;
                 }
 
-                {
+                
 
                     currentDate = startDate;
 
@@ -97,10 +92,10 @@ namespace Layout_2._1
                     }
 
 
-                }
+                
 
                 TimeSpan difference = endDate - startDate;
-                string m = difference.ToString("dd");
+                 m = difference.ToString("dd");
 
                 if (Drop.SelectedValue == "First Half " || Drop.SelectedValue == "Second Half")
 
@@ -154,15 +149,8 @@ namespace Layout_2._1
 
         protected void Calendar2_Click(object sender, ImageClickEventArgs e)
         {
-            Calendar2.SelectedDate = currentDate;
-           // Calendar3Label.Text = "";
-            To.Text = "";
-            Total_Days.Text = "";
-            if (from.Text != "")
-            {
-                Calendar2.Enabled = true;
-            }
-            Calendar1.Visible = false;
+            Calendar2.SelectedDate = currentDate;   To.Text = ""; Total_Days.Text = ""; Calendar1.Visible = false;
+
             if (Calendar2.Visible)
             {
                 Calendar2.Visible = false;
@@ -210,49 +198,49 @@ namespace Layout_2._1
             Employee emp = new Employee();
             emp = cmd.GetEmployee(Session["ID"] as string);
 
+            string FirstName = emp.FirstName;
+            string lastName = emp.LastName;
+
             Leave leave = new Leave();
 
 
             try
             {
                 MailMessage Email = new MailMessage();
-                MailAddress Sender = new MailAddress("flexur.messanger@flexur.com");
+                MailAddress Sender = new MailAddress(Session["ID"] as string);
                 Email.From = Sender;
-                //      Console.WriteLine("Enter receiver email address:");
+        
+                Email.To.Add("swapnil.suradkar@flexur.com");
+               
+                string[] ccEmails = {"bhimashankar.patil@flexur.com",  "suraj.patil@flexur.com"};
 
-                // Email.To.Add("suraj.patil@flexur.com");
-
-                Email.To.Add(Session["ID"] as string);
-
-
-
+                foreach (string ccEmail in ccEmails)
+                {
+                    Email.CC.Add(ccEmail);
+                }
                 Email.Subject = "Leave Application";
 
+                string format = @"Hello,
+                               " + FirstName + " " + lastName + " has requested for " + Drop.SelectedValue + " on date " + from.Text + " to " + To.Text + " for" + Total_Days.Text + " Days " +
+                                 Environment.NewLine + " The reason for Leave : " + comment.Text +
+                                 Environment.NewLine + "Awaiting a positive response." +
+                                 Environment.NewLine + "Thank You!" +
+                                 Environment.NewLine + "Regards" +
+                                 Environment.NewLine + FirstName + " " + lastName;
 
-                string format = @"Hello sir,
-                                          I will be unavailable in office from" + from.Text + "To" + To.Text + "\n           reason: " + comment.Text;
-
-
-                // Set the email body to the comments
                 Email.Body = format;
 
-
-
-                //        Console.WriteLine("Enter SMTP server name :");
                 string ServerName = "flxdev";
-                //        Console.WriteLine("Enter Port (default 25) :");
+            
                 string Port = "25";
                 if (string.IsNullOrEmpty(Port))
                     Port = "25";
-
-
 
                 SmtpClient MailClient = new SmtpClient(ServerName, int.Parse(Port));
                 MailClient.Send(Email)
 ;
                 Email.Dispose();
-                //   Console.WriteLine("Message sent succesfully. Check receiver inbox or smtp delivery queue.");
-            }
+              }
             catch (Exception ex)
             {
                 Custom.ErrorHandle(ex, Response);
@@ -262,7 +250,7 @@ namespace Layout_2._1
 
         protected void Submit_click(object sender, EventArgs e)
         {
-            //SendMail();
+            SendMail();
             try
             {
                 Calendar1.Visible = false;
@@ -398,11 +386,6 @@ namespace Layout_2._1
 
         protected void Drop_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            ;
-
-
-           // LeaveLable.Text = "";
             Total_Days.Text = "";
             from.Text = "";
             To.Text = "";
@@ -411,16 +394,11 @@ namespace Layout_2._1
 
             if (!string.IsNullOrEmpty(selectedValue) && selectedValue != "--Select Leave--")
             {
-
-
-
                 if (Drop.SelectedValue == "First Half " || Drop.SelectedValue == "Second Half")
                 {
                     Cal1.Enabled = false;
                     Cal1.BackColor = System.Drawing.Color.LightGray;
 
-
-                    //   Cal1.Visible = false;
 
                 }
                 else
