@@ -8,3 +8,100 @@ ADD [LeaveBalance] DECIMAL(5, 2);
 UPDATE [LeavePortal].[dbo].[Employee]
 SET [LeaveBalance] = 22
 WHERE [Email] = 'prasad.joshi@flexur.com';
+
+UPDATE [LeavePortal].[dbo].[Employee]
+SET [LeaveBalance] = 22
+WHERE [Email] = 'chetan.chauhan@flexur.com';
+
+UPDATE [LeavePortal].[dbo].[Employee]
+SET [LeaveBalance] = 20.5
+WHERE [Email] = 'sumeet.kulkarni@flexur.com';
+
+UPDATE [LeavePortal].[dbo].[Employee]
+SET [LeaveBalance] = 22
+WHERE [Email] = 'abhijit.limaye@flexur.com';
+
+UPDATE [LeavePortal].[dbo].[Employee]
+SET [LeaveBalance] = 21
+WHERE [Email] = 'sanman.kale@flexur.com';
+
+UPDATE [LeavePortal].[dbo].[Employee]
+SET [LeaveBalance] = 21
+WHERE [Email] = 'kaushal.sharma@flexur.com';
+
+UPDATE [LeavePortal].[dbo].[Employee]
+SET [LeaveBalance] = 20
+WHERE [Email] = 'shrutika.shelke@flexur.com';
+
+UPDATE [LeavePortal].[dbo].[Employee]
+SET [LeaveBalance] = 22
+WHERE [Email] = 'nikhil.tripathi@flexur.com';
+
+UPDATE [LeavePortal].[dbo].[Employee]
+SET [LeaveBalance] = 16
+WHERE [Email] = 'mayur.bhalekar@flexur.com';
+
+UPDATE [LeavePortal].[dbo].[Employee]
+SET [LeaveBalance] = 15
+WHERE [Email] = 'piyush.patle@flexur.com';
+
+UPDATE [LeavePortal].[dbo].[Employee]
+SET [LeaveBalance] = 21
+WHERE [Email] = 'prathamesh.jadhav@flexur.com';
+
+UPDATE [LeavePortal].[dbo].[Employee]
+SET [LeaveBalance] = 22
+WHERE [Email] = 'shubham.gurav@flexur.com';
+
+UPDATE [LeavePortal].[dbo].[Employee]
+SET [LeaveBalance] = 22
+WHERE [Email] = 'asmita.andhale@flexur.com';
+
+UPDATE [LeavePortal].[dbo].[Employee]
+SET [LeaveBalance] = 17
+WHERE [Email] = 'chandrasagar.khandagale@flexur.com';
+
+UPDATE [LeavePortal].[dbo].[Employee]
+SET [LeaveBalance] = 21
+WHERE [Email] = 'rajnandini.suryakar@flexur.com';
+
+UPDATE [LeavePortal].[dbo].[Employee]
+SET [LeaveBalance] = 22
+WHERE [Email] = 'sohan.lanke.ext@flexur.com';
+
+UPDATE [LeavePortal].[dbo].[Employee]
+SET [LeaveBalance] = 19.5
+WHERE [Email] = 'pooja.devare@flexur.com';
+
+UPDATE [LeavePortal].[dbo].[Employee]
+SET [LeaveBalance] = 22
+WHERE [Email] = 'suraj.patil@flexur.com';
+
+UPDATE [LeavePortal].[dbo].[Employee]
+SET [LeaveBalance] = 20
+WHERE [Email] = 'swapnil.suradkar@flexur.com';
+
+UPDATE [LeavePortal].[dbo].[Employee]
+SET [LeaveBalance] = 22
+WHERE [Email] = 'bhimashankar.patil@flexur.com';
+
+UPDATE [LeavePortal].[dbo].[Employee]
+SET [LeaveBalance] = 0
+WHERE [Email] = 'admin@flexur.com';
+
+UPDATE [LeavePortal].[dbo].[Employee]
+SET [LeaveBalance] = 11.5
+WHERE [Email] = 'ayush.soni@flexur.com';
+
+UPDATE [LeavePortal].[dbo].[Employee]
+SET [LeaveBalance] = 11.5
+WHERE [Email] = 'pranav.bhavsar@flexur.com';
+
+UPDATE [LeavePortal].[dbo].[Employee]
+SET [LeaveBalance] = 11.5
+WHERE [Email] = 'sanket.aware@flexur.com';
+
+UPDATE [LeavePortal].[dbo].[Employee]
+SET [LeaveBalance] = 11.5
+WHERE [Email] = 'gajanan.kadam@flexur.com';
+
