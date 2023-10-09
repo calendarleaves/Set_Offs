@@ -154,7 +154,7 @@ namespace SetOffs1
 
         public void AddLeave(Leave leave)
         {
-            using (SqlCommand command = new SqlCommand("INSERT INTO Leave (EmpId, LeaveType, StartDate, EndDate, Comments,Days,CreatedOn,CreatedBy) VALUES (@EmpId,@LeaveType,@StartDate, @EndDate,@Comments, @Days,@CreatedOn,@CreatedBy)", con))
+            using (SqlCommand command = new SqlCommand("INSERT INTO Leave (EmpId, LeaveType, StartDate, EndDate, Comments,Days,Created_On,CreatedBy) VALUES (@EmpId,@LeaveType,@StartDate, @EndDate,@Comments, @Days,@Created_On,@CreatedBy)", con))
             {
                 command.Parameters.AddWithValue("@EmpId", leave.EmpId);
                 command.Parameters.AddWithValue("@LeaveType", leave.LeaveType);
@@ -162,7 +162,7 @@ namespace SetOffs1
                 command.Parameters.AddWithValue("@EndDate", leave.EndDate);
                 command.Parameters.AddWithValue("@Comments", leave.Comments);
                 command.Parameters.AddWithValue("@Days", leave.Days);
-                command.Parameters.AddWithValue("@CreatedOn", leave.CreatedOn);
+                command.Parameters.AddWithValue("@Created_On", leave.Created_On);
                 command.Parameters.AddWithValue("@CreatedBy", leave.CreatedBy);
 
                 con.Open();
@@ -966,7 +966,7 @@ namespace SetOffs1
         public string Comments { get; set; } = "NoComments";
         public float Days { get; set; } = 0;
 
-        public DateTime CreatedOn { get; set; } = DateTime.Now;
+        public DateTime Created_On { get; set; } = DateTime.Now;
 
         public string CreatedBy { get; set; } = "NoUser";
     }

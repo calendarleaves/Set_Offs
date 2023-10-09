@@ -281,7 +281,7 @@ namespace Layout_2._1
                     l.LeaveType = Drop.SelectedValue;
                     l.StartDate = Calendar1.SelectedDate;
 
-                    l.CreatedOn = DateTime.Now;
+                    l.Created_On = DateTime.Now;
                     l.CreatedBy = emp.Email;
 
                     if (Drop.SelectedValue == "First Half " || Drop.SelectedValue == "Second Half")

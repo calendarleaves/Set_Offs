@@ -3,3 +3,17 @@
  ALTER TABLE [Setoffs].[dbo].[Leave]
 ADD [CreatedOn] DATE,
     [CreatedBy] VARCHAR(100);
+
+
+/****** Script to modify createdOn   column  ******/
+
+ALTER TABLE Leave
+ADD Created_On DATETIME;
+
+select * from Leave;
+
+UPDATE Leave
+SET Created_On = CONCAT(CreatedOn, ' 00:00:00');
+
+ALTER TABLE Leave
+DROP COLUMN CreatedOn;

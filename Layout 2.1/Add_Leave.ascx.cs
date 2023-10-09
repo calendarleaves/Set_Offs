@@ -138,7 +138,7 @@ namespace Layout_2._1
 
                     l.Comments = comment.Text;
 
-                    l.CreatedOn = DateTime.Now;
+                    l.Created_On = DateTime.Now;
                     l.CreatedBy = "admin@flexur.com";
 
                     double l1;
