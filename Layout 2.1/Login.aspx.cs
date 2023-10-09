@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using static System.Net.Mime.MediaTypeNames;
@@ -50,6 +51,7 @@ namespace Layout_2._1
                     Session["ID"] = UsernameTextBox.Text;
                     //Response.Redirect("Calendar.aspx");
                     HandleSuccessfulAuthentication();
+                    //FormsAuthentication.RedirectFromLoginPage(username, false);
                 }
                 else
                 {
