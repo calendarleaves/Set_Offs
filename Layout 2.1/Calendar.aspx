@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Calendar.aspx.cs" Inherits="WebApplication1.WebForm11" %>
 <%@ Register TagPrefix="uc" TagName="Holidays" Src="~/Holidays.ascx" %>
-<%@ Register TagPrefix="uc" TagName="LeaveApproval" Src="~/LeaveApproval.ascx" %>
+
 
 <%@ Register TagPrefix="uc" TagName="Leave_Records" Src="~/Leave_Records.ascx" %>
 <%@ Register TagPrefix="uc" TagName="Add_Leave" Src="~/Add_Leave.ascx" %>
@@ -372,8 +372,7 @@
 
                 <asp:HiddenField ID="hiddenField" runat="server" Value="" />
        
-               <button type="button" id="LeaveApproval" class="btn btn-primary  popUpButtons2" data-toggle="modal" data-target="#myModal90">LeaveApproval</button>     
-	        <uc:LeaveApproval ID="LeaveApproval" runat="server" />
+               
                           <button runat="server" type="button" id="AddUsrBtn" class="btn btn-primary  popUpButtons2" data-toggle="modal" data-target="#myModal7">Apply Leave</button>     
       <uc:Add_Leave_User ID="Add_Leave_User" runat="server" />
 
