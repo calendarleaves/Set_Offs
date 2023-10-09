@@ -262,7 +262,7 @@ namespace Layout_2._1
 
         protected void Submit_click(object sender, EventArgs e)
         {
-            SendMail();
+            //SendMail();
             try
             {
                 Calendar1.Visible = false;
@@ -310,7 +310,7 @@ namespace Layout_2._1
                     }
 
                     int id1 = emp.Id;
-
+                    
                     cmd.AddLeave(l);
                     cmd.UpdateLeaveAfterAdd2(id1, l1);
                     Response.Redirect("Calendar.aspx");
