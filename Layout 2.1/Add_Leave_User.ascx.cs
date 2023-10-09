@@ -310,10 +310,18 @@ namespace Layout_2._1
                     }
 
                     int id1 = emp.Id;
-                    
-                    cmd.AddLeave(l);
+
+                if (cmd.AddLeave(l))
+                {
                     cmd.UpdateLeaveAfterAdd2(id1, l1);
                     Response.Redirect("Calendar.aspx");
+                }
+                else
+                {
+                    commentError.Text = "Already leave is taken dates between start date and end date.";
+
+                }
+                    
                 
             }
             catch (Exception ex)

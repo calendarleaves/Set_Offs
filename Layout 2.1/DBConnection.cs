@@ -151,10 +151,34 @@ namespace SetOffs1
 
             return upcomingHolidays;
         }
-
-        public void AddLeave(Leave leave)
+        public bool IsLeavePresent(Leave leave)
         {
-            using (SqlCommand command = new SqlCommand("INSERT INTO Leave (EmpId, LeaveType, StartDate, EndDate, Comments,Days,CreatedOn,CreatedBy) VALUES (@EmpId,@LeaveType,@StartDate, @EndDate,@Comments, @Days,@CreatedOn,@CreatedBy)", con))
+
+            string query = "SELECT EmpId FROM leave l WHERE ((l.StartDate >= @Variable1 AND l.StartDate <= @Variable2)   OR (l.EndDate >= @Variable1 AND l.EndDate <= @Variable2)   OR(l.StartDate <= @Variable1 AND l.EndDate >= @Variable2)) and l.EmpId=@empid";
+            con.Open();
+            using (SqlCommand command = new SqlCommand(query, con))
+            {
+                command.Parameters.AddWithValue("@Variable1", leave.StartDate);
+                command.Parameters.AddWithValue("@Variable2", leave.EndDate);
+                command.Parameters.AddWithValue("@empid", leave.EmpId);
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        con.Close();
+                        return true;
+                    }
+                }
+            }
+            con.Close();
+            return false;
+        }
+        public bool AddLeave(Leave leave)
+        {
+            if(IsLeavePresent(leave))
+            { return false; }
+            using (SqlCommand command = new SqlCommand("INSERT INTO Leave (EmpId, LeaveType, StartDate, EndDate, Comments,Days,Created_On,CreatedBy) VALUES (@EmpId,@LeaveType,@StartDate, @EndDate,@Comments, @Days,@CreatedOn,@CreatedBy)", con))
             {
                 command.Parameters.AddWithValue("@EmpId", leave.EmpId);
                 command.Parameters.AddWithValue("@LeaveType", leave.LeaveType);
@@ -168,14 +192,14 @@ namespace SetOffs1
                 con.Open();
                 command.ExecuteNonQuery();
                 con.Close();
-
+                return true;
             }
 
         }
 
-        public void Addleave(string firstname, string lastname, Leave l)
+        public bool Addleave(string firstname, string lastname, Leave l)
         {
-
+            
 
             string query = "SELECT id FROM Employee WHERE FirstName = @firstName AND LastName = @lastName";
             con.Open();
@@ -192,7 +216,14 @@ namespace SetOffs1
                     }
                 }
                 con.Close();
-                AddLeave(l);
+                if(AddLeave(l))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
         // GetAll Leave from data base for search 

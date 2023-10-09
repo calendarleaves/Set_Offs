@@ -14,7 +14,7 @@ namespace WebApplication1
 {
     public partial class WebForm11 : System.Web.UI.Page
     {
-        DBConnection d1 = new DBConnection();
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -200,6 +200,7 @@ namespace WebApplication1
            
             try
             {
+                DBConnection d1 = new DBConnection();
                 //color code  starts
                 DateTime date = e.Day.Date; List<EmployeeLeave> employeeLeaves = d1.GetEmployeeLeave(date); int recordCount = employeeLeaves.Count;
 
