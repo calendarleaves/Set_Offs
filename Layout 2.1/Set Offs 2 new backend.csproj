@@ -108,7 +108,6 @@
     <Content Include="Web.config" />
     <Content Include="Login.aspx" />
     <Content Include="DeleteLeavePage.aspx" />
-    <Content Include="LeaveApproval.ascx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddLeave.aspx.cs">
@@ -239,13 +238,6 @@
     </Compile>
     <Compile Include="Test_Delete_Leave.ascx.designer.cs">
       <DependentUpon>Test_Delete_Leave.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="LeaveApproval.ascx.cs">
-      <DependentUpon>LeaveApproval.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="LeaveApproval.ascx.designer.cs">
-      <DependentUpon>LeaveApproval.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
