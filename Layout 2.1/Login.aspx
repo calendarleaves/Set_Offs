@@ -47,7 +47,7 @@
 
                 <div class="col-md-4  " style="float:right">
                     <div class="box " style="max-width:350px; max-height:420px">
-                        <form id="form2" runat="server" >
+                        <form id="form2" runat="server" method="post" action="Login.aspx" >
 
 
 

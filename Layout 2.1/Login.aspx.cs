@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Layout_2._1
 {
@@ -40,13 +41,15 @@ namespace Layout_2._1
                 }
                 else
                 { user.Text = ""; }
+                var pass1 = HttpUtility.HtmlEncode(PasswordTextBox.Text);
 
-
-                if (UsernameTextBox.Text == employee.Email && DBConnection.VerifyPassword(PasswordTextBox.Text, employee.Password))
-                       { 
-
+                PasswordTextBox.Text = DBConnection.HashPassword(pass1);
+                if (UsernameTextBox.Text == employee.Email && DBConnection.VerifyPassword(pass1, employee.Password))
+                {
+                    
                     Session["ID"] = UsernameTextBox.Text;
-                    Response.Redirect("Calendar.aspx");
+                    //Response.Redirect("Calendar.aspx");
+                    HandleSuccessfulAuthentication();
                 }
                 else
                 {
@@ -79,6 +82,11 @@ namespace Layout_2._1
                 
             }
 
-        } } }
+        }
+        protected void HandleSuccessfulAuthentication()
+        {
+            Response.Redirect("Calendar.aspx");
+        }
+    } }
     
 

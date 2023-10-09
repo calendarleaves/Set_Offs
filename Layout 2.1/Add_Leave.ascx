@@ -45,19 +45,18 @@
     });--%>
 
 
-    function checkFields() {
-        // Get references to the input fields
+    function checkFields()
+    {
         var selectEmployee = document.getElementById('<%=  SelectEmployee.ClientID %>');
-       
         var dropDown = document.getElementById('<%= drop.ClientID %>');
-       var fromDate = document.getElementById('<%= from.ClientID %>');
-       var toDate = document.getElementById('<%= To.ClientID %>');
+        var fromDate = document.getElementById('<%= from.ClientID %>');
+        var toDate = document.getElementById('<%= To.ClientID %>');
         var comment = document.getElementById('<%= comment.ClientID %>');
         
-    // Get the submit button
+    
         var btnSubmit = document.getElementById('<%= SubmitButton.ClientID %>');
 
-        // Check if all fields have values
+
         if (
             selectEmployee.selectedIndex > 0 &&
             dropDown.value.trim() !== '' &&
@@ -65,12 +64,15 @@
             toDate.value.trim() !== '' &&
             comment.value.trim() !== ''
         ) {
-            btnSubmit.disabled = false; // Enable the submit button
-            btnSubmit.style.backgroundColor = "#0555fb";
-        } else {
-            btnSubmit.disabled = true; // Disable the submit button
+            btnSubmit.disabled = false;
+            btnSubmit.classList.add(submit.backgroundColor = "#0555fb");
+            btnSubmit.classList.add(submit.hover);
 
-            btnSubmit.style.backgroundColor = "lightgray";
+
+
+        } else {
+            btnSubmit.disabled = true;
+            btnSubmit.classList.add(submit.backgroundColor = "lightgray");
 
         }
 

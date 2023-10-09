@@ -33,29 +33,31 @@
     
     function checkFields2()
     {
-        // Get references to the input fields
-       
+        var dropDown = document.getElementById('<%= Drop.ClientID %>');
         var fromDate = document.getElementById('<%= from.ClientID %>');
         var toDate = document.getElementById('<%= To.ClientID %>');
         var comment = document.getElementById('<%= comment.ClientID %>');
         
-    // Get the submit button
-        var btnSubmit = document.getElementById('<%=SubmitButton.ClientID %>');
+       
+        var btnSubmit = document.getElementById('<%= SubmitButton.ClientID %>');
 
-        // Check if all fields have values
+      
         if (
-            
+            dropDown.value.trim() !== '' &&
             fromDate.value.trim() !== '' &&
             toDate.value.trim() !== '' &&
-            comment.value.trim() !== '')
-        {
-            btnSubmit.disabled = false; // Enable the submit button
-            btnSubmit.style.backgroundColor = "#0555fb";
-        } else
-        {
-            btnSubmit.disabled = true; // Disable the submit button
+            comment.value.trim() !== ''
+        ) {
+            btnSubmit.disabled = false; 
+           
+            btnSubmit.classList.add(submit.backgroundColor = "#0555fb");
+            btnSubmit.classList.add(submit.hover);
+
+        } else {
+            btnSubmit.disabled = true;
 
             btnSubmit.style.backgroundColor = "lightgray";
+            btnSubmit.classList.remove(submit.hover);
 
         }
 
