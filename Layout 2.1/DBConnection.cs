@@ -307,6 +307,7 @@ namespace SetOffs1
             SqlCommand command = new SqlCommand(@"
         SELECT 
             CONCAT(e.FirstName, ' ', e.LastName) AS Name,
+            LeaveType,
             CONVERT(varchar, l.StartDate, 106) AS StartDate,
             CONVERT(varchar, l.EndDate, 106) AS EndDate,
             l.Comments
@@ -343,6 +344,7 @@ namespace SetOffs1
             SqlCommand command = new SqlCommand(@"
         SELECT 
             CONCAT(e.FirstName, ' ', e.LastName) AS Name,
+            LeaveType,
             CONVERT(varchar, l.StartDate, 106) AS StartDate,
             CONVERT(varchar, l.EndDate, 106) AS EndDate,
             l.Comments

@@ -31,11 +31,20 @@ namespace Layout_2._1
                 //dt1 = d.GetLeaveBalance();
                 //GridView5.DataSource = dt1;
                 //GridView5.DataBind();
-                GridView5.Visible = false;
+                //GridView5.Columns[0].Visible = false;
+               GridView5.Visible = false;
             }
             else
             {
                 dt1 = d.GetLeaveBalance(usId);
+
+                foreach (DataRow row in dt1.Rows)
+                {
+                    double leaveBalance = Convert.ToDouble(row["LeaveBalance"]);
+                    string formattedLeaveBalance = leaveBalance.ToString("0.#");
+                    row["LeaveBalance"] = formattedLeaveBalance;
+                }
+
                 GridView5.DataSource = dt1;
                 GridView5.DataBind();
                 GridView5.Columns[0].Visible = false;
@@ -53,6 +62,7 @@ namespace Layout_2._1
                 {
                     GridView4.DataSource = null;
                     GridView4.DataBind();
+                    GridView4.Columns[0].Visible = true;
                     lblMsg.Text = "No Records!";
 
                 }
@@ -60,6 +70,7 @@ namespace Layout_2._1
                 {
                     GridView4.DataSource = dt;
                     GridView4.DataBind();
+                    GridView4.Width = Unit.Percentage(97);
                     lblMsg.Text = string.Empty;
                     lblMsg.Visible = false;
                 }

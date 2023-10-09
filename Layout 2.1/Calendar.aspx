@@ -314,7 +314,7 @@
                                <%--<asp:BoundField DataField="FirstName" Headertext="FirstName"/>
                                <asp:BoundField DataField="LastName" Headertext="LastName"/>--%>
                                 <asp:BoundField DataField="FullName" Headertext="Name"/>
-                                <asp:BoundField DataField="LeaveType" Headertext=" "/>
+                                <asp:BoundField DataField="LeaveType" Headertext="Leave Type"/>
                                 <asp:BoundField DataField="StartDate" Headertext="From" /> 
                                <asp:BoundField DataField="EndDate" Headertext="To" /> 
                
@@ -364,7 +364,7 @@
     </div>
                       </div>
    <div style="display: flex; justify-content: flex-start; margin-top: 10px;">
-    <span style="font-size: 10px; color: #888;">LeavePortal 1.3 &copy; Flexur Systems Pvt.Ltd.</span>
+    <span style="font-size: 10px; color: #888;">LeavePortal v1.2</span>
 </div>
                      
 </div>
