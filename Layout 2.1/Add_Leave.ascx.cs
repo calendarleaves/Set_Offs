@@ -152,14 +152,24 @@ namespace Layout_2._1
                     }
 
                     DBConnection s = new DBConnection();
-                    s.Addleave(firstName, lastName, l);
+                if (s.Addleave(firstName, lastName, l))
+                {
                     s.UpdateLeaveAfterAdd(fullName, l1);
-
                     Response.Redirect("Calendar.aspx");
+                }
+                else
+                {
+                    commentError.Text = "Already leave is taken dates between start date and end date.";
+
+                }
 
 
 
-              //  }
+
+
+
+
+                //  }
 
             }
             catch (Exception ex)
