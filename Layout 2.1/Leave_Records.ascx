@@ -13,11 +13,11 @@
     <div class="modal-dialog">
     
    
-      <div class="modal-content" style="max-height:650px; width:750px; overflow-y:auto; margin: auto; padding: 0 1.5%;" >
+      <div class="modal-content" style="max-height:650px; width:780px; overflow-y:auto; margin: auto; padding: 0 1.5%;" >
 
        <!-- Modal Header -->
             <div class="modal-header" style="padding:10px;">
-                <h2 style="margin-left:250px; ">Leave Records</h2>
+                <h2 style="margin-left:265px; ">Leave Records</h2>
     <asp:ImageButton ID="close" CssClass="Close" ImageUrl="images/Close1.png" ImageAlign="AbsBottom"
 	runat="server" OnClick="closeLRec_Click" />
            
