@@ -1,5 +1,5 @@
 ﻿/****** Script to add  columns  ******/
 
- ALTER TABLE [Setoffs].[dbo].[Leave]
-ADD [CreatedOn] DATE,
+ALTER TABLE [LeavePortal].[dbo].[Leave]
+ADD [CreatedOn] DATETIME,
     [CreatedBy] VARCHAR(100);

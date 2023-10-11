@@ -313,7 +313,9 @@
                            <Columns>
                                <%--<asp:BoundField DataField="FirstName" Headertext="FirstName"/>
                                <asp:BoundField DataField="LastName" Headertext="LastName"/>--%>
-                                <asp:BoundField DataField="FullName" Headertext="Name"/>
+                                <asp:BoundField DataField="FullName" Headertext="Name">
+                                      <ItemStyle Width="40%" />
+                                    </asp:BoundField>
                                 <asp:BoundField DataField="LeaveType" Headertext="Leave Type"/>
                                 <asp:BoundField DataField="StartDate" Headertext="From" /> 
                                <asp:BoundField DataField="EndDate" Headertext="To" /> 

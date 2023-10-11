@@ -42,10 +42,11 @@ namespace Layout_2._1
                 }
                 else
                 { user.Text = ""; }
-                var pass1 = HttpUtility.HtmlEncode(PasswordTextBox.Text);
 
-                PasswordTextBox.Text = DBConnection.HashPassword(pass1);
-                if (UsernameTextBox.Text == employee.Email && DBConnection.VerifyPassword(pass1, employee.Password))
+
+                if (employee != null &&
+     string.Equals(UsernameTextBox.Text, employee.Email, StringComparison.OrdinalIgnoreCase) &&
+     DBConnection.VerifyPassword(PasswordTextBox.Text, employee.Password))
                 {
                     
                     Session["ID"] = UsernameTextBox.Text;

@@ -144,7 +144,7 @@ namespace Layout_2._1
                 }
                 else
                 {
-                    commentError.Text = "Already leave is taken dates between start date and end date.";
+                    commentError.Text = "Record already exists.Please fill different dates.";
 
                 }
 
