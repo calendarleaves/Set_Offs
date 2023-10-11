@@ -362,3 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /Layout 2.1/LoginCSSboot2.css
+/Layout 2.1/AddLeave.js
+/Layout 2.1/AddUserLeave.js
