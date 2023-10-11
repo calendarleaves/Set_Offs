@@ -58,12 +58,14 @@ namespace Layout_2._1
         protected void DefaultValues()
         {
 
+           
+
             To.BackColor = System.Drawing.Color.LightGray;
             from.BackColor = System.Drawing.Color.LightGray;
             Total_Days.BackColor = System.Drawing.Color.LightGray;
-
             To.Enabled = false;
             from.Enabled = false;
+            Total_Days.Enabled = false;
 
 
         }
@@ -144,7 +146,7 @@ namespace Layout_2._1
                 }
                 else
                 {
-                    commentError.Text = "Already leave is taken dates between start date and end date.";
+                    commentError.Text = "Record already exists.Please fill different dates.";
 
                 }
 

@@ -222,6 +222,15 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.HiddenField hiddenField;
 
         /// <summary>
+        /// Add_Leave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Layout_2._1.Add_Leave Add_Leave;
+
+        /// <summary>
         /// AddUsrBtn control.
         /// </summary>
         /// <remarks>
@@ -238,15 +247,6 @@ namespace WebApplication1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Layout_2._1.Add_Leave_User Add_Leave_User;
-
-        /// <summary>
-        /// Add_Leave control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Layout_2._1.Add_Leave Add_Leave;
 
         /// <summary>
         /// DltUsrBtn control.

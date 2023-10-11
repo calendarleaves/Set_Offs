@@ -54,13 +54,14 @@
             btnSubmit.disabled = false; 
            
             btnSubmit.classList.add(submit.backgroundColor = "#0555fb");
-            btnSubmit.classList.add(submit.hover);
+            
 
         } else {
             btnSubmit.disabled = true;
 
-            btnSubmit.style.backgroundColor = "lightgray";
-            btnSubmit.classList.remove(submit.hover);
+          
+             btnSubmit.classList.add(submit.backgroundColor = "lightgray");
+           
 
         }
 

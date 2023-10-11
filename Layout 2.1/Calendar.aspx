@@ -3,9 +3,10 @@
 
 
 <%@ Register TagPrefix="uc" TagName="Leave_Records" Src="~/Leave_Records.ascx" %>
-<%@ Register TagPrefix="uc" TagName="Add_Leave" Src="~/Add_Leave.ascx" %>
-<%@ Register TagPrefix="uc" TagName="Delete_Leave" Src="~/Delete_Leave.ascx" %>
 <%@ Register TagPrefix="uc" TagName="Add_Leave_User" Src="~/Add_Leave_User.ascx" %>
+
+<%@ Register TagPrefix="uc" TagName="Delete_Leave" Src="~/Delete_Leave.ascx" %>
+<%@ Register TagPrefix="uc" TagName="Add_Leave" Src="~/Add_Leave.ascx" %>
 <%@ Register TagPrefix="uc" TagName="Delete_Leave_User" Src="~/Delete_Leave_User.ascx" %>
 <%@ Register TagPrefix="uc" TagName="Test_Delete_Leave" Src="~/Test_Delete_Leave.ascx" %>
 <%@ Register TagPrefix="uc" TagName="PasswordChange" Src="~/PasswordChange.ascx" %>
@@ -313,7 +314,9 @@
                            <Columns>
                                <%--<asp:BoundField DataField="FirstName" Headertext="FirstName"/>
                                <asp:BoundField DataField="LastName" Headertext="LastName"/>--%>
-                                <asp:BoundField DataField="FullName" Headertext="Name"/>
+                                <asp:BoundField DataField="FullName" Headertext="Name">
+                                      <ItemStyle Width="40%" />
+                                    </asp:BoundField>
                                 <asp:BoundField DataField="LeaveType" Headertext="Leave Type"/>
                                 <asp:BoundField DataField="StartDate" Headertext="From" /> 
                                <asp:BoundField DataField="EndDate" Headertext="To" /> 
@@ -371,13 +374,13 @@
 
 
                 <asp:HiddenField ID="hiddenField" runat="server" Value="" />
-       
+           <button type="button" id="AddAdmnBtn" class="btn btn-primary  popUpButtons2" data-toggle="modal" data-target="#myModal3" style="display:none">Add Leave</button>     
+      <uc:Add_Leave ID="Add_Leave" runat="server" />
                
                           <button runat="server" type="button" id="AddUsrBtn" class="btn btn-primary  popUpButtons2" data-toggle="modal" data-target="#myModal7">Apply Leave</button>     
       <uc:Add_Leave_User ID="Add_Leave_User" runat="server" />
 
-                <button type="button" id="AddAdmnBtn" class="btn btn-primary  popUpButtons2" data-toggle="modal" data-target="#myModal3" style="display:none">Add Leave</button>     
-      <uc:Add_Leave ID="Add_Leave" runat="server" />
+            
                 
                 <button runat="server" type="button" id="DltUsrBtn" class="btn btn-primary  popUpButtons2" style="display:none; text-align:center; justify-content:center;"  data-toggle="modal" data-target="#myModal8">Delete Leave</button>     
 	 <uc:Delete_Leave_User ID="Delete_Leave_User" runat="server" />

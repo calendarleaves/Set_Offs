@@ -1,1 +1,6 @@
 ﻿INSERT [dbo].[Employee] ([Id], [FirstName], [LastName], [Designation], [Email], [Password], [Flx_Id]) VALUES (27, N'Asmita', N'Andhale', N'Software Engineer', N'asmita.andhale@flexur.com', N'$2a$12$QSQBXsYwKG.LosQIB9.FzOFKWL/zfda8hNC1rm5DAt1k3o1DlnFtC', N'FLX033')
+
+INSERT [dbo].[Employee] ([Id], [FirstName], [LastName], [Designation], [Email], [Password], [Flx_Id]) VALUES (22, N'Ayush', N'Soni', N'Trainee Software Engineer', N'ayush.soni@flexur.com', N'$2a$12$Val0emYdvgGz7JjLGBj2IeII.lQR7b3hYyg.UQ/onTj8e42GKil1S', N'FLX055')
+INSERT [dbo].[Employee] ([Id], [FirstName], [LastName], [Designation], [Email], [Password], [Flx_Id]) VALUES (23, N'Pranav', N'Bhavsar', N'Trainee Software Engineer', N'pranav.bhavsar@flexur.com', N'$2a$12$UPXJ6MBZ.mIJzkmKnIWKNeDfBMz216uNqnvCWe8zb3TKAj4piQPrC', N'FLX056')
+INSERT [dbo].[Employee] ([Id], [FirstName], [LastName], [Designation], [Email], [Password], [Flx_Id]) VALUES (24, N'Sanket', N'Aware', N'Trainee Software Engineer', N'sanket.aware@flexur.com', N'$2a$12$Val0emYdvgGz7JjLGBj2IeII.lQR7b3hYyg.UQ/onTj8e42GKil1S', N'FLX057')
+INSERT [dbo].[Employee] ([Id], [FirstName], [LastName], [Designation], [Email], [Password], [Flx_Id]) VALUES (26, N'Gajanan', N'Kadam', N'Trainee Software Engineer', N'gajanan.kadam@flexur.com', N'$2a$12$UPXJ6MBZ.mIJzkmKnIWKNeDfBMz216uNqnvCWe8zb3TKAj4piQPrC', N'FLX058')

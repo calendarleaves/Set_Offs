@@ -203,48 +203,57 @@ namespace Layout_2._1
 
             Leave leave = new Leave();
 
-
             try
             {
                 MailMessage Email = new MailMessage();
-                MailAddress Sender = new MailAddress(Session["ID"] as string);
+                MailAddress Sender = new MailAddress("flexur.messenger@flexur.com");
                 Email.From = Sender;
-        
+
                 Email.To.Add("swapnil.suradkar@flexur.com");
-               
-                string[] ccEmails = {"bhimashankar.patil@flexur.com",  "suraj.patil@flexur.com"};
+
+                string[] ccEmails = { "bhimashankar.patil@flexur.com", Session["ID"] as string };
 
                 foreach (string ccEmail in ccEmails)
                 {
                     Email.CC.Add(ccEmail);
                 }
-                Email.Subject = "Leave Application";
+                if (Drop.SelectedValue == "Work From Home")
+                {
+                    Email.Subject = FirstName + " " + lastName + " On " + Drop.SelectedValue;
+                }
+                else
+                {
+                    Email.Subject = FirstName + " " + lastName + " On " + Drop.SelectedValue + " Leave ";
 
-                string format = @"Hello,
-                               " + FirstName + " " + lastName + " has requested for " + Drop.SelectedValue + " on date " + from.Text + " to " + To.Text + " for" + Total_Days.Text + " Days " +
-                                 Environment.NewLine + " The reason for Leave : " + comment.Text +
-                                 Environment.NewLine + "Awaiting a positive response." +
-                                 Environment.NewLine + "Thank You!" +
-                                 Environment.NewLine + "Regards" +
-                                 Environment.NewLine + FirstName + " " + lastName;
+                }
+
+                string format = "Hello,\n"
+                                + FirstName + " " + lastName + " has requested for " + Drop.SelectedValue + " on date " + from.Text + " to " + To.Text + " for " + Total_Days.Text + " days \n" +
+                                "Reason for leave - " + comment.Text + " \n\n" +
+
+                                "Thank you \n" +
+                                "Regards \n" +
+                                 FirstName + " " + lastName;
 
                 Email.Body = format;
 
                 string ServerName = "flxdev";
-            
+
                 string Port = "25";
                 if (string.IsNullOrEmpty(Port))
                     Port = "25";
 
                 SmtpClient MailClient = new SmtpClient(ServerName, int.Parse(Port));
                 MailClient.Send(Email)
+
 ;
                 Email.Dispose();
-              }
+            }
             catch (Exception ex)
             {
                 Custom.ErrorHandle(ex, Response);
             }
+
         }
 
 
@@ -306,7 +315,7 @@ namespace Layout_2._1
                 }
                 else
                 {
-                    commentError.Text = "Already leave is taken dates between start date and end date.";
+                    commentError.Text = "Leave already exists.Please fill different dates.";
 
                 }
                     

@@ -90,6 +90,10 @@ SET [LeaveBalance] = 0
 WHERE [Email] = 'admin@flexur.com';
 
 UPDATE [LeavePortal].[dbo].[Employee]
+SET [LeaveBalance] = 0
+WHERE [Email] = 'test@flexur.com';
+
+UPDATE [LeavePortal].[dbo].[Employee]
 SET [LeaveBalance] = 11.5
 WHERE [Email] = 'ayush.soni@flexur.com';
 
