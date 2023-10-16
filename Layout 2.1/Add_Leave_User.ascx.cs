@@ -15,6 +15,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+//SendMail() in this methode line 215 and 217
+    //specify the email address of mail receivers
+
 namespace Layout_2._1
 {
 
@@ -212,9 +215,9 @@ namespace Layout_2._1
                 Email.From = Sender;
                 string format;
 
-                Email.To.Add("abhijit.limaye@flexur.com");
+                Email.To.Add("");
 
-                string[] ccEmails = { "sanman.kale@flexur.com", "sumeet.kulkarni@flexur.com", Session["ID"] as string };
+                string[] ccEmails = { "", Session["ID"] as string };
 
                 foreach (string ccEmail in ccEmails)
                 {
