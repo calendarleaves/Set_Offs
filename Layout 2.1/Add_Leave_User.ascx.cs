@@ -1,6 +1,7 @@
 ﻿using SetOffs1;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Policy;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
@@ -208,40 +210,53 @@ namespace Layout_2._1
                 MailMessage Email = new MailMessage();
                 MailAddress Sender = new MailAddress("flexur.messenger@flexur.com");
                 Email.From = Sender;
+                string format;
 
-                Email.To.Add("swapnil.suradkar@flexur.com");
+                Email.To.Add("abhijit.limaye@flexur.com");
 
-                string[] ccEmails = { "bhimashankar.patil@flexur.com", Session["ID"] as string };
+                string[] ccEmails = { "sanman.kale@flexur.com", "sumeet.kulkarni@flexur.com", Session["ID"] as string };
 
                 foreach (string ccEmail in ccEmails)
                 {
                     Email.CC.Add(ccEmail);
                 }
-                if (Drop.SelectedValue == "Work From Home")
+                if (Drop.SelectedValue == "Work From  Home")
                 {
                     Email.Subject = FirstName + " " + lastName + " On " + Drop.SelectedValue;
-                }
-                else
-                {
-                    Email.Subject = FirstName + " " + lastName + " On " + Drop.SelectedValue + " Leave ";
-
-                }
-
-                string format = "Hello,\n"
+                    format = "Hello,\n"
                                 + FirstName + " " + lastName + " has requested for " + Drop.SelectedValue + " on date " + from.Text + " to " + To.Text + " for " + Total_Days.Text + " days \n" +
                                 "Reason for leave - " + comment.Text + " \n\n" +
 
                                 "Thank you \n" +
                                 "Regards \n" +
                                  FirstName + " " + lastName;
+                }
+                else
+                {
+                    Email.Subject = FirstName + " " + lastName + " On " + Drop.SelectedValue + " Leave ";
+                    
+                    format = "Hello,\n"
+                                + FirstName + " " + lastName + " has requested for " + Drop.SelectedValue + " leave on date " + from.Text + " to " + To.Text + " for " + Total_Days.Text + " days \n" +
+                                "Reason for leave - " + comment.Text + " \n\n" +
+
+                                "Thank you \n" +
+                                "Regards \n" +
+                                 FirstName + " " + lastName;
+                }
+
+               
 
                 Email.Body = format;
 
-                string ServerName = "flxdev";
+                //string ServerName = "flxdev";
 
-                string Port = "25";
-                if (string.IsNullOrEmpty(Port))
-                    Port = "25";
+                //string Port = "25";
+
+                string ServerName = ConfigurationManager.AppSettings["SmtpServerName"];
+                string Port = ConfigurationManager.AppSettings["SmtpPort"];
+
+                //if (string.IsNullOrEmpty(Port))
+                  //  Port = "25";
 
                 SmtpClient MailClient = new SmtpClient(ServerName, int.Parse(Port));
                 MailClient.Send(Email)
@@ -259,108 +274,132 @@ namespace Layout_2._1
 
         protected void Submit_click(object sender, EventArgs e)
         {
-            SendMail();
+
             try
             {
                 Calendar1.Visible = false;
                 Calendar2.Visible = false;
                 DateTime start1 = Calendar1.SelectedDate;
                 DateTime end1 = Calendar2.SelectedDate;
-                
-                    DBConnection cmd = new DBConnection();
-                    Employee emp = new Employee();
-                    emp = cmd.GetEmployee(Session["ID"] as string);
+
+                DBConnection cmd = new DBConnection();
+                Employee emp = new Employee();
+                emp = cmd.GetEmployee(Session["ID"] as string);
 
 
 
-                    Leave l = new Leave();
-                    l.EmpId = emp.Id;
-                    l.LeaveType = Drop.SelectedValue;
-                    l.StartDate = Calendar1.SelectedDate;
+                Leave l = new Leave();
+                l.EmpId = emp.Id;
+                l.LeaveType = Drop.SelectedValue;
+                l.StartDate = Calendar1.SelectedDate;
 
-                    l.CreatedOn = DateTime.Now;
-                    l.CreatedBy = emp.Email;
+                l.CreatedOn = DateTime.Now;
+                l.CreatedBy = emp.Email;
 
-                    if (Drop.SelectedValue == "First Half " || Drop.SelectedValue == "Second Half")
+                if (Drop.SelectedValue == "First Half " || Drop.SelectedValue == "Second Half")
 
-                    {
-                        l.EndDate = Calendar1.SelectedDate;
+                {
+                    l.EndDate = Calendar1.SelectedDate;
 
 
-                    }
-                    else
-                    {
-                        l.EndDate = Calendar2.SelectedDate;
-                    }
-                    l.Days = float.Parse(Total_Days.Text);
-                    l.Comments = comment.Text;
+                }
+                else
+                {
+                    l.EndDate = Calendar2.SelectedDate;
+                }
+                l.Days = float.Parse(Total_Days.Text);
+                l.Comments = comment.Text;
 
- 
-                    double l1;
-                    if (l.LeaveType == "Work From  Home")
-                    {
-                        l1 = 0;
-                    }
-                    else
-                    {
-                        l1 = double.Parse(Total_Days.Text);
-                    }
 
-                    int id1 = emp.Id;
+                double l1;
+                if (l.LeaveType == "Work From  Home")
+                {
+                    l1 = 0;
+                }
+                else
+                {
+                    l1 = double.Parse(Total_Days.Text);
+                }
+
+                int id1 = emp.Id;
 
                 if (cmd.AddLeave(l))
                 {
                     cmd.UpdateLeaveAfterAdd2(id1, l1);
+                    SendMail();
                     Response.Redirect("Calendar.aspx");
                 }
                 else
                 {
+                    Logger.Log("Duplicate Leave addition attempt...");
                     commentError.Text = "Leave already exists.Please fill different dates.";
 
                 }
-                    
-                
+
+
+            }
+            catch (System.Threading.ThreadAbortException ex)
+            {
+
             }
             catch (Exception ex)
             {
+                Logger.LogException(ex);
                 Custom.ErrorHandle(ex, Response);
             }
+
+
+
+
+
             ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal7').modal('show');", true);
 
         }
 
         protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
         {
-            Calendar1.BackColor = Color.White;
-            Calendar1.TitleFormat = TitleFormat.Month;
-
-            if (e.Day.Date < DateTime.Now.Date) 
+            try
             {
-                e.Day.IsSelectable = false;
-                e.Cell.ForeColor = System.Drawing.Color.Gray; 
-            }
+                Calendar1.BackColor = Color.White;
+                Calendar1.TitleFormat = TitleFormat.Month;
 
-            if (To.Text != "")
-            {
-                if (e.Day.Date > Calendar2.SelectedDate) 
+                if (e.Day.Date < DateTime.Now.Date)
                 {
                     e.Day.IsSelectable = false;
-                    e.Cell.ForeColor = System.Drawing.Color.Gray; 
+                    e.Cell.ForeColor = System.Drawing.Color.Gray;
                 }
-            }
-            if (e.Day.Date.DayOfWeek == DayOfWeek.Saturday || e.Day.Date.DayOfWeek == DayOfWeek.Sunday)
-            {
-                e.Day.IsSelectable = false;
-                e.Cell.ForeColor = System.Drawing.Color.Red;
+
+                if (To.Text != "")
+                {
+                    if (e.Day.Date > Calendar2.SelectedDate)
+                    {
+                        e.Day.IsSelectable = false;
+                        e.Cell.ForeColor = System.Drawing.Color.Gray;
+                    }
+                }
+                if (e.Day.Date.DayOfWeek == DayOfWeek.Saturday || e.Day.Date.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    e.Day.IsSelectable = false;
+                    e.Cell.ForeColor = System.Drawing.Color.Red;
+
+                }
+                if (holidays.Contains(e.Day.Date))
+                {
+                    e.Day.IsSelectable = false;
+                    e.Cell.ForeColor = System.Drawing.Color.Red;
+                }
 
             }
-            if (holidays.Contains(e.Day.Date))
+            catch (Exception ex)
             {
-                e.Day.IsSelectable = false;
-                e.Cell.ForeColor = System.Drawing.Color.Red; 
+                //Logger.LogException(ex);
+
             }
+
+
 
             ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal7').modal('show');", true);
+            
 
 
         }

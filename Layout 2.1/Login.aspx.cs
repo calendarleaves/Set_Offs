@@ -16,6 +16,8 @@ namespace Layout_2._1
     public partial class WebForm1 : System.Web.UI.Page
     { protected void Page_Load(object sender, EventArgs e)
         {
+
+           
             Session["ID"] = null;
             
         }
@@ -48,17 +50,21 @@ namespace Layout_2._1
      string.Equals(UsernameTextBox.Text, employee.Email, StringComparison.OrdinalIgnoreCase) &&
      DBConnection.VerifyPassword(PasswordTextBox.Text, employee.Password))
                 {
-                    
+
                     Session["ID"] = UsernameTextBox.Text;
-                    //Response.Redirect("Calendar.aspx");
-                    HandleSuccessfulAuthentication();
+
+
+                    Response.Redirect("Calendar.aspx");
+
+
+                    //HandleSuccessfulAuthentication();
                     //FormsAuthentication.RedirectFromLoginPage(username, false);
                 }
                 else
                 {
-                  /*  if (UsernameTextBox.Text != "" && PasswordTextBox.Text != "")
-                    { error.Text = "* Username or password is incorrect  "; }
-                    else { error.Text = ""; } */
+                    /*  if (UsernameTextBox.Text != "" && PasswordTextBox.Text != "")
+                      { error.Text = "* Username or password is incorrect  "; }
+                      else { error.Text = ""; } */
 
                     if (UsernameTextBox.Text == "" && PasswordTextBox.Text == "")
                     {
@@ -79,17 +85,23 @@ namespace Layout_2._1
                     else { error.Text = ""; }
                 }
             }
+            catch (System.Threading.ThreadAbortException ex)
+            { 
+            
+            }
             catch (Exception ex)
             {
-                Custom.ErrorHandle(ex, Response,Context);
-                
+                Logger.LogException(ex);
+                Custom.ErrorHandle(ex, Response, Context);
+
             }
 
         }
-        protected void HandleSuccessfulAuthentication()
-        {
-            Response.Redirect("Calendar.aspx");
-        }
+        //protected void HandleSuccessfulAuthentication()
+        //{
+          
+        //    Response.Redirect("Calendar.aspx");
+        //}
     } }
     
 

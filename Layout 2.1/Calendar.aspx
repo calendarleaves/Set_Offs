@@ -367,7 +367,7 @@
     </div>
                       </div>
    <div style="display: flex; justify-content: flex-start; margin-top: 10px;">
-    <span style="font-size: 10px; color: #888;">LeavePortal v1.2</span>
+    <span style="font-size: 10px; color: #888;">LeavePortal v1.3</span>
 </div>
                      
 </div>
