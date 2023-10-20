@@ -96,6 +96,7 @@ namespace Layout_2._1
             {
                 string fullName = SelectEmployee.SelectedItem.Value;
 
+             
                 Calendar1.Visible = false;
                 Calendar2.Visible = false;
                 DateTime start1 = Calendar1.SelectedDate;
@@ -153,8 +154,13 @@ namespace Layout_2._1
 
 
             }
+            catch (System.Threading.ThreadAbortException ex)
+            {
+
+            }
             catch (Exception ex)
             {
+                Logger.LogException(ex);
                 Custom.ErrorHandle(ex, Response);
 
             }

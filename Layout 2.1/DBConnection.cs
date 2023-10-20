@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.Remoting.Lifetime;
@@ -27,7 +28,7 @@ namespace SetOffs1
 
         public DBConnection()
         {
-            this.con = new SqlConnection(connectionString: ConfigurationManager.ConnectionStrings["Setoffs"].ConnectionString);
+            this.con = new SqlConnection(connectionString: ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString);
         }
 
         public List<EmployeeLeave> GetEmployeeLeave(DateTime date)
@@ -178,7 +179,7 @@ namespace SetOffs1
         {
             if(IsLeavePresent(leave))
             { return false; }
-            using (SqlCommand command = new SqlCommand("INSERT INTO Leave (EmpId, LeaveType, StartDate, EndDate, Comments,Days,Created_On,CreatedBy) VALUES (@EmpId,@LeaveType,@StartDate, @EndDate,@Comments, @Days,@CreatedOn,@CreatedBy)", con))
+            using (SqlCommand command = new SqlCommand("INSERT INTO Leave (EmpId, LeaveType, StartDate, EndDate, Comments,Days,CreatedOn,CreatedBy) VALUES (@EmpId,@LeaveType,@StartDate, @EndDate,@Comments, @Days,@CreatedOn,@CreatedBy)", con))
             {
                 command.Parameters.AddWithValue("@EmpId", leave.EmpId);
                 command.Parameters.AddWithValue("@LeaveType", leave.LeaveType);
@@ -192,6 +193,7 @@ namespace SetOffs1
                 con.Open();
                 command.ExecuteNonQuery();
                 con.Close();
+               
                 return true;
             }
 
@@ -1003,5 +1005,62 @@ namespace SetOffs1
 
         public string CreatedBy { get; set; } = "NoUser";
     }
+    public class Logger
+    {
+        //private static string LogDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Log");
+        private static string LogDirectory;
+
+        public static void Log(string message)
+        {
+           
+            try
+            {
+
+               
+               
+                string logDirectoryAbsolutePath = ConfigurationManager.AppSettings["LogDirectory"];
+
+                // Check if the directory exists, and create it if it doesn't
+                if (!Directory.Exists(logDirectoryAbsolutePath))
+                {
+                    Directory.CreateDirectory(logDirectoryAbsolutePath);
+                }
+
+// Now you can use the logDirectoryAbsolutePath as your LogDirectory
+                LogDirectory = logDirectoryAbsolutePath;
+
+
+                //string today = DateTime.Now.ToString("dd-MM-yyyy");
+                //string logFolder = Path.Combine(LogDirectory, today);
+                //Directory.CreateDirectory(logFolder);
+
+                string logFileName = DateTime.Now.ToString("dd-MM-yyyy") + ".txt";
+                string logFilePath = Path.Combine(LogDirectory, logFileName);
+
+                string logEntry = $"\n{DateTime.Now:yyyy-MM-dd HH:mm:ss} - {message}" + "\n ************************************************************************* \n ";
+
+
+                using (var writer = new StreamWriter(logFilePath, true))
+                {
+                    writer.WriteLine(logEntry);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error while logging: {ex.Message}");
+            }
+        }
+
+        public static void LogException(Exception ex)
+        {
+            string message = $"Exception Type: {ex.GetType().FullName}\nException Message: {ex.Message}\nStack Trace:\n{ex.StackTrace}";
+            Log(message);
+        }
+    }
+
+
+
+
 
 }
+
