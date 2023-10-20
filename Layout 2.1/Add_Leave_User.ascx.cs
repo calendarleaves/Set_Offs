@@ -25,15 +25,18 @@ namespace Layout_2._1
 
     public partial class Add_Leave_User : System.Web.UI.UserControl
     {
+        
         string selectedValue, value1, value2, item;
         int id;
         DateTime currentDate, targetDate;
         private List<DateTime> holidays = new List<DateTime>();
         protected void Page_Load(object sender, EventArgs e)
         {
-            DefaultSetting();
-            DBConnection db = new DBConnection();
-            DataTable dt = db.GetAllHolidayDates();
+            try
+            {
+                DefaultSetting();
+                DBConnection db = new DBConnection();
+                DataTable dt = db.GetAllHolidayDates();
 
 
             CultureInfo culture = new CultureInfo("en-GB");
@@ -44,43 +47,57 @@ namespace Layout_2._1
                 holidays.Add(targetDate);
             }
 
-            if (!IsPostBack)
+                    if (!IsPostBack)
+                    {
+                     Calendar1.Visible = false;
+                     Calendar2.Visible = false;
+                    }
+            }
+            catch (Exception ex)
             {
-                Calendar1.Visible = false;
-                Calendar2.Visible = false;
+                Logger.LogException(ex);
+                Custom.ErrorHandle(ex, Response);
             }
 
         }
+
         public void DefaultSetting()
         {
-            To.BackColor = System.Drawing.Color.LightGray;
-            from.BackColor = System.Drawing.Color.LightGray;
-            Total_Days.BackColor = System.Drawing.Color.LightGray;
-            To.Enabled = false;
-            from.Enabled = false;
-            Total_Days.Enabled = false;
+            try
+            {
+                To.BackColor = System.Drawing.Color.LightGray;
+                from.BackColor = System.Drawing.Color.LightGray;
+                Total_Days.BackColor = System.Drawing.Color.LightGray;
+                To.Enabled = false;
+                from.Enabled = false;
+                Total_Days.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                Custom.ErrorHandle(ex, Response);
+            }
+
         }
         public string totalDays()
         {
-            int weekoff = 0, holidaysCount = 0; DateTime startDate, endDate; string m;
-
-            if (from.Text != "" && To.Text != "")
+            try
             {
-               
-                if (Drop.SelectedValue == "First Half " || Drop.SelectedValue == "Second Half")
+                int weekoff = 0, holidaysCount = 0; DateTime startDate, endDate; string m;
+                if (from.Text != "" && To.Text != "")
                 {
-                    startDate = Calendar1.SelectedDate;
-                    endDate = Calendar1.SelectedDate;
-                }
-                else
-                {
+                    if (Drop.SelectedValue == "First Half " || Drop.SelectedValue == "Second Half")
+                    {
+                        startDate = Calendar1.SelectedDate;
+                        endDate = Calendar1.SelectedDate;
+                    }
+                    else
+                    {
 
+                        startDate = Calendar1.SelectedDate;
+                        endDate = Calendar2.SelectedDate;
+                    }
 
-                    startDate = Calendar1.SelectedDate;
-                    endDate = Calendar2.SelectedDate;
-                }
-
-                
 
                     currentDate = startDate;
 
@@ -100,26 +117,28 @@ namespace Layout_2._1
                     }
 
 
-                
+                    TimeSpan difference = endDate - startDate;
+                    m = difference.ToString("dd");
 
-                TimeSpan difference = endDate - startDate;
-                 m = difference.ToString("dd");
+                    if (Drop.SelectedValue == "First Half " || Drop.SelectedValue == "Second Half")
 
-                if (Drop.SelectedValue == "First Half " || Drop.SelectedValue == "Second Half")
+                    {
+                        Total_Days.Text = "0.5";
 
-                {
-                    Total_Days.Text = "0.5";
 
+                    }
+                    else
+                    {
+                        int n = Int16.Parse(m) + 1 - weekoff - holidaysCount;
+                        Total_Days.Text = n.ToString();
+                    }
 
                 }
-                else
-                {
-                    int n = Int16.Parse(m) + 1 - weekoff - holidaysCount;
-                    Total_Days.Text = n.ToString();
-                }
-
-
-
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                Custom.ErrorHandle(ex, Response);
 
             }
             return Total_Days.Text;
@@ -127,82 +146,114 @@ namespace Layout_2._1
 
         protected void Calendar1_Click(object sender, ImageClickEventArgs e)
         {
-            Calendar1.SelectedDate = currentDate;
-           // calendar1lable.Text = "";
-            from.Text = "";
-
-            Total_Days.Text = "";
-
-            Calendar2.Visible = false;
-
-            if (Drop.SelectedValue == "First Half " || Drop.SelectedValue == "Second Half")
+            try
             {
-                To.Text = "";
-            }
+                Calendar1.SelectedDate = currentDate;
+                // calendar1lable.Text = "";
+                from.Text = "";
 
-            if (Calendar1.Visible)
+                Total_Days.Text = "";
+
+                Calendar2.Visible = false;
+
+                if (Drop.SelectedValue == "First Half " || Drop.SelectedValue == "Second Half")
+                {
+                    To.Text = "";
+                }
+
+                if (Calendar1.Visible)
+                {
+                    Calendar1.Visible = false;
+
+                }
+                else
+                {
+                    Calendar1.Visible = true;
+                }
+
+                Calendar1.Attributes.Add("style", "position:absolute");
+                ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal7').modal('show');", true);
+            }
+            catch (Exception ex)
             {
-                Calendar1.Visible = false;
+                Logger.LogException(ex);
+                Custom.ErrorHandle(ex, Response);
 
             }
-            else
-            {
-                Calendar1.Visible = true;
-            }
-
-            Calendar1.Attributes.Add("style", "position:absolute");
-            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal7').modal('show');", true);
-
         }
 
         protected void Calendar2_Click(object sender, ImageClickEventArgs e)
         {
-            Calendar2.SelectedDate = currentDate;   To.Text = ""; Total_Days.Text = ""; Calendar1.Visible = false;
-
-            if (Calendar2.Visible)
+            try
             {
-                Calendar2.Visible = false;
-            }
-            else
-            {
-                Calendar2.Visible = true;
-            }
-            Calendar2.Attributes.Add("style", "position:absolute");
-            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal7').modal('show');", true);
+                Calendar2.SelectedDate = currentDate; To.Text = ""; Total_Days.Text = ""; Calendar1.Visible = false;
 
+                if (Calendar2.Visible)
+                {
+                    Calendar2.Visible = false;
+                }
+                else
+                {
+                    Calendar2.Visible = true;
+                }
+                Calendar2.Attributes.Add("style", "position:absolute");
+                ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal7').modal('show');", true);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                Custom.ErrorHandle(ex, Response);
+
+            }
         }
 
         protected void Calendar1_SelectionChanged(object sender, EventArgs e)
         {
-
-
-            from.Text = Calendar1.SelectedDate.ToString("dd/MM/yy");
-
-            if (Drop.SelectedValue == "First Half " || Drop.SelectedValue == "Second Half")
+            try
             {
-                To.Text = from.Text;
+
+                from.Text = Calendar1.SelectedDate.ToString("dd/MM/yy");
+
+                if (Drop.SelectedValue == "First Half " || Drop.SelectedValue == "Second Half")
+                {
+                    To.Text = from.Text;
+                }
+
+                Calendar1.Visible = false;
+                totalDays();
+                ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal7').modal('show');", true);
             }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                Custom.ErrorHandle(ex, Response);
 
-            Calendar1.Visible = false;
-            totalDays();
-            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal7').modal('show');", true);
-
+            }
         }
 
         protected void Calendar2_SelectionChanged(object sender, EventArgs e)
         {
+            try
+            {
+                To.Text = Calendar2.SelectedDate.ToString("dd/MM/yy");
+                Calendar2.Visible = false;
+                totalDays();
+                ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal7').modal('show');", true);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                Custom.ErrorHandle(ex, Response);
 
-            To.Text = Calendar2.SelectedDate.ToString("dd/MM/yy");
-            Calendar2.Visible = false;
-            totalDays();
-            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal7').modal('show');", true);
-
-
+            }
         }
 
         protected void SendMail()
         {
-            DBConnection cmd = new DBConnection();
+
+            try
+            {
+                DBConnection cmd = new DBConnection();
             Employee emp = new Employee();
             emp = cmd.GetEmployee(Session["ID"] as string);
 
@@ -211,8 +262,6 @@ namespace Layout_2._1
 
             Leave leave = new Leave();
 
-            try
-            {
                 MailMessage Email = new MailMessage();
                 MailAddress Sender = new MailAddress("flexur.messenger@flexur.com");
                 Email.From = Sender;
@@ -250,12 +299,8 @@ namespace Layout_2._1
                                  FirstName + " " + lastName;
                 }
 
-               
-
                 Email.Body = format;
-
                 //string ServerName = "flxdev";
-
                 //string Port = "25";
 
                 string ServerName = ConfigurationManager.AppSettings["SmtpServerName"];
@@ -272,6 +317,7 @@ namespace Layout_2._1
             }
             catch (Exception ex)
             {
+                Logger.LogException(ex);
                 Custom.ErrorHandle(ex, Response);
             }
 
@@ -280,7 +326,6 @@ namespace Layout_2._1
 
         protected void Submit_click(object sender, EventArgs e)
         {
-
             try
             {
                 Calendar1.Visible = false;
@@ -291,8 +336,6 @@ namespace Layout_2._1
                 DBConnection cmd = new DBConnection();
                 Employee emp = new Employee();
                 emp = cmd.GetEmployee(Session["ID"] as string);
-
-
 
                 Leave l = new Leave();
                 l.EmpId = emp.Id;
@@ -342,6 +385,7 @@ namespace Layout_2._1
 
                 }
 
+                ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal7').modal('show');", true);
 
             }
             catch (System.Threading.ThreadAbortException ex)
@@ -353,12 +397,6 @@ namespace Layout_2._1
                 Logger.LogException(ex);
                 Custom.ErrorHandle(ex, Response);
             }
-
-
-
-
-
-            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal7').modal('show');", true);
 
         }
 
@@ -394,97 +432,122 @@ namespace Layout_2._1
                     e.Day.IsSelectable = false;
                     e.Cell.ForeColor = System.Drawing.Color.Red;
                 }
+                ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal7').modal('show');", true);
+
 
             }
             catch (Exception ex)
             {
-                //Logger.LogException(ex);
-
+                Logger.LogException(ex);
+                Custom.ErrorHandle(ex, Response);
             }
-
-
-
-            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal7').modal('show');", true);
-            
-
-
         }
 
         protected void Calendar2_DayRender(object sender, DayRenderEventArgs e)
         {
-            if (e.Day.Date < DateTime.Now.Date) 
+            try
             {
-                e.Day.IsSelectable = false;
-                e.Cell.ForeColor = System.Drawing.Color.Gray; 
-            }
-            if (e.Day.Date < Calendar1.SelectedDate) 
-            {
-                e.Day.IsSelectable = false;
-                e.Cell.ForeColor = System.Drawing.Color.Gray; 
-            }
-            if (e.Day.Date.DayOfWeek == DayOfWeek.Saturday || e.Day.Date.DayOfWeek == DayOfWeek.Sunday)
-            {
-                e.Day.IsSelectable = false;
-                e.Cell.ForeColor = System.Drawing.Color.Red;
+                if (e.Day.Date < DateTime.Now.Date)
+                {
+                    e.Day.IsSelectable = false;
+                    e.Cell.ForeColor = System.Drawing.Color.Gray;
+                }
+                if (e.Day.Date < Calendar1.SelectedDate)
+                {
+                    e.Day.IsSelectable = false;
+                    e.Cell.ForeColor = System.Drawing.Color.Gray;
+                }
+                if (e.Day.Date.DayOfWeek == DayOfWeek.Saturday || e.Day.Date.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    e.Day.IsSelectable = false;
+                    e.Cell.ForeColor = System.Drawing.Color.Red;
 
+                }
+                if (holidays.Contains(e.Day.Date))
+                {
+                    e.Day.IsSelectable = false;
+                    e.Cell.ForeColor = System.Drawing.Color.Red;
+                }
+                ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal7').modal('show');", true);
             }
-            if (holidays.Contains(e.Day.Date))
+            catch (Exception ex)
             {
-                e.Day.IsSelectable = false;
-                e.Cell.ForeColor = System.Drawing.Color.Red; 
+                Logger.LogException(ex);
+                Custom.ErrorHandle(ex, Response);
             }
-            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal7').modal('show');", true);
-
 
         }
 
         protected void Drop_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Total_Days.Text = "";
-            from.Text = "";
-            To.Text = "";
-
-            string selectedValue = Drop.SelectedValue;
-
-            if (!string.IsNullOrEmpty(selectedValue) && selectedValue != "--Select Leave--")
+            try
             {
-                if (Drop.SelectedValue == "First Half " || Drop.SelectedValue == "Second Half")
-                {
-                    Cal1.Enabled = false;
-                    Cal1.BackColor = System.Drawing.Color.LightGray;
+                Total_Days.Text = "";
+                from.Text = "";
+                To.Text = "";
 
+                string selectedValue = Drop.SelectedValue;
+
+                if (!string.IsNullOrEmpty(selectedValue) && selectedValue != "--Select Leave--")
+                {
+                    if (Drop.SelectedValue == "First Half " || Drop.SelectedValue == "Second Half")
+                    {
+                        Cal1.Enabled = false;
+                        Cal1.BackColor = System.Drawing.Color.LightGray;
+
+
+                    }
+                    else
+                    {
+                        Cal1.Enabled = true;
+                        Cal1.BackColor = System.Drawing.Color.White;
+                        Cal1.Visible = true;
+                    }
 
                 }
-                else
+                if (Calendar1.Visible)
                 {
-                    Cal1.Enabled = true;
-                    Cal1.BackColor = System.Drawing.Color.White;
-                    Cal1.Visible = true;
+                    Calendar1.Visible = false;
+
                 }
+                if (Calendar2.Visible)
+                {
+                    Calendar2.Visible = false;
 
+                }
+                ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal7').modal('show');", true);
             }
-            if (Calendar1.Visible)
+            catch (Exception ex)
             {
-                Calendar1.Visible = false;
-
+                Logger.LogException(ex);
+                Custom.ErrorHandle(ex, Response);
             }
-            if (Calendar2.Visible)
-            {
-                Calendar2.Visible = false;
-
-            }
-            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal7').modal('show');", true);
-
         }
 
         protected void Cancel_Click(object sender, EventArgs e)
         {
-            Server.Transfer("Calendar.aspx");
+            try
+            {
+                Server.Transfer("Calendar.aspx");
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                Custom.ErrorHandle(ex, Response);
+            }
         }
 
         protected void close_Click(object sender, ImageClickEventArgs e)
         {
-            Server.Transfer("Calendar.aspx");
+            try
+            {
+                Server.Transfer("Calendar.aspx");
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                Custom.ErrorHandle(ex, Response);
+            }
         }
 
         protected void comment_TextChanged(object sender, EventArgs e)
