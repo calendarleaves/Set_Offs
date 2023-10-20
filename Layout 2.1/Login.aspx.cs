@@ -17,9 +17,16 @@ namespace Layout_2._1
     { protected void Page_Load(object sender, EventArgs e)
         {
 
-           
-            Session["ID"] = null;
-            
+            try
+            {
+                Session["ID"] = null;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                Custom.ErrorHandle(ex, Response);
+            }
+
         }
         protected void Login_Click(object sender, EventArgs e)
         {
