@@ -14,23 +14,43 @@ namespace Layout_2._1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["ID"] != null || Session["ID"] as String != "")
+            try
             {
+                if (Session["ID"] != null || Session["ID"] as String != "")
+                {
 
-                ////Added Dropdown Profile details 
-                //DBConnection d = new DBConnection();
-                //DataTable dt = d.GetProfileDataTable(Session["Id"] as string);
+                    ////Added Dropdown Profile details 
+                    //DBConnection d = new DBConnection();
+                    //DataTable dt = d.GetProfileDataTable(Session["Id"] as string);
 
-                //details.DataSource = dt;
-                //details.DataBind();
+                    //details.DataSource = dt;
+                    //details.DataBind();
 
+                }
             }
-          
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                Custom.ErrorHandle(ex, Response);
+            }
+
         }
 
         protected void closeChangepass(object sender, ImageClickEventArgs e)
         {
-            Response.Redirect("Calendar.aspx");
+            try
+            {
+                Response.Redirect("Calendar.aspx");
+            }
+            catch (System.Threading.ThreadAbortException ex)
+            {
+
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                Custom.ErrorHandle(ex, Response);
+            }
         }
 
         protected void ChangePass(object sender, EventArgs e)
@@ -102,13 +122,19 @@ namespace Layout_2._1
                 //    }
 
                 //}
+                ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal15').modal('show');", true);
+
             }
-            catch(Exception ex)
+            catch (System.Threading.ThreadAbortException ex)
             {
 
             }
-            ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal15').modal('show');", true);
-
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                Custom.ErrorHandle(ex, Response);
+            }
+           
 
 
         }

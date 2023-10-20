@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -26,9 +27,11 @@ namespace Layout_2._1
             DBConnection db = new DBConnection();
             DataTable dt = db.GetAllHolidayDates();
             DefaultValues();
+            CultureInfo culture = new CultureInfo("en-GB");
             foreach (DataRow row in dt.Rows)
             {
-                DateTime targetDate = Convert.ToDateTime(row["Date"]);
+              
+                DateTime targetDate = Convert.ToDateTime(row["Date"],culture);
                 holidays.Add(targetDate);
             }
 

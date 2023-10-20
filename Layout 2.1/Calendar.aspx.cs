@@ -9,12 +9,28 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using SetOffs1;
 using System.Web.Configuration;
+using System.Globalization;
+
+//***List Of Methods - Calender.aspx.cs ***
+
+// 	- void Page_Load
+//	- void Calendar1_SelectionChanged
+//	- List<EmployeeLeave> GetEmployeeLeavesByDate(DateTime date)
+// - void LoadTodayRecords
+//	- void Calendar1_DayRender
+//	- void Calendar1_VisibleMonthChanged
+//	- void Button1_Click
+//	- void Button2_Click
+//	- void logout
+//	- void LoadUpcomingleaves
+//	- void LoadHolidays ----not in use delete this
+
 
 namespace WebApplication1
 {
     public partial class WebForm11 : System.Web.UI.Page
     {
-        
+        CultureInfo culture = new CultureInfo("en-GB");
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -91,6 +107,7 @@ namespace WebApplication1
             }
             catch (Exception ex) 
             {
+                Logger.LogException(ex);
                 Custom.ErrorHandle(ex, Response,Context);
             }
         }
@@ -155,15 +172,17 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
+                Logger.LogException(ex);
                 Custom.ErrorHandle(ex, Response);
             }
         }
 
         private List<EmployeeLeave> GetEmployeeLeavesByDate(DateTime date) // method to get employee list who are on leave by date
-        {   
-
-            DBConnection d = new DBConnection();
-            return d.GetEmployeeLeave(date);
+        {
+            
+                DBConnection d = new DBConnection();
+                return d.GetEmployeeLeave(date);
+            
         }
 
         private void LoadTodayRecords() // this will load Today's records
@@ -191,6 +210,7 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
+                Logger.LogException(ex);
                 Custom.ErrorHandle(ex, Response);
             }
         }
@@ -238,7 +258,8 @@ namespace WebApplication1
                 foreach (DataRow row in dt.Rows)
                 {
                     // Parse the date from the DataTable
-                    DateTime targetDate = Convert.ToDateTime(row["Date"]);
+
+                    DateTime targetDate = Convert.ToDateTime(row["Date"], culture);
 
                     // Compare the date from the DataTable with the date being rendered on the Calendar
                     if (e.Day.Date == targetDate)
@@ -268,6 +289,7 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
+                Logger.LogException(ex);
                 Custom.ErrorHandle(ex, Response);
             }
         }
@@ -290,6 +312,7 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
+                Logger.LogException(ex);
                 Custom.ErrorHandle(ex, Response);
             }
         }
@@ -309,6 +332,7 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
+                Logger.LogException(ex);
                 Custom.ErrorHandle(ex, Response);
             }
         }
@@ -322,8 +346,13 @@ namespace WebApplication1
                 }
                
             }
+            catch (System.Threading.ThreadAbortException ex)
+            {
+
+            }
             catch (Exception ex)
             {
+                Logger.LogException(ex);
                 Custom.ErrorHandle(ex, Response);
             }
 
@@ -337,6 +366,7 @@ namespace WebApplication1
             }
             catch(Exception ex) {
                 //Response.Redirect("Create_Abs.aspx");
+                Logger.LogException(ex);
                 Custom.ErrorHandle(ex, Response);
             }
         }
@@ -420,6 +450,7 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
+                Logger.LogException(ex);
                 Custom.ErrorHandle(ex, Response,Context);
 
             }
@@ -452,6 +483,7 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
+                Logger.LogException(ex);
                 Custom.ErrorHandle(ex, Response);
             }
         }

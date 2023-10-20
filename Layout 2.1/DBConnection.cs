@@ -17,6 +17,60 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 //using static Layout_2.2.DBConnection;
 
+//***List Of Methods - DBConnection.cs ***
+
+//	- DBConnection
+//	-  List<EmployeeLeave> GetEmployeeLeave(DateTime date)
+//	-List<string> GetAllEmployeeName()
+//    - void AddEmployee(Employee employee)
+//    - Employee GetEmployee(string email)
+//    - List < HolidayList > GetUpcomingHolidays(DateTime currentDate)
+//    - bool IsLeavePresent(Leave leave)
+//    - bool AddLeave(Leave leave)
+//    - bool Addleave(string firstname, string lastname, Leave l)
+//    - int getEmployeeId(String s)
+//    - DataTable GetAllEmployeesLeave()
+//    - DataTable GetAllEmployeesLeavebyName(String s)
+//    - DataTable GetAllLeaveRecords()
+//    - DataTable GetUserLeaveRecords(string email)
+//    - DataTable GetAllHolidayDates()
+//    - DataTable GetAllEmployeesLeaveLikeName(String s)
+//    - DataTable GetAllEmployeesLeave(String s, DateTime startDate)
+//    - DataTable GetAllEmployeesLeave(String s, DateTime startDate, DateTime endDate)
+//    - int CountLeave(string s)
+//    - int CountLeave(string s, DateTime startDate)
+//    - void DeleteLeave(string s)
+//    - void DeleteLeave(string s, DateTime startDate)
+//    - void DeleteLeave(string s, DateTime startDate, DateTime endDate)
+//    - Leave GetLeave(int id)
+//    - DataTable GetLeaveBalance(string usId)
+//    - UpdateLeaveAfterDelete(string s, string l)
+//    - UpdateLeaveAfterAdd(string s, double l)
+//    - UpdateLeaveAfterAdd2(int id, double l)
+//    - DataTable GetLeaveBalance()
+//    - List < Employee > GetCalendarDetails()
+//    - DataTable GetProfileDataTable(String s)
+//    - DataTable GetUpcomingLeaves(DateTime curentDate, DateTime nextFriday)
+//    - DataTable allEmployees()
+//    - void UpdatePassword()
+//    - void UpdatePassword(string s, string password)
+//    - static string HashPassword(string password)
+
+//    - static bool VerifyPassword(string password, string hashedPassword)
+
+//    -int test()
+//    - DataTable LeaveApproval()
+//    - void UpdateRowInDatabase2(string LeaveType, string ApprovalStatus)
+
+//###### classes ######
+//    - HolidayList
+//    - EmployeeLeave
+//    - Upcomingleaves
+//    - Employee
+//    - Leave
+//    - Logger
+
+
 namespace SetOffs1
 {
 

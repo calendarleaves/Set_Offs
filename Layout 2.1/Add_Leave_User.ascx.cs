@@ -5,10 +5,12 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Net.Mail;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Policy;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
@@ -36,11 +38,14 @@ namespace Layout_2._1
                 DBConnection db = new DBConnection();
                 DataTable dt = db.GetAllHolidayDates();
 
-                    foreach (DataRow row in dt.Rows)
-                    {
-                        DateTime targetDate = Convert.ToDateTime(row["Date"]);
-                        holidays.Add(targetDate);
-                    }
+
+            CultureInfo culture = new CultureInfo("en-GB");
+            foreach (DataRow row in dt.Rows)
+            {
+                
+                DateTime targetDate = Convert.ToDateTime(row["Date"],culture);
+                holidays.Add(targetDate);
+            }
 
                     if (!IsPostBack)
                     {
