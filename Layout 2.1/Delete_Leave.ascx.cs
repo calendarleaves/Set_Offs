@@ -15,9 +15,17 @@ namespace Layout_2._1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            try
             {
-                BindGridView();
+                if (!IsPostBack)
+                {
+                    BindGridView();
+                }
+            }
+            catch(Exception ex) {
+
+                Logger.LogException(ex);
+                Custom.ErrorHandle(ex, Response);
             }
         }
 
@@ -48,6 +56,7 @@ namespace Layout_2._1
             }
             catch (Exception ex)
             {
+                Logger.LogException(ex);
                 Custom.ErrorHandle(ex, Response);
             }
             //ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "$('#myModal4').modal('show')", true);
@@ -107,6 +116,7 @@ namespace Layout_2._1
             }
             catch (Exception ex)
             {
+                Logger.LogException(ex);
                 Custom.ErrorHandle(ex, Response);
             }
            ScriptManager.RegisterStartupScript(this,GetType(), "Popup", "$('#myModal4').modal('show')", true);
@@ -130,6 +140,7 @@ namespace Layout_2._1
             }
             catch (Exception ex)
             {
+                Logger.LogException(ex);
                 Custom.ErrorHandle(ex, Response);
             }
             
@@ -138,37 +149,56 @@ namespace Layout_2._1
 
         protected void DeleteLeaveGridView_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-
-            if (e.Row.RowType == DataControlRowType.DataRow)
+            try
             {
-
-                if (e.Row.RowIndex == DeleteLeaveGridView.SelectedIndex)
+                if (e.Row.RowType == DataControlRowType.DataRow)
                 {
-                    e.Row.CssClass = "selected-row";
+
+                    if (e.Row.RowIndex == DeleteLeaveGridView.SelectedIndex)
+                    {
+                        e.Row.CssClass = "selected-row";
+                    }
                 }
             }
-         
+         catch(Exception ex) {
+                Logger.LogException(ex);
+                Custom.ErrorHandle(ex, Response);
+            }
             ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal4').modal('show');", true);
         }
 
         protected void DeleteLeaveGridView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-            DeleteLeaveGridView.SelectedIndex = DeleteLeaveGridView.SelectedRow.RowIndex;
-        
+            try
+            {
+                DeleteLeaveGridView.SelectedIndex = DeleteLeaveGridView.SelectedRow.RowIndex;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                Custom.ErrorHandle(ex, Response);
+            }
              ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal4').modal('show');", true);
         }
 
         protected void DeleteLeaveGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            string fullName = DeleteLeaveGridView.Rows[e.RowIndex].Cells[1].Text + " " + DeleteLeaveGridView.Rows[e.RowIndex].Cells[2].Text;
-            string startDate = DeleteLeaveGridView.Rows[e.RowIndex].Cells[4].Text;
-            string endDate = DeleteLeaveGridView.Rows[e.RowIndex].Cells[5].Text;
+            try
+            {
+                string fullName = DeleteLeaveGridView.Rows[e.RowIndex].Cells[1].Text + " " + DeleteLeaveGridView.Rows[e.RowIndex].Cells[2].Text;
+                string startDate = DeleteLeaveGridView.Rows[e.RowIndex].Cells[4].Text;
+                string endDate = DeleteLeaveGridView.Rows[e.RowIndex].Cells[5].Text;
 
-            DBConnection con = new DBConnection();
-            con.DeleteLeave(fullName, DateTime.Parse(startDate), DateTime.Parse(endDate));
+                DBConnection con = new DBConnection();
+                con.DeleteLeave(fullName, DateTime.Parse(startDate), DateTime.Parse(endDate));
 
-            BindGridView();
+                BindGridView();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                Custom.ErrorHandle(ex, Response);
+            }
         }
     }
 }

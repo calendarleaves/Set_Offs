@@ -33,30 +33,34 @@ namespace Layout_2._1
             }
             catch (Exception ex)
             {
-
+                Logger.LogException(ex);
+                Custom.ErrorHandle(ex, Response);
             }
         }
         private List<HolidayList> LoadHolidays2() // this will load next Holidays
         {
-            try
-            {
+           
                 DateTime today = DateTime.Today;
                 DBConnection d = new DBConnection();
                 List<HolidayList> nextHolidays = d.GetUpcomingHolidays(today);
 
                 return nextHolidays;
 
-            }
-            catch (Exception ex)
-            {
-                Custom.ErrorHandle(ex, Response);
-                return new List<HolidayList>();
-            }
+            
+          
         }
 
         protected void closeHoli_Click(object sender, ImageClickEventArgs e)
         {
-            Server.Transfer("Calendar.aspx");
+            try
+            {
+                Server.Transfer("Calendar.aspx");
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                Custom.ErrorHandle(ex, Response);
+            }
         }
     }
 }

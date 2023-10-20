@@ -50,6 +50,7 @@ namespace Layout_2._1
             }
             catch (Exception ex)
             {
+                Logger.LogException(ex);
                 Custom.ErrorHandle(ex, Response);
             }
         }
@@ -102,6 +103,7 @@ namespace Layout_2._1
             }
             catch (Exception ex)
             {
+                Logger.LogException(ex);
                 Custom.ErrorHandle(ex, Response);
             }
         }
@@ -131,6 +133,7 @@ namespace Layout_2._1
             }
             catch (Exception ex)
             {
+                Logger.LogException(ex);
                 Custom.ErrorHandle(ex, Response);
             }
 
@@ -150,6 +153,7 @@ namespace Layout_2._1
             }
             catch (Exception ex)
             {
+                Logger.LogException(ex);
                 Custom.ErrorHandle(ex, Response);
             }
 
@@ -163,6 +167,7 @@ namespace Layout_2._1
             }
             catch (Exception ex)
             {
+                Logger.LogException(ex);
                 Custom.ErrorHandle(ex, Response);
             }
         }

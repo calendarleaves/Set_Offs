@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -51,6 +52,7 @@ namespace Layout_2._1
             }
             catch (Exception ex)
             {
+                Logger.LogException(ex);
                 Custom.ErrorHandle(ex, Response);
             }
         }
@@ -80,32 +82,47 @@ namespace Layout_2._1
             }
             catch (Exception ex)
             {
+                Logger.LogException(ex);
                 Custom.ErrorHandle(ex, Response);
             }
 
         }
         protected void DeleteLeaveGridView_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow)
+            try
             {
-
-                if (e.Row.RowIndex == DeleteLeaveGridView.SelectedIndex)
+                if (e.Row.RowType == DataControlRowType.DataRow)
                 {
-                    e.Row.CssClass = "selected-row";
-                }
 
-                DateTime StartDate = Convert.ToDateTime(e.Row.Cells[4].Text);
+                    if (e.Row.RowIndex == DeleteLeaveGridView.SelectedIndex)
+                    {
+                        e.Row.CssClass = "selected-row";
+                    }
+                    CultureInfo culture = new CultureInfo("en-GB");
+                    DateTime StartDate = Convert.ToDateTime(e.Row.Cells[4].Text,culture);
 
-                if (StartDate < DateTime.Today)
-                {
-                    Button btnDelete = e.Row.FindControl("btnDelete") as Button;
-                    btnDelete.Enabled = false;
+                    if (StartDate < DateTime.Today)
+                    {
+                        Button btnDelete = e.Row.FindControl("btnDelete") as Button;
+                        btnDelete.Enabled = false;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
             }
         }
         protected void DeleteLeaveGridView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DeleteLeaveGridView.SelectedIndex = DeleteLeaveGridView.SelectedRow.RowIndex;
-        }
+            try
+            {
+                DeleteLeaveGridView.SelectedIndex = DeleteLeaveGridView.SelectedRow.RowIndex;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+            }
     }
 }
