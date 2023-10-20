@@ -42,6 +42,10 @@ namespace Layout_2._1
             {
                 Response.Redirect("Calendar.aspx");
             }
+            catch (System.Threading.ThreadAbortException ex)
+            {
+
+            }
             catch (Exception ex)
             {
                 Logger.LogException(ex);
@@ -119,6 +123,10 @@ namespace Layout_2._1
 
                 //}
                 ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal15').modal('show');", true);
+
+            }
+            catch (System.Threading.ThreadAbortException ex)
+            {
 
             }
             catch (Exception ex)

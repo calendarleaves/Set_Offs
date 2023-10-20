@@ -346,6 +346,10 @@ namespace WebApplication1
                 }
                
             }
+            catch (System.Threading.ThreadAbortException ex)
+            {
+
+            }
             catch (Exception ex)
             {
                 Logger.LogException(ex);

@@ -80,6 +80,10 @@ namespace Layout_2._1
 
                 Response.Redirect("Calendar.aspx");
             }
+            catch (System.Threading.ThreadAbortException ex)
+            {
+
+            }
             catch (Exception ex)
             {
                 Logger.LogException(ex);
@@ -111,6 +115,7 @@ namespace Layout_2._1
             catch (Exception ex)
             {
                 Logger.LogException(ex);
+                Custom.ErrorHandle(ex, Response);
             }
         }
         protected void DeleteLeaveGridView_SelectedIndexChanged(object sender, EventArgs e)
@@ -122,6 +127,7 @@ namespace Layout_2._1
             catch (Exception ex)
             {
                 Logger.LogException(ex);
+                Custom.ErrorHandle(ex, Response);
             }
             }
     }
