@@ -56,6 +56,10 @@ namespace Layout_2._1
             {
                 Server.Transfer("Calendar.aspx");
             }
+            catch (System.Threading.ThreadAbortException ex)
+            {
+
+            }
             catch (Exception ex)
             {
                 Logger.LogException(ex);

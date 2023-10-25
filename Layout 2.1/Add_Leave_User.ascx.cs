@@ -268,8 +268,9 @@ namespace Layout_2._1
                 string format;
 
                 Email.To.Add("");
+        
 
-                string[] ccEmails = { "", Session["ID"] as string };
+                 string[] ccEmails = { "", Session["ID"] as string };
 
                 foreach (string ccEmail in ccEmails)
                 {
@@ -277,7 +278,8 @@ namespace Layout_2._1
                 }
                 if (Drop.SelectedValue == "Work From  Home")
                 {
-                    Email.Subject = FirstName + " " + lastName + " On " + Drop.SelectedValue;
+                    Email.Subject = "LeavePortal-{ " + FirstName + " " + lastName + " }-{ " + Drop.SelectedValue + " }";
+                    //Email.Subject = FirstName + " " + lastName + " On " + Drop.SelectedValue;
                     format = "Hello,\n"
                                 + FirstName + " " + lastName + " has requested for " + Drop.SelectedValue + " on date " + from.Text + " to " + To.Text + " for " + Total_Days.Text + " days \n" +
                                 "Reason for leave - " + comment.Text + " \n\n" +
@@ -288,8 +290,8 @@ namespace Layout_2._1
                 }
                 else
                 {
-                    Email.Subject = FirstName + " " + lastName + " On " + Drop.SelectedValue + " Leave ";
-                    
+                    //Email.Subject = FirstName + " " + lastName + " On " + Drop.SelectedValue + " Leave ";
+                    Email.Subject = "LeavePortal-{ " + FirstName + " " + lastName + " }-{ " + Drop.SelectedValue + " Leave}";
                     format = "Hello,\n"
                                 + FirstName + " " + lastName + " has requested for " + Drop.SelectedValue + " leave on date " + from.Text + " to " + To.Text + " for " + Total_Days.Text + " days \n" +
                                 "Reason for leave - " + comment.Text + " \n\n" +
@@ -530,6 +532,10 @@ namespace Layout_2._1
             {
                 Server.Transfer("Calendar.aspx");
             }
+            catch (System.Threading.ThreadAbortException ex)
+            {
+
+            }
             catch (Exception ex)
             {
                 Logger.LogException(ex);
@@ -542,6 +548,10 @@ namespace Layout_2._1
             try
             {
                 Server.Transfer("Calendar.aspx");
+            }
+            catch (System.Threading.ThreadAbortException ex)
+            {
+
             }
             catch (Exception ex)
             {

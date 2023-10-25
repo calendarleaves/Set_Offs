@@ -189,6 +189,7 @@ namespace WebApplication1
         {
             try
             {
+                
                 DateTime today = DateTime.Today;
 
                 List<EmployeeLeave> todayLeaves = GetEmployeeLeavesByDate(today);
@@ -330,6 +331,10 @@ namespace WebApplication1
                     Server.Transfer("Create_Abs.aspx");
                 }
             }
+            catch (System.Threading.ThreadAbortException ex)
+            {
+
+            }
             catch (Exception ex)
             {
                 Logger.LogException(ex);
@@ -364,7 +369,11 @@ namespace WebApplication1
             {
                 Server.Transfer("Login.aspx");
             }
-            catch(Exception ex) {
+            catch (System.Threading.ThreadAbortException ex)
+            {
+
+            }
+            catch (Exception ex) {
                 //Response.Redirect("Create_Abs.aspx");
                 Logger.LogException(ex);
                 Custom.ErrorHandle(ex, Response);

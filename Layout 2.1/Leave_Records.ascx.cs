@@ -40,10 +40,10 @@ namespace Layout_2._1
                 else
                 {
                     dt1 = d.GetLeaveBalance(usId);
-                    CultureInfo culture = new CultureInfo("en-GB");
+                   
                     foreach (DataRow row in dt1.Rows)
                     {
-                        double leaveBalance = Convert.ToDouble(row["LeaveBalance"], culture);
+                        double leaveBalance = Convert.ToDouble(row["LeaveBalance"]);
                         string formattedLeaveBalance = leaveBalance.ToString("0.#");
                         row["LeaveBalance"] = formattedLeaveBalance;
                     }
@@ -115,6 +115,10 @@ namespace Layout_2._1
             try
             {
                 Server.Transfer("Calendar.aspx");
+            }
+            catch (System.Threading.ThreadAbortException ex)
+            {
+
             }
             catch (Exception ex)
             {
