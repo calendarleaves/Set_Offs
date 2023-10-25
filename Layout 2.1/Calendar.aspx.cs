@@ -101,7 +101,7 @@ namespace WebApplication1
                     }
                 }
 
-               
+
 
 
             }
@@ -182,7 +182,7 @@ namespace WebApplication1
             
                 DBConnection d = new DBConnection();
                 return d.GetEmployeeLeave(date);
-            
+           
         }
 
         private void LoadTodayRecords() // this will load Today's records

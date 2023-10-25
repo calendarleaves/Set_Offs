@@ -332,7 +332,7 @@ namespace Layout_2._1
         {
             try
             {
-                from.Text = Calendar1.SelectedDate.ToString("dd/MM/yy");
+                from.Text = Calendar1.SelectedDate.ToString("dd/MM/yy", CultureInfo.InvariantCulture);
 
                 if (drop.SelectedValue == "First Half " || drop.SelectedValue == "Second Half")
                 {
@@ -355,7 +355,7 @@ namespace Layout_2._1
         {
             try
             {
-                To.Text = Calendar2.SelectedDate.ToString("dd/MM/yy");
+                To.Text = Calendar2.SelectedDate.ToString("dd/MM/yy", CultureInfo.InvariantCulture);
                 Calendar2.Visible = false;
                 totalDays();
                 ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal3').modal('show');", true);

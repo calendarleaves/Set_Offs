@@ -212,7 +212,7 @@ namespace Layout_2._1
             try
             {
 
-                from.Text = Calendar1.SelectedDate.ToString("dd/MM/yy");
+                from.Text = Calendar1.SelectedDate.ToString("dd/MM/yy", CultureInfo.InvariantCulture);
 
                 if (Drop.SelectedValue == "First Half " || Drop.SelectedValue == "Second Half")
                 {
@@ -235,7 +235,7 @@ namespace Layout_2._1
         {
             try
             {
-                To.Text = Calendar2.SelectedDate.ToString("dd/MM/yy");
+                To.Text = Calendar2.SelectedDate.ToString("dd/MM/yy", CultureInfo.InvariantCulture);
                 Calendar2.Visible = false;
                 totalDays();
                 ScriptManager.RegisterStartupScript(this, GetType(), "keepModalOpen", "$('#myModal7').modal('show');", true);
@@ -267,10 +267,10 @@ namespace Layout_2._1
                 Email.From = Sender;
                 string format;
 
-                Email.To.Add("");
+                Email.To.Add("swapnil.suradkar@flexur.com");
         
 
-                 string[] ccEmails = { "", Session["ID"] as string };
+                 string[] ccEmails = { "bhimashankar.patil@flexur.com", Session["ID"] as string };
 
                 foreach (string ccEmail in ccEmails)
                 {

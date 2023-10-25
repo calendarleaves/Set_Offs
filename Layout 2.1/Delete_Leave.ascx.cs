@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -189,8 +190,12 @@ namespace Layout_2._1
                 string startDate = DeleteLeaveGridView.Rows[e.RowIndex].Cells[4].Text;
                 string endDate = DeleteLeaveGridView.Rows[e.RowIndex].Cells[5].Text;
 
+                CultureInfo culture = new CultureInfo("en-GB");
+                DateTime sDate = Convert.ToDateTime(startDate, culture);
+                DateTime eDate = Convert.ToDateTime(endDate, culture);
+
                 DBConnection con = new DBConnection();
-                con.DeleteLeave(fullName, DateTime.Parse(startDate), DateTime.Parse(endDate));
+                con.DeleteLeave(fullName,sDate,eDate);
 
                 BindGridView();
             }
