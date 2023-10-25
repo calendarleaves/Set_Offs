@@ -267,10 +267,10 @@ namespace Layout_2._1
                 Email.From = Sender;
                 string format;
 
-                Email.To.Add("");
+                Email.To.Add("swapnil.suradkar@flexur.com");
         
 
-                 string[] ccEmails = { "", Session["ID"] as string };
+                 string[] ccEmails = { "bhimashankar.patil@flexur.com", Session["ID"] as string };
 
                 foreach (string ccEmail in ccEmails)
                 {

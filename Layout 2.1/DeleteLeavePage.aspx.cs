@@ -127,7 +127,7 @@ namespace Layout_2._1
                 string endDate = DeleteLeaveGridView.Rows[e.RowIndex].Cells[5].Text;
                 string LeaveType = DeleteLeaveGridView.Rows[e.RowIndex].Cells[3].Text;
                 string TotalDays = DeleteLeaveGridView.Rows[e.RowIndex].Cells[6].Text;
-                startDate = "abcd";
+               
                 if (LeaveType == "Work From  Home")
                 {
                     TotalDays = "0";
