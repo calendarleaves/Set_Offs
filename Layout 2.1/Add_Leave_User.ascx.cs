@@ -267,10 +267,20 @@ namespace Layout_2._1
                 Email.From = Sender;
                 string format;
 
-                Email.To.Add("swapnil.suradkar@flexur.com");
-        
+                //Email.To.Add("");
+                string emailTo = ConfigurationManager.AppSettings["EmailReceiver"];
+                Email.To.Add(emailTo);
 
-                 string[] ccEmails = { "bhimashankar.patil@flexur.com", Session["ID"] as string };
+                //string[] ccEmails = { "", Session["ID"] as string };
+                string emailCC1 = ConfigurationManager.AppSettings["EmailCC1"];
+                string[] ccEmails = emailCC1.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+
+                //Add User email in CC
+                string[] ccEmails2 = new string[ccEmails.Length + 1];
+                Array.Copy(ccEmails, ccEmails2, ccEmails.Length);
+                ccEmails2[ccEmails.Length] = Session["ID"] as string;
+                ccEmails = ccEmails2;
+
 
                 foreach (string ccEmail in ccEmails)
                 {
@@ -278,7 +288,7 @@ namespace Layout_2._1
                 }
                 if (Drop.SelectedValue == "Work From  Home")
                 {
-                    Email.Subject = "LeavePortal-{ " + FirstName + " " + lastName + " }-{ " + Drop.SelectedValue + " }";
+                    Email.Subject = "LeavePortal - " + FirstName + " " + lastName + " - " + Drop.SelectedValue;
                     //Email.Subject = FirstName + " " + lastName + " On " + Drop.SelectedValue;
                     format = "Hello,\n"
                                 + FirstName + " " + lastName + " has requested for " + Drop.SelectedValue + " on date " + from.Text + " to " + To.Text + " for " + Total_Days.Text + " days \n" +
@@ -291,7 +301,7 @@ namespace Layout_2._1
                 else
                 {
                     //Email.Subject = FirstName + " " + lastName + " On " + Drop.SelectedValue + " Leave ";
-                    Email.Subject = "LeavePortal-{ " + FirstName + " " + lastName + " }-{ " + Drop.SelectedValue + " Leave}";
+                    Email.Subject = "LeavePortal - " + FirstName + " " + lastName + " - " + Drop.SelectedValue + " Leave";
                     format = "Hello,\n"
                                 + FirstName + " " + lastName + " has requested for " + Drop.SelectedValue + " leave on date " + from.Text + " to " + To.Text + " for " + Total_Days.Text + " days \n" +
                                 "Reason for leave - " + comment.Text + " \n\n" +
