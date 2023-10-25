@@ -15,9 +15,16 @@ namespace Layout_2._1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            try
             {
-                BindGridView();
+                if (!IsPostBack)
+                {
+                    BindGridView();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
             }
         }
 
@@ -72,9 +79,12 @@ namespace Layout_2._1
                     TotalDays = "0";
                 }
 
+                CultureInfo culture = new CultureInfo("en-GB");
+                DateTime sDate = Convert.ToDateTime(startDate, culture);
+                DateTime eDate = Convert.ToDateTime(endDate, culture);
 
                 DBConnection con = new DBConnection();
-                con.DeleteLeave(fullname, DateTime.Parse(startDate), DateTime.Parse(endDate));
+                con.DeleteLeave(fullname, sDate, eDate);
                 con.UpdateLeaveAfterDelete(fullname, TotalDays);
                 BindGridView();
 

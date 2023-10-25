@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace Layout_2._1
 {
@@ -18,9 +19,17 @@ namespace Layout_2._1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            try
             {
-                BindGridView();
+                if (!IsPostBack)
+                {
+                    BindGridView();
+                }
+            }
+            catch (Exception ex) 
+            {
+                Logger.LogException(ex);
+                Custom.ErrorHandle(ex, Response);
             }
 
         }
@@ -118,14 +127,18 @@ namespace Layout_2._1
                 string endDate = DeleteLeaveGridView.Rows[e.RowIndex].Cells[5].Text;
                 string LeaveType = DeleteLeaveGridView.Rows[e.RowIndex].Cells[3].Text;
                 string TotalDays = DeleteLeaveGridView.Rows[e.RowIndex].Cells[6].Text;
-
+                startDate = "abcd";
                 if (LeaveType == "Work From  Home")
                 {
                     TotalDays = "0";
                 }
 
+                CultureInfo culture = new CultureInfo("en-GB");
+                DateTime sDate = Convert.ToDateTime(startDate, culture);
+                DateTime eDate = Convert.ToDateTime(endDate, culture);
+
                 DBConnection con = new DBConnection();
-                con.DeleteLeave(fullName, DateTime.Parse(startDate), DateTime.Parse(endDate));
+                con.DeleteLeave(fullName, sDate, eDate);
                 con.UpdateLeaveAfterDelete(fullName, TotalDays);
 
                 BindGridView();

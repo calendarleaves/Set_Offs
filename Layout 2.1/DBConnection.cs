@@ -89,7 +89,7 @@ namespace SetOffs1
         {
             Employee emp = new Employee();
             List<EmployeeLeave> users = new List<EmployeeLeave>();
-            using (SqlCommand command = new SqlCommand("SELECT e.FirstName, l.LeaveType FROM Employee e INNER JOIN Leave l ON e.id = l.EMPID WHERE  '" + date.ToString("yyyy-MM-dd") + "'between l.StartDate AND l.EndDate ;", con))
+            using (SqlCommand command = new SqlCommand("SELECT e.FirstName, l.LeaveType FROM Employee e INNER JOIN Leave l ON e.id = l.EMPID WHERE  '" + date.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) + "'between l.StartDate AND l.EndDate ;", con))
             {
                 con.Open();
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -196,7 +196,7 @@ namespace SetOffs1
                         HolidayList holiday = new HolidayList();
                         DateTime dateTimeValue = reader.GetDateTime(0);
                         // holiday.Date = dateTimeValue.Date.ToString("yyyy-MM-dd") ;
-                        holiday.Date = dateTimeValue.Date.ToString("dd-MMM-yyyy");
+                        holiday.Date = dateTimeValue.Date.ToString("dd-MMM-yyyy", CultureInfo.InvariantCulture);
                         holiday.Holiday = reader.GetString(1);
                         upcomingHolidays.Add(holiday);
                     }
@@ -687,8 +687,7 @@ namespace SetOffs1
             int id = getEmployeeId(s);
 
 
-            try
-            {
+           
                 con.Open();
                 double leaveBalanceIncrement = double.Parse(l);
 
@@ -709,8 +708,8 @@ namespace SetOffs1
                 }
 
                 con.Close();
-            }
-            catch (Exception ex) { }
+            
+           
 
         }
 
@@ -719,8 +718,7 @@ namespace SetOffs1
             int id = getEmployeeId(s);
 
 
-            try
-            {
+           
                 con.Open();
                 // double leaveBalanceIncrement = double.Parse(l);
                 double leaveBalanceIncrement = l;
@@ -741,8 +739,7 @@ namespace SetOffs1
                 }
 
                 con.Close();
-            }
-            catch (Exception ex) { }
+        
 
         }
         public void UpdateLeaveAfterAdd2(int id, double l)
@@ -750,8 +747,7 @@ namespace SetOffs1
             //int id = getEmployeeId(s);
 
 
-            try
-            {
+           
                 con.Open();
                 // double leaveBalanceIncrement = double.Parse(l);
                 double leaveBalanceIncrement = l;
@@ -772,8 +768,7 @@ namespace SetOffs1
                 }
 
                 con.Close();
-            }
-            catch (Exception ex) { }
+           
 
         }
 
@@ -810,9 +805,9 @@ namespace SetOffs1
 
         public DataTable GetProfileDataTable(String s)
         {
-            // Replace with your data retrieval logic
+          
             DataTable dt = new DataTable();
-            dt.Columns.Add("Profile"); // Replace "ColumnName" with the actual column name
+            dt.Columns.Add("Profile"); 
 
             DBConnection d = new DBConnection();
             Employee emp = new Employee();
@@ -1088,7 +1083,7 @@ namespace SetOffs1
                 //string logFolder = Path.Combine(LogDirectory, today);
                 //Directory.CreateDirectory(logFolder);
 
-                string logFileName = DateTime.Now.ToString("dd-MM-yyyy") + ".txt";
+                string logFileName = DateTime.Now.ToString("dd-MM-yyyy", CultureInfo.InvariantCulture) + ".txt";
                 string logFilePath = Path.Combine(LogDirectory, logFileName);
 
                 string logEntry = $"\n{DateTime.Now:yyyy-MM-dd HH:mm:ss} - {message}" + "\n ************************************************************************* \n ";
